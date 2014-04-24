@@ -1,0 +1,18 @@
+Source: diaspora
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Pirate Praveen <praveen@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.7.5~)
+Standards-Version: 3.9.5
+#Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/diaspora.git
+#Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-ruby-extras/diaspora.git;a=summary
+Homepage: FIXME
+XS-Ruby-Versions: all
+
+Package: diaspora
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+Description: FIXME
+ <insert long description, indented with spaces>
