@@ -1,0 +1,2 @@
+remove-development-test-from-gemfile.patch
+remove-gemfile-lock.patch
