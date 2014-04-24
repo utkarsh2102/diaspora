@@ -1,2 +1,3 @@
 remove-development-test-from-gemfile.patch
 remove-gemfile-lock.patch
+loosen-unicorn-version-dep.patch
