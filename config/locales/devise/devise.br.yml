@@ -1,0 +1,87 @@
+#   Copyright (c) 2010-2013, Diaspora Inc.  This file is
+#   licensed under the Affero General Public License version 3 or later.  See
+#   the COPYRIGHT file.
+
+
+
+br:
+  devise:
+    confirmations:
+      confirmed: "Ho kont zo bet kadarnaet. Kennasket oc'h."
+      new:
+        resend_confirmation: "Kas titour kadarnaat en-dro"
+      send_instructions: "Emaoc'h o vont da reseviñ ur postel gant titouroù a-benn goût penaos kadarnaat ho kont a-benn nebeut."
+    failure:
+      inactive: "N'eo ket bet gweredekaet ho kont evit c'hoazh."
+      invalid: "Direizh eo ar postel pe ar ger-kuzh."
+      invalid_token: "Direizh eo ar bilhed gwiriañ."
+      locked: "Prennet eo ho kont."
+      timeout: "Diamzeret eo hoc'h abadenn, dav eo deoc'h mont e-barzh en-dro evit kendelc'her."
+      unauthenticated: "Dav eo deoc'h mont e-barzh pe lakaat hoc'h anv a-raok kendelc'her ganti."
+      unconfirmed: "Dav eo deoc'h kadarnaat ho kont a-raok mont pelloc'h."
+    invitations:
+      invitation_token_invalid: "Ar bilhed-pediñ kaset deoc'h zo divalav!"
+      send_instructions: "Kaset eo bet ho pedadenn."
+      updated: "Kaset eo bet mat ho ker-kuzh. Emaoc'h luget."
+    mailer:
+      confirmation_instructions:
+        confirm: "Kadarnaat ma c'hont"
+        subject: "Titour kadarnaat"
+        you_can_confirm: "Moaien zo deoc'h kadarnaat ho kont gant al liamm dindan:"
+      hello: "Demat, %{email}!"
+      inviter:
+        has_invited_you: "%{name}"
+        have_invited_you: "Pedet oc'h gant %{names} da lakaat hoc'h anv e Diaspora."
+      reset_password_instructions:
+        change: "Cheñch ma ger-kuzh"
+        ignore: "M'ho peus ket goulennet an dra-se n'ho peus ket nemet leuskel an dra-se a-gostez."
+        someone_requested: "Unan bennak en deus goulennet kaout ul liamm da cheñch ho ker-kuzh, moaien zo deoc'h hen ober dre al liamm a-is."
+        subject: "Titouroù evit nulañ ar ger-kuzh"
+        wont_change: "Ne cheñcho ket ho ker-kuzh keit ma n'ho po ket kliket war al liamm dindan ha dibabet unan all."
+      unlock_instructions:
+        account_locked: "Prennet eo bet ho kont abalamour m'ho peus klasket mont e-barzh en un ober re a daolioù-gwenn."
+        click_to_unlock: "Klikit war al liamm dindan a-benn dibrennañ ho kont:"
+        subject: "Titour dibrennañ"
+        unlock: "Dibrennañ ma c'hont"
+      welcome: "Donemat deoc'h, %{email}!"
+    passwords:
+      edit:
+        change_password: "Cheñch ma ger-kuzh"
+      new:
+        forgot_password: "Ankouaet ho ker-kuzh ganeoc'h?"
+        no_account: "N'eus kont ebet stag ouzh ar postel-mañ. M'emaoc'h o c'hortoz ur bedadenn, kaset e vo deoc'h ken buan ha ma c'hallimp."
+        send_password_instructions: "Kasit din an titour evit adsevel ar ger-kuzh"
+      send_instructions: "Emaoc'h o vont da reseviñ ur postel gant titouroù evit goût penaos nulañ ho ker-kuzh a-benn nebeut."
+      updated: "Cheñchet eo bet ho ker-kuzh. Kennasket oc'h bremañ."
+    registrations:
+      destroyed: "Kenavo! Ho kont zo bet nullet. Emichañs e voc'h gwelet en dro a-benn nebeut."
+      signed_up: "Enskrivet hoc'h bet mat. M'ho peus dibabet e vo kaset deoc'h ur postel-kadarnaat."
+      updated: "Adnevezet eo bet ho kont ganeoc'h."
+    sessions:
+      new:
+        login: "Kennaskañ"
+        modern_browsers: "ne c'hell mont en-dro gant merdeidi modern nemetken."
+        password: "Ger-kuzh"
+        remember_me: "Delc'her soñj ac'hanon"
+        sign_in: "Lakait hoc'h anv"
+        username: "Anv implijer"
+      signed_in: "Kennasket oc'h bremañ."
+      signed_out: "Digennasket oc'h bremañ."
+    shared:
+      links:
+        forgot_your_password: "Disoñjet ho ker-kuzh ganeoc'h?"
+        receive_confirmation: "N'ho peus ket resevet titouroù-kadarnaat?"
+        receive_unlock: "N'ho peus ket resevet titouroù-dibrenn?"
+        sign_in: "Mont e-barzh"
+        sign_up: "Lakait hoc'h anv"
+        sign_up_closed: "Klozet eo an enskrivadurioù evit poent."
+    unlocks:
+      new:
+        resend_unlock: "Kas titouroù-dibrennañ en dro"
+      send_instructions: "Emaoc'h o vont da reseviñ ur postel gant titouroù evit goût penaos dibrennañ ho kont a-benn nebeut."
+      unlocked: "Ho kont zo bet dibrennet mat. Emaoc'h luget."
+  errors:
+    messages:
+      already_confirmed: "zo bet kadarnet dija"
+      not_found: "n'eo ket bet kavet"
+      not_locked: "n'eo ket bet prennet"

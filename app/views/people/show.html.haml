@@ -1,0 +1,30 @@
+-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+-#   licensed under the Affero General Public License version 3 or later.  See
+-#   the COPYRIGHT file.
+
+
+- content_for :head do
+  = javascript_include_tag :people
+  - if user_signed_in? && @person != current_user.person
+    :javascript
+      Mentions.options.prefillMention = Mentions._contactToMention(#{j @person.to_json});
+
+- content_for :page_title do
+  = @person.name
+
+.span-6
+  = render :partial => 'people/profile_sidebar', :locals => {:person => @person, :contact => @contact }
+
+.span-18.last
+  .stream_container
+    = render 'people/sub_header', :person => @person, :contact => @contact
+
+    #main_stream.stream
+      - if @block.present?
+        .dull
+          = t('.ignoring', :name => @person.first_name)
+
+    #paginate
+
+  %a{:id=>"back-to-top", :title=>"#{t('layouts.application.back_to_top')}", :href=>"#"}
+    &#8679;

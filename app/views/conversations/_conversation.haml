@@ -1,0 +1,30 @@
+-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+-#   licensed under the Affero General Public License version 3 or later.  See
+-#   the COPYRIGHT file.
+
+.conversation-wrapper{ :"data-conversation-path" => conversation_path(conversation) }
+  .stream_element.conversation{:data=>{:guid=>conversation.id}, :class => ('unread' if unread_counts[conversation.id].to_i > 0)}
+    .media
+      .img
+        - other_participants = ordered_participants[conversation.id] - [current_user.person]
+        - if other_participants.first.present?
+          = person_image_tag(other_participants.first)
+
+      .bg
+        .badge.badge-dafault.message_count
+          = conversation.messages.size
+        - unread_count = unread_counts[conversation.id].to_i
+        - if unread_count > 0
+          .badge.badge-important.unread_message_count
+            = unread_count
+        .subject
+          %div{ :class => direction_for(conversation.subject) }
+            = conversation.subject
+        %time.timeago.timestamp{:datetime => conversation.updated_at.iso8601}
+          = t('ago', :time =>  time_ago_in_words(conversation.updated_at))
+        .last_author
+          - if authors[conversation.id].present?
+            = authors[conversation.id].name
+        .last_message
+          - if conversation.messages.present?
+            = '»' + conversation.messages.last.text + '«'

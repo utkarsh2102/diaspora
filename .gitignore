@@ -1,0 +1,67 @@
+#trademark sillyness
+app/views/home/_show.*
+app/assets/images/custom/
+
+
+# Configuration files
+config/diaspora.yml
+config/heroku.yml
+config/initializers/secret_token.rb
+config/redis.conf
+config/deploy_config.yml
+.bundle
+vendor/bundle/
+vendor/cache/
+config/database.yml
+.rvmrc_custom
+.rvmrc.local
+
+#Mailing list stuff
+config/email_offset
+config/mailing_list.csv
+
+# Generated files
+log/
+public/stylesheets/*.css
+public/diaspora
+spec/fixtures/*.y*ml
+spec/fixtures/*.fixture.*
+coverage/
+xml_locales/
+app/assets/images/branding-*.png
+app/assets/images/icons-*.png
+app/assets/images/social_media_logos-*.png
+
+#Documentation
+.yardoc/
+doc/
+
+# Uploaded files and local files
+public/uploads/
+public/assets/
+public/source.tar*
+public/.well-known
+tmp/**/
+tmp/
+*.sqlite3
+
+# Temporary files of every sort
+.sass-cache/
+.DS_Store
+.idea
+.redcar
+.rvmrc
+.stgit*
+*.swap
+*.swo
+*.swp
+*~
+*#
+bin/*
+nbproject
+patches-*
+capybara-*.html
+dump.rdb
+
+#Rubinius's JIT
+*.rbc

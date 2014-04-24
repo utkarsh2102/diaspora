@@ -1,0 +1,18 @@
+@import '../mixins';
+
+body.idle {
+  #post-nav {
+    @include opacity(0);
+
+    .nav-arrow{
+      &.right {
+        margin-right: -40px;
+      }
+
+      &.left {
+        margin-left: -40px;
+      }
+    }
+
+  }
+}
