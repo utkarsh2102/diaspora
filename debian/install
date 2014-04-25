@@ -8,7 +8,6 @@ db usr/share/diaspora
 features usr/share/diaspora
 FederationProcfile usr/share/diaspora
 Gemfile usr/share/diaspora
-Gemfile.lock usr/share/diaspora
 GNU-AGPL-3.0 usr/share/diaspora
 graphics usr/share/diaspora
 Guardfile usr/share/diaspora
