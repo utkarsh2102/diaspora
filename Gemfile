@@ -4,7 +4,7 @@ gem 'rails', '3.2.17'
 
 # Appserver
 
-gem 'unicorn', '4.8.0', :require => false
+gem 'unicorn', '>= 4.8.0', :require => false
 
 # API and JSON
 
@@ -13,7 +13,7 @@ gem 'json',        '1.8.1'
 
 # Authentication
 
-gem 'devise', '3.2.2'
+gem 'devise', '>= 3.2.2'
 
 # Captcha
 
@@ -21,8 +21,8 @@ gem 'galetahub-simple_captcha', '0.1.5', :require => 'simple_captcha'
 
 # Background processing
 
-gem 'sidekiq', '2.17.2'
-gem 'sinatra', '1.3.3'
+gem 'sidekiq', '>= 2.17.2'
+gem 'sinatra', '>= 1.3.3'
 
 # Configuration
 
@@ -30,35 +30,35 @@ gem 'configurate', '0.0.8'
 
 # Cross-origin resource sharing
 
-gem 'rack-cors', '0.2.8', :require => 'rack/cors'
+gem 'rack-cors', '>= 0.2.8', :require => 'rack/cors'
 
 # Database
 
 ENV['DB'] ||= 'mysql'
 
-gem 'mysql2', '0.3.14' if ENV['DB'] == 'all' || ENV['DB'] == 'mysql'
+gem 'mysql2', '>= 0.3.14' if ENV['DB'] == 'all' || ENV['DB'] == 'mysql'
 gem 'pg',     '0.17.1' if ENV['DB'] == 'all' || ENV['DB'] == 'postgres'
 
-gem 'activerecord-import', '0.3.1'
+gem 'activerecord-import', '>= 0.3.1'
 gem 'foreigner',           '1.6.1'
 
 # File uploading
 
-gem 'carrierwave', '0.9.0'
-gem 'fog',         '1.19.0'
+gem 'carrierwave', '>= 0.9.0'
+gem 'fog',         '>= 1.19.0'
 gem 'mini_magick', '3.7.0'
 gem 'remotipart',  '1.2.1'
 
 # Localization
 
-gem 'http_accept_language', '1.0.2'
+gem 'http_accept_language', '>= 1.0.2'
 gem 'i18n-inflector-rails', '1.0.7'
-gem 'rails-i18n',           '0.7.4'
+gem 'rails-i18n',           '>= 0.7.4'
 
 # Mail
 
 gem 'markerb',             '1.0.1'
-gem 'messagebus_ruby_api', '1.0.3'
+gem 'messagebus_ruby_api', '>= 1.0.3'
 
 # Parsing
 
@@ -164,56 +164,4 @@ group :production do # we don't install these on travis to speed up test runs
   # Third party asset hosting
 
   gem 'asset_sync', '1.0.0', :require => false
-end
-
-group :development do
-  # Comparison images
-
-  gem 'rmagick', '2.13.2', :require => false
-
-  # Automatic test runs
-
-  gem 'guard-cucumber', '1.4.1'
-  gem 'guard-rspec',    '4.2.4'
-  gem 'rb-fsevent',     '0.9.4', :require => false
-  gem 'rb-inotify',     '0.9.3', :require => false
-
-  # Preloading environment
-
-  gem 'guard-spork', '1.5.1'
-  gem 'spork',       '1.0.0rc4'
-end
-
-group :test do
-  # RSpec (unit tests, some integration tests)
-
-  gem 'fixture_builder',   '0.3.6'
-  gem 'fuubar',            '1.3.2'
-  gem 'rspec-instafail',   '0.2.4', :require => false
-  gem 'test_after_commit', '0.2.2'
-
-  # Cucumber (integration tests)
-
-  gem 'capybara',           '2.2.1'
-  gem 'database_cleaner',   '1.2.0'
-  gem 'selenium-webdriver', '2.39.0'
-
-  # General helpers
-
-  gem 'factory_girl_rails', '4.3.0'
-  gem 'timecop',            '0.7.1'
-  gem 'webmock',            '1.16.1', :require => false
-end
-
-
-group :development, :test do
-  # RSpec (unit tests, some integration tests)
-  gem "rspec-rails",     '2.14.1'
-
-  # Cucumber (integration tests)
-  gem 'cucumber-rails',     '1.4.0', :require => false
-
-  # Jasmine (client side application tests (JS))
-  gem 'jasmine', '1.3.2'
-  gem 'sinon-rails',	    '1.7.3'
 end

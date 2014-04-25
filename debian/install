@@ -5,7 +5,6 @@ config usr/share/diaspora
 config.ru usr/share/diaspora
 COPYRIGHT usr/share/diaspora
 db usr/share/diaspora
-debian usr/share/diaspora
 features usr/share/diaspora
 FederationProcfile usr/share/diaspora
 Gemfile usr/share/diaspora
