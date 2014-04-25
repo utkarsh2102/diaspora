@@ -14,7 +14,7 @@ Package: diaspora
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- ruby-rails,
+ ruby-rails-3.2,
  unicorn,
  ruby-acts-as-api,
  ruby-json,
