@@ -1,0 +1,14 @@
+remove-development-test-from-gemfile.patch
+remove-gemfile-lock.patch
+loosen-unicorn-version-dep.patch
+loosen-devise-version.patch
+loosen-sidekiq-version.patch
+loosen-sinatra-version.patch
+loosen-rack-cors-version.patch
+loosen-mysql2-version.patch
+loosen-activerecord-import-version.patch
+loosen-carrierwave-version.patch
+loosen-fog-version.patch
+loosen-http-accept-language-version.patch
+loosen-rails-i18n-version.patch
+loosen-messagebus-ruby-api-version.patch

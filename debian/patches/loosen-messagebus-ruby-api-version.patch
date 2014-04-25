@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -58,7 +58,7 @@
+ # Mail
+ 
+ gem 'markerb',             '1.0.1'
+-gem 'messagebus_ruby_api', '1.0.3'
++gem 'messagebus_ruby_api', '>= 1.0.3'
+ 
+ # Parsing
+ 

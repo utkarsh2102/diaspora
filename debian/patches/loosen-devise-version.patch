@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -13,7 +13,7 @@
+ 
+ # Authentication
+ 
+-gem 'devise', '3.2.2'
++gem 'devise', '>= 3.2.2'
+ 
+ # Captcha
+ 
