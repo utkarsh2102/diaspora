@@ -13,3 +13,7 @@
 
 %:
 	dh $@ --buildsystem=ruby --with ruby
+
+clean:
+	dh clean
+	rm -rf .bundle
