@@ -13,6 +13,30 @@ XS-Ruby-Versions: all
 Package: diaspora
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
+ ruby-rails,
+ unicorn,
+ ruby-acts-as-api,
+ ruby-json,
+ ruby-devise,
+ ruby-galetahub-simple-captcha,
+ ruby-sidekiq,
+ ruby-sinatra,
+ ruby-configurate,
+ ruby-rack-cors,
+ ruby-mysql2,
+ ruby-pg,
+ ruby-activerecord-import,
+ ruby-foreigner,
+ ruby-carrierwave,
+ ruby-fog,
+ ruby-mini-magick,
+ ruby-remotipart,
+ ruby-http-accept-language,
+ ruby-i18n-inflector-rails,
+ ruby-rails-i18n,
+ ruby-markerb,
+ ruby-messagebus-api,
+ ruby-nokogiri,
 Description: FIXME
  <insert long description, indented with spaces>
