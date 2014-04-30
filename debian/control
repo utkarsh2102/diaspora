@@ -38,5 +38,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-markerb,
  ruby-messagebus-api,
  ruby-nokogiri,
+ ruby-rails-autolink,
+ ruby-redcarpet,
+ ruby-roxml,
+ ruby-oembed,
+ ruby-opengraph-parser,
+ ruby-strong-parameters
 Description: FIXME
  <insert long description, indented with spaces>
