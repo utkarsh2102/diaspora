@@ -43,6 +43,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-roxml,
  ruby-oembed,
  ruby-opengraph-parser,
- ruby-strong-parameters
+ ruby-strong-parameters,
+ ruby-omniauth,
+ ruby-omniauth-facebook,
+ ruby-omniauth-tumblr,
+ ruby-omniauth-twitter,
+ ruby-twitter,
+ ruby-omniauth-wordpress
 Description: FIXME
  <insert long description, indented with spaces>
