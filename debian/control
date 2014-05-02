@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.7.5~)
 Standards-Version: 3.9.5
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/diaspora.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-ruby-extras/diaspora.git;a=summary
-Homepage: FIXME
+Homepage: http://diasporafoundation.org
 XS-Ruby-Versions: all
 
 Package: diaspora
