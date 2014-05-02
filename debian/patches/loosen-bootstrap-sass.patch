@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -115,7 +115,7 @@
+ 
+   # CSS
+ 
+-  gem 'bootstrap-sass', '2.2.2.0'
++  gem 'bootstrap-sass', '>= 2.2.2.0'
+   gem 'compass-rails',  '1.0.3'
+   gem 'sass-rails',     '3.2.6'
+ 
