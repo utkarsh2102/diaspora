@@ -14,3 +14,4 @@ loosen-rails-i18n-version.patch
 loosen-messagebus-ruby-api-version.patch
 loosen-redcarpet-version.patch
 loosen-roxml-version.patch
+loosen-twitter-version.patch
