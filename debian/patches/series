@@ -15,3 +15,6 @@ loosen-messagebus-ruby-api-version.patch
 loosen-redcarpet-version.patch
 loosen-roxml-version.patch
 loosen-twitter-version.patch
+loosen-faraday-version.patch
+loosen-fraraday-middleware-version.patch
+loosen-typhoeus-version.patch
