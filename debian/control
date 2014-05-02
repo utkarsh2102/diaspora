@@ -54,6 +54,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-addressable,
  ruby-faraday,
  ruby-faraday-middleware,
- ruby-typhoeus
+ ruby-typhoeus,
+ ruby-client-side-validations,
+ ruby-gon,
+ ruby-haml,
+ ruby-mobile-fu,
+ ruby-will-paginate 
 Description: FIXME
  <insert long description, indented with spaces>
