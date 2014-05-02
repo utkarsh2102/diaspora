@@ -60,5 +60,18 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-haml,
  ruby-mobile-fu,
  ruby-will-paginate 
-Description: FIXME
- <insert long description, indented with spaces>
+Description: distributed social networking service
+ Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
+ personal web server that implements a distributed social networking service.
+ Installations of the software form nodes (termed "pods") which make up the
+ distributed Diaspora social network.
+ .
+ Diaspora is intended to address privacy concerns related to centralized
+ social networks by allowing users set up their own server (or "pod") to
+ host content; pods can then interact to share status updates, photographs,
+ and other social data. It allows its users to host their data with a
+ traditional web host, a cloud-based host, an ISP, or a friend. The framework,
+ which is being built on Ruby on Rails, is free software and can be
+ experimented with by external developers.
+ .
+ Learn more about diaspora at http://diasporafoundation.org
