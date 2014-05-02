@@ -49,6 +49,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-omniauth-tumblr,
  ruby-omniauth-twitter,
  ruby-twitter,
- ruby-omniauth-wordpress
+ ruby-omniauth-wordpress,
+ ruby-acts-as-taggable-on,
+ ruby-addressable,
+ ruby-faraday,
+ ruby-faraday-middleware,
+ ruby-typhoeus
 Description: FIXME
  <insert long description, indented with spaces>
