@@ -21,3 +21,5 @@ loosen-typhoeus-version.patch
 loosen-gon-version.patch
 loosen-mobile-fu-version.patch
 loosen-bootstrap-sass.patch
+loosen-compass-rails-version.patch
+lower-sass-rails.patch
