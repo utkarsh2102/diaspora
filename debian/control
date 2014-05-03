@@ -59,7 +59,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-gon,
  ruby-haml,
  ruby-mobile-fu,
- ruby-will-paginate 
+ ruby-will-paginate,
+ ruby-zip-zip,
+ ruby-entypo-rails,
+ ruby-bootstrap-sass,
+ ruby-compass-rails,
+ ruby-sass-rails  
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
