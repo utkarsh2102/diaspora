@@ -69,7 +69,13 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-backbone-on-rails,
  ruby-handlebars-assets,
  ruby-jquery-rails,
- nodejs 
+ nodejs ,
+ ruby-rack-google-analytics,
+ ruby-rack-piwik,
+ ruby-rack-protection,
+ ruby-rack-rewrite,
+ ruby-rack-ssl,
+ ruby-asset-sync
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
