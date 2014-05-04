@@ -23,3 +23,7 @@ loosen-mobile-fu-version.patch
 loosen-bootstrap-sass.patch
 loosen-compass-rails-version.patch
 lower-sass-rails.patch
+loosen-uglifier-version.patch
+loosen-backbone-on-rails-version.patch
+loosen-handlebars-assets-version.patch
+loosen-jquery-rails-version.patch
