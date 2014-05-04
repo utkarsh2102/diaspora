@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -141,7 +141,7 @@
+ 
+   # Administration
+ 
+-  gem 'rails_admin', '0.4.9'
++ # gem 'rails_admin', '0.4.9'
+ 
+   # Analytics
+ 

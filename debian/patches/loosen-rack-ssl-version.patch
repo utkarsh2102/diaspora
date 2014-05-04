@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -159,7 +159,7 @@
+   # Redirects
+ 
+   gem 'rack-rewrite', '1.5.0', :require => false
+-  gem 'rack-ssl',     '1.3.3', :require => 'rack/ssl'
++  gem 'rack-ssl',     '>= 1.3.2', :require => 'rack/ssl'
+ 
+   # Third party asset hosting
+ 

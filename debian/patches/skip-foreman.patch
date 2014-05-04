@@ -1,0 +1,11 @@
+--- a/Gemfile
++++ b/Gemfile
+@@ -154,7 +154,7 @@
+ 
+   # Process management
+ 
+-  gem 'foreman', '0.62'
++  # gem 'foreman', '0.62'
+ 
+   # Redirects
+ 
