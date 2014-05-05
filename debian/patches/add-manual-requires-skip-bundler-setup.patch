@@ -1,0 +1,152 @@
+--- a/config/boot.rb
++++ b/config/boot.rb
+@@ -1,11 +1,146 @@
+-require 'rubygems'
++#require 'rubygems'
+ 
+ # Set up gems listed in the Gemfile.
+-ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
+-require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
++#ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
++#require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
+ 
+ # Ensure Builder is loaded
+ require 'active_support/builder' unless defined?(Builder)
+ 
+ # Load configuration early
+ require_relative 'load_config'
++
++require 'rails'
++
++# API and JSON
++
++require 'acts_as_api'
++require 'json'
++
++# Authentication
++
++require 'devise'
++
++# Captcha
++
++require 'simple_captcha'
++
++# Background processing
++
++require 'sidekiq'
++require 'sinatra'
++
++# Configuration
++
++require 'configurate'
++
++# Cross-origin resource sharing
++
++require 'rack/cors'
++
++# Database
++
++
++require 'mysql2'
++
++require 'activerecord-import'
++require 'foreigner'
++
++# File uploading
++
++require 'carrierwave'
++require 'fog'
++require 'mini_magick'
++require 'remotipart'
++
++# Localization
++
++require 'http_accept_language'
++require 'i18n-inflector-rails'
++require 'rails-i18n'
++
++# Mail
++
++require 'markerb'
++require 'messagebus_ruby_api'
++
++# Parsing
++
++require 'nokogiri'
++require 'rails_autolink'
++require 'redcarpet'
++require 'roxml'
++require 'ruby-oembed'
++require 'opengraph_parser'
++
++
++# Please remove when migrating to Rails 4
++require 'strong_parameters'
++
++
++# Services
++
++require 'omniauth'
++require 'omniauth-facebook'
++require 'omniauth-tumblr'
++require 'omniauth-twitter'
++require 'twitter'
++require 'omniauth-wordpres'
++
++# Tags
++
++require 'acts-as-taggable-on'
++
++# URIs and HTTP
++
++require 'addressable/uri'
++require 'faraday'
++require 'faraday_middleware'
++require 'typhoeus'
++
++# Views
++
++require 'client_side_validations'
++require 'gon'
++require 'haml'
++require 'mobile-fu'
++require 'will_paginate'
++
++# Workarounds
++# https://github.com/rubyzip/rubyzip#important-note
++require 'zip-zip'
++
++### GROUPS ####
++
++
++  # Icons
++require 'entypo-rails'
++
++  # CSS
++
++  require 'bootstrap-sass'
++  require 'compass-rails'
++  require 'sass-rails'
++
++  # Compression
++
++  require 'uglifier'
++
++  # JavaScript
++
++  require 'backbone-on-rails'
++  require 'handlebars_assets'
++  require 'jquery-rails'
++
++  # Analytics
++
++  require 'rack/google-analytics'
++  require 'rack/piwik'
++
++  # Click-jacking protection
++
++  require 'rack-protection'
++
++  # Redirects
++
++  require 'rack/ssl'
