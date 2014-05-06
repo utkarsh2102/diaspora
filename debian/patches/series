@@ -32,3 +32,4 @@ loosen-rack-google-analytics-version.patch
 loosen-rack-protection-version.patch
 skip-foreman.patch
 loosen-rack-ssl-version.patch
+loosen-rails-admin-version.patch
