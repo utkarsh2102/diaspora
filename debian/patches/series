@@ -28,7 +28,6 @@ loosen-uglifier-version.patch
 loosen-backbone-on-rails-version.patch
 loosen-handlebars-assets-version.patch
 loosen-jquery-rails-version.patch
-skip-rails-admin.patch
 loosen-rack-google-analytics-version.patch
 loosen-rack-protection-version.patch
 skip-foreman.patch
