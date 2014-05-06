@@ -1,0 +1,2 @@
+rake generate:secret_token
+RAILS_ENV=production  rake db:create db:schema:load
