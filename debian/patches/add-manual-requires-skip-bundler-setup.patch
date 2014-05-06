@@ -1,6 +1,6 @@
 --- a/config/boot.rb
 +++ b/config/boot.rb
-@@ -1,11 +1,146 @@
+@@ -1,11 +1,148 @@
 -require 'rubygems'
 +#require 'rubygems'
  
@@ -17,6 +17,8 @@
  require_relative 'load_config'
 +
 +require 'rails'
++require 'active_record'
++require 'action_view'
 +
 +# API and JSON
 +
@@ -76,7 +78,7 @@
 +require 'rails_autolink'
 +require 'redcarpet'
 +require 'roxml'
-+require 'ruby-oembed'
++#require 'ruby-oembed'
 +require 'opengraph_parser'
 +
 +
@@ -91,7 +93,7 @@
 +require 'omniauth-tumblr'
 +require 'omniauth-twitter'
 +require 'twitter'
-+require 'omniauth-wordpres'
++require 'omniauth-wordpress'
 +
 +# Tags
 +
@@ -114,7 +116,7 @@
 +
 +# Workarounds
 +# https://github.com/rubyzip/rubyzip#important-note
-+require 'zip-zip'
++require 'zip/zip'
 +
 +### GROUPS ####
 +
@@ -124,9 +126,9 @@
 +
 +  # CSS
 +
-+  require 'bootstrap-sass'
-+  require 'compass-rails'
-+  require 'sass-rails'
++ # require 'bootstrap-sass'
++ # require 'compass-rails'
++ # require 'sass-rails'
 +
 +  # Compression
 +
