@@ -1,3 +1,6 @@
+Description: Use newer faraday versions
+Bug: https://github.com/diaspora/diaspora/issues/4950
+
 --- a/Gemfile
 +++ b/Gemfile
 @@ -90,7 +90,7 @@
