@@ -1,9 +1,10 @@
---- a/config/boot.rb
-+++ b/config/boot.rb
-@@ -1,11 +1,148 @@
--require 'rubygems'
+Index: diaspora/config/boot.rb
+===================================================================
+--- diaspora.orig/config/boot.rb
++++ diaspora/config/boot.rb
+@@ -1,9 +1,148 @@
 +#require 'rubygems'
- 
++
  # Set up gems listed in the Gemfile.
 -ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 -require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
