@@ -16,23 +16,39 @@ describe Workers::HttpMulti do
     @post_xml = Base64.encode64 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
 
     @hydra = Typhoeus::Hydra.new
-    Typhoeus::Hydra.stub(:new).and_return(@hydra)
+    allow(Typhoeus::Hydra).to receive(:new).and_return(@hydra)
     @salmon = Salmon::EncryptedSlap.create_by_user_and_activity bob, Base64.decode64(@post_xml)
-    Salmon::EncryptedSlap.stub(:create_by_user_and_activity).and_return @salmon
+    allow(Salmon::EncryptedSlap).to receive(:create_by_user_and_activity).and_return @salmon
     @body = "encrypted things"
-    @salmon.stub(:xml_for).and_return @body
+    allow(@salmon).to receive(:xml_for).and_return @body
 
     @response = Typhoeus::Response.new(
       code: 200,
       body: "",
       time: 0.2,
-      effective_url: 'http://foobar.com'
+      effective_url: 'http://foobar.com',
+      return_code: :ok
     )
     @failed_response = Typhoeus::Response.new(
       code: 504,
       body: "",
       time: 0.2,
-      effective_url: 'http://foobar.com'
+      effective_url: 'http://foobar.com',
+      return_code: :ok
+    )
+    @ssl_error_response = Typhoeus::Response.new(
+      code: 0,
+      body: "",
+      time: 0.2,
+      effective_url: 'http://foobar.com',
+      return_code: :ssl_connect_error
+    )
+    @unable_to_resolve_response = Typhoeus::Response.new(
+      code: 0,
+      body: "",
+      time: 0.2,
+      effective_url: 'http://foobar.com',
+      return_code: :couldnt_resolve_host
     )
   end
 
@@ -41,8 +57,8 @@ describe Workers::HttpMulti do
       Typhoeus.stub(person.receive_url).and_return @response
     end
 
-    @hydra.should_receive(:queue).twice
-    @hydra.should_receive(:run).once
+    expect(@hydra).to receive(:queue).twice
+    expect(@hydra).to receive(:run).once
 
     Workers::HttpMulti.new.perform bob.id, @post_xml, @people.map(&:id), "Postzord::Dispatcher::Private"
   end
@@ -52,7 +68,25 @@ describe Workers::HttpMulti do
 
     Typhoeus.stub(person.receive_url).and_return @failed_response
 
-    Workers::HttpMulti.should_receive(:perform_in).with(1.hour, bob.id, @post_xml, [person.id], anything, 1).once
+    expect(Workers::HttpMulti).to receive(:perform_in).with(1.hour, bob.id, @post_xml, [person.id], anything, 1).once
+    Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
+  end
+
+  it 'retries if it could not resolve the server' do
+    person = @people.first
+
+    Typhoeus.stub(person.receive_url).and_return @unable_to_resolve_response
+
+    expect(Workers::HttpMulti).to receive(:perform_in).with(1.hour, bob.id, @post_xml, [person.id], anything, 1).once
+    Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
+  end
+
+  it 'does not retry on an SSL error' do
+    person = @people.first
+
+    Typhoeus.stub(person.receive_url).and_return @ssl_error_response
+
+    expect(Workers::HttpMulti).not_to receive(:perform_in)
     Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
   end
 
@@ -61,7 +95,7 @@ describe Workers::HttpMulti do
 
     Typhoeus.stub(person.receive_url).and_return @failed_response
 
-    Workers::HttpMulti.should_not_receive :perform_in
+    expect(Workers::HttpMulti).not_to receive :perform_in
     Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private", 3
   end
 
@@ -69,7 +103,7 @@ describe Workers::HttpMulti do
     person = @people.first
 
     Typhoeus.stub(person.receive_url).and_return @response
-    @salmon.should_receive(:xml_for).and_return @body
+    expect(@salmon).to receive(:xml_for).and_return @body
 
     Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
   end
@@ -90,7 +124,7 @@ describe Workers::HttpMulti do
 
     Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
     person.reload
-    person.url.should == "https://remote.net/"
+    expect(person.url).to eq("https://remote.net/")
   end
 
   it 'only sends to users with valid RSA keys' do
@@ -98,13 +132,12 @@ describe Workers::HttpMulti do
     person.serialized_public_key = "-----BEGIN RSA PUBLIC KEY-----\nPsych!\n-----END RSA PUBLIC KEY-----"
     person.save
 
-    # Should be possible to drop when converting should_receive to expect(...).to
-    RSpec::Mocks.proxy_for(Salmon::EncryptedSlap).reset
+    allow(@salmon).to receive(:xml_for).and_call_original
 
     Typhoeus.stub(person.receive_url).and_return @response
     Typhoeus.stub(@people[1].receive_url).and_return @response
 
-    @hydra.should_receive(:queue).once
+    expect(@hydra).to receive(:queue).once
     Workers::HttpMulti.new.perform bob.id, @post_xml, @people.map(&:id), "Postzord::Dispatcher::Private"
   end
 end

@@ -1,30 +1,12 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 /*   Copyright (c) 2010-2011, Diaspora Inc.  This file is
  *   licensed under the Affero General Public License version 3 or later.  See
  *   the COPYRIGHT file.
  */
-//= require jquery.autoSuggest.custom
 
 $(document).ready(function(){
-
-  if ($('#first_unread').length > 0) {
-    $("html").scrollTop($('#first_unread').offset().top-45);
-  }
-
-  $('time.timeago').each(function(i,e) {
-    var jqe = $(e);
-    jqe.attr('data-original-title', new Date(jqe.attr('datetime')).toLocaleString());
-    jqe.attr('title', '');
-  });
-
-  $('.timeago').tooltip();
-  $('.timeago').timeago();
-
-  $('time.timeago').each(function(i,e) {
-    var jqe = $(e);
-    jqe.attr('title', '');
-  });
-
-  $('.conversation-wrapper').live('click', function(){
+  $(document).on('click', '.conversation-wrapper', function(){
     var conversation_path = $(this).data('conversation-path');
 
     $.getScript(conversation_path, function() {
@@ -34,7 +16,7 @@ $(document).ready(function(){
     history.pushState(null, "", conversation_path);
 
     var conv = $(this).children('.stream_element'),
-        cBadge = $("#message_inbox_badge .badge_count");
+        cBadge = $("#conversations_badge .badge_count");
     if(conv.hasClass('unread') ){
       conv.removeClass('unread');
     }
@@ -71,7 +53,7 @@ $(document).ready(function(){
     debug: false,
     donetext: "no more.",
     loadingText: "",
-    loadingImg: '/assets/ajax-loader.gif'
+    loadingImg: ImagePaths.get('ajax-loader.gif')
   }, function(){
     $('.conversation-wrapper', '.stream').bind('mousedown', function(){
       bindIt($(this));
@@ -91,11 +73,6 @@ $(document).ready(function(){
   $(document).ajaxError(function(e,xhr,opt){
     if (xhr.status == 404) { $('a.next_page').remove(); }
   });
-
-  $('#reply_to_conversation').live('click', function(evt) {
-    evt.preventDefault();
-     $('html, body').animate({scrollTop:$(window).height()}, 'medium', function(){
-      $('#message_text').focus();
-     });
-  });
 });
+// @license-end
+

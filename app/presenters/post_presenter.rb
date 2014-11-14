@@ -1,6 +1,5 @@
 class PostPresenter
   include PostsHelper
-  include ActionView::Helpers::TextHelper
 
   attr_accessor :post, :current_user
 
@@ -14,10 +13,15 @@ class PostPresenter
   end
 
   def as_json(options={})
+    text = if @post.message
+      @post.message.plain_text_for_json
+    else
+      @post.raw_message
+    end
     {
         :id => @post.id,
         :guid => @post.guid,
-        :text => @post.raw_message,
+        :text => text,
         :public => @post.public,
         :created_at => @post.created_at,
         :interacted_at => @post.interacted_at,
@@ -35,6 +39,8 @@ class PostPresenter
         :root => root,
         :title => title,
         :address => @post.address,
+        :poll => @post.poll(),
+        :already_participated_in_poll => already_participated_in_poll,
 
         :interactions => {
             :likes => [user_like].compact,
@@ -47,7 +53,7 @@ class PostPresenter
   end
 
   def title
-    @post.text.present? ? post_page_title(@post) : I18n.translate('posts.presenter.title', :name => @post.author_name)
+    @post.message.present? ? @post.message.title : I18n.t('posts.presenter.title', name: @post.author_name)
   end
 
   def root
@@ -72,6 +78,14 @@ class PostPresenter
     @current_user.present?
   end
 
+  private
+
+  def already_participated_in_poll
+    if @post.poll && user_signed_in?
+      @post.poll.already_participated?(current_user)
+    end
+  end
+
 end
 
 class PostInteractionPresenter
@@ -90,7 +104,7 @@ class PostInteractionPresenter
   end
 
   def as_api(collection)
-    collection.includes(:author => :profile).all.map do |element|
+    collection.includes(:author => :profile).map do |element|
       element.as_api_response(:backbone)
     end
   end

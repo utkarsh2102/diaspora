@@ -1,130 +1,106 @@
-
 describe("app.views.AspectMembership", function(){
+  var resp_success = {status: 200, responseText: '{}'};
+  var resp_fail = {status: 400};
+
   beforeEach(function() {
     // mock a dummy aspect dropdown
-    this.person = factory.author({name: "My Name"});
-    spec.content().html(
-      '<div class="aspect_membership dropdown">'+
-      '  <div class="button toggle">The Button</div>'+
-      '  <ul class="dropdown_list" data-person-short-name="'+this.person.name+'" data-person_id="'+this.person.id+'">'+
-      '    <li data-aspect_id="10">Aspect 10</li>'+
-      '    <li data-membership_id="99" data-aspect_id="11" class="selected">Aspect 11</li>'+
-      '    <li data-aspect_id="12">Aspect 12</li>'+
-      '  </ul>'+
-      '</div>'
-    );
-
-    this.view = new app.views.AspectMembership();
-  });
-
-  it('attaches to the aspect selector', function(){
-    spyOn($.fn, 'on');
-    view = new app.views.AspectMembership();
-
-    expect($.fn.on).toHaveBeenCalled();
+    spec.loadFixture("aspect_membership_dropdown_bootstrap");
+    this.view = new app.views.AspectMembership({el: $('.aspect_membership_dropdown')});
+    this.person_id = $('.dropdown-menu').data('person_id');
+    this.person_name = $('.dropdown-menu').data('person-short-name');
+    Diaspora.I18n.load({
+      aspect_dropdown: {
+        started_sharing_with: 'you started sharing with <%= name %>',
+        stopped_sharing_with: 'you stopped sharing with <%= name %>',
+        error: 'unable to add <%= name %>',
+        error_remove: 'unable to remove <%= name %>'
+      }
+    });
   });
 
   context('adding to aspects', function() {
     beforeEach(function() {
-      this.newAspect = spec.content().find('li:eq(0)');
-      this.newAspectId = 10;
+      this.newAspect = $('li:not(.selected)');
+      this.newAspectId = this.newAspect.data('aspect_id');
     });
 
-    it('calls "addMembership"', function() {
-       spyOn(this.view, "addMembership");
-       this.newAspect.trigger('click');
+    it('marks the aspect as selected', function() {
+      this.newAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_success);
 
-       expect(this.view.addMembership).toHaveBeenCalledWith(this.person.id, this.newAspectId);
+      expect(this.newAspect.attr('class')).toContain('selected');
     });
 
-    it('tries to create a new AspectMembership', function() {
-      spyOn(app.models.AspectMembership.prototype, "save");
-      this.view.addMembership(1, 2);
+    it('displays flash message when added to first aspect', function() {
+      spec.content().find('li').removeClass('selected');
+      this.newAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_success);
 
-      expect(app.models.AspectMembership.prototype.save).toHaveBeenCalled();
+      expect($('[id^="flash"]')).toBeSuccessFlashMessage(
+        Diaspora.I18n.t('aspect_dropdown.started_sharing_with', {name: this.person_name})
+      );
     });
 
     it('displays an error when it fails', function() {
-      spyOn(this.view, "_displayError");
-      spyOn(app.models.AspectMembership.prototype, "save").andCallFake(function() {
-        this.trigger('error');
-      });
+      this.newAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_fail);
 
-      this.view.addMembership(1, 2);
-
-      expect(this.view._displayError).toHaveBeenCalledWith('aspect_dropdown.error');
+      expect($('[id^="flash"]')).toBeErrorFlashMessage(
+        Diaspora.I18n.t('aspect_dropdown.error', {name: this.person_name})
+      );
     });
   });
 
   context('removing from aspects', function(){
     beforeEach(function() {
-      this.oldAspect = spec.content().find('li:eq(1)');
-      this.oldMembershipId = 99;
+      this.oldAspect = $('li.selected').first();
+      this.oldMembershipId = this.oldAspect.data('membership_id');
     });
 
-    it('calls "removeMembership"', function(){
-      spyOn(this.view, "removeMembership");
+    it('marks the aspect as unselected', function(){
       this.oldAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_success);
 
-      expect(this.view.removeMembership).toHaveBeenCalledWith(this.oldMembershipId);
+      expect(this.oldAspect.attr('class')).not.toContain('selected');
     });
 
-    it('tries to destroy an AspectMembership', function() {
-      spyOn(app.models.AspectMembership.prototype, "destroy");
-      this.view.removeMembership(1);
+    it('displays a flash message when removed from last aspect', function() {
+      spec.content().find('li.selected:last').removeClass('selected');
+      this.oldAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_success);
 
-      expect(app.models.AspectMembership.prototype.destroy).toHaveBeenCalled();
+      expect($('[id^="flash"]')).toBeSuccessFlashMessage(
+        Diaspora.I18n.t('aspect_dropdown.stopped_sharing_with', {name: this.person_name})
+      );
     });
 
     it('displays an error when it fails', function() {
-      spyOn(this.view, "_displayError");
-      spyOn(app.models.AspectMembership.prototype, "destroy").andCallFake(function() {
-        this.trigger('error');
-      });
+      this.oldAspect.trigger('click');
+      jasmine.Ajax.requests.mostRecent().response(resp_fail);
 
-      this.view.removeMembership(1);
-
-      expect(this.view._displayError).toHaveBeenCalledWith('aspect_dropdown.error_remove');
+      expect($('[id^="flash"]')).toBeErrorFlashMessage(
+        Diaspora.I18n.t('aspect_dropdown.error_remove', {name: this.person_name})
+      );
     });
   });
 
-  context('summary text in the button', function() {
+  context('button summary text', function() {
     beforeEach(function() {
-      this.btn = spec.content().find('div.button.toggle');
-      this.btn.text(""); // reset
-      this.view.dropdown = spec.content().find('ul.dropdown_list');
+      this.Aspect = $('li:eq(0)');
     });
 
-    it('shows "no aspects" when nothing is selected', function() {
-      spec.content().find('li[data-aspect_id]').removeClass('selected');
-      this.view.updateSummary();
+    it('calls "_toggleCheckbox"', function() {
+      spyOn(this.view, "_toggleCheckbox");
+      this.view.updateSummary(this.Aspect);
 
-      expect(this.btn.text()).toContain(Diaspora.I18n.t('aspect_dropdown.toggle.zero'));
+      expect(this.view._toggleCheckbox).toHaveBeenCalledWith(this.Aspect);
     });
 
-    it('shows "all aspects" when everything is selected', function() {
-      spec.content().find('li[data-aspect_id]').addClass('selected');
-      this.view.updateSummary();
+    it('calls "_updateButton"', function() {
+      spyOn(this.view, "_updateButton");
+      this.view.updateSummary(this.Aspect);
 
-      expect(this.btn.text()).toContain(Diaspora.I18n.t('aspect_dropdown.all_aspects'));
-    });
-
-    it('shows the name of the selected aspect ( == 1 )', function() {
-      var list = spec.content().find('li[data-aspect_id]');
-      list.removeClass('selected'); // reset
-      list.eq(1).addClass('selected');
-      this.view.updateSummary();
-
-      expect(this.btn.text()).toContain(list.eq(1).text());
-    });
-
-    it('shows the number of selected aspects ( > 1)', function() {
-      var list = spec.content().find('li[data-aspect_id]');
-      list.removeClass('selected'); // reset
-      $([list.eq(1), list.eq(2)]).addClass('selected');
-      this.view.updateSummary();
-
-      expect(this.btn.text()).toContain(Diaspora.I18n.t('aspect_dropdown.toggle', { 'count':2 }));
+      expect(this.view._updateButton).toHaveBeenCalledWith('green');
     });
   });
 });

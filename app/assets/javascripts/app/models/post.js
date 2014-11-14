@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 app.models.Post = Backbone.Model.extend(_.extend({}, app.models.formatDateMixin, {
   urlRoot : "/posts",
 
@@ -25,6 +27,14 @@ app.models.Post = Backbone.Model.extend(_.extend({}, app.models.formatDateMixin,
 
   reshareAuthor : function(){
     return this.get("author")
+  },
+
+  blockAuthor: function() {
+    var personId = this.get("author").id;
+    var block = new app.models.Block();
+
+    return block.save({block : {person_id : personId}})
+             .done(function(){ app.events.trigger('person:block:'+personId); });
   },
 
   toggleFavorite : function(options){
@@ -60,3 +70,5 @@ app.models.Post = Backbone.Model.extend(_.extend({}, app.models.formatDateMixin,
     return $.trim(this.get("text")) !== ""
   }
 }));
+// @license-end
+

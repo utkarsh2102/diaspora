@@ -39,8 +39,6 @@ cy:
       are_you_sure: "A ydych yn siŵr eich bod am ddileu yr agwedd hon?"
       aspect_not_empty: "Agwedd nid ar wag"
     index:
-      cubbies:
-        heading: "Cysylltu i Cubbi.es"
       diaspora_id:
         heading: "ID Diaspora"
       handle_explanation: "This is your diaspora handle.  Like an email address, you can give this to people to reach you."
@@ -93,7 +91,6 @@ cy:
       all_contacts: "Cysylltiadau i gŷd"
       my_contacts: "Fy nghysylltiadau"
       no_contacts: "No contacts."
-      remove_person_from_aspect: "Tynnu %{person_name} oddi ar \"%{aspect_name}\""
       title: "Cysylltiadau"
       your_contacts: "Eich Cysylltiadau chi"
     many: "%{count} contacts"
@@ -112,9 +109,6 @@ cy:
         other: "%{count} new messages"
         two: "%{count} new messages"
         zero: "no new messages"
-    index:
-      message_inbox: "Neges Inbox"
-      new_message: "Neges Newydd"
   delete: "Dileu"
   email: "E-bost"
   find_people: "Dod o hyd i bobl neu # tagiau"
@@ -450,13 +444,7 @@ cy:
   status_messages:
     helper:
       no_message_to_display: "Dim neges i arddangos."
-    too_long:
-      few: "please make your status messages less than %{count} characters"
-      many: "please make your status messages less than %{count} characters"
-      one: "please make your status messages less than %{count} character"
-      other: "please make your status messages less than %{count} characters"
-      two: "please make your status messages less than %{count} characters"
-      zero: "please make your status messages less than %{count} characters"
+    too_long: "{\"few\"=>\"please make your status messages less than %{count} characters\", \"many\"=>\"please make your status messages less than %{count} characters\", \"one\"=>\"please make your status messages less than %{count} character\", \"other\"=>\"please make your status messages less than %{count} characters\", \"two\"=>\"please make your status messages less than %{count} characters\", \"zero\"=>\"please make your status messages less than %{count} characters\"}"
   stream_helper:
     hide_comments: "hide comments"
     show_comments:
@@ -491,9 +479,6 @@ cy:
   tags:
     show:
       nobody_talking: "Does neb yn siarad am %{tag} eto."
-  tokens:
-    show:
-      connecting_is_simple: "Connecting your Diaspora account is as simple as filling out two fields on your Cubbi.es account page."
   username: "Enw Defnyddiwr"
   users:
     confirm_email:

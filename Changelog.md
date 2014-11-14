@@ -1,3 +1,278 @@
+# Head
+
+## Major Sidekiq update
+This release includes a major upgrade of the background processing system Sidekiq. To upgrade cleanly:
+
+1. Stop diaspora*
+2. Run `RAILS_ENV=production bundle exec sidekiq` and wait 5-10 minutes, then stop it again (hit `CTRL+C`)
+3. Do a normal upgrade of diaspora*
+4. Start diaspora*
+
+## Rails 4 - Manual action required
+Please edit `config/initializers/secret_token.rb`, replacing `secret_token` with
+`secret_key_base`.
+
+```ruby
+# Old
+Rails.application.config.secret_token = '***********...'
+
+# New
+Diaspora::Application.config.secret_key_base = '*************...'
+```
+
+You also need to take care to set `RAILS_ENV` and to clear the cache while precompiling assets: `RAILS_ENV=production bundle exec rake tmp:cache:clear assets:precompile`
+
+## Supported Ruby versions
+This release drops official support for the Ruby 1.9 series. This means we will no longer test against this Ruby version or take care to choose libraries
+that work with it. However that doesn't mean we won't accept patches that improve running diaspora* on it.
+
+At the same time we adopt support for the Ruby 2.1 series and recommend running on the latest Ruby version of that branch. We continue to support the Ruby 2.0
+series and run our comphrensive testsuite against it.
+
+## Change in defaults.yml
+The default for including jQuery from a CDN has changed. If you want to continue to include it from a CDN, please explicitly set the `jquery_cdn` setting to `true` in diaspora.yml.
+
+## Change in statistics.json schema
+The way services are shown in the `statistics.json` route is changing. The keys relating to showing whether services are enabled or not are moving to their own container as `"services": {....}`, instead of having them all in the root level of the json.
+
+The keys will still be available in the root level within the 0.5 release. The old keys will be removed in the 0.6 release.
+
+## New maintenance feature to automatically expire inactive accounts
+Removing of old inactive users can now be done automatically by background processing. The amount of inactivity is set by `after_days`. A warning email will be sent to the user and after an additional `warn_days`, the account will be automatically closed.
+
+This maintenance is not enabled by default. Podmins can enable it by for example copying over the new settings under `settings.maintenance` to their `diaspora.yml` file and setting it enabled. The default setting is to expire accounts that have been inactive for 2 years (no login).
+
+## Camo integration to proxy external assets
+It is now possible to enable an automatic proxying of external assets, for example images embedded via Markdown or OpenGraph thumbnails loaded from insecure third party servers through a [Camo proxy](https://github.com/atmos/camo).
+
+This is disabled by default since it requires the installation of additional packages and might cause some traffic. Check the [wiki page](https://wiki.diasporafoundation.org/Installation/Camo) for more information and detailed installation instructions.
+
+## Refactor
+* Redesign contacts page [#5153](https://github.com/diaspora/diaspora/pull/5153)
+* Improve profile page design on mobile [#5084](https://github.com/diaspora/diaspora/pull/5084)
+* Port testsuite to RSpec 3 [#5170](https://github.com/diaspora/diaspora/pull/5170)
+* Port tag stream to Bootstrap [#5138](https://github.com/diaspora/diaspora/pull/5138)
+* Consolidate migrations, if you need a migration prior 2013, checkout the latest release in the 0.4.x series first [#5173](https://github.com/diaspora/diaspora/pull/5173)
+* Add tests for mobile sign up [#5185](https://github.com/diaspora/diaspora/pull/5185)
+* Display new conversation form on conversations/index [#5178](https://github.com/diaspora/diaspora/pull/5178)
+* Port profile page to Backbone [#5180](https://github.com/diaspora/diaspora/pull/5180)
+* Pull punycode.js from rails-assets.org [#5263](https://github.com/diaspora/diaspora/pull/5263)
+* Redesign profile page and port to Bootstrap [#4657](https://github.com/diaspora/diaspora/pull/4657)
+* Unify stream selection links in the left sidebar [#5271](https://github.com/diaspora/diaspora/pull/5271)
+* Refactor schema of statistics.json regarding services [#5296](https://github.com/diaspora/diaspora/pull/5296)
+* Pull jquery.idle-timer.js from rails-assets.org [#5310](https://github.com/diaspora/diaspora/pull/5310)
+* Pull jquery.placeholder.js from rails-assets.org [#5299](https://github.com/diaspora/diaspora/pull/5299)
+* Pull jquery.textchange.js from rails-assets.org [#5297](https://github.com/diaspora/diaspora/pull/5297)
+* Pull jquery.hotkeys.js from rails-assets.org [#5368](https://github.com/diaspora/diaspora/pull/5368)
+* Reduce number of useless background job retries and pull public posts when missing [#5209](https://github.com/diaspora/diaspora/pull/5209
+* Updated Weekly User Stats admin page to show data for the most recent week including reversing the order of the weeks in the drop down to show the most recent. [#5331](https://github.com/diaspora/diaspora/pull/5331)
+* Convert some cukes to rspec tests [#5289](https://github.com/diaspora/diaspora/pull/5289)
+* Hidden overflow for long names on tag pages [#5279](https://github.com/diaspora/diaspora/pull/5279)
+* Always reshare absolute root of a post [#5276](https://github.com/diaspora/diaspora/pull/5276)
+* Convert remaining SASS stylesheets to SCSS [#5342](https://github.com/diaspora/diaspora/pull/5342)
+
+## Bug fixes
+* orca cannot see 'Add Contact' button [#5158](https://github.com/diaspora/diaspora/pull/5158)
+* Move submit button to the right in conversations view [#4960](https://github.com/diaspora/diaspora/pull/4960)
+* Handle long URLs and titles in OpenGraph descriptions [#5208](https://github.com/diaspora/diaspora/pull/5208)
+* Fix deformed getting started popover [#5227](https://github.com/diaspora/diaspora/pull/5227)
+* Use correct locale for invitation subject [#5232](https://github.com/diaspora/diaspora/pull/5232)
+* Initial support for IDN emails
+* Fix services settings reported by statistics.json [#5256](https://github.com/diaspora/diaspora/pull/5256)
+* Only collapse empty comment box [#5328](https://github.com/diaspora/diaspora/pull/5328)
+* Fix pagination for people/guid/contacts [#5304](https://github.com/diaspora/diaspora/pull/5304)
+* Fix poll creation on Bootstrap pages [#5334](https://github.com/diaspora/diaspora/pull/5334)
+* Show error message on invalid reset password attempt [#5325](https://github.com/diaspora/diaspora/pull/5325)
+* Fix translations on mobile password reset pages [#5318](https://github.com/diaspora/diaspora/pull/5318)
+* Handle unset user agent when signing out [#5316](https://github.com/diaspora/diaspora/pull/5316)
+* More robust URL parsing for oEmbed and OpenGraph [#5347](https://github.com/diaspora/diaspora/pull/5347)
+* Fix Publisher doesn't expand while uloading images [#3098](https://github.com/diaspora/diaspora/issues/3098)
+* Drop unneeded and too open crossdomain.xml
+
+## Features
+* Don't pull jQuery from a CDN by default [#5105](https://github.com/diaspora/diaspora/pull/5105)
+* Better character limit message [#5151](https://github.com/diaspora/diaspora/pull/5151)
+* Remember whether a AccountDeletion was performed [#5156](https://github.com/diaspora/diaspora/pull/5156)
+* Increased the number of notifications shown in drop down bar to 15 [#5129](https://github.com/diaspora/diaspora/pull/5129)
+* Increase possible captcha length [#5169](https://github.com/diaspora/diaspora/pull/5169)
+* Display visibility icon in publisher aspects dropdown [#4982](https://github.com/diaspora/diaspora/pull/4982)
+* Add a link to the reported comment in the admin panel [#5337](https://github.com/diaspora/diaspora/pull/5337)
+* Strip search query from leading and trailing whitespace [#5317](https://github.com/diaspora/diaspora/pull/5317)
+* Add the "network" key to statistics.json and set it to "Diaspora" [#5308](https://github.com/diaspora/diaspora/pull/5308)
+* Infinite scrolling in the notifications dropdown [#5237](https://github.com/diaspora/diaspora/pull/5237)
+* Maintenance feature to automatically expire inactive accounts [#5288](https://github.com/diaspora/diaspora/pull/5288)
+* Add LibreJS markers to JavaScript [5320](https://github.com/diaspora/diaspora/pull/5320)
+* Ask for confirmation when leaving a submittable publisher [#5309](https://github.com/diaspora/diaspora/pull/5309)
+* Allow page-specific styling via individual CSS classes [#5282](https://github.com/diaspora/diaspora/pull/5282)
+* Change diaspora logo in the header on hover [#5355](https://github.com/diaspora/diaspora/pull/5355)
+
+# 0.4.1.2
+
+* Update Rails, fixes [CVE-2014-7818](https://groups.google.com/forum/#!topic/rubyonrails-security/dCp7duBiQgo).
+
+# 0.4.1.1
+
+* Fix XSS issue in poll questions [#5274](https://github.com/diaspora/diaspora/issues/5274)
+
+# 0.4.1.0
+
+## New 'Terms of Service' feature and template
+
+This release brings a new ToS feature that allows pods to easily display to users the terms of service they are operating on. This feature is not enabled by default. If you want to enable it, please add under `settings` in `config/diaspora.yml` the following and restart diaspora. If in doubt see `config/diaspora.yml.example`:
+
+    terms:
+      enable: true
+
+When enabled, the footer and sidebar will have a link to terms page, and signup will have a disclaimer indicating that creating an account means the user accepts the terms of use.
+
+While the project itself doesn't restrict what kind of terms pods run on, we realize not all podmins want to spend time writing them from scratch. Thus there is a basic ToS template included that will be used unless a custom one available.
+
+To modify (or completely rewrite) the terms template, create a file called `app/views/terms/terms.haml` or `app/views/terms/terms.erb` and it will automatically replace the default template, which you can find at `app/views/terms/default.haml`.
+
+There are also two configuration settings to customize the terms (when using the default template). These are optional.
+
+* `settings.terms.jurisdiction` - indicate here in which country or state any legal disputes are handled.
+* `settings.terms.minimum_age` - indicate here if you want to show a minimum required age for creating an account.
+
+## Rake task to email users
+
+There is a new Rake task `podmin:admin_mail` available to allow podmins to easily send news and notices to users. The rake task triggers emails via the normal diaspora mailer mechanism (so they are embedded in the standard template) and takes the following parameters:
+
+1) Users definition
+
+* `all` - all users in the database (except deleted)
+* `active_yearly` - users logged in within the last year
+* `active_monthly` - users logged in within the last month
+* `active_halfyear` - users logged in within the last 6 months
+
+2) Path to message file
+
+* Give here a path to a HTML or plain text file that contains the message.
+
+3) Subject
+
+* A subject for the email
+
+Example shell command (depending on your environment);
+
+`RAILS_ENV=production bundle exec rake podmin:admin_mail['active_monthly','./message.html','Important message from pod']`
+
+Read more about [specifying arguments to Rake tasks](http://stackoverflow.com/a/825832/1489738).
+
+## Refactor
+* Port help pages to Bootstrap [#5050](https://github.com/diaspora/diaspora/pull/5050)
+* Refactor Notification#notify [#4945](https://github.com/diaspora/diaspora/pull/4945)
+* Port getting started to Bootstrap [#5057](https://github.com/diaspora/diaspora/pull/5057)
+* Port people search page to Bootstrap [#5077](https://github.com/diaspora/diaspora/pull/5077)
+* Clarify explanations and defaults in diaspora.yml.example [#5088](https://github.com/diaspora/diaspora/pull/5088)
+* Consistent header spacing on Bootstrap pages [#5108](https://github.com/diaspora/diaspora/pull/5108)
+* Port settings pages (account, profile, privacy, services) to Bootstrap [#5039](https://github.com/diaspora/diaspora/pull/5039)
+* Port contacts and community spotlight pages to Bootstrap [#5118](https://github.com/diaspora/diaspora/pull/5118)
+* Redesign login page [#5112](https://github.com/diaspora/diaspora/pull/5112)
+* Change mark read link on notifications page [#5141](https://github.com/diaspora/diaspora/pull/5141)
+
+## Bug fixes
+* Fix hiding of poll publisher on close [#5029](https://github.com/diaspora/diaspora/issues/5029)
+* Fix padding in user menu [#5047](https://github.com/diaspora/diaspora/pull/5047)
+* Fix self-XSS when renaming an aspect [#5048](https://github.com/diaspora/diaspora/pull/5048)
+* Fix live updating when renaming an aspect [#5049](https://github.com/diaspora/diaspora/pull/5049)
+* Use double quotes when embedding translations into Javascript [#5055](https://github.com/diaspora/diaspora/issues/5055)
+* Fix regression in mobile sign-in ([commit](https://github.com/diaspora/diaspora/commit/4a2836b108f8a9eb6f46ca58cfcb7b23f40bb076))
+* Set mention notification as read when viewing post [#5006](https://github.com/diaspora/diaspora/pull/5006)
+* Set sharing notification as read when viewing profile [#5009](https://github.com/diaspora/diaspora/pull/5009)
+* Ensure a consistent border on text input elements [#5069](https://github.com/diaspora/diaspora/pull/5069)
+* Escape person name in contacts json returned by Conversations#new
+* Make sure all parts of the hovercard are always in front [#5188](https://github.com/diaspora/diaspora/pull/5188)
+
+## Features
+* Port admin pages to bootstrap, polish user search results, allow accounts to be closed from the backend [#5046](https://github.com/diaspora/diaspora/pull/5046)
+* Reference Salmon endpoint in Webfinger XRD to aid discovery by alternative implementations [#5062](https://github.com/diaspora/diaspora/pull/5062)
+* Change minimal birth year for the birthday field to 1910 [#5083](https://github.com/diaspora/diaspora/pull/5083)
+* Add scrolling thumbnail switcher in the lightbox [#5102](https://github.com/diaspora/diaspora/pull/5102)
+* Add help section about keyboard shortcuts [#5100](https://github.com/diaspora/diaspora/pull/5100)
+* Automatically add poll answers as needed [#5109](https://github.com/diaspora/diaspora/pull/5109)
+* Add Terms of Service as an option for podmins, includes base template [#5104](https://github.com/diaspora/diaspora/pull/5104)
+* Add rake task to send a mail to all users [#5111](https://github.com/diaspora/diaspora/pull/5111)
+* Expose which services are configured in /statistics.json [#5121](https://github.com/diaspora/diaspora/pull/5121)
+* In filtered notification views, replace "Mark all as read" with "Mark shown as read" [#5122](https://github.com/diaspora/diaspora/pull/5122)
+* When ignoring a user remove his posts from the stream instantly [#5127](https://github.com/diaspora/diaspora/pull/5127)
+* Allow to delete photos from the pictures stream [#5131](https://github.com/diaspora/diaspora/pull/5131)
+
+# 0.4.0.1
+
+## Bug fixes
+
+* Fix performance regression on stream loading with MySQL/MariaDB database backends [#5014](https://github.com/diaspora/diaspora/issues/5014)
+* Fix issue with post reporting [#5017](https://github.com/diaspora/diaspora/issues/5017)
+
+# 0.4.0.0
+
+## Ensure account deletions are run
+
+A regression caused accounts deletions to not properly perform in some cases, see [#4792](https://github.com/diaspora/diaspora/issues/4792).
+To ensure these are reexecuted properly, please run `RAILS_ENV=production bundle exec rake accounts:run_deletions`
+after you've upgraded.
+
+## Change in guid generation
+
+This version will break federation to pods running on versions prior 0.1.1.0.
+
+Read more in [#4249](https://github.com/diaspora/diaspora/pull/4249) and [#4883](https://github.com/diaspora/diaspora/pull/4883)
+
+## Refactor
+* Drop number of followers from tags page [#4717](https://github.com/diaspora/diaspora/pull/4717)
+* Remove some unused beta code [#4738](https://github.com/diaspora/diaspora/pull/4738)
+* Style improvements for SPV, use original author's avatar for reshares [#4754](https://github.com/diaspora/diaspora/pull/4754)
+* Update image branding to the new decided standard [#4702](https://github.com/diaspora/diaspora/pull/4702)
+* Consistent naming of conversations and messages [#4756](https://github.com/diaspora/diaspora/pull/4756)
+* Improve stream generation time [#4769](https://github.com/diaspora/diaspora/pull/4769)
+* Port help pages to backbone [#4768](https://github.com/diaspora/diaspora/pull/4768)
+* Add participants to conversations menu [#4656](https://github.com/diaspora/diaspora/pull/4656)
+* Update forgot_password and reset_password pages [#4707](https://github.com/diaspora/diaspora/pull/4707)
+* Change jQuery CDN to jquery.com from googleapis.com [#4765](https://github.com/diaspora/diaspora/pull/4765)
+* Update to jQuery 10
+* Port publisher and bookmarklet to Bootstrap [#4678](https://github.com/diaspora/diaspora/pull/4678)
+* Improve search page, add better indications [#4794](https://github.com/diaspora/diaspora/pull/4794)
+* Port notifications and hovercards to Bootstrap [#4814](https://github.com/diaspora/diaspora/pull/4814)
+* Replace .rvmrc by .ruby-version and .ruby-gemset [#4854](https://github.com/diaspora/diaspora/pull/4855)
+* Reorder and reword items on user settings page [#4912](https://github.com/diaspora/diaspora/pull/4912)
+* SPV: Improve padding and interaction counts [#4426](https://github.com/diaspora/diaspora/pull/4426)
+* Remove auto 'mark as read' for notifications [#4810](https://github.com/diaspora/diaspora/pull/4810)
+* Improve set read/unread in notifications dropdown [#4869](https://github.com/diaspora/diaspora/pull/4869)
+* Refactor publisher: trigger events for certain actions, introduce 'disabled' state [#4932](https://github.com/diaspora/diaspora/pull/4932)
+
+## Bug fixes
+* Fix user account deletion [#4953](https://github.com/diaspora/diaspora/pull/4953) and [#4963](https://github.com/diaspora/diaspora/pull/4963)
+* Fix email body language when invite a friend [#4832](https://github.com/diaspora/diaspora/issues/4832)
+* Improve time agos by updating the plugin [#4281](https://github.com/diaspora/diaspora/pull/4281)
+* Do not add a space after adding a mention [#4767](https://github.com/diaspora/diaspora/issues/4767)
+* Fix active user statistics by saving a last seen timestamp for users [#4802](https://github.com/diaspora/diaspora/pull/4802)
+* Render HTML in atom user feed [#4835](https://github.com/diaspora/diaspora/pull/4835)
+* Fix plaintext mode of Mentionable [#4831](https://github.com/diaspora/diaspora/pull/4831)
+* Fixed Atom Feed Error if reshared Post is deleted [#4841](https://github.com/diaspora/diaspora/pull/4841)
+* Show hovercards in the notification drop-down for users on the same pod [#4843](https://github.com/diaspora/diaspora/pull/4843)
+* The photo stream no longer repeats after the last photo [#4787](https://github.com/diaspora/diaspora/pull/4787)
+* Fix avatar alignment for hovercards in the notifications dropdown [#4853](https://github.com/diaspora/diaspora/pull/4853)
+* Do not parse hashtags inside Markdown links [#4856](https://github.com/diaspora/diaspora/pull/4856)
+* Restore comment textarea content after revealing more comments [#4858](https://github.com/diaspora/diaspora/pull/4858)
+* OpenGraph: don't make description into links [#4708](https://github.com/diaspora/diaspora/pull/4708)
+* Don't cut off long tags in stream posts [#4878](https://github.com/diaspora/diaspora/pull/4878)
+* Do not replace earlier appearances of the name while mentioning somebody [#4882](https://github.com/diaspora/diaspora/pull/4882)
+* Catch exceptions when trying to decode an invalid URI [#4889](https://github.com/diaspora/diaspora/pull/4889)
+* Redirect to the stream when switching the mobile publisher to desktop [#4917](https://github.com/diaspora/diaspora/pull/4917)
+* Parsing mention witch contain in username special characters [#4919](https://github.com/diaspora/diaspora/pull/4919)
+* Do not show your own hovercard [#4758](https://github.com/diaspora/diaspora/pull/4758)
+* Hit Nominatim via https [#4968](https://github.com/diaspora/diaspora/pull/4968)
+
+## Features
+* You can report a single post or comment by clicking the correct icon in the controler section [#4517](https://github.com/diaspora/diaspora/pull/4517) [#4781](https://github.com/diaspora/diaspora/pull/4781)
+* Add permalinks for comments [#4577](https://github.com/diaspora/diaspora/pull/4577)
+* New menu for the mobile version [#4673](https://github.com/diaspora/diaspora/pull/4673)
+* Added comment count to statistic to enable calculations of posts/comments ratios [#4799](https://github.com/diaspora/diaspora/pull/4799)
+* Add filters to notifications controller [#4814](https://github.com/diaspora/diaspora/pull/4814)
+* Activate hovercards in SPV and conversations [#4870](https://github.com/diaspora/diaspora/pull/4870)
+* Added possibility to conduct polls [#4861](https://github.com/diaspora/diaspora/pull/4861) [#4894](https://github.com/diaspora/diaspora/pull/4894) [#4897](https://github.com/diaspora/diaspora/pull/4897) [#4899](https://github.com/diaspora/diaspora/pull/4899)
+
 # 0.3.0.3
 
 * Bump Rails to 3.2.17, fixes CVE-2014-0081, CVE-2014-0082. For more information see http://weblog.rubyonrails.org/2014/2/18/Rails_3_2_17_4_0_3_and_4_1_0_beta2_have_been_released/
@@ -6,7 +281,7 @@
 
 ## Bug fixes
 * Use youtube HTTPS scheme for oEmbed [#4743](https://github.com/diaspora/diaspora/pull/4743)
-* Fix infinite scroll on aspect streams [#4729](https://github.com/diaspora/diaspora/issues/4729)
+* Fix infinite scroll on aspect streams [#4747](https://github.com/diaspora/diaspora/pull/4747)
 * Fix hovercards [#4782](https://github.com/diaspora/diaspora/pull/4782)
 * Bump kaminari to fix admin panel [#4714](https://github.com/diaspora/diaspora/issues/4714)
 
@@ -14,6 +289,7 @@
 
 ## Bug fixes
 * Fix regression caused by using after_commit with nested '#save' which lead to an infinite recursion [#4715](https://github.com/diaspora/diaspora/issues/4715)
+* Save textarea value before rendering comments when clicked 'show more...' [#4858](https://github.com/diaspora/diaspora/pull/4858)
 
 # 0.3.0.0
 
@@ -51,6 +327,7 @@ For more details see https://wiki.diasporafoundation.org/Updating
 * Slight redesign of mobile publisher [#4604](https://github.com/diaspora/diaspora/pull/4604)
 * Port conversations to Bootstrap [#4622](https://github.com/diaspora/diaspora/pull/4622)
 * Remove participants popover and improve conversations menu [#4644](https://github.com/diaspora/diaspora/pull/4644)
+* Refactor right side bar [#4793](https://github.com/diaspora/diaspora/pull/4793)
 
 ## Bug fixes
 * Highlight down arrow at the user menu on hover [#4441](https://github.com/diaspora/diaspora/pull/4441)
@@ -97,6 +374,7 @@ For more details see https://wiki.diasporafoundation.org/Updating
 * Add indication about markdown formatting in the publisher [#4589](https://github.com/diaspora/diaspora/pull/4589)
 * Add captcha to signup form [#4659](https://github.com/diaspora/diaspora/pull/4659)
 * Update Underscore.js 1.3.1 to 1.5.2, update Backbone.js 0.9.2 to 1.1.0 [#4662](https://github.com/diaspora/diaspora/pull/4662)
+* Display more than 8 pictures on a post [#4796](https://github.com/diaspora/diaspora/pull/4796)
 
 ## Gem updates
 Added:
@@ -315,7 +593,6 @@ Updated:
 * warden 1.2.1 -> 1.2.3
 * webmock 1.11.0 -> 1.13.0
 * xpath 0.1.4 -> 2.0.0
-
 
 # 0.1.1.0
 

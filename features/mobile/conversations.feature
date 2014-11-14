@@ -1,5 +1,5 @@
 @javascript
-Feature: private messages mobile
+Feature: private conversations mobile
     In order to be talkative
     As a mobile user
     I want to converse with people
@@ -7,9 +7,9 @@ Feature: private messages mobile
   Background:
     Given a user with username "bob"
     And a user named "Alice Awesome" with email "alice@alice.alice"
-    When I sign in as "bob@bob.bob"
     And a user with username "bob" is connected with "alice_awesome"
-    And I toggle the mobile view
+    When I toggle the mobile view
+    And I sign in as "bob@bob.bob"
 
   Scenario: send and delete a mobile message
     Given I send a mobile message with subject "Greetings" and text "hello, alice!" to "Alice Awesome"

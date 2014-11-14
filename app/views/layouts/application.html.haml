@@ -24,7 +24,7 @@
     - if @css_framework == :bootstrap && !@include_application_css
       = stylesheet_link_tag :default, 'new-templates', :media => 'all'
     - else
-      = stylesheet_link_tag 'login', 'application', 'default'
+      = stylesheet_link_tag 'application', 'default'
 
     - if rtl?
       = stylesheet_link_tag :rtl, :media => 'all'
@@ -40,7 +40,6 @@
       = javascript_include_tag :main, :templates
       = load_javascript_locales
 
-    = set_asset_host
     = translation_missing_warnings
     = current_user_atom_tag
 
@@ -53,7 +52,7 @@
 
     = include_gon(:camel_case => true)
 
-  %body
+  %body{ :class => "page-#{controller_name} action-#{action_name}" }
     = flash_messages
 
     = yield :before_content

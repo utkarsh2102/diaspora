@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 app.views.StreamPost = app.views.Post.extend({
   templateName: "stream-element",
   className : "stream_element loaded",
@@ -9,6 +11,7 @@ app.views.StreamPost = app.views.Post.extend({
     ".post-content" : "postContentView",
     ".oembed" : "oEmbedView",
     ".opengraph" : "openGraphView",
+    ".poll" : "pollView",
     ".status-message-location" : "postLocationStreamView"
   },
 
@@ -19,17 +22,22 @@ app.views.StreamPost = app.views.Post.extend({
 
     "click .remove_post": "destroyModel",
     "click .hide_post": "hidePost",
+    "click .post_report": "report",
     "click .block_user": "blockUser"
   },
 
   tooltipSelector : ".timeago, .post_scope, .block_user, .delete",
 
   initialize : function(){
+    var personId = this.model.get('author').id;
+    app.events.on('person:block:'+personId, this.remove, this);
+
     this.model.on('remove', this.remove, this);
     //subviews
     this.commentStreamView = new app.views.CommentStream({model : this.model});
     this.oEmbedView = new app.views.OEmbed({model : this.model});
     this.openGraphView = new app.views.OpenGraph({model : this.model});
+    this.pollView = new app.views.Poll({model : this.model});
   },
 
 
@@ -69,20 +77,13 @@ app.views.StreamPost = app.views.Post.extend({
     if(evt) { evt.preventDefault(); }
     if(!confirm(Diaspora.I18n.t('ignore_user'))) { return }
 
-    var personId = this.model.get("author").id;
-    var block = new app.models.Block();
-
-    block.save({block : {person_id : personId}}, {
-      success : function(){
-        if(!app.stream) { return }
-
-        _.each(app.stream.posts.models, function(model){
-          if(model.get("author").id == personId) {
-            app.stream.posts.remove(model);
-          }
-        })
-      }
-    })
+    this.model.blockAuthor()
+      .fail(function() {
+        Diaspora.page.flashMessages.render({
+          success: false,
+          notice: Diaspora.I18n.t('ignore_failed')
+        });
+      });
   },
 
   remove : function() {
@@ -114,3 +115,5 @@ app.views.StreamPost = app.views.Post.extend({
   }
 
 })
+// @license-end
+

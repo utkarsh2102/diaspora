@@ -6,7 +6,7 @@
 describe("app.views.Publisher", function() {
   describe("standalone", function() {
     beforeEach(function() {
-      // should be jasmine helper
+      // TODO should be jasmine helper
       loginAs({name: "alice", avatar : {small : "http://avatar.com/photo.jpg"}});
 
       spec.loadFixture("aspects_index");
@@ -26,7 +26,7 @@ describe("app.views.Publisher", function() {
 
   context("plain publisher", function() {
     beforeEach(function() {
-      // should be jasmine helper
+      // TODO should be jasmine helper
       loginAs({name: "alice", avatar : {small : "http://avatar.com/photo.jpg"}});
 
       spec.loadFixture("aspects_index");
@@ -38,6 +38,12 @@ describe("app.views.Publisher", function() {
         expect($(this.view.el)).toHaveClass("closed");
         this.view.open($.Event());
         expect($(this.view.el)).not.toHaveClass("closed");
+      });
+
+      it("won't open when disabled", function() {
+        this.view.disabled = true;
+        this.view.open($.Event());
+        expect($(this.view.el)).toHaveClass("closed");
       });
     });
 
@@ -124,11 +130,43 @@ describe("app.views.Publisher", function() {
       })
     });
 
+    describe('#setText', function() {
+      it('sets the content text', function() {
+        this.view.setText('FOO bar');
+
+        expect(this.view.el_input.val()).toEqual('FOO bar');
+        expect(this.view.el_hiddenInput.val()).toEqual('FOO bar');
+      });
+    });
+
+    describe('#setEnabled', function() {
+      it('disables the publisher', function() {
+        expect(this.view.disabled).toBeFalsy();
+        this.view.setEnabled(false);
+
+        expect(this.view.disabled).toBeTruthy();
+        expect(this.view.el_input.prop('disabled')).toBeTruthy();
+        expect(this.view.el_hiddenInput.prop('disabled')).toBeTruthy();
+      });
+
+      it("disables submitting", function() {
+        this.view.togglePollCreator();
+
+        this.view.setText('TESTING');
+        expect(this.view.el_submit.prop('disabled')).toBeFalsy();
+        expect(this.view.el_preview.prop('disabled')).toBeFalsy();
+
+        this.view.setEnabled(false);
+        expect(this.view.el_submit.prop('disabled')).toBeTruthy();
+        expect(this.view.el_preview.prop('disabled')).toBeTruthy();
+      });
+    });
+
     describe("publishing a post with keyboard", function(){
       it("should submit the form when ctrl+enter is pressed", function(){
         this.view.render();
         var form = this.view.$("form")
-        var submitCallback = jasmine.createSpy().andReturn(false);
+        var submitCallback = jasmine.createSpy().and.returnValue(false);
         form.submit(submitCallback);
 
         var e = $.Event("keydown", { keyCode: 13 });
@@ -138,6 +176,32 @@ describe("app.views.Publisher", function() {
         expect(submitCallback).toHaveBeenCalled();
         expect($(this.view.el)).not.toHaveClass("closed");
       })
+    });
+
+    describe("_beforeUnload", function(){
+      beforeEach(function(){
+        Diaspora.I18n.load({ confirm_unload: "Please confirm that you want to leave this page - data you have entered won't be saved."});
+      });
+
+      it("calls _submittable", function(){
+        spyOn(this.view, "_submittable");
+        $(window).trigger('beforeunload');
+        expect(this.view._submittable).toHaveBeenCalled();
+      });
+
+      it("returns a confirmation if the publisher is submittable", function(){
+        spyOn(this.view, "_submittable").and.returnValue(true);
+        var e = $.Event();
+        expect(this.view._beforeUnload(e)).toBe(Diaspora.I18n.t('confirm_unload'));
+        expect(e.returnValue).toBe(Diaspora.I18n.t('confirm_unload'));
+      });
+
+      it("doesn't ask for a confirmation if the publisher isn't submittable", function(){
+        spyOn(this.view, "_submittable").and.returnValue(false);
+        var e = $.Event();
+        expect(this.view._beforeUnload(e)).toBe(undefined);
+        expect(e.returnValue).toBe(undefined);
+      });
     })
   });
 
@@ -207,9 +271,11 @@ describe("app.views.Publisher", function() {
   context("aspect selection", function(){
     beforeEach( function(){
       spec.loadFixture('status_message_new');
+      Diaspora.I18n.load({ stream: { public: 'Public' }});
 
-      this.radio_els = $('#publisher .dropdown li.radio');
-      this.check_els = $('#publisher .dropdown li.aspect_selector');
+      this.radio_els = $('#publisher .aspect_dropdown li.radio');
+      this.check_els = $('#publisher .aspect_dropdown li.aspect_selector');
+      this.visibility_icon = $('#visibility-icon');
 
       this.view = new app.views.Publisher();
       this.view.open();
@@ -222,23 +288,56 @@ describe("app.views.Publisher", function() {
       _.each(this.check_els, function(el){
         expect($(el).hasClass('selected')).toBeFalsy();
       });
+      expect(this.visibility_icon.hasClass('globe')).toBeFalsy();
+      expect(this.visibility_icon.hasClass('lock')).toBeTruthy();
     });
 
     it("toggles the selected entry visually", function(){
+      // click on the last aspect
       this.check_els.last().trigger('click');
-
+      // public and "all aspects" are deselected
       _.each(this.radio_els, function(el){
         expect($(el).hasClass('selected')).toBeFalsy();
       });
-
+      // the first aspect is not selected
       expect(this.check_els.first().hasClass('selected')).toBeFalsy();
+      // the last aspect is selected
       expect(this.check_els.last().hasClass('selected')).toBeTruthy();
+      // visibility icon is set to the lock icon
+      expect(this.visibility_icon.hasClass('globe')).toBeFalsy();
+      expect(this.visibility_icon.hasClass('lock')).toBeTruthy();
+
+      // click on public
+      this.radio_els.first().trigger('click');
+      // public is selected, "all aspects" is deselected
+      expect(this.radio_els.first().hasClass('selected')).toBeTruthy();
+      expect(this.radio_els.last().hasClass('selected')).toBeFalsy();
+      // the aspects are deselected
+      _.each(this.check_els, function(el){
+        expect($(el).hasClass('selected')).toBeFalsy();
+      });
+      // visibility icon is set to the globe icon
+      expect(this.visibility_icon.hasClass('globe')).toBeTruthy();
+      expect(this.visibility_icon.hasClass('lock')).toBeFalsy();
+
+      // click on "all aspects"
+      this.radio_els.last().trigger('click');
+      // public is deselected, "all aspects" is selected
+      expect(this.radio_els.first().hasClass('selected')).toBeFalsy();
+      expect(this.radio_els.last().hasClass('selected')).toBeTruthy();
+      // the aspects are deselected
+      _.each(this.check_els, function(el){
+        expect($(el).hasClass('selected')).toBeFalsy();
+      });
+      // visibility icon is set to the lock icon
+      expect(this.visibility_icon.hasClass('globe')).toBeFalsy();
+      expect(this.visibility_icon.hasClass('lock')).toBeTruthy();
     });
 
     describe("hidden form elements", function(){
       beforeEach(function(){
-        this.li = $('<li data-aspect_id="42" />');
-        this.view.$('.dropdown_list').append(this.li);
+        this.li = $('<li data-aspect_id="42" class="aspect_selector" />');
+        this.view.$('.dropdown-menu').append(this.li);
       });
 
       it("removes a previous selection and inserts the current one", function() {
@@ -264,8 +363,8 @@ describe("app.views.Publisher", function() {
       });
 
       it("keeps other fields with different values", function() {
-        var li2 = $("<li data-aspect_id=99></li>");
-        this.view.$('.dropdown_list').append(li2);
+        var li2 = $('<li data-aspect_id=99 class="aspect_selector"></li>');
+        this.view.$('.dropdown-menu').append(li2);
 
         this.li.trigger('click');
         li2.trigger('click');
@@ -274,7 +373,6 @@ describe("app.views.Publisher", function() {
         expect(this.view.$('input[name="aspect_ids[]"][value="99"]').length).toBe(1);
       });
     });
-
   });
 
   context("locator", function() {
@@ -290,7 +388,7 @@ describe("app.views.Publisher", function() {
       it("Show location", function(){
 
         // inserts location to the DOM; it is the location's view element
-        setFixtures('<div id="publisher_textarea_wrapper"></div>');
+        setFixtures('<div id="location_container"></div>');
 
         // creates a fake Locator
         OSM = {};
@@ -393,7 +491,7 @@ describe("app.views.Publisher", function() {
 
       context('successful completion', function() {
         beforeEach(function() {
-          Diaspora.I18n.loadLocale({ photo_uploader: { completed: '<%= file %> completed' }});
+          Diaspora.I18n.load({ photo_uploader: { completed: '<%= file %> completed' }});
           $('#photodropzone').html('<li class="publisher_photo loading"><img src="" /></li>');
 
           this.uploader.onComplete(null, 'test.jpg', {
@@ -431,7 +529,7 @@ describe("app.views.Publisher", function() {
 
       context('unsuccessful completion', function() {
         beforeEach(function() {
-          Diaspora.I18n.loadLocale({ photo_uploader: { completed: '<%= file %> completed' }});
+          Diaspora.I18n.load({ photo_uploader: { completed: '<%= file %> completed' }});
           $('#photodropzone').html('<li class="publisher_photo loading"><img src="" /></li>');
 
           this.uploader.onComplete(null, 'test.jpg', {
@@ -461,7 +559,7 @@ describe("app.views.Publisher", function() {
           '</li>'
         );
 
-        spyOn(jQuery, 'ajax').andCallFake(function(opts) { opts.success(); });
+        spyOn(jQuery, 'ajax').and.callFake(function(opts) { opts.success(); });
         this.view.el_photozone.find('.x').click();
       });
 

@@ -1,5 +1,6 @@
 describe("Locator", function(){
-  navigator.geolocation['getCurrentPosition'] = function(myCallback){
+  navigator.geolocation = {};
+  navigator.geolocation.getCurrentPosition = function(myCallback){
     lat = 1;
     lon = 2;
     position = { coords: { latitude: lat, longitude: lon} }
@@ -7,7 +8,7 @@ describe("Locator", function(){
   };
 
   $.getJSON = function(url, myCallback){
-    if(url == "http://nominatim.openstreetmap.org/reverse?format=json&lat=1&lon=2&addressdetails=3")
+    if(url == "https://nominatim.openstreetmap.org/reverse?format=json&lat=1&lon=2&addressdetails=3")
     {
       return myCallback({ display_name: 'locator address' })
     }

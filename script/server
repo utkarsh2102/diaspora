@@ -107,7 +107,7 @@ then
     tar czf public/source.tar.gz  $(git ls-tree -r $branch | awk '{print $4}')
   else
     fatal "Can't generate public/source.tar.gz for you.
-Please tar up a copy of your Diaspora installtion and place it there."
+Please tar up a copy of your Diaspora installation and place it there."
   fi
 fi
 
@@ -117,12 +117,24 @@ then
 fi
 
 # Check if assets are precompiled
-if [ "$RAILS_ENV" = "production" -a ! -e "public/assets/default.css" ]
+if [ "$RAILS_ENV" = "production" -a -z "$(find public/assets -maxdepth 1 -name 'default-*.css' -print -quit)" ]
 then
   fatal "You're running in production mode without having assets
 precompiled. Now and after each update before you restart the
 application, run:
     bundle exec rake assets:precompile"
+fi
+
+# Check for old curl versions (see https://github.com/diaspora/diaspora/issues/4202)
+if [ `curl -V | grep AsynchDNS | wc -l` -ne 1 ]
+then
+  warning "
+*****************************************************************
+curl does not support async DNS, this can cause Sidekiq to crash!
+Please update curl to version 7.32, see issue
+https://github.com/diaspora/diaspora/issues/4202 for details
+*****************************************************************
+"
 fi
 
 # Start Diaspora

@@ -3,43 +3,44 @@ require 'spec_helper'
 describe PostPresenter do
   before do
     @sm = FactoryGirl.create(:status_message, :public => true)
+    @sm_with_poll = FactoryGirl.create(:status_message_with_poll, public: true)
     @presenter = PostPresenter.new(@sm, bob)
     @unauthenticated_presenter = PostPresenter.new(@sm)
   end
 
   it 'takes a post and an optional user' do
-    @presenter.should_not be_nil
+    expect(@presenter).not_to be_nil
   end
 
   describe '#as_json' do
     it 'works with a user' do
-      @presenter.as_json.should be_a Hash
+      expect(@presenter.as_json).to be_a Hash
     end
 
     it 'works without a user' do
-      @unauthenticated_presenter.as_json.should be_a Hash
+      expect(@unauthenticated_presenter.as_json).to be_a Hash
     end
   end
 
   describe '#user_like' do
     it 'includes the users like' do
       bob.like!(@sm)
-      @presenter.user_like.should be_present
+      expect(@presenter.user_like).to be_present
     end
 
     it 'is nil if the user is not authenticated' do
-      @unauthenticated_presenter.user_like.should be_nil
+      expect(@unauthenticated_presenter.user_like).to be_nil
     end
   end
 
   describe '#user_reshare' do
     it 'includes the users reshare' do
       bob.reshare!(@sm)
-      @presenter.user_reshare.should be_present
+      expect(@presenter.user_reshare).to be_present
     end
 
     it 'is nil if the user is not authenticated' do
-      @unauthenticated_presenter.user_reshare.should be_nil
+      expect(@unauthenticated_presenter.user_reshare).to be_nil
     end
   end
 
@@ -65,35 +66,27 @@ describe PostPresenter do
 
   describe '#title' do
     context 'with posts with text' do
-      context 'with a Markdown header of less than 200 characters on first line'do
-        it 'returns atx style header' do
-          @sm = double(:text => "## My title\n Post content...")
-          @presenter.post = @sm
-          @presenter.title.should == "## My title"
-        end
-
-        it 'returns setext style header' do
-          @sm = double(:text => "My title \n======\n Post content...")
-          @presenter.post = @sm
-          @presenter.title.should == "My title \n======"
-        end
-      end
-
-      context 'without a Markdown header of less than 200 characters on first line 'do
-        it 'truncates post to the 20 first characters' do
-          @sm = double(:text => "Very, very, very long post")
-          @presenter.post = @sm
-          @presenter.title.should == "Very, very, very ..."
-        end
+      it "delegates to message.title" do
+        message = double(present?: true)
+        expect(message).to receive(:title)
+        @presenter.post = double(message: message)
+        @presenter.title
       end
     end
 
     context 'with posts without text' do
       it ' displays a messaage with the post class' do
-        @sm = double(:text => "", :author => bob.person, :author_name => bob.person.name)
+        @sm = double(message: double(present?: false), author: bob.person, author_name: bob.person.name)
         @presenter.post = @sm
-        @presenter.title.should == "A post from #{@sm.author.name}"
+        expect(@presenter.title).to eq("A post from #{@sm.author.name}")
       end
+    end
+  end
+
+  describe '#poll' do
+    it 'works without a user' do
+      presenter = PostPresenter.new(@sm_with_poll)
+      expect(presenter.as_json).to be_a(Hash)
     end
   end
 end

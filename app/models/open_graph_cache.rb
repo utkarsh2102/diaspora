@@ -1,10 +1,4 @@
 class OpenGraphCache < ActiveRecord::Base
-  attr_accessible :title
-  attr_accessible :ob_type
-  attr_accessible :image
-  attr_accessible :url
-  attr_accessible :description
-
   validates :title, :presence => true
   validates :ob_type, :presence => true
   validates :image, :presence => true
@@ -21,10 +15,18 @@ class OpenGraphCache < ActiveRecord::Base
     t.add :url
   end
 
-  def self.find_or_create_by_url(url)
-    cache = OpenGraphCache.find_or_initialize_by_url(url)
+  def image
+    if AppConfig.privacy.camo.proxy_opengraph_thumbnails?
+      Diaspora::Camo.image_url(self[:image])
+    else
+      self[:image]
+    end
+  end
+
+  def self.find_or_create_by(opts)
+    cache = OpenGraphCache.find_or_initialize_by(opts)
     cache.fetch_and_save_opengraph_data! unless cache.persisted?
-    cache if cache.persisted?
+    cache if cache.persisted? # Make this an after create callback and drop this method ?
   end
 
   def fetch_and_save_opengraph_data!
@@ -32,7 +34,7 @@ class OpenGraphCache < ActiveRecord::Base
 
     return if response.blank? || response.type.blank?
 
-    self.title = response.title
+    self.title = response.title.truncate(255)
     self.ob_type = response.type
     self.image = response.images[0]
     self.url = response.url

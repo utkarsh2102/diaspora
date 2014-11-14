@@ -97,10 +97,6 @@ ka:
       aspect_not_empty: "ასპექტი არ არის ცარიელი"
       remove: "წაშლა"
     index:
-      cubbies:
-        explanation: "cubbie.es არის პირველი დიასპორას აპლიკაცია რომელიც დამუშავების რეჟიმშა"
-        heading: "Cubbi.es-თან დაკავშირება"
-        learn_more: "მეტის გაგება"
       diaspora_id:
         content_1: "თქვენი Diaspora-ს ID არის:"
         content_2: "გაუზიარეთ ის ნებისმიერ ადამიანს და ის შეძლებს თქვენს პოვნას Diaspora-ზე."
@@ -132,7 +128,6 @@ ka:
         content: "დიასპორაში შეგიძლია დაუკავშირდე შემდეგ სერვისებს:"
         heading: "სერვისებთან დაკავშირება"
       unfollow_tag: "შეწყვიტე გაყოლა #%{tag}"
-      welcome_to_diaspora: ""
     many: "%{count} ასპექტი"
     move_contact:
       error: "კონტაქტის გადაყვანისას დაფიქსირდა შეცდომა: %{inspect}"
@@ -201,7 +196,6 @@ ka:
       no_contacts_message: "ნახე %{community_spotlight}"
       no_contacts_message_with_aspect: "ნახე %{community_spotlight} ან %{add_to_aspect_link}"
       only_sharing_with_me: "აზიარებს მხოლოდ ჩემთან"
-      remove_person_from_aspect: "ამოშლა %{person_name} \"%{aspect_name}\"-დან"
       start_a_conversation: "დაიწყე საუბარი"
       title: "კონტაქტები"
       your_contacts: "შენი კონტაქტები"
@@ -229,10 +223,7 @@ ka:
         two: "%{count} new messages"
         zero: "No new messages"
     index:
-      create_a_new_message: "შექმენი ახალი წერილი"
       inbox: "შემოსული"
-      message_inbox: "შემოსული წერილი"
-      new_message: "ახალი წერილი"
       no_conversation_selected: "საუბარი არ არის მონიშნული"
       no_messages: "წერილები არ არის"
     new:
@@ -241,8 +232,6 @@ ka:
       sending: "იგზავნება..."
       subject: "თემა"
       to: "ვის"
-    new_message:
-      fail: "არასწორი წერილი"
     show:
       delete: "წაშალე და დაბლოკე საუბარი"
       reply: "პასუხი"
@@ -468,10 +457,8 @@ ka:
       edit_membership: "edit aspect membership"
     few: "%{count} ადამიანს"
     helper:
-      people_on_pod_are_aware_of: " people on pod are aware of"
       results_for: " რეზულტატი %{params}-სთვის"
     index:
-      couldnt_find_them_send_invite: "ვერ იპოვე? გაუგზავნე მოწვევა"
       looking_for: "ეძებ %{tag_link} დათაგულ პოსტებს?"
       no_one_found: "...და ვერავინ ვერ მოიძებნა."
       no_results: "რამე უნდა მოძებნო!"
@@ -765,13 +752,7 @@ ka:
       no_message_to_display: "არ არის მესიჯები."
     new:
       mentioning: "Mentioning: %{person}"
-    too_long:
-      few: "please make your status messages less than %{count} characters"
-      many: "please make your status messages less than %{count} characters"
-      one: "please make your status messages less than %{count} character"
-      other: "please make your status messages less than %{count} characters"
-      two: "please make your status messages less than %{count} characters"
-      zero: "please make your status messages less than %{count} characters"
+    too_long: "{\"few\"=>\"please make your status messages less than %{count} characters\", \"many\"=>\"please make your status messages less than %{count} characters\", \"one\"=>\"please make your status messages less than %{count} character\", \"other\"=>\"please make your status messages less than %{count} characters\", \"two\"=>\"please make your status messages less than %{count} characters\", \"zero\"=>\"please make your status messages less than %{count} characters\"}"
   stream_helper:
     hide_comments: "დამალე ყველა კომენატარი"
     show_comments:

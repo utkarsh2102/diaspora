@@ -1,7 +1,31 @@
 describe("app.views.StreamPost", function(){
   beforeEach(function(){
     this.PostViewClass = app.views.StreamPost
+
+    var posts = $.parseJSON(spec.readFixture("stream_json"));
+    this.collection = new app.collections.Posts(posts);
+    this.statusMessage = this.collection.models[0];
+    this.reshare = this.collection.models[1];
   })
+
+  describe("events", function(){
+    var _PostViewClass = undefined;
+    var author_id = undefined;
+
+    beforeEach(function(){
+      _PostViewClass = this.PostViewClass;
+      authorId = this.statusMessage.get('author').id;
+    });
+
+    describe("remove posts for blocked person", function(){
+      it("setup remove:author:posts:#{id} to #remove", function(){
+        spyOn(_PostViewClass.prototype, 'remove');
+        view = new _PostViewClass({model : this.statusMessage});
+        app.events.trigger('person:block:'+authorId);
+        expect(_PostViewClass.prototype.remove).toHaveBeenCalled();
+      });
+    });
+  });
 
   describe("#render", function(){
     var o_embed_cache = {
@@ -21,7 +45,7 @@ describe("app.views.StreamPost", function(){
     beforeEach(function(){
       loginAs({name: "alice", avatar : {small : "http://avatar.com/photo.jpg"}});
 
-      Diaspora.I18n.loadLocale({stream : {
+      Diaspora.I18n.load({stream : {
         reshares : {
           one : "<%= count %> reshare",
           other : "<%= count %> reshares"
@@ -32,12 +56,6 @@ describe("app.views.StreamPost", function(){
           other : "<%= count %> Likes"
         }
       }})
-
-      var posts = $.parseJSON(spec.readFixture("stream_json"));
-
-      this.collection = new app.collections.Posts(posts);
-      this.statusMessage = this.collection.models[0];
-      this.reshare = this.collection.models[1];
     })
 
     context("reshare", function(){
@@ -58,13 +76,13 @@ describe("app.views.StreamPost", function(){
 
     context("likes", function(){
       it("displays a like count", function(){
-        this.statusMessage.set({likes_count : 1})
+        this.statusMessage.interactions.set({likes_count : 1})
         var view = new this.PostViewClass({model : this.statusMessage}).render();
 
         expect($(view.el).html()).toContain(Diaspora.I18n.t('stream.likes', {count: 1}))
       })
       it("does not display a like count for 'zero'", function(){
-        this.statusMessage.set({likes_count : 0})
+        this.statusMessage.interactions.set({likes_count : 0})
         var view = new this.PostViewClass({model : this.statusMessage}).render();
 
         expect($(view.el).html()).not.toContain("0 Likes")
@@ -156,12 +174,12 @@ describe("app.views.StreamPost", function(){
       })
 
       it("destroys the view when they delete a their post from the show page", function(){
-        spyOn(window, "confirm").andReturn(true);
+        spyOn(window, "confirm").and.returnValue(true);
 
         this.view.$(".remove_post").click();
 
         expect(window.confirm).toHaveBeenCalled();
-        expect(this.view).not.toExist();
+        expect(this.view.el).not.toBeInDOM();
       })
     })
 

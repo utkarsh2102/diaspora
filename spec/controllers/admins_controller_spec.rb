@@ -4,7 +4,7 @@
 
 require 'spec_helper'
 
-describe AdminsController do
+describe AdminsController, :type => :controller do
   before do
     @user = FactoryGirl.create :user
     sign_in :user, @user
@@ -14,7 +14,7 @@ describe AdminsController do
     context 'admin not signed in' do
       it 'is behind redirect_unless_admin' do
         get :user_search
-        response.should redirect_to stream_path
+        expect(response).to redirect_to stream_path
       end
     end
 
@@ -25,37 +25,23 @@ describe AdminsController do
 
       it 'succeeds and renders user_search' do
         get :user_search
-        response.should be_success
-        response.should render_template(:user_search)
+        expect(response).to be_success
+        expect(response).to render_template(:user_search)
       end
 
       it 'assigns users to an empty array if nothing is searched for' do
         get :user_search
-        assigns[:users].should == []
+        expect(assigns[:users]).to eq([])
       end
 
       it 'searches on username' do
-        get :user_search, :user => {:username => @user.username}
-        assigns[:users].should == [@user]
+        get :user_search, admins_controller_user_search: { username: @user.username }
+        expect(assigns[:users]).to eq([@user])
       end
 
       it 'searches on email' do
-        get :user_search, :user => {:email => @user.email}
-        assigns[:users].should == [@user]
-      end
-
-      it 'searches on invitation_identifier' do
-        @user.invitation_identifier = "La@foo.com"
-        @user.save!
-        get :user_search, :user => {:invitation_identifier => @user.invitation_identifier}
-        assigns[:users].should == [@user]
-      end
-
-      it 'searches on invitation_token' do
-        @user.invitation_token = "akjsdhflhasdf"
-        @user.save
-        get :user_search, :user => {:invitation_token => @user.invitation_token}
-        assigns[:users].should == [@user]
+        get :user_search, admins_controller_user_search: { email: @user.email }
+        expect(assigns[:users]).to eq([@user])
       end
 
       it 'searches on age < 13 (COPPA)' do
@@ -67,10 +53,10 @@ describe AdminsController do
         o_13.profile.birthday = 20.years.ago.to_date
         o_13.profile.save!
 
-        get :user_search, under13: true
+        get :user_search, admins_controller_user_search: { under13: '1' }
 
-        assigns[:users].should include(u_13)
-        assigns[:users].should_not include(o_13)
+        expect(assigns[:users]).to include(u_13)
+        expect(assigns[:users]).not_to include(o_13)
       end
     end
   end
@@ -79,7 +65,7 @@ describe AdminsController do
     context 'admin not signed in' do
       it 'is behind redirect_unless_admin' do
         get :admin_inviter
-        response.should redirect_to stream_path
+        expect(response).to redirect_to stream_path
       end
     end
 
@@ -91,14 +77,14 @@ describe AdminsController do
       it 'does not die if you do it twice' do
         get :admin_inviter, :identifier => 'bob@moms.com'
         get :admin_inviter, :identifier => 'bob@moms.com'
-        response.should be_redirect
+        expect(response).to be_redirect
       end
 
       it 'invites a new user' do
-        EmailInviter.should_receive(:new).and_return(double.as_null_object)
+        expect(EmailInviter).to receive(:new).and_return(double.as_null_object)
         get :admin_inviter, :identifier => 'bob@moms.com'
-        response.should redirect_to user_search_path
-        flash.notice.should include("invitation sent")
+        expect(response).to redirect_to user_search_path
+        expect(flash.notice).to include("invitation sent")
       end
     end
   end
@@ -110,8 +96,8 @@ describe AdminsController do
 
     it 'succeeds and renders stats' do
       get :stats
-      response.should be_success
-      response.should render_template(:stats)
+      expect(response).to be_success
+      expect(response).to render_template(:stats)
     end
   end
 end

@@ -29,7 +29,7 @@ factory = {
       "id" : this.id.next(),
       "text" : "This is a comment!"
     }
-    
+
     return new app.models.Comment(_.extend(defaultAttrs, overrides))
   },
 
@@ -79,8 +79,8 @@ factory = {
     }
   },
 
-  profile : function(overrides) {
-    var id = overrides && overrides.id || factory.id.next()
+  profileAttrs: function(overrides) {
+    var id = (overrides && overrides.id) ? overrides.id : factory.id.next();
     var defaults = {
       "bio": "I am a cat lover and I love to run",
       "birthday": "2012-04-17",
@@ -99,9 +99,38 @@ factory = {
       "person_id": "person" + id,
       "searchable": true,
       "updated_at": "2012-04-17T23:48:36Z"
-    }
+    };
+    return _.extend({}, defaults, overrides);
+  },
 
-    return new app.models.Profile(_.extend(defaults, overrides))
+  profile : function(overrides) {
+    return new app.models.Profile(factory.profileAttrs(overrides));
+  },
+
+  personAttrs: function(overrides) {
+    var id = (overrides && overrides.id) ? overrides.id : factory.id.next();
+    var defaults = {
+      "id": id,
+      "guid": factory.guid(),
+      "name": "Bob Grimm",
+      "diaspora_id": "bob@localhost:3000",
+      "relationship": "sharing",
+      "is_own_profile": false
+    };
+    return _.extend({}, defaults, overrides);
+  },
+
+  person: function(overrides) {
+    return new app.models.Person(factory.personAttrs(overrides));
+  },
+
+  personWithProfile: function(overrides) {
+    var profile_overrides = _.clone(overrides.profile);
+    delete overrides.profile;
+    var defaults = {
+      profile: factory.profileAttrs(profile_overrides)
+    };
+    return factory.person(_.extend({}, defaults, overrides));
   },
 
   photoAttrs : function(overrides){
@@ -124,22 +153,65 @@ factory = {
     return new app.models.Post(_.extend(defaultAttrs, overrides))
   },
 
+  postWithPoll :  function(overrides) {
+    defaultAttrs = _.extend(factory.postAttrs(),  {"author" : this.author()});
+    defaultAttrs = _.extend(defaultAttrs,  {"already_participated_in_poll" : false});
+    defaultAttrs = _.extend(defaultAttrs,  {"poll" : factory.poll()});
+    return new app.models.Post(_.extend(defaultAttrs, overrides));
+  },
+
   statusMessage : function(overrides){
     //intentionally doesn't have an author to mirror creation process, maybe we should change the creation process
     return new app.models.StatusMessage(_.extend(factory.postAttrs(), overrides))
   },
 
-  comment: function(overrides) {
-    var defaultAttrs = {
-      "text" : "This is an awesome comment!",
+  poll: function(overrides){
+    return {
+      "question" : "This is an awesome question",
       "created_at" : "2012-01-03T19:53:13Z",
       "author" : this.author(),
+      "post_id" : 1,
+      "poll_answers" : [{"answer" : "yes", "id" : 1, "vote_count" : 9}, {"answer" : "no", "id" : 2, "vote_count" : 1}],
       "guid" : this.guid(),
-      "id": this.id.next()
+      "poll_id": this.id.next(),
+      "participation_count" : 10
     }
+  },
+
+  comment: function(overrides) {
+    var defaultAttrs = {
+      id:     this.id.next(),
+      guid:   this.guid(),
+      text:   "This is an awesome comment!",
+      author: this.author(),
+      created_at: "2012-01-03T19:53:13Z"
+    };
 
     return new app.models.Comment(_.extend(defaultAttrs, overrides))
+  },
+
+  aspectAttrs: function(overrides) {
+    var names = ['Work','School','Family','Friends','Just following','People','Interesting'];
+    var defaultAttrs = {
+      name: names[Math.floor(Math.random()*names.length)]+' '+Math.floor(Math.random()*100),
+      selected: false
+    };
+
+    return _.extend({}, defaultAttrs, overrides);
+  },
+
+  aspect: function(overrides) {
+    return new app.models.Aspect(this.aspectAttrs(overrides));
+  },
+
+  preloads: function(overrides) {
+    var defaults = {
+      aspect_ids: []
+    };
+
+    window.gon = { preloads: {} };
+    _.extend(window.gon.preloads, defaults, overrides);
   }
 }
 
-factory.author = factory.userAttrs
+factory.author = factory.userAttrs;
