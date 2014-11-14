@@ -1,3 +1,7 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
+//= require ./aspects_dropdown_view
+
 /**
  * this view lets the user (de-)select aspect memberships in the context
  * of another users profile or the contact page.
@@ -5,15 +9,14 @@
  * updates to the list of aspects are immediately propagated to the server, and
  * the results are dislpayed as flash messages.
  */
-app.views.AspectMembership = Backbone.View.extend({
+app.views.AspectMembership = app.views.AspectsDropdown.extend({
+
+  events: {
+    "click ul.aspect_membership.dropdown-menu > li.aspect_selector": "_clickHandler",
+    "keypress ul.aspect_membership.dropdown-menu > li.aspect_selector": "_clickHandler"
+  },
 
   initialize: function() {
-    // attach event handler, removing any previous instances
-    var selector = '.dropdown.aspect_membership .dropdown_list > li';
-    $('body')
-      .off('click', selector)
-      .on('click', selector, _.bind(this._clickHandler, this));
-
     this.list_item = null;
     this.dropdown  = null;
   },
@@ -22,19 +25,25 @@ app.views.AspectMembership = Backbone.View.extend({
   //   -> addMembership
   //   -> removeMembership
   _clickHandler: function(evt) {
-    this.list_item = $(evt.target);
+    var promise = null;
+    this.list_item = $(evt.target).closest('li.aspect_selector');
     this.dropdown  = this.list_item.parent();
 
     this.list_item.addClass('loading');
 
     if( this.list_item.is('.selected') ) {
       var membership_id = this.list_item.data('membership_id');
-      this.removeMembership(membership_id);
+      promise = this.removeMembership(membership_id);
     } else {
       var aspect_id = this.list_item.data('aspect_id');
       var person_id = this.dropdown.data('person_id');
-      this.addMembership(person_id, aspect_id);
+      promise = this.addMembership(person_id, aspect_id);
     }
+
+    promise && promise.always(function() {
+      // trigger a global event
+      app.events.trigger('aspect_membership:update');
+    });
 
     return false; // stop the event
   },
@@ -56,7 +65,7 @@ app.views.AspectMembership = Backbone.View.extend({
       this._displayError('aspect_dropdown.error');
     }, this);
 
-    aspect_membership.save();
+    return aspect_membership.save();
   },
 
   _successSaveCb: function(aspect_membership) {
@@ -72,17 +81,16 @@ app.views.AspectMembership = Backbone.View.extend({
     }
 
     li.attr('data-membership_id', membership_id) // just to be sure...
-      .data('membership_id', membership_id)
-      .addClass('selected');
+      .data('membership_id', membership_id);
 
-    this.updateSummary();
+    this.updateSummary(li);
     this._done();
   },
 
   // show an error flash msg
   _displayError: function(msg_id) {
     this._done();
-    this.dropdown.removeClass('active'); // close the dropdown
+    this.dropdown.closest('.aspect_membership_dropdown').removeClass('open'); // close the dropdown
 
     var msg = Diaspora.I18n.t(msg_id, { 'name': this._name() });
     Diaspora.page.flashMessages.render({ 'success':false, 'notice':msg });
@@ -99,7 +107,7 @@ app.views.AspectMembership = Backbone.View.extend({
       this._displayError('aspect_dropdown.error_remove');
     }, this);
 
-    aspect_membership.destroy();
+    return aspect_membership.destroy();
   },
 
   _successDestroyCb: function(aspect_membership) {
@@ -107,8 +115,8 @@ app.views.AspectMembership = Backbone.View.extend({
     var li = this.dropdown.find('li[data-membership_id="'+membership_id+'"]');
 
     li.removeAttr('data-membership_id')
-      .removeData('membership_id')
-      .removeClass('selected');
+      .removeData('membership_id');
+    this.updateSummary(li);
 
     // we just removed the last aspect, inform the user with a flash message
     // that he is no longer sharing with that person
@@ -117,7 +125,6 @@ app.views.AspectMembership = Backbone.View.extend({
       Diaspora.page.flashMessages.render({ 'success':true, 'notice':msg });
     }
 
-    this.updateSummary();
     this._done();
   },
 
@@ -129,33 +136,10 @@ app.views.AspectMembership = Backbone.View.extend({
   },
 
   // refresh the button text to reflect the current aspect selection status
-  updateSummary: function() {
-    var btn = this.dropdown.parents('div.aspect_membership').find('.button.toggle');
-    var aspects_cnt = this.dropdown.find('li.selected').length;
-    var txt;
-
-    if( aspects_cnt == 0 ) {
-      btn.removeClass('in_aspects');
-      txt = Diaspora.I18n.t('aspect_dropdown.toggle.zero');
-    } else {
-      btn.addClass('in_aspects');
-      txt = this._pluralSummaryTxt(aspects_cnt);
-    }
-
-    btn.text(txt + ' ▼');
+  updateSummary: function(target) {
+    this._toggleCheckbox(target);
+    this._updateButton('green');
   },
-
-  _pluralSummaryTxt: function(cnt) {
-    var all_aspects_cnt = this.dropdown.find('li').length;
-
-    if( cnt == 1 ) {
-      return this.dropdown.find('li.selected').first().text();
-    }
-
-    if( cnt == all_aspects_cnt ) {
-      return Diaspora.I18n.t('aspect_dropdown.all_aspects');
-    }
-
-    return Diaspora.I18n.t('aspect_dropdown.toggle', { 'count':cnt.toString() });
-  }
 });
+// @license-end
+

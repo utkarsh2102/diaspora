@@ -1,34 +1,35 @@
 class Notifier < ActionMailer::Base
   helper :application
-  helper :markdownify
   helper :notifier
   helper :people
-  
-  def self.admin(string, recipients, opts = {})
+
+  def self.admin(string, recipients, opts = {}, subject=nil)
     mails = []
     recipients.each do |rec|
-      mail = single_admin(string, rec, opts.dup)
+      mail = single_admin(string, rec, opts.dup, subject)
       mails << mail
     end
     mails
   end
 
-  def single_admin(string, recipient, opts={})
+  def single_admin(string, recipient, opts={}, subject=nil)
     @receiver = recipient
     @string = string.html_safe
-    
+
     if attach = opts.delete(:attachments)
       attach.each{ |f|
         attachments[f[:name]] = f[:file]
       }
     end
 
+    unless subject
+      subject = I18n.t('notifier.single_admin.subject')
+    end
+
     default_opts = {:to => @receiver.email,
          :from => AppConfig.mail.sender_address,
-         :subject => I18n.t('notifier.single_admin.subject'),  :host => AppConfig.pod_uri.host}
+         :subject => subject, :host => AppConfig.pod_uri.host}
     default_opts.merge!(opts)
-
-
 
     mail(default_opts) do |format|
       format.text
@@ -42,11 +43,11 @@ class Notifier < ActionMailer::Base
     @locale = locale
     @invitation_code = invitation_code
 
-    mail_opts = {:to => email, :from => AppConfig.mail.sender_address,
+    I18n.with_locale(locale) do
+      mail_opts = {:to => email, :from => AppConfig.mail.sender_address,
                  :subject => I18n.t('notifier.invited_you', :name => @inviter.name),
                  :host => AppConfig.pod_uri.host}
 
-    I18n.with_locale(locale) do
       mail(mail_opts) do |format|
         format.text { render :layout => nil }
         format.html { render :layout => nil }

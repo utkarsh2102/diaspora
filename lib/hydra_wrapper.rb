@@ -17,16 +17,19 @@ class HydraWrapper
     }
   }
 
-  attr_reader :failed_people, :user, :encoded_object_xml
+  attr_reader :people_to_retry , :user, :encoded_object_xml
   attr_accessor :dispatcher_class, :people
   delegate :run, to: :hydra
 
   def initialize user, people, encoded_object_xml, dispatcher_class
     @user = user
-    @failed_people = []
+    @people_to_retry = []
     @people = people
     @dispatcher_class = dispatcher_class
     @encoded_object_xml = encoded_object_xml
+    @keep_for_retry_proc = Proc.new do |response|
+      true
+    end
   end
 
   # Inserts jobs for all @people
@@ -36,6 +39,14 @@ class HydraWrapper
         insert_job(receive_url, xml, people_for_receive_url)
       end
     end
+  end
+
+  # This method can be used to tell the hydra whether or not to
+  # retry a request that it made which failed.
+  # @yieldparam response [Typhoeus::Response] The response object for the failed request.
+  # @yieldreturn [Boolean] Whether the request whose response was passed to the block should be retried.
+  def keep_for_retry_if &block
+    @keep_for_retry_proc = block
   end
 
   private
@@ -55,7 +66,7 @@ class HydraWrapper
     @people.group_by { |person|
       @dispatcher_class.receive_url_for person
     }
-  end 
+  end
 
   # Prepares and inserts job into the hydra queue
   # @param url [String]
@@ -72,7 +83,7 @@ class HydraWrapper
   def prepare_request request, people_for_receive_url
     request.on_complete do |response|
       # Save the reference to the pod to the database if not already present
-      Pod.find_or_create_by_url response.effective_url
+      Pod.find_or_create_by(url: response.effective_url)
 
       if redirecting_to_https? response
         Person.url_batch_update people_for_receive_url, response.headers_hash['Location']
@@ -83,11 +94,14 @@ class HydraWrapper
           event: "http_multi_fail",
           sender_id: @user.id,
           url: response.effective_url,
-          response_code: response.code
+          return_code: response.return_code
         }
-        message[:response_message] = response.return_message if response.code == 0
         Rails.logger.info message.to_a.map { |k,v| "#{k}=#{v}" }.join(' ')
-        @failed_people += people_for_receive_url.map(&:id)
+
+        if @keep_for_retry_proc.call(response)
+          @people_to_retry += people_for_receive_url.map(&:id)
+        end
+
       end
     end
   end

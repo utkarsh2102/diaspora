@@ -1,7 +1,7 @@
 describe("app.views.AspectsList", function(){
   beforeEach(function(){
     setFixtures('<ul id="aspects_list"></ul>');
-    Diaspora.I18n.loadLocale({ aspect_navigation : {
+    Diaspora.I18n.load({ aspect_navigation : {
       'select_all' : 'Select all',
       'deselect_all' : 'Deselect all'
     }});
@@ -40,8 +40,8 @@ describe("app.views.AspectsList", function(){
         beforeEach(function(){
           app.router = new app.Router();
           spyOn(app.router, 'aspects_stream');
-          spyOn(this.view, 'toggleAll').andCallThrough();
-          spyOn(this.view, 'toggleSelector').andCallThrough();
+          spyOn(this.view, 'toggleAll').and.callThrough();
+          spyOn(this.view, 'toggleSelector').and.callThrough();
           this.view.delegateEvents();
           this.view.$('.toggle_selector').click();
         });

@@ -1,3 +1,4 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
 
 // cache url regex globally, for direct acces when testing
 $(function() {
@@ -7,7 +8,7 @@ $(function() {
 (function(){
   //make it so I take text and mentions rather than the modelapp.helpers.textFormatter(
   var textFormatter = function textFormatter(text, model) {
-    var mentions = model.get("mentioned_people");
+    var mentions = model ? model.get("mentioned_people") : [];
 
     return textFormatter.mentionify(
       textFormatter.hashtagify(
@@ -45,9 +46,12 @@ $(function() {
         }
 
         // url*DE*code as much as possible
-        while( unicodeUrl.indexOf("%") !== -1 && unicodeUrl != decodeURI(unicodeUrl) ) {
-          unicodeUrl = decodeURI(unicodeUrl);
+        try {
+          while( unicodeUrl.indexOf("%") !== -1 && unicodeUrl != decodeURI(unicodeUrl) ) {
+            unicodeUrl = decodeURI(unicodeUrl);
+          }
         }
+        catch(e){}
 
         // markdown doesn't like '(' or ')' anywhere, except where it wants
         var workingUrl = unicodeUrl.replace(/\(/, "%28").replace(/\)/, "%29");
@@ -108,11 +112,15 @@ $(function() {
   };
 
   textFormatter.hashtagify = function hashtagify(text){
-    var utf8WordCharcters =/(\s|^|>)#([\u0080-\uFFFF|\w|-]+|&lt;3)/g
-    return text.replace(utf8WordCharcters, function(hashtag, preceeder, tagText) {
-      return preceeder + "<a href='/tags/" + tagText.toLowerCase() +
-                         "' class='tag'>#" + tagText + "</a>"
-    })
+    var utf8WordCharcters =/(<a[^>]*>.*?<\/a>)|(\s|^|>)#([\u0080-\uFFFF|\w|-]+|&lt;3)/g;
+
+    return text.replace(utf8WordCharcters, function(result, linkTag, preceeder, tagText) {
+      if(linkTag)
+        return linkTag;
+      else
+        return preceeder + "<a href='/tags/" + tagText.toLowerCase() +
+                           "' class='tag'>#" + tagText + "</a>";
+    });
   };
 
   textFormatter.mentionify = function mentionify(text, mentions) {
@@ -134,4 +142,5 @@ $(function() {
 
   app.helpers.textFormatter = textFormatter;
 })();
+// @license-end
 

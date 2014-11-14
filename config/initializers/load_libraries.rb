@@ -3,7 +3,6 @@ require 'cgi'
 require 'uri'
 
 # Not auto required gems
-require 'active_support/base64'
 require 'builder/xchar'
 require 'carrierwave/orm/activerecord'
 require 'erb'
@@ -12,9 +11,6 @@ require 'typhoeus'
 
 # Presenters
 require 'post_presenter'
-
-# Helpers
-require 'markdownify_helper'
 
 # Our libs
 require 'collect_user_photos'
@@ -33,3 +29,4 @@ require 'statistics'
 require 'stream'
 require 'webfinger'
 require 'webfinger_profile'
+require 'account_deleter'

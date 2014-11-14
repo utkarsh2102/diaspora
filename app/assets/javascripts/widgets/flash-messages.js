@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 (function() {
   var FlashMessages = function() {
     var self = this;
@@ -19,7 +21,7 @@
       .html($("<div/>", {
         'class': "message"
         })
-        .html(result.notice))
+        .text(result.notice))
       .prependTo(document.body);
 
 
@@ -33,3 +35,5 @@
 
   Diaspora.Widgets.FlashMessages = FlashMessages;
 })();
+// @license-end
+

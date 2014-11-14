@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 /*   Copyright (c) 2010-2012, Diaspora Inc.  This file is
  *   licensed under the Affero General Public License version 3 or later.  See
  *   the COPYRIGHT file.
@@ -23,7 +25,7 @@ app.views.PublisherServices = Backbone.View.extend({
 
   // visually toggle the icon and handle all other actions for cross-posting
   toggleService: function(evt) {
-    var el = $(evt.target);
+    var el = $(evt.target).closest('.service_icon');
     var provider = el.attr('id');
 
     el.toggleClass("dim");
@@ -61,3 +63,5 @@ app.views.PublisherServices = Backbone.View.extend({
     }
   }
 });
+// @license-end
+

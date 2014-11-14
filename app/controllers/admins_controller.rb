@@ -1,12 +1,16 @@
-class AdminsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :redirect_unless_admin
+class AdminsController < Admin::AdminController
+
+  use_bootstrap_for :user_search, :weekly_user_stats, :stats, :correlations
 
   def user_search
-    params[:user] ||= {}
-    params[:user].delete_if {|key, value| value.blank? }
-    @users = User.joins(person: :profile).where(["profiles.birthday > ?", Date.today - 13.years]) if params[:under13]
-    @users = (@users || User).where(params[:user]) if params[:user].present?
+    if params[:admins_controller_user_search]
+      search_params = params.require(:admins_controller_user_search)
+                            .permit(:username, :email, :guid, :under13)
+      @search = UserSearch.new(search_params)
+      @users = @search.perform
+    end
+
+    @search ||= UserSearch.new
     @users ||= []
   end
 
@@ -37,12 +41,12 @@ class AdminsController < ApplicationController
       @created_users_by_week[week] << u.username
     end
 
-    @selected_week = params[:week] || @created_users_by_week.keys.first
+    @selected_week = params[:week] || @created_users_by_week.keys.last
     @counter = @created_users_by_week[@selected_week].count
   end
 
   def stats
-    @popular_tags = ActsAsTaggableOn::Tagging.joins(:tag).limit(50).count(:group => :tag, :order => 'count(taggings.id) DESC')
+    @popular_tags = ActsAsTaggableOn::Tagging.joins(:tag).limit(50).order('count(taggings.id) DESC').group(:tag).count
 
     case params[:range]
     when "week"
@@ -63,7 +67,7 @@ class AdminsController < ApplicationController
       create_hash(model, :range => range)
     end
 
-    @posts_per_day = Post.count(:group => "DATE(created_at)", :conditions => ["created_at >= ?", Date.today - 21.days], :order => "DATE(created_at) ASC")
+    @posts_per_day = Post.where("created_at >= ?", Date.today - 21.days).group("DATE(created_at)").order("DATE(created_at) ASC").count
     @most_posts_within = @posts_per_day.values.max.to_f
 
     @user_count = User.count
@@ -94,5 +98,47 @@ class AdminsController < ApplicationController
       @#{plural}[:change] = percent_change(@#{plural}[:yesterday], @#{plural}[:day_before])
 DATA
     )
+  end
+
+
+  class UserSearch
+    include ActiveModel::Model
+    include ActiveModel::Conversion
+    include ActiveModel::Validations
+
+    attr_accessor :username, :email, :guid, :under13
+
+    validate :any_searchfield_present?
+
+    def initialize(attributes={})
+      assign_attributes(attributes)
+      yield(self) if block_given?
+    end
+
+    def assign_attributes(values)
+      values.each do |k, v|
+        public_send("#{k}=", v)
+      end
+    end
+
+    def any_searchfield_present?
+      if %w(username email guid under13).all? { |attr| public_send(attr).blank? }
+        errors.add :base, "no fields for search set"
+      end
+    end
+
+    def perform
+      return User.none unless valid?
+
+      users = User.arel_table
+      people = Person.arel_table
+      profiles = Profile.arel_table
+      res = User.joins(person: :profile)
+      res = res.where(users[:username].matches("%#{username}%")) unless username.blank?
+      res = res.where(users[:email].matches("%#{email}%")) unless email.blank?
+      res = res.where(people[:guid].matches("%#{guid}%")) unless guid.blank?
+      res = res.where(profiles[:birthday].gt(Date.today-13.years)) if under13 == '1'
+      res
+    end
   end
 end

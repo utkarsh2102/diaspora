@@ -4,7 +4,7 @@
 
 defaults:
   version:
-    number: "0.3.0.3" # Do not touch unless doing a release, do not backport the version number that's in master but keep develop to always say "head"
+    number: "head" # Do not touch unless doing a release, do not backport the version number that's in master but keep develop to always say "head"
   heroku: false
   environment:
     url: "http://localhost:3000/"
@@ -41,7 +41,7 @@ defaults:
     embed_sidekiq_worker: false
     sidekiq_workers: 1
   privacy:
-    jquery_cdn: true
+    jquery_cdn: false
     google_analytics_key:
     piwik:
       enable: false
@@ -52,6 +52,13 @@ defaults:
     statistics:
       user_counts: false
       post_counts: false
+      comment_counts: false
+    camo:
+      proxy_markdown_images: false
+      proxy_opengraph_thumbnails: false
+      proxy_remote_pod_images: false
+      root:
+      key:
   settings:
     pod_name: 'diaspora*'
     enable_registrations: true
@@ -88,6 +95,16 @@ defaults:
       captcha_length: 5
       image_style: 'simply_green'
       distortion: 'low'
+    terms:
+      enable: false
+      jurisdiction: false
+      minimum_age: false
+    maintenance:
+      remove_old_users:
+        enable: false
+        after_days: 730
+        warn_days: 30
+        limit_removals_to_per_day: 100
   services:
     facebook:
       enable: false

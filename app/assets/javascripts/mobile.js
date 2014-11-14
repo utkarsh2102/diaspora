@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 /*   Copyright (c) 2010-2011, Diaspora Inc.  This file is
  *   licensed under the Affero General Public License version 3 or later.  See
  *   the COPYRIGHT file.
@@ -8,6 +10,7 @@
 //= require mbp-helper
 //= require jquery.autoSuggest.custom
 //= require fileuploader-custom
+//= require rails-timeago
 
 $(document).ready(function(){
 
@@ -24,6 +27,18 @@ $(document).ready(function(){
          .toggleClass('active')
          .toggleClass('inactive');
   };
+
+  /* Drawer menu */
+  $('#menu_badge').bind("tap click", function(evt){
+    evt.preventDefault();
+    $("#app").toggleClass('draw');
+  });
+
+  /* Show / hide aspects in the drawer */
+  $('#all_aspects').bind("tap click", function(evt){
+    evt.preventDefault();
+    $("#all_aspects + li").toggleClass('hide');
+  });
 
   /* Heart toggle */
   $(".like_action", ".stream").bind("tap click", function(evt){
@@ -125,10 +140,12 @@ $(document).ready(function(){
             link.addClass('active');
             existingCommentsContainer.show();
             scrollToOffset(parent, commentsContainer());
+            commentsContainer().find('time.timeago').timeago();
           }
         });
       } else {
         existingCommentsContainer.show();
+        existingCommentsContainer.find('time.timeago').timeago();
       }
 
       link.addClass('active');
@@ -140,10 +157,10 @@ $(document).ready(function(){
           parent.append(data);
           link.addClass('active');
           scrollToOffset(parent, commentsContainer());
+          commentsContainer().find('time.timeago').timeago();
         }
       });
     }
-
   });
 
   var scrollToOffset = function(parent, commentsContainer){
@@ -202,7 +219,7 @@ $(document).ready(function(){
     form.remove();
   });
 
-  $(".new_comment").live("submit", function(evt){
+  $(document).on("submit", ".new_comment", function(evt){
     evt.preventDefault();
     var form = $(this);
 
@@ -231,6 +248,7 @@ $(document).ready(function(){
       reactionLink.text(reactionLink.text().replace(/(\d+)/, function(match){ return parseInt(match) + 1; }));
       commentCount.text(commentCount.text().replace(/(\d+)/, function(match){ return parseInt(match) + 1; }));
       commentActionLink.addClass("inactive");
+      bottomBar.find('time.timeago').timeago();
     }, 'html');
   });
 
@@ -266,7 +284,7 @@ $(document).ready(function(){
       );
     }
   });
-  
+
   $("#submit_new_message").bind("tap click", function(evt){
     evt.preventDefault();
     $("#new_status_message").submit();
@@ -303,7 +321,7 @@ function createUploader(){
         $('#publisher_textarea_wrapper').addClass("with_attachments");
         $('#photodropzone').append(
           "<li class='publisher_photo loading' style='position:relative;'>" +
-            "<img alt='Ajax-loader2' src='/assets/ajax-loader2.gif' />" +
+            "<img alt='Ajax-loader2' src='"+ImagePaths.get('ajax-loader2.gif')+"' />" +
           "</li>"
           );
        },
@@ -355,3 +373,5 @@ function createUploader(){
    });
 }
 createUploader();
+// @license-end
+

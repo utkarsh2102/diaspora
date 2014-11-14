@@ -22,34 +22,46 @@ pt-BR:
     aspect_navigation:
       add_an_aspect: "+ Adicionar um aspecto"
       deselect_all: "Desmarcar tudo"
-      no_aspects: "Sem aspecto selecionado"
+      no_aspects: "Nenhum aspecto selecionado"
       select_all: "Marcar tudo"
+    bookmarklet:
+      post_something: "Publicar em diaspora*"
+      post_submit: "Enviando publicação..."
+      post_success: "Publicado! Fechando janela popup..."
     comma: ","
     comments:
       hide: "ocultar comentários"
       no_comments: "Ainda não existem comentários."
       show: "mostrar todos comentários"
     confirm_dialog: "Tem certeza?"
+    contacts:
+      add_contact: "Adicionar contato"
+      aspect_list_is_not_visible: "Contatos neste aspecto não podem ver uns aos outros."
+      aspect_list_is_visible: "Contatos neste aspecto podem ver uns aos outros."
+      error_add: "Não foi possível adicionar <%= name %> ao aspecto :("
+      error_remove: "Não foi possível remover <%= name %> do aspecto :("
+      remove_contact: "Remover contato"
     conversation:
       participants: "Participantes"
     delete: "Apagar"
     edit: "Editar"
     failed_to_like: "Falhou ao curtir!"
     failed_to_post_message: "Falha na publicação da mensagem!"
+    failed_to_remove: "Falha ao remover a entrada!"
     getting_started:
       alright_ill_wait: "Tudo bem, eu esperarei."
       hey: "Ei, <%= name %>!"
       no_tags: "Ei, você não está seguindo todas as tags! Continuar assim mesmo?"
       preparing_your_stream: "Preparando seu fluxo personalizado..."
     header:
-      admin: "Administrador"
+      admin: "Administração"
       close: "fechar"
       contacts: "Contatos"
+      conversations: "Conversas"
       help: "Ajuda"
       home: "Páginal Inicial"
       log_out: "Sair"
-      mark_all_as_read: "Marcar Todas como Lidas"
-      messages: "Mensagens"
+      mark_all_as_read: "Marcar todas como lidas"
       notifications: "Notificações"
       profile: "Perfil"
       recent_notifications: "Notificações Recentes"
@@ -57,15 +69,27 @@ pt-BR:
       settings: "Configurações"
       view_all: "Ver todas"
     ignore: "Ignorar"
+    ignore_failed: "Não foi possível ignorar este usuário"
     ignore_user: "Ignorar este usuário?"
     infinite_scroll:
       no_more: "Não há mais publicações."
       no_more_contacts: "Sem mais contatos."
-    my_activity: "Minhas Atividades"
+    my_activity: "Minha Atividade"
     my_aspects: "Meus Aspectos"
     my_stream: "Fluxo"
+    no_results: "Nenhum Resultado Encontrado"
+    notifications:
+      mark_read: "Marcar como lida"
+      mark_unread: "Marcar como não lida"
     people:
+      edit_my_profile: "Editar meu perfil"
+      helper:
+        is_not_sharing: "<%= name %> não está compartilhando com você"
+        is_sharing: "<%= name %> está compartilhando com você"
+      mention: "Menção"
+      message: "Mensagem"
       not_found: "e ninguém foi encontrado..."
+      stop_ignoring: "Parar de ignorar"
     photo_uploader:
       completed: "<%= file %> completo"
       empty: "{file} está vazio, por favor selecione arquivos novamente sem este."
@@ -73,11 +97,40 @@ pt-BR:
       invalid_ext: "{file} possui extensão inválida. Somente {extensions} são permitidas."
       looking_good: "OMG, veja você é incrível!"
       size_error: "{file} é muito grande, o tamanho máximo do arquivo é {sizeLimit}."
+    poll:
+      close_result: "Ocultar resultado"
+      count:
+        one: "<%=count%> voto até agora"
+        other: "<%=count%> votos até agora"
+      result: "Resultado"
+      show_result: "Mostrar resultado"
+      vote: "Votar"
+    profile:
+      add_some: "adicionar alguns"
+      bio: "Apresentação Pessoal"
+      born: "Data de Aniversário"
+      contacts: "Contatos"
+      edit: "editar"
+      gender: "Sexo"
+      ignoring: "Você está ignorando todas as publicações de <%= name %>."
+      location: "Localização"
+      photos: "Fotos"
+      you_have_no_tags: "você não possui tags!"
     publisher:
+      add_option: "Adicionar uma resposta"
       at_least_one_aspect: "Você deve publicar em pelo menos um aspecto"
       limited: "Limitada - a sua publicação será visível apenas para as pessoas com quem você compartilha."
       near_from: "Publicado de: <%= location %>"
+      option: "Resposta"
       public: "Pública - a sua publicação será totalmente visível na web e poderá ser encontrada por mecanismos de buscas, como Google, Bing e etc..."
+      question: "Pergunta"
+    report:
+      name: "Relatar"
+      prompt: "Por favor entre um motivo:"
+      prompt_default: "conteúdo ofensivo"
+      status:
+        created: "O relato foi criado com sucesso"
+        exists: "O relato já existe"
     reshares:
       duplicate: "Que bom, hein? Você já recompartilhou essa publicação."
       post: "Recompartilhar a publicação de <%= name %>?"
@@ -104,7 +157,7 @@ pt-BR:
         one: "Mostre mais <%= count %> comentário"
         other: "Mostre mais <%= count %> comentários"
         zero: "Mostre mais <%= count %> comentário"
-      original_post_deleted: "A publicação original foi deletada pelo autor."
+      original_post_deleted: "A publicação original foi apagada pelo autor."
       public: "Público"
       reshare: "Recompartilhar"
       reshares:
@@ -119,6 +172,7 @@ pt-BR:
         stop_following: "Parar de Seguir #<%= tag %>"
       unfollow: "Parar de seguir"
       unlike: "Descurtir"
+      via: "via <%= provider %>"
     tags:
       wasnt_that_interesting: "Ok, eu acho que #<%= tagName %> não era tão interessante..."
     timeago:
@@ -135,8 +189,10 @@ pt-BR:
       seconds: "menos de um minuto"
       suffixAgo: "atrás"
       suffixFromNow: "a partir de agora"
+      wordSeparator: " "
       year: "cerca de um ano"
       years: "%d anos"
+    unblock_failed: "O desbloqueio deste usuário falhou"
     videos:
       unknown: "Tipo de vídeo desconhecido"
       watch: "Assista este vídeo no <%= provider %>"

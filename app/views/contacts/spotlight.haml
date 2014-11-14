@@ -1,30 +1,25 @@
--#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
--#   licensed under the Affero General Public License version 3 or later.  See
--#   the COPYRIGHT file.
-
 - content_for :page_title do
   = t('contacts.spotlight.community_spotlight')
 
-- content_for :head do
-  = javascript_include_tag :people
 
-#section_header
-  %h2
-    = t('contacts.index.title')
+.container-fluid#contacts_container
+  .row-fluid
+    .span3
+      = render 'contacts/sidebar'
 
-= render 'shared/contact_sidebar'
+    .span9
+      #people_stream.stream.contacts
+        .header
+          - if AppConfig.settings.community_spotlight.suggest_email.present?
+            .pull-right
+              = link_to t('contacts.spotlight.suggest_member'), "mailto:#{AppConfig.settings.community_spotlight.suggest_email}", :class => "btn btn-default", :id => "suggest_member"
+          %h3
+            = t('contacts.spotlight.community_spotlight')
 
-.span-18.last{:style => "position:relative;"}
+        #community_spotlight
+          - unless @people.blank?
+            - @people.each do |person|
+              = render 'people/person', :person => person, :contact => current_user.contact_for(person)
 
-  - if AppConfig.settings.community_spotlight.suggest_email.present?
-    .right
-      = link_to t('contacts.spotlight.suggest_member'), "mailto:#{AppConfig.settings.community_spotlight.suggest_email}", :class => "button"
-
-  %h3
-    = t('contacts.spotlight.community_spotlight')
-  %br
-
-  #community_spotlight
-    - unless @people.blank?
-      - @people.each do |person|
-        = render 'community_spotlight/user', :person => person
+          -# if @contacts_size > 0
+            = render @contacts

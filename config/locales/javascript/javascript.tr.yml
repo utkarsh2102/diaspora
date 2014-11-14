@@ -37,9 +37,8 @@ tr:
       close: "kapat"
       contacts: "Kişiler"
       home: "Ana Sayfa"
-      log_out: "Çıkış yap"
+      log_out: "Çık"
       mark_all_as_read: "Tümünü okundu olarak işaretle"
-      messages: "Mesajlar"
       notifications: "Bildirimler"
       profile: "Profil"
       recent_notifications: "Son Bildirimler"
@@ -47,6 +46,7 @@ tr:
       settings: "Ayarlar"
       view_all: "Tümünü gör"
     ignore: "Yoksay"
+    ignore_failed: "Bu kullanıcı ihmal edilemiyor"
     infinite_scroll:
       no_more: "Daha fazla gönderi yok."
     my_activity: "Etkinliklerim"

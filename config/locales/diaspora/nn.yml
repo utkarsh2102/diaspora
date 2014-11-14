@@ -8,6 +8,7 @@ nn:
   _applications: "Program"
   _comments: "Merknader"
   _contacts: "Kontaktar"
+  _help: "Hjelp"
   _home: "Heim"
   _photos: "foto"
   _services: "Tenester"
@@ -146,10 +147,6 @@ nn:
       aspect_not_empty: "Aspektet er ikkje tomt"
       remove: "fjern"
     index:
-      cubbies:
-        explanation: "Cubbi.es er den første Diaspora-applikasjonen som vert utvikla."
-        heading: "Kopla til Cubbi.es"
-        learn_more: "Lær meir"
       diaspora_id:
         content_1: "Diaspora-ID-en din er:"
         content_2: "Gje han til kven som helst så kan dei finna deg på Diaspora."
@@ -171,6 +168,7 @@ nn:
         tag_bug: "bug"
         tag_feature: "feature"
         tag_question: "spørsmål"
+        tutorials_and_wiki: "%{faq}, %{tutorial} og %{wiki} er her for å hjelpe deg med dei første skritta."
       introduce_yourself: "Dette er straumen din.   Hiv deg med og introduser deg sjølv."
       keep_diaspora_running: "Held utviklinga av Diaspora* rask med ei månadleg donasjon!"
       keep_pod_running: "Held %{pod} på beina og spander kaffi på serverane med ein månadleg donasjon!"
@@ -221,14 +219,6 @@ nn:
       failure: "Aspektet ditt, %{name}, hadde eit for langt namn til å bli lagra."
       success: "Aspektet ditt, %{name}, er vorte endra."
     zero: "ingen aspekt"
-  authorizations:
-    index:
-      no_applications: "Du har enno ikkje registrert nokon applikasjonar."
-      revoke_access: "Trekk attende tilgangen"
-    new:
-      authorize: "Autoriser"
-      cubbies_will: "Cubbies vil kunne legge ut bilete på vegne av deg"
-      nope: "Nei"
   back: "Attende"
   blocks:
     create:
@@ -269,7 +259,6 @@ nn:
       no_contacts_message: "Ta ein titt på %{community_spotlight}"
       no_contacts_message_with_aspect: "Ta ein titt på %{community_spotlight} eller %{add_to_aspect_link}"
       only_sharing_with_me: "Deler berre med meg"
-      remove_person_from_aspect: "Fjerna %{person_name} frå \"%{aspect_name}\""
       start_a_conversation: "Start ein samtale"
       title: "Kontaktar"
       your_contacts: "Kontaktane dine"
@@ -301,10 +290,7 @@ nn:
         two: "%{count} nye meldingar"
         zero: "Ingen nye meldingar"
     index:
-      create_a_new_message: "skriv ei ny melding"
       inbox: "Innkorg"
-      message_inbox: "Innkorga"
-      new_message: "Ny melding"
       no_conversation_selected: "ingen samtale er vald"
       no_messages: "ingen meldingar"
     new:
@@ -313,8 +299,6 @@ nn:
       sending: "Sender …"
       subject: "emne"
       to: "til"
-    new_message:
-      fail: "Ugyldig melding"
     show:
       delete: "slett og blokker samtalen"
       reply: "svar"
@@ -445,9 +429,17 @@ nn:
         other: "og %{count} andre"
         two: "og %{count} andre"
         zero: "og ingen andre"
+      liked: "Likte"
       mark_all_as_read: "Merk alle som lesne"
+      mark_all_shown_as_read: "Merk alle som lesne"
+      mark_read: "Merk som lesen"
       mark_unread: "Merk som ulest"
+      mentioned: "Nemnde"
       notifications: "Varsel"
+      reshared: "Delte"
+      show_all: "vis alle"
+      show_unread: "vis ulesne"
+      started_sharing: "Byrja å dela"
     liked:
       one: "%{actors} har likt %{post_link}et ditt."
       other: "%{actors} har likt %{post_link}et ditt."
@@ -555,10 +547,10 @@ nn:
       edit_membership: "endra aspektmedlemskap"
     few: "%{count} personar"
     helper:
-      people_on_pod_are_aware_of: "personar på tenaren er kjende med "
+      is_not_sharing: "%{name} delar ikkje med deg"
+      is_sharing: "%{name} delar med deg"
       results_for: " resultat for %{params}"
     index:
-      couldnt_find_them_send_invite: "Finn du dei ikkje? Send dei ei innbyding."
       looking_for: "Ser du etter innlegg merka med %{tag_link}?"
       no_one_found: "… og ingen vart funnen."
       no_results: "Du må søkja etter noko."
@@ -579,6 +571,7 @@ nn:
       gender: "Kjønn"
       in_aspects: "i aspekta"
       location: "Stad"
+      photos: "Bilete"
       remove_contact: "Fjern kontakten"
       remove_from: "Fjerna %{name} frå %{aspect}?"
     show:
@@ -866,13 +859,7 @@ nn:
       no_message_to_display: "Ingen innlegg kan synast."
     new:
       mentioning: "Nemner: %{person}"
-    too_long:
-      few: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
-      many: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
-      one: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
-      other: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
-      two: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
-      zero: "sjå til at statusmeldingane dine har færre enn %{count} teikn"
+    too_long: "{\"few\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"many\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"one\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"other\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"two\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"zero\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\"}"
   stream_helper:
     hide_comments: "Gøym alle kommentarane"
     show_comments:
@@ -930,18 +917,6 @@ nn:
       posts_tagged_with: "Meldingar som er merka med #%{tag}"
       stop_following: "Følg ikkje #%{tag} lenger"
   terms_and_conditions: "Vilkår og retningslinjer"
-  tokens:
-    show:
-      connect_to_cubbies: "Kopla deg til Cubbi.es"
-      connecting_is_simple: "Det er lett å kopla til Diaspora-kontoen. Skriv berre inn Diaspora-ID-en din (<b>%{diaspora_id}</b>) frå <a href='%{href_link}'>innstillingssida</a> di på cubbi.es og trykk 'kopla til'."
-      daniels_account: "Daniel sin Diaspora-konto"
-      love_to_try: "Vi vonar du vil prøva det."
-      making_the_connection: "Koplar til"
-      screenshot_explanation: "%{link1}. Denne cubbyen er lenka til %{link2}."
-      sign_up_today: "Registrer deg no"
-      typical_userpage: "Ei typisk brukarside på cubbie.es"
-      via: "(via %{link})"
-      what_is_cubbies: "Cubbi.es er det første Diaspora-programmet i verda og er òg den beste måten å samla bilete på nettet."
   undo: "Gjera om?"
   username: "Brukarnamn"
   users:

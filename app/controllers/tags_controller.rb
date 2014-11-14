@@ -3,8 +3,11 @@
 #   the COPYRIGHT file.
 
 class TagsController < ApplicationController
-  skip_before_filter :set_grammatical_gender
-  before_filter :ensure_page, :only => :show
+  skip_before_action :set_grammatical_gender
+  before_action :ensure_page, :only => :show
+
+  layout ->(c) { request.format == :mobile ? "application" : "with_header_with_footer" }, :only => [:show]
+  use_bootstrap_for :show
 
   helper_method :tag_followed?
 
@@ -57,9 +60,9 @@ class TagsController < ApplicationController
   end
 
   def prep_tags_for_javascript
-    @tags.map! do |tag|
+    @tags = @tags.map {|tag|
       { :name  => ("#" + tag.name) }
-    end
+    }
 
     @tags << { :name  => ('#' + params[:q]) }
     @tags.uniq!

@@ -3,35 +3,66 @@
 }
 
 #single-post-content {
+  border-right: solid 1px #cccccc;
+  padding-right: 12px;
   #head {
-    color: #aaaaaa;
-    font-size: 12px;
-    #author {
-      .img {
-        max-width: 25%;
-      }
-      .avatar {}
-      .bd {
-        padding-left: 10px;
-        .retweet {
-          i {
-            margin: 0 3px;
-          }
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-grey;
+    #post-info {
+      .author{ color: $grey; }
+      .info {
+        color: lighten($text-grey,10%);
+        font-size: 12px;
+        .post-time a { color: $text-grey; }
+        .post_scope { margin-right: 5px; }
+        .status-message-location { 
+          padding-top: 2px; 
+          line-height: 14px;
         }
       }
+      .avatar.medium {
+        max-width: 75px;
+      }
+      .bd {
+        padding-left: 10px;
+      }
+    }
+    .row-fluid.reshare {
+      border-top: 1px solid lighten($border-grey,5%);
+      padding-top: 10px; 
+      margin-top: 10px; 
+    }
+    #reshare-info {
+      line-height: 15px;
+      i.retweet {
+        color: $text-dark-grey;
+        font-size: 28px;
+        line-height: 30px;
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+      .post-time a {
+        color: $text-grey;
+        display: block;
+        font-size: 12px;
+      }
+      .avatar {
+        height: 30px;
+        width: 30px;
+      }
+      .img { margin-right: 10px; }
     }
     #single-post-actions {
-      .buttons {
-        position: relative;
-        top: 6px;
-        clear: right;
-      }
-      .public-info > i {
-        float: left;
-        margin: 2px 4px 0 0;
+      padding-right: 5px;
+      i {
+        font-size: 28px;
+        line-height: 30px;
       }
       i.comment:hover {
         color: #424242;
+      }
+      .post_report i.gray:hover {
+        color: $red;
       }
       i.heart.gray:hover {
         color: $red;
@@ -54,9 +85,7 @@
       }
     }
   }
-  border-right: solid 1px #cccccc;
-  padding-right: 10px;
-
+  
   #body {
     margin-left: 20px;
     padding-top: 20px;
@@ -103,17 +132,24 @@
   position: relative;
   left: -1px;
   margin-left: 0;
-  padding-left: 2.5%;
+  padding-left: 15px;
+  
   .comments .comment {
+    border-top: none;
     border-bottom: solid 1px #cccccc;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin: 10px;
     p {
       margin: 0 0 1em 0;
       word-wrap: break-word;
       &:last-child {
         margin-bottom: 0;
       }
+    }
+    .avatar {
+      height: 35px;
+      width: 35px;
     }
   }
   .no_comments {
@@ -125,90 +161,28 @@
     margin-bottom: 30px;
   }
 
-  textarea {
-    width: 95%;
-  }
   .new_comment_form_wrapper {
     border-bottom: none;
   }
   a {
-    color: #3f8fba;
-  }
-  .timeago {
-    font-size: smaller;
+    color: $blue;
   }
   .count {
-    width: 12.8%;
-    text-align: right;
     i {
       display: inline-block;
       text-align: center;
       width: 25px;
       vertical-align: middle;
     }
-  }
-  #reshares .count i { text-align: left; }
-  .persons {
-    margin-left: 5px;
-  }
-}
-
-.comment {
-  &:hover {
-    .controls {
-      @include opacity(0.3);
-    }
-  }
-  .controls {
-    @include transition(opacity);
-    @include opacity(0);
-    z-index: 6;
-    float: right;
-    &:hover {
-      @include opacity(1);
-    }
-    .delete {
+    span {
+      margin-left: -3px;
+      width: 30px;
       display: inline-block;
-      .icons-deletelabel {
-        height: 14px;
-        width: 14px;
-      }
-    }
-    a:hover {
-      text-decoration: none;
+      text-align: center;
     }
   }
-  .submit_button {
-    input {
-      float: right;
-    }
-    padding-left: 12px;
-    width: 95%;
-  }
-
-  .button.creation {
-    $button-border-color: #aaa;
-    @include border-radius(3px);
-    @include box-shadow(0,1px,1px,#cfcfcf);
-    @include transition(border);
-    @include button-gradient($creation-blue);
-    font: {
-      size: 12px;
-    }
-    color: #fff;
-    padding: 4px 9px;
-    min-width: 90px;
-    min-height: 10px;
-    border: 1px solid darken($button-border-color,20%);
-
-    cursor: pointer;
-    white-space: nowrap;
-
-    &:hover {
-      @include button-gradient-hover($creation-blue);
-      border: 1px solid darken($button-border-color,35%);
-      text-decoration: none;
-    }
+  #reshares, #likes, #comments-meta {
+    margin-left: 7px;
+    margin-bottom: 8px;
   }
 }
-

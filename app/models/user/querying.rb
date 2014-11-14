@@ -27,7 +27,7 @@ module User::Querying
     opts[:klass] = klass
     opts[:by_members_of] ||= self.aspect_ids
 
-    post_ids = klass.connection.select_values(visible_shareable_sql(klass, opts)).map { |id| id.to_i }
+    post_ids = klass.connection.select_values(visible_shareable_sql(klass, opts)).map(&:to_i)
     post_ids += klass.connection.select_values("#{construct_public_followings_sql(opts).to_sql} LIMIT #{opts[:limit]}").map {|id| id.to_i }
   end
 
@@ -68,10 +68,17 @@ module User::Querying
   end
 
   def construct_public_followings_sql(opts)
-    aspects = Aspect.where(:id => opts[:by_members_of])
-    person_ids = Person.connection.select_values(people_in_aspects(aspects).select("people.id").to_sql)
+    Rails.logger.debug("[EVIL-QUERY] user.construct_public_followings_sql")
 
-    query = opts[:klass].where(:author_id => person_ids, :public => true, :pending => false)
+    # For PostgreSQL and MySQL/MariaDB we use a different query
+    # see issue: https://github.com/diaspora/diaspora/issues/5014
+    if AppConfig.postgres?
+      query = opts[:klass].where(:author_id => Person.in_aspects(opts[:by_members_of]).select("people.id"), :public => true, :pending => false)
+    else
+      aspects = Aspect.where(:id => opts[:by_members_of])
+      person_ids = Person.connection.select_values(people_in_aspects(aspects).select("people.id").to_sql)
+      query = opts[:klass].where(:author_id => person_ids, :public => true, :pending => false)
+    end
 
     unless(opts[:klass] == Photo)
       query = query.where(:type => opts[:type])
@@ -81,9 +88,9 @@ module User::Querying
   end
 
   def construct_shareable_from_self_query(opts)
-    conditions = {:pending => false }
+    conditions = {:pending => false, :author_id => self.person_id }
     conditions[:type] = opts[:type] if opts.has_key?(:type)
-    query = self.person.send(opts[:klass].to_s.tableize).where(conditions)
+    query = opts[:klass].where(conditions)
 
     if opts[:by_members_of]
       query = query.joins(:aspect_visibilities).where(:aspect_visibilities => {:aspect_id => opts[:by_members_of]})
@@ -95,6 +102,11 @@ module User::Querying
   def contact_for(person)
     return nil unless person
     contact_for_person_id(person.id)
+  end
+
+  def block_for(person)
+    return nil unless person
+    self.blocks.where(person_id: person.id).first
   end
 
   def aspects_with_shareable(base_class_name_or_class, shareable_id)
@@ -135,8 +147,11 @@ module User::Querying
     ::EvilQuery::ShareablesFromPerson.new(self, Post, person).make_relation!
   end
 
-  def photos_from(person)
+  def photos_from(person, opts={})
+    opts = prep_opts(Photo, opts)
     ::EvilQuery::ShareablesFromPerson.new(self, Photo, person).make_relation!
+      .by_max_time(opts[:max_time])
+      .limit(opts[:limit])
   end
 
   protected

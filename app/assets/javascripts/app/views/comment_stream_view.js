@@ -1,3 +1,5 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
+
 app.views.CommentStream = app.views.Base.extend({
 
   templateName: "comment-stream",
@@ -19,6 +21,7 @@ app.views.CommentStream = app.views.Base.extend({
 
   setupBindings: function() {
     this.model.comments.bind('add', this.appendComment, this);
+    this.model.bind("commentsExpanded", this.storeTextareaValue, this);
     this.model.bind("commentsExpanded", this.render, this);
   },
 
@@ -28,6 +31,7 @@ app.views.CommentStream = app.views.Base.extend({
 
     // add autoexpanders to new comment textarea
     this.$("textarea").autoResize({'extraSpace' : 10});
+    this.$('textarea').val(this.textareaValue);
   },
 
   presenter: function(){
@@ -73,6 +77,10 @@ app.views.CommentStream = app.views.Base.extend({
     this.$("form").removeClass('hidden').addClass("open");
   },
 
+  storeTextareaValue: function(){
+    this.textareaValue = this.$('textarea').val();
+  },
+
   expandComments: function(evt){
     if(evt){ evt.preventDefault(); }
 
@@ -90,3 +98,5 @@ app.views.CommentStream = app.views.Base.extend({
     });
   }
 });
+// @license-end
+

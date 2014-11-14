@@ -3,7 +3,12 @@
 #   the COPYRIGHT file.
 
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:new, :create, :public, :user_photo]
+  before_action :authenticate_user!, :except => [:new, :create, :public, :user_photo]
+  before_action -> { @css_framework = :bootstrap }, only: [:privacy_settings, :edit]
+
+  layout ->(c) { request.format == :mobile ? "application" : "with_header_with_footer" }, only: [:privacy_settings, :edit]
+
+  use_bootstrap_for :getting_started
 
   respond_to :html
 
@@ -71,8 +76,6 @@ class UsersController < ApplicationController
           flash[:error] = I18n.t 'users.update.follow_settings_not_changed'
         end
       end
-    elsif aspect_order = params[:reorder_aspects]
-      @user.reorder_aspects(aspect_order)
     end
 
     respond_to do |format|
@@ -100,7 +103,11 @@ class UsersController < ApplicationController
     if @user = User.find_by_username(params[:username])
       respond_to do |format|
         format.atom do
-          @posts = Post.where(:author_id => @user.person_id, :public => true).order('created_at DESC').limit(25)
+          @posts = Post.where(author_id: @user.person_id, public: true)
+                    .order('created_at DESC')
+                    .limit(25)
+                    .map {|post| post.is_a?(Reshare) ? post.absolute_root : post }
+                    .compact
         end
 
         format.any { redirect_to person_path(@user.person) }
@@ -115,8 +122,6 @@ class UsersController < ApplicationController
     @person   = @user.person
     @profile  = @user.profile
 
-    @css_framework = :bootstrap
-    @include_application_css = true #Hack for multiple CSS frameworks and having two main styles
     respond_to do |format|
     format.mobile { render "users/getting_started" }
     format.all { render "users/getting_started", layout: "with_header_with_footer" }
@@ -177,6 +182,7 @@ class UsersController < ApplicationController
       :remember_me,
       :getting_started,
       email_preferences: [
+        :someone_reported,
         :also_commented,
         :mentioned,
         :comment_on_post,

@@ -17,7 +17,7 @@ Feature: posting from the main page
       And I have user with username "alice" in an aspect called "PostingTo"
       And I have user with username "alice" in an aspect called "NotPostingThingsHere"
       And I am on the home page
-      
+
     Scenario: expanding the publisher
       Given ".markdownIndications" is hidden
       And ".options_and_submit" is hidden
@@ -28,23 +28,20 @@ Feature: posting from the main page
 
     Scenario: post a text-only message to all aspects
       Given I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | I am eating yogurt    |
-      And I press "Share"
+      When I write the status message "I am eating yogurt"
+      And I submit the publisher
 
       And I go to the aspects page
       Then "I am eating yogurt" should be post 1
 
     Scenario: re-posting a text-only message
       Given I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | The World needs more Cats.    |
-      And I press "Share"
+      When I write the status message "The World needs more Cats."
+      And I submit the publisher
 
       Given I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | The World needs more Cats.    |
-      And I press "Share"
+      When I write the status message "The World needs more Cats."
+      And I submit the publisher
 
       And I go to the aspects page
       Then "The World needs more Cats." should be post 1
@@ -58,10 +55,9 @@ Feature: posting from the main page
     Scenario: post a text-only message to just one aspect
       When I select only "PostingTo" aspect
       And I expand the publisher
-      And I fill in the following:
-          | status_message_fake_text    | I am eating a yogurt    |
+      When I write the status message "I am eating a yogurt"
 
-      And I press "Share"
+      And I submit the publisher
 
       When I am on the aspects page
       And I select only "PostingTo" aspect
@@ -73,10 +69,9 @@ Feature: posting from the main page
 
     Scenario: post a photo with text
       Given I expand the publisher
-      When I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
-      When I fill in the following:
-          | status_message_fake_text    | Look at this dog    |
-      And I press "Share"
+      And I attach "spec/fixtures/button.png" to the publisher
+      When I write the status message "Look at this dog"
+      And I submit the publisher
       And I go to the aspects page
       Then I should see a "img" within ".stream_element div.photo_attachments"
       And I should see "Look at this dog" within ".stream_element"
@@ -88,10 +83,11 @@ Feature: posting from the main page
 
     Scenario: post a photo without text
       Given I expand the publisher
-      When I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
+      And I attach "spec/fixtures/button.png" to the publisher
       Then I should see an uploaded image within the photo drop zone
       When I press "Share"
-      And I go to the aspects page
+      Then I should see a "img" within ".stream_element div.photo_attachments"
+      When I go to the aspects page
       Then I should see a "img" within ".stream_element div.photo_attachments"
       When I log out
       And I sign in as "alice@alice.alice"
@@ -100,42 +96,37 @@ Feature: posting from the main page
 
     Scenario: back out of posting a photo-only post
       Given I expand the publisher
-      And I have turned off jQuery effects
-      When I attach the file "spec/fixtures/bad_urls.txt" to "file" within "#file-upload"
-      And I confirm the alert
-      Then I should not see an uploaded image within the photo drop zone
-      When I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
-      And I click to delete the first uploaded photo
+      And I attach "spec/fixtures/button.png" to the publisher
+      When I click to delete the first uploaded photo
       Then I should not see an uploaded image within the photo drop zone
       And I should not be able to submit the publisher
 
     Scenario: back out of uploading a picture to a post with text
       Given I expand the publisher
       And I have turned off jQuery effects
-      When I fill in the following:
-          | status_message_fake_text    | I am eating a yogurt    |
-      And I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
+      When I write the status message "I am eating a yogurt"
+      And I attach "spec/fixtures/button.png" to the publisher
       And I click to delete the first uploaded photo
       Then I should not see an uploaded image within the photo drop zone
       And the publisher should be expanded
+      And I close the publisher
 
     Scenario: back out of uploading a picture when another has been attached
       Given I expand the publisher
       And I have turned off jQuery effects
-      When I fill in the following:
-          | status_message_fake_text    | I am eating a yogurt    |
-      And I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
-      And I attach the file "spec/fixtures/button.png" to hidden "file" within "#file-upload"
+      When I write the status message "I am eating a yogurt"
+      And I attach "spec/fixtures/button.png" to the publisher
+      And I attach "spec/fixtures/button.png" to the publisher
       And I click to delete the first uploaded photo
       Then I should see an uploaded image within the photo drop zone
       And the publisher should be expanded
+      And I close the publisher
 
     @wip
     Scenario: hide a contact's post
       Given I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | Here is a post for you to hide    |
-      And I press "Share"
+      When I write the status message "Here is a post for you to hide"
+      And I submit the publisher
 
       And I log out
       And I sign in as "alice@alice.alice"
@@ -151,9 +142,8 @@ Feature: posting from the main page
 
     Scenario: delete one of my posts
       Given I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | I am eating a yogurt    |
-      And I press "Share"
+      When I write the status message "I am eating a yogurt"
+      And I submit the publisher
       And I go to the aspects page
       And I hover over the ".stream_element"
       And I click to delete the first post
@@ -165,7 +155,7 @@ Feature: posting from the main page
       And I press the aspect dropdown
       And I toggle the aspect "PostingTo"
       And I append "I am eating a yogurt" to the publisher
-      And I press "Share"
+      And I submit the publisher
 
       And I am on the aspects page
       And I select only "PostingTo" aspect
@@ -179,13 +169,13 @@ Feature: posting from the main page
       And I press the aspect dropdown
       And I toggle the aspect "PostingTo"
       And I append "I am eating a yogurt" to the publisher
-      And I press "Share"
+      And I submit the publisher
 
       And I expand the publisher
       And I press the aspect dropdown
       And I toggle the aspect "Besties"
       And I append "And cornflakes also" to the publisher
-      And I press "Share"
+      And I submit the publisher
 
       And I am on the aspects page
       And I select only "PostingTo" aspect
@@ -201,9 +191,8 @@ Feature: posting from the main page
     # (NOTE) make this a jasmine spec
     Scenario: reject deletion one of my posts
       When I expand the publisher
-      When I fill in the following:
-          | status_message_fake_text    | I am eating a yogurt    |
-      And I press "Share"
+      When I write the status message "I am eating a yogurt"
+      And I submit the publisher
 
       And I hover over the ".stream_element"
       And I prepare the deletion of the first post

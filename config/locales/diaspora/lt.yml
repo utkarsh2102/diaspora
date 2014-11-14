@@ -93,10 +93,6 @@ lt:
       aspect_not_empty: "Kategorijoje nėra kontaktų"
       remove: "šalinti"
     index:
-      cubbies:
-        explanation: "Cubbi.es yra pirmojo tinklapio Diaspora kuriama programa."
-        heading: "Prisijungti prie internetinės nuotraukų saugyklos Cubbi.es"
-        learn_more: "Sužinoti daugiau"
       diaspora_id:
         content_1: "Jūsų unikalus Diaspora ID:"
         content_2: "Jo pagalba Jus galima surasti Diaspora tinkle."
@@ -195,7 +191,6 @@ lt:
       no_contacts_message: "Peržiūrėti %{community_spotlight}"
       no_contacts_message_with_aspect: "Peržiūrėti %{community_spotlight} arba %{add_to_aspect_link}"
       only_sharing_with_me: "Tik tie, kurie su manimi dalijasi"
-      remove_person_from_aspect: "Ištrinti %{person_name} iš kategorijos \"%{aspect_name}\""
       start_a_conversation: "Pradėti pokalbį"
       title: "Kontaktai"
       your_contacts: "Jūsų kontaktai"
@@ -221,10 +216,7 @@ lt:
         other: "%{count} naujų pranešimų"
         zero: "Nėra naujų pranešimų"
     index:
-      create_a_new_message: "Sukurti naują pranešimą"
       inbox: "Gauta"
-      message_inbox: "Gauti pranešimai"
-      new_message: "Naujas pranešimas"
       no_conversation_selected: "Nepasirinktas joks pokalbis"
       no_messages: "Nėra pranešimų"
     new:
@@ -233,8 +225,6 @@ lt:
       sending: "Siunčiama..."
       subject: "Tema"
       to: ""
-    new_message:
-      fail: "Netinkamas pranešimas"
     show:
       delete: "Ištrinti ir užblokuoti pokalbį"
       reply: "Atrašyti"
@@ -428,10 +418,8 @@ lt:
   people:
     few: "%{count} people"
     helper:
-      people_on_pod_are_aware_of: " žmonės serveryje žino"
       results_for: " \"%{params}\" rezultatai"
     index:
-      couldnt_find_them_send_invite: "Negalite surasti? Nusiųskite pakvietimą!"
       no_one_found: "... ir nieko nepavyko rasti."
       no_results: "Labas! Nieko nerasta."
       results_for: "ieškoti rezultatų pagal"
@@ -613,11 +601,7 @@ lt:
   status_messages:
     helper:
       no_message_to_display: "Žinučių nėra."
-    too_long:
-      few: "Sutrumpinkite savo statuso pranešimą %{count} ženklais"
-      one: "Sutrumpinkite savo statuso pranešimą %{count} ženklu"
-      other: "Sutrumpinkite savo statuso pranešimą %{count} ženklų"
-      zero: "Sutrumpinkite savo statuso pranešimą %{count} ženklų"
+    too_long: "{\"few\"=>\"Sutrumpinkite savo statuso pranešimą %{count} ženklais\", \"one\"=>\"Sutrumpinkite savo statuso pranešimą %{count} ženklu\", \"other\"=>\"Sutrumpinkite savo statuso pranešimą %{count} ženklų\", \"zero\"=>\"Sutrumpinkite savo statuso pranešimą %{count} ženklų\"}"
   stream_helper:
     hide_comments: "Slėpti visus komentarus"
     show_comments:
@@ -640,9 +624,6 @@ lt:
       failure: "Failed to stop following: #%{name}"
       success: "Successfully stopped following: #%{name}"
   terms_and_conditions: "Nuostatos ir sąlygos"
-  tokens:
-    show:
-      connecting_is_simple: "Connecting your Diaspora account is as simple as filling out two fields on your Cubbi.es account page."
   undo: "Atšaukti"
   username: "Vartotojo vardas"
   users:

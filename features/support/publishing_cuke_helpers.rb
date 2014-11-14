@@ -1,8 +1,35 @@
 module PublishingCukeHelpers
+  def write_in_publisher(txt)
+    fill_in 'status_message_fake_text', with: txt
+  end
+
+  def append_to_publisher(txt, input_selector='#status_message_fake_text')
+    elem = find(input_selector, visible: false)
+    elem.native.send_keys(' ' + txt)
+
+    # make sure the other text field got the new contents
+    expect(find('#status_message_text', visible: false).value).to include(txt)
+  end
+
+  def upload_file_with_publisher(path)
+    page.execute_script(%q{$("input[name='file']").css("opacity", '1');})
+    with_scope("#publisher_textarea_wrapper") do
+      attach_file("file", Rails.root.join(path).to_s)
+      # wait for the image to be ready
+      page.assert_selector(".publisher_photo.loading", count: 0)
+    end
+  end
+
   def make_post(text)
-    fill_in 'status_message_fake_text', :with => text
-    find(".creation").click
-    page.should have_content text unless page.has_css? '.nsfw-shield'
+    write_in_publisher(text)
+    submit_publisher
+  end
+
+  def submit_publisher
+    txt = find('#publisher #status_message_fake_text').value
+    find('#publisher .creation').click
+    # wait for the content to appear
+    expect(page).to have_content(txt) unless page.has_css?('.nsfw-shield')
   end
 
   def click_and_post(text)
@@ -25,19 +52,19 @@ module PublishingCukeHelpers
   def expand_first_post
     within(".stream_element", match: :first) do
       find(".expander").click
-      has_css?(".expander").should be_false
+      expect(has_css?(".expander")).to be false
     end
   end
 
   def first_post_collapsed?
-    find(".stream_element .collapsible", match: :first).should have_css(".expander")
-    page.should have_css(".stream_element .collapsible.collapsed", match: :first)
+    expect(find(".stream_element .collapsible", match: :first)).to have_css(".expander")
+    expect(page).to have_css(".stream_element .collapsible.collapsed", match: :first)
   end
 
   def first_post_expanded?
-    page.should have_no_css(".stream_element .expander", match: :first)
-    page.should have_no_css(".stream_element .collapsible.collapsed", match: :first)
-    page.should have_css(".stream_element .collapsible.opened", match: :first)
+    expect(page).to have_no_css(".stream_element .expander", match: :first)
+    expect(page).to have_no_css(".stream_element .collapsible.collapsed", match: :first)
+    expect(page).to have_css(".stream_element .collapsible.opened", match: :first)
   end
 
   def first_post_text
@@ -57,6 +84,7 @@ module PublishingCukeHelpers
   end
 
   def find_post_by_text(text)
+    expect(page).to have_text(text)
     find(".stream_element", text: text)
   end
 
@@ -101,7 +129,7 @@ module PublishingCukeHelpers
 
   def assert_nsfw(text)
     post = find_post_by_text(text)
-    post.find(".nsfw-shield").should be_present
+    expect(post.find(".nsfw-shield")).to be_present
   end
 end
 

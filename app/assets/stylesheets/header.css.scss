@@ -3,11 +3,9 @@
   border-bottom: none;
 }
 
-body > #container { margin-top: 50px; } /* to avoid being hidden under the header in the SPV */
-
 body > header {
   @include box-shadow(0,1px,3px,rgba(0,0,0,0.9));
-  background: url('header-bg.png') rgb(40,35,35);
+  background: image-url('header-bg.png') rgb(40,35,35);
   z-index: 1001;
   padding: 6px 0;
   color: #CCC;
@@ -18,6 +16,10 @@ body > header {
   top: 0;
   left: 0;
   border-bottom: 1px solid #000;
+
+  > div > div.container {
+    height: 26px;
+  }
 
   .diaspora_header_logo {
     float: left;
@@ -95,12 +97,12 @@ body > header {
       }
     }
 
-    #notification_badge, #message_inbox_badge {
+    #notification_badge, #conversations_badge {
       float: left;
       padding: 0px 3px;
     }
 
-    #message_inbox_badge {
+    #conversations_badge {
       padding-top: 3px;
       margin-right: 0px;
       padding-right: 0px;
@@ -124,16 +126,7 @@ body > header {
       width: 380px;
       display: none;
       float: left;
-      color: #444;
-
-      .right {
-        font-size: smaller;
-        display: inline;
-        position: relative;
-        float: right;
-        top: 4px;
-        font-weight: bold;
-      }
+      color: $grey;
 
       a { color: $blue; }
       a.disabled {
@@ -142,39 +135,80 @@ body > header {
       }
 
       .header {
-        padding: 10px;
+        border-bottom: 1px solid $border-grey;
+        padding: 5px 10px 5px 5px;
 
         h4 {
           padding-bottom: 0;
           margin-bottom: 0;
+          font-size: 16px;
+          color: $black;
+        }
+
+        a {
+          font-size: 11px;
+          font-weight: bold;
         }
       }
-
-      .notification_element,
-      .header { border-bottom: 1px solid $border-grey; }
 
       .ajax_loader {
         text-align: center;
         padding: 15px;
       }
+      .notifications{
+        overflow: hidden;
+        position: relative;
+        max-height: 325px;
+      }
 
       .notification_element {
-        padding: 10px;
-        padding-left: 50px;
-        min-height: 30px;
+        border-bottom: 1px solid $border-grey;
+        padding: 5px;
+        min-height: 35px;
+        line-height: 18px;
 
-        &:hover { background-color: $highlight-white; }
-
-        .avatar {
-          height: 30px;
-          width: 30px;
+        > .avatar {
+          height: 35px;
+          width: 35px;
           float: left;
-          margin-left: -40px;
+        }
+
+        .notification_message {
+          margin-left: 40px;
+        }
+
+        .unread-toggle {
+          padding: 9px 9px;
+          position: relative;
+          .entypo {
+            cursor: pointer;
+            color: lighten($black,75%);
+            font-size: 17px;
+            line-height: 17px;
+          }
+          .tooltip {
+            position: fixed;
+          }
         }
 
         &.unread {
           background-color: $background-grey;
-          color: #000;
+          color: $black;
+          .unread-toggle {
+            .entypo { color: $black; }
+          }
+        }
+      }
+
+      .view_all {
+        background-color: $blue;
+        border-bottom: 1px solid $border-dark-grey;
+        text-align: center;
+        a {
+          display: block;
+          padding: 5px;
+          color: white;
+          font-size: 12px;
           font-weight: bold;
         }
       }
@@ -230,24 +264,39 @@ body > header {
     cursor: pointer;
     z-index: 10;
     display: inline;
+    visibility: hidden;
     top: -4px;
     float: right;
-    margin: -2px -5px 0px 0px;
-    padding: 5px 7px 5px 32px;
+    margin: -2px -3px 0px 0px;
+    padding: 0;
 
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
+    > li {
+      display: block;
+      border-left: 1px solid #333;
+      border-right: 1px solid #333;
+
+      &:first-child {
+        visibility: visible;
+      }
+
+      &:last-child {
+        border-bottom: 1px solid #333;
+      }
+    }
 
     &.active {
-      margin-top: -3px;
       @include dropdown-shadow;
       background-color: rgb(34,30,30);
-      border: 1px solid $border-dark-grey;
+      visibility: visible;
+
+      > li {
+        border-color: $border-dark-grey;
+      }
     }
   }
 
   .user-menu-item a {
-    padding: 4px;
+    padding: 4px 8px 4px 40px;
     height: 100%;
     color: $text-grey;
 
@@ -259,7 +308,7 @@ body > header {
   }
 
   .user-menu-trigger {
-    padding: 5px 0;
+    padding: 10px 25px 10px 40px;
 
     &:hover {
       color: $highlight-white;
@@ -268,7 +317,6 @@ body > header {
   }
 
   .user-name {
-    padding: 4px 15px 4px 4px;
 
     &:hover {
       background-color: transparent;
@@ -284,11 +332,11 @@ body > header {
   }
 
   .user-menu-avatar {
-    height: 22px;
-    width: 22px;
+    height: 25px;
+    width: 25px;
     position: absolute;
-    left: 7px;
-    top: 9px;
+    left: 8px;
+    top: 8px;
     display: block;
   }
 

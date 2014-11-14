@@ -1,21 +1,35 @@
+// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3-or-Later
 
-app.views.Hovercard = Backbone.View.extend({
-  el: '#hovercard_container',
+app.views.Hovercard = app.views.Base.extend({
+  templateName: 'hovercard',
+  id: 'hovercard_container',
+
+  events: {
+    'mouseleave': '_mouseleaveHandler'
+  },
 
   initialize: function() {
-    $('.hovercardable')
-      .live('mouseenter', _.bind(this._mouseenterHandler, this))
-      .live('mouseleave', _.bind(this._mouseleaveHandler, this));
+    this.render();
+
+    $(document)
+      .on('mouseenter', '.hovercardable', _.bind(this._mouseenterHandler, this))
+      .on('mouseleave', '.hovercardable', _.bind(this._mouseleaveHandler, this));
 
     this.show_me = false;
+    this.parent = null;  // current 'hovercarable' element that caused HC to appear
 
+    // cache some element references
     this.avatar = this.$('.avatar');
     this.dropdown = this.$('.dropdown_list');
     this.dropdown_container = this.$('#hovercard_dropdown_container');
     this.hashtags = this.$('.hashtags');
     this.person_link = this.$('a.person');
-    this.person_handle = this.$('p.handle');
+    this.person_handle = this.$('div.handle');
     this.active = true;
+  },
+
+  postRenderTemplate: function() {
+    this.$el.appendTo($('body'))
   },
 
   deactivate: function() {
@@ -23,11 +37,13 @@ app.views.Hovercard = Backbone.View.extend({
   },
 
   href: function() {
-    return this.$el.parent().attr('href');
+    return this.parent.attr('href');
   },
 
   _mouseenterHandler: function(event) {
-    if(this.active == false) { return false }
+    if( this.active == false ||
+        $.contains(this.el, event.target) ) { return false; }
+
     var el = $(event.target);
     if( !el.is('a') ) {
       el = el.parents('a');
@@ -44,7 +60,9 @@ app.views.Hovercard = Backbone.View.extend({
   },
 
   _mouseleaveHandler: function(event) {
-    if(this.active == false) { return false }
+    if( this.active == false ||
+        $.contains(this.el, event.relatedTarget) ) { return false; }
+
     this.show_me = false;
     if( this.$el.is(':visible') ) {
       this.$el.fadeOut('fast');
@@ -66,10 +84,10 @@ app.views.Hovercard = Backbone.View.extend({
     }
 
     hc.hide();
-    hc.prependTo(el);
+    this.parent = el;
     this._positionHovercard();
     this._populateHovercard();
-  }, 500),
+  }, 700),
 
   _populateHovercard: function() {
     var href = this.href();
@@ -102,17 +120,21 @@ app.views.Hovercard = Backbone.View.extend({
     })) );
 
     // set aspect dropdown
+    // TODO render me client side!!!
     var href = this.href();
-    href += "/aspect_membership_button"
+    href += "/aspect_membership_button";
+    if(gon.bootstrap == true){
+      href += "?bootstrap=true";
+    }
     $.get(href, function(response) {
       self.dropdown_container.html(response);
     });
+    var aspect_membership = new app.views.AspectMembership({el: self.dropdown_container});
   },
 
   _positionHovercard: function() {
-    var p = this.$el.parent();
-    var p_pos = p.position();
-    var p_height = p.height();
+    var p_pos = this.parent.offset();
+    var p_height = this.parent.height();
 
     this.$el.css({
       top: p_pos.top + p_height - 25,
@@ -120,3 +142,5 @@ app.views.Hovercard = Backbone.View.extend({
     });
   }
 });
+// @license-end
+
