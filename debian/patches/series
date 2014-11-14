@@ -3,7 +3,6 @@ remove-development-test-from-gemfile.patch
 remove-gemfile-lock.patch
 004-loosen-sidekiq-version.patch
 005-loosen-sinatra-version.patch
-loosen-mysql2-version.patch
 loosen-activerecord-import-version.patch
 loosen-carrierwave-version.patch
 loosen-fog-version.patch
