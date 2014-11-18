@@ -5,7 +5,7 @@ remove-gemfile-lock.patch
 005-loosen-sinatra-version.patch
 006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
-loosen-twitter-version.patch
+008-loosen-twitter-version.patch
 loosen-faraday-version.patch
 loosen-fraraday-middleware-version.patch
 loosen-typhoeus-version.patch
