@@ -6,7 +6,6 @@ remove-gemfile-lock.patch
 006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
 008-loosen-twitter-version.patch
-loosen-mobile-fu-version.patch
 loosen-bootstrap-sass.patch
 loosen-compass-rails-version.patch
 lower-sass-rails.patch
