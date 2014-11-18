@@ -3,7 +3,7 @@ remove-development-test-from-gemfile.patch
 remove-gemfile-lock.patch
 004-loosen-sidekiq-version.patch
 005-loosen-sinatra-version.patch
-loosen-messagebus-ruby-api-version.patch
+006-loosen-messagebus-ruby-api-version.patch
 loosen-redcarpet-version.patch
 loosen-roxml-version.patch
 loosen-twitter-version.patch
