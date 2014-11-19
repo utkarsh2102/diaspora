@@ -7,7 +7,6 @@ remove-gemfile-lock.patch
 007-loosen-roxml-version.patch
 008-loosen-twitter-version.patch
 009-loosen-bootstrap-sass.patch
-loosen-compass-rails-version.patch
 lower-sass-rails.patch
 loosen-uglifier-version.patch
 loosen-backbone-on-rails-version.patch
