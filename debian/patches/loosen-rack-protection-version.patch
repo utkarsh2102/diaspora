@@ -1,6 +1,8 @@
---- a/Gemfile
-+++ b/Gemfile
-@@ -150,7 +150,7 @@
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -170,7 +170,7 @@ group :production do # we don't install
  
    # Click-jacking protection
  
