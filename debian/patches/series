@@ -9,5 +9,4 @@ remove-gemfile-lock.patch
 009-loosen-bootstrap-sass.patch
 loosen-rack-protection-version.patch
 skip-foreman.patch
-loosen-rails-admin-version.patch
 loosen-omniauth-version.patch
