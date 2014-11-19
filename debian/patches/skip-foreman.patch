@@ -1,6 +1,8 @@
---- a/Gemfile
-+++ b/Gemfile
-@@ -154,7 +154,7 @@
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -174,7 +174,7 @@ group :production do # we don't install
  
    # Process management
  
