@@ -7,5 +7,5 @@ remove-gemfile-lock.patch
 007-loosen-roxml-version.patch
 008-loosen-twitter-version.patch
 009-loosen-bootstrap-sass.patch
-loosen-rack-protection-version.patch
+010-loosen-rack-protection-version.patch
 skip-foreman.patch
