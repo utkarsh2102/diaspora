@@ -8,4 +8,4 @@ remove-gemfile-lock.patch
 008-loosen-twitter-version.patch
 009-loosen-bootstrap-sass.patch
 010-loosen-rack-protection-version.patch
-skip-foreman.patch
+011-skip-foreman.patch
