@@ -1,0 +1,13 @@
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -161,7 +161,7 @@ group :production do # we don't install
+ 
+   # Administration
+ 
+-  gem 'rails_admin', '0.6.5'
++  gem 'rails_admin', '~> 0.6'
+ 
+   # Analytics
+ 
