@@ -11,3 +11,4 @@ remove-gemfile-lock.patch
 011-skip-foreman.patch
 012-loosen-rails-version.patch
 013-loosen-sass-rails-version.patch
+014-loosen-entypo-rails-version.patch
