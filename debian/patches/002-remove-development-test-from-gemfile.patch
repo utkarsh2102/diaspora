@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -186,47 +186,6 @@ group :production do # we don't install
+@@ -186,56 +186,3 @@ group :production do # we don't install
    gem 'asset_sync', '1.1.0', :require => false
  end
  
@@ -47,6 +47,15 @@ Index: diaspora/Gemfile
 -end
 -
 -
- group :development, :test do
-   # RSpec (unit tests, some integration tests)
-   gem 'rspec-rails',     '3.1.0'
+-group :development, :test do
+-  # RSpec (unit tests, some integration tests)
+-  gem 'rspec-rails',     '3.1.0'
+-
+-  # Cucumber (integration tests)
+-  gem 'cucumber-rails',     '1.4.2', :require => false
+-
+-  # Jasmine (client side application tests (JS))
+-  gem 'jasmine',              '2.0.3'
+-  gem 'jasmine-jquery-rails', '2.0.3'
+-  gem 'sinon-rails',	      '1.10.3'
+-end

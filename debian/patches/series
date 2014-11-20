@@ -1,5 +1,5 @@
 add-manual-requires-skip-bundler-setup.patch
-remove-development-test-from-gemfile.patch
+002-remove-development-test-from-gemfile.patch
 remove-gemfile-lock.patch
 004-loosen-sidekiq-version.patch
 005-loosen-sinatra-version.patch
