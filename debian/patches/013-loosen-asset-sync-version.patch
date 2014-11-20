@@ -7,6 +7,6 @@ Index: diaspora/Gemfile
    # Third party asset hosting
  
 -  gem 'asset_sync', '1.1.0', :require => false
-+  gem 'asset_sync', '~> 1.1', :require => false
++  gem 'asset_sync', '~> 1.0', :require => false
  end
  
