@@ -10,4 +10,3 @@ remove-gemfile-lock.patch
 010-loosen-rack-protection-version.patch
 011-skip-foreman.patch
 012-loosen-rails-version.patch
-013-loosen-asset-sync-version.patch
