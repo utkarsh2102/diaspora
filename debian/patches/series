@@ -9,3 +9,4 @@ remove-gemfile-lock.patch
 009-loosen-bootstrap-sass.patch
 010-loosen-rack-protection-version.patch
 011-skip-foreman.patch
+012-loosen-rails-version.patch
