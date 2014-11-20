@@ -14,3 +14,4 @@ remove-gemfile-lock.patch
 014-loosen-entypo-rails-version.patch
 015-loosen-nokogiri-version.patch
 016-loosen-oembed-version.patch
+017-loosen-will-paginate-version.patch
