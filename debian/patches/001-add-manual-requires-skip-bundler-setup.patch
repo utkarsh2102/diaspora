@@ -59,8 +59,8 @@ Index: diaspora/config/boot.rb
 +
 +# CSS
 +
-+require 'bootstrap-sass'
 +require 'compass-rails'
++require 'bootstrap-sass'
 +require 'sass-rails'
 +
 +
