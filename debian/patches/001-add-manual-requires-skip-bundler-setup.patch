@@ -121,7 +121,7 @@ Index: diaspora/config/boot.rb
 +require 'redcarpet'
 +require 'twitter-text'
 +require 'roxml'
-+require 'ruby-oembed'
++require 'oembed'
 +require 'opengraph_parser'
 +
 +# Services
