@@ -17,3 +17,4 @@ remove-gemfile-lock.patch
 017-loosen-will-paginate-version.patch
 018-loosen-rails-timeago.patch
 019-loosen-rails-admin.patch
+020-disable-twitter-text.patch
