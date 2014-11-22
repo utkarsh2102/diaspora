@@ -119,7 +119,7 @@ Index: diaspora/config/boot.rb
 +
 +require 'nokogiri'
 +require 'redcarpet'
-+require 'twitter-text'
++#require 'twitter-text'
 +require 'roxml'
 +require 'oembed'
 +require 'opengraph_parser'
