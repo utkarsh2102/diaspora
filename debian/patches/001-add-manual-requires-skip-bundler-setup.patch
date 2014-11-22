@@ -2,7 +2,7 @@ Index: diaspora/config/boot.rb
 ===================================================================
 --- diaspora.orig/config/boot.rb
 +++ diaspora/config/boot.rb
-@@ -1,9 +1,148 @@
+@@ -1,9 +1,163 @@
 +#require 'rubygems'
 +
  # Set up gems listed in the Gemfile.
@@ -29,15 +29,25 @@ Index: diaspora/config/boot.rb
 +# Authentication
 +
 +require 'devise'
++require 'devise_lastseenable'
 +
 +# Captcha
 +
-+require 'simple_captcha'
++require 'simple_captcha2'
 +
 +# Background processing
 +
 +require 'sidekiq'
 +require 'sinatra'
++
++# Scheduled processing
++
++require 'sidetiq'
++
++# Compression
++
++require 'uglifier'
++
 +
 +# Configuration
 +
@@ -47,10 +57,16 @@ Index: diaspora/config/boot.rb
 +
 +require 'rack/cors'
 +
++# CSS
++
++require 'bootstrap-sass'
++require 'compass-rails'
++require 'sass-rails'
++
++
 +# Database
 +
-+
-+require 'mysql2'
++require 'pg'
 +
 +require 'activerecord-import'
 +require 'foreigner'
@@ -61,6 +77,32 @@ Index: diaspora/config/boot.rb
 +require 'fog'
 +require 'mini_magick'
 +require 'remotipart'
++
++# GUID generation
++
++require 'uuid'
++
++# Icons
++
++require 'entypo-rails'
++
++# JavaScript
++
++require 'backbone-on-rails'
++require 'handlebars_assets'
++require 'jquery-rails'
++require 'rails-assets-jquery' # Should be kept in sync with jquery-rails
++require 'js_image_paths'
++require 'js-routes'
++require 'rails-assets-punycode'
++
++# jQuery plugins
++
++require 'rails-assets-jeresig--jquery.hotkeys'
++require 'rails-assets-jquery-idletimer'
++require 'rails-assets-jquery-placeholder'
++require 'rails-assets-jquery-textchange'
++require 'rails-assets-perfect-scrollbar'
 +
 +# Localization
 +
@@ -76,16 +118,11 @@ Index: diaspora/config/boot.rb
 +# Parsing
 +
 +require 'nokogiri'
-+require 'rails_autolink'
 +require 'redcarpet'
++require 'twitter-text'
 +require 'roxml'
-+#require 'ruby-oembed'
++require 'ruby-oembed'
 +require 'opengraph_parser'
-+
-+
-+# Please remove when migrating to Rails 4
-+require 'strong_parameters'
-+
 +
 +# Services
 +
@@ -109,37 +146,15 @@ Index: diaspora/config/boot.rb
 +
 +# Views
 +
-+require 'client_side_validations'
 +require 'gon'
 +require 'haml'
 +require 'mobile-fu'
 +require 'will_paginate'
++require 'rails-timeago'
 +
 +# Workarounds
 +# https://github.com/rubyzip/rubyzip#important-note
 +require 'zip/zip'
-+
-+### GROUPS ####
-+
-+
-+  # Icons
-+require 'entypo-rails'
-+
-+  # CSS
-+
-+ # require 'bootstrap-sass'
-+ # require 'compass-rails'
-+ # require 'sass-rails'
-+
-+  # Compression
-+
-+  require 'uglifier'
-+
-+  # JavaScript
-+
-+  require 'backbone-on-rails'
-+  require 'handlebars_assets'
-+  require 'jquery-rails'
 +
 +  # Analytics
 +
