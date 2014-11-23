@@ -12,7 +12,7 @@ postgres: &postgres
   adapter: postgresql
   host: /var/run/postgresql
   port: 5432
-  username: postgres
+  username: diaspora
   password:
   encoding: unicode
 
