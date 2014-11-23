@@ -13,6 +13,7 @@ XS-Ruby-Versions: all
 Package: diaspora
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
+Pre-Depends: postgresql-client, dbconfig-common, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-rails (>= 4.1~),
  ruby-actionpack-action-caching,
@@ -94,7 +95,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-rack-ssl,
  ruby-asset-sync,
  imagemagick,
- curl
+ curl,
+ postgresql,
+ sudo
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
