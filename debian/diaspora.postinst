@@ -29,7 +29,7 @@ set -e
 . /usr/share/debconf/confmodule
 . /usr/share/dbconfig-common/dpkg/postinst.pgsql
 
-dbc_dbname="diaspora"
+dbc_dbname="diaspora_production"
 dbc_dbuser="diaspora"
 
 dbc_go diaspora $@
