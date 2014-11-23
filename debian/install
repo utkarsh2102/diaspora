@@ -23,3 +23,4 @@ spec usr/share/diaspora
 vendor usr/share/diaspora
 debian/adduser.sh usr/lib/diaspora/scripts
 debian/grantpriv.sh usr/lib/diaspora/scripts
+debian/database.yml usr/share/diaspora/config
