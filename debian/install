@@ -21,3 +21,5 @@ redis-integration2.conf usr/share/diaspora
 script usr/share/diaspora
 spec usr/share/diaspora
 vendor usr/share/diaspora
+debian/adduser.sh usr/lib/diaspora/scripts
+debian/grantpriv.sh usr/lib/diaspora/scripts
