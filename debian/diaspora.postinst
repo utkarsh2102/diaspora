@@ -1,0 +1,60 @@
+#! /bin/sh
+# postinst script for gnukhata-core-engine
+# copied from postinst script for hplip
+# $Id: hplip.postinst,v 1.1 2005/10/15 21:39:04 hmh Exp $
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.pgsql
+
+dbc_dbname="diaspora"
+dbc_dbuser="diaspora"
+
+dbc_go diaspora $@
+
+case "$1" in
+    configure)
+
+	/usr/lib/diaspora/scripts/adduser.sh
+	/usr/lib/diaspora/scripts/grantpriv.sh
+	chown -R diaspora: /usr/share/diaspora
+	cd /usr/share/diaspora
+	sudo -u diaspora bundle install --local
+
+   ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+db_stop
+
+
+exit 0
