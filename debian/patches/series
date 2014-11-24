@@ -1,4 +1,3 @@
-001-add-manual-requires-skip-bundler-setup.patch
 002-remove-development-test-from-gemfile.patch
 remove-gemfile-lock.patch
 004-loosen-sidekiq-version.patch
