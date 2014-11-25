@@ -100,7 +100,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  postgresql,
  sudo,
  ruby-rspec,
- netstat
+ net-tools
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
