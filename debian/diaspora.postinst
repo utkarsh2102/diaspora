@@ -43,6 +43,7 @@ case "$1" in
 	cd /usr/share/diaspora
 	sudo -u diaspora bundle install --local
 	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake db:create db:schema:load
+	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake assets:precompile
 
    ;;
 
