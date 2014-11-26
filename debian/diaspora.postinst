@@ -41,6 +41,11 @@ case "$1" in
 	/usr/lib/diaspora/scripts/grantpriv.sh
 	chown -R diaspora: /usr/share/diaspora
 	cd /usr/share/diaspora
+# These gems need more work before they can be apt-get
+	gem install handlebars_assets rails-timeago 
+	gem install -v=0.62.0 foreman 
+	gem install -v=3.4.1 devise
+	gem install --source https://rails-assets.org rails-assets-jquery-idletimer
 	sudo -u diaspora bundle install --local
 	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake db:create db:schema:load
 	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake assets:precompile
