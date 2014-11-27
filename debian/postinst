@@ -43,10 +43,26 @@ case "$1" in
 	cd /usr/share/diaspora
 	echo "Installing gems with rubygems (their debian packages have bugs)..."
 # These gems need more work before they can be apt-get
-	gem install handlebars_assets rails-timeago 
-	gem install -v=0.62.0 foreman 
-	gem install -v=3.4.1 devise
-	gem install --source https://rails-assets.org rails-assets-jquery-idletimer
+	if gem list handlebars_asstes | grep handlebars_assets
+		then gem install handlebars_assets
+	fi
+	
+	if gem list rails-timeago | grep rails-timeago
+		then gem install rails-timeago
+	fi
+	
+	if gem list foreman | grep foreman
+		then gem install -v=0.62.0 foreman
+	fi
+
+	if gem list devise | grep devise
+		then gem install -v=3.4.1 devise
+	fi
+	
+	if gem list rails-assets-jquery-idletimer | grep rails-assets-jquery-idletimer
+		then gem install --source https://rails-assets.org rails-assets-jquery-idletimer
+	fi
+
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora bundle install --local
 	echo "Initializing database..."
