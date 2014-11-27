@@ -19,3 +19,14 @@ fi
 # What is your pod address?
 db_input high diaspora/url || true
 db_go
+
+# Configure pod address.
+db_get diaspora/url
+if ! grep ENVIRONMENT_URL /etc/diaspora.conf >/dev/null
+	then echo export ENVIRONMENT_URL=$RET >> /etc/diaspora.conf
+fi
+
+if [ "$RET" = "false" ]; then
+    db_go
+fi
+
