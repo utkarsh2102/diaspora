@@ -47,19 +47,19 @@ case "$1" in
 		then gem install handlebars_assets
 	fi
 	
-	if gem list rails-timeago | grep rails-timeago
+	if ! gem list rails-timeago | grep rails-timeago
 		then gem install rails-timeago
 	fi
 	
-	if gem list foreman | grep foreman
+	if ! gem list foreman | grep foreman
 		then gem install -v=0.62.0 foreman
 	fi
 
-	if gem list devise | grep devise
+	if ! gem list devise | grep devise
 		then gem install -v=3.4.1 devise
 	fi
 	
-	if gem list rails-assets-jquery-idletimer | grep rails-assets-jquery-idletimer
+	if ! gem list rails-assets-jquery-idletimer | grep rails-assets-jquery-idletimer
 		then gem install --source https://rails-assets.org rails-assets-jquery-idletimer
 	fi
 
