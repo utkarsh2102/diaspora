@@ -93,6 +93,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  imagemagick,
  curl,
  postgresql,
+ redis-server,
  sudo,
  ruby-rspec,
  net-tools
