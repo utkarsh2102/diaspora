@@ -41,15 +41,23 @@ case "$1" in
 	/usr/lib/diaspora/scripts/grantpriv.sh
 	chown -R diaspora: /usr/share/diaspora
 	cd /usr/share/diaspora
+	echo "Installing gems with rubygems (their debian packages have bugs)..."
 # These gems need more work before they can be apt-get
 	gem install handlebars_assets rails-timeago 
 	gem install -v=0.62.0 foreman 
 	gem install -v=3.4.1 devise
 	gem install --source https://rails-assets.org rails-assets-jquery-idletimer
+	echo "Verifying we have all required libraries..."
 	sudo -u diaspora bundle install --local
+	echo "Initializing database..."
 	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake db:create db:schema:load
+	echo "Precompiling assets..."
 	sudo -u diaspora RAILS_ENV=production DB=postgres bundle exec rake assets:precompile
-
+	echo "Now start the service by running"
+	echo "# cd /usr/share/diaspora"
+	echo "# touch public/source.tar.gz"
+	echo "# sudo -u diaspora RAILS_ENV=production DB=postgres ./script/server"
+	echo "and visit your pod at http://localhost:3000"
    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
