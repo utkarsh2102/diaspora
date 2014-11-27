@@ -122,7 +122,7 @@ configuration: ## Section
       ## Serve static assets via the appserver (default=false)
       ## This is highly discouraged for production use. Let your reverse
       ## proxy/webserver do it by serving the files under public/ directly.
-      #serve: false
+      serve: true
 
       ## Upload your assets to S3 (default=false)
       #upload: false
