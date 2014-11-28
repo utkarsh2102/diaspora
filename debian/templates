@@ -1,6 +1,6 @@
 Template: diaspora/url
 Type: string
-Default: http://localhost:3000/
+Default: localhost
 Description: Set hostname for your diaspora pod
  Set the hostname of the machine you're running Diaspora on, as seen
  from the internet. This should be the domain name you want to use to
