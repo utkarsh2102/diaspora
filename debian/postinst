@@ -76,6 +76,7 @@ case "$1" in
 	
 	# source diaspora variables	
 	. /etc/diaspora.conf
+	export ENVIRONMENT_URL=http://${SERVERNAME}
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora -E bundle install --local
 	echo "Initializing database..."
