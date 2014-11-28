@@ -22,7 +22,7 @@ server {
             access_log /var/log/diaspora/access.log;
             error_log /var/log/diaspora/error.log;
 
-            root   DIASPORA_PATH_FIXME/public/;
+            root   DIASPORA_ROOT_FIXME/public/;
             index  index2.html;
 
             if ($http_user_agent ~* Googlebot) {
