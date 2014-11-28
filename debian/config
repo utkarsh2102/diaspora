@@ -22,7 +22,7 @@ db_go
 
 # Configure pod address.
 db_get diaspora/url
-if ! [[ -f /etc/diaspora.conf ]]
+if ! test -f /etc/diaspora.conf
 	then 
 		echo export SERVERNAME=$RET >> /etc/diaspora.conf
 		sed -e "s/SERVERNAME_FIXME/$RET/" -e "s/DIASPORA_SSL_PATH_FIXME/\\/etc\\/diaspora/" -e "s/DIASPORA_ROOT_FIXME/\\/usr\\/share\\/diaspora/" /usr/share/doc/diaspora/nginx.conf.example >/etc/nginx/sites-available/$RET
