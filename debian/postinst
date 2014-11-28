@@ -77,7 +77,7 @@ case "$1" in
 	
 	# source diaspora variables	
 	. /etc/diaspora.conf
-	export ENVIRONMENT_URL=http://${SERVERNAME}
+	export ENVIRONMENT_URL=https://${SERVERNAME}
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora -E bundle install --local
 	echo "Initializing database..."
@@ -87,6 +87,8 @@ case "$1" in
 	sudo -u diaspora  touch public/source.tar.gz
 	echo "Starting diaspora service..."
 	sudo -u diaspora -E nohup ./script/server &
+	echo "Copy $SERVERNAME-bundle.pem and $SERVERNAME.key to /etc/diaspora/ssl"
+	echo "And reload nginx, run # systemctl reload nginx.service"
 	echo "visit your pod at $ENVIRONMENT_URL"
 	echo "To stop diaspora, run # killall -9 unicorn_rails foreman sidekiq"
 	echo "To see the service status, run # tail -f /usr/share/diaspora/nohup.out"
