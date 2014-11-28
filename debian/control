@@ -95,7 +95,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  redis-server,
  sudo,
  ruby-rspec,
- net-tools
+ net-tools,
+ nginx
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
