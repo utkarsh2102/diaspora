@@ -9,7 +9,7 @@ server {
 }
 
 server {
-            listen   [::]:443;
+            listen   	443;
             server_name SERVERNAME_FIXME;
 
             proxy_set_header   X-Real-IP  $remote_addr;
