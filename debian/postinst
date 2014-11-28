@@ -39,6 +39,7 @@ case "$1" in
 
 	/usr/lib/diaspora/scripts/adduser.sh
 	/usr/lib/diaspora/scripts/grantpriv.sh
+	mkdir /var/log/diaspora
 	chown -R diaspora: /usr/share/diaspora
 	cd /usr/share/diaspora
 	echo "Installing gems with rubygems (their debian packages have bugs)..."
