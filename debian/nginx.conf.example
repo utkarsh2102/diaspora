@@ -1,4 +1,4 @@
-upstream domain1 {
+upstream domain11 {
         server 127.0.0.1:3000;
 }
 
@@ -58,7 +58,7 @@ server {
                           }
 
                           if (!-f $request_filename) {
-                                           proxy_pass http://domain1;
+                                           proxy_pass http://domain11;
 
                                            break;
                           }
