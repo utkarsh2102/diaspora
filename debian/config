@@ -25,7 +25,7 @@ db_get diaspora/url
 if ! grep ENVIRONMENT_URL /etc/diaspora.conf >/dev/null
 	then 
 		echo export SERVERNAME=$RET >> /etc/diaspora.conf
-		sed -e "s/SERVERNAME_FIXME/$RET/" -e "s/DIASPORA_SSL_PATH_FIXME/\\/etc\\/diaspora/" -e "s/DIASPORA_ROOT_FIXME/\\/usr\\/share\\/diaspora/" /usr/share/doc/diaspora/nginx.conf.example
+		sed -e "s/SERVERNAME_FIXME/$RET/" -e "s/DIASPORA_SSL_PATH_FIXME/\\/etc\\/diaspora/" -e "s/DIASPORA_ROOT_FIXME/\\/usr\\/share\\/diaspora/" /usr/share/doc/diaspora/nginx.conf.example >/etc/nginx/sites-available/$RET
 		ln -s /etc/nginx/sites-available/$RET /etc/nginx/sites-enabled/
 fi
 
