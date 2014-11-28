@@ -3,9 +3,10 @@ Type: string
 Default: http://localhost:3000/
 Description: Set hostname for your diaspora pod
  Set the hostname of the machine you're running Diaspora on, as seen
- from the internet. This should be the URL you want to use to
+ from the internet. This should be the domain name you want to use to
  access the pod. So if you plan to use a reverse proxy, it should be
- the URL the proxy listens on. DO NOT CHANGE THIS AFTER INITIAL SETUP!
- However changing http to https is okay and has no consequences.
- If you do change the URL, you will have to start again as the URL
+ the hostname the proxy listens on. DO NOT CHANGE THIS AFTER INITIAL SETUP!
+ If you do change the hostname, you will have to start again as the hostname
  will be hardcoded into the database.
+ .
+ Examples: example.com, pod.example.com etc
