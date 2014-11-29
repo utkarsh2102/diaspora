@@ -2,21 +2,22 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -186,56 +186,3 @@ group :production do # we don't install
+@@ -197,57 +197,3 @@ group :production do # we don't install
+ 
    gem 'asset_sync', '1.1.0', :require => false
  end
- 
+-
 -group :development do
 -  # Automatic test runs
 -  gem 'guard-cucumber', '1.5.1'
 -  gem 'guard-rspec',    '4.3.1'
--  gem 'guard',          '2.7.3', :require => false
+-  gem 'guard',          '2.8.2', :require => false
 -  gem 'rb-fsevent',     '0.9.4', :require => false
 -  gem 'rb-inotify',     '0.9.5', :require => false
 -
 -  # Preloading environment
 -
--  gem 'guard-spork', '1.5.1'
+-  gem 'guard-spork', '2.0.1'
 -  gem 'spork',       '1.0.0rc4'
 -
 -  # Debugging
@@ -55,7 +56,7 @@ Index: diaspora/Gemfile
 -  gem 'cucumber-rails',     '1.4.2', :require => false
 -
 -  # Jasmine (client side application tests (JS))
--  gem 'jasmine',              '2.0.3'
+-  gem 'jasmine',              '2.1.0'
 -  gem 'jasmine-jquery-rails', '2.0.3'
 -  gem 'sinon-rails',	      '1.10.3'
 -end
