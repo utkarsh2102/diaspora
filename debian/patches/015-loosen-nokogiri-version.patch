@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -109,7 +109,7 @@ gem 'messagebus_ruby_api', '>= 1.0.3'
+@@ -110,7 +110,7 @@ gem 'messagebus_ruby_api', '>= 1.0.3'
  
  # Parsing
  

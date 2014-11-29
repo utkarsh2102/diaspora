@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -76,7 +76,7 @@ gem 'uuid', '2.3.7'
+@@ -77,7 +77,7 @@ gem 'uuid', '2.3.7'
  
  # Icons
  

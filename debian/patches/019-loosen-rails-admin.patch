@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -161,7 +161,7 @@ group :production do # we don't install
+@@ -173,7 +173,7 @@ group :production do # we don't install
  
    # Administration
  
