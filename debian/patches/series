@@ -1,5 +1,5 @@
 002-remove-development-test-from-gemfile.patch
-002-remove-gemfile-lock.patch
+003-remove-gemfile-lock.patch
 004-lower-sidekiq-version.patch
 006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
