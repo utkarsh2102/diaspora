@@ -32,6 +32,9 @@ series and run our comphrensive testsuite against it.
 ## Change in defaults.yml
 The default for including jQuery from a CDN has changed. If you want to continue to include it from a CDN, please explicitly set the `jquery_cdn` setting to `true` in diaspora.yml.
 
+## Experimental chat feature
+This release adds experimental integration with XMPP for realtime chat. Please see  [our wiki](https://wiki.diasporafoundation.org/Vines) for further informations.
+
 ## Change in statistics.json schema
 The way services are shown in the `statistics.json` route is changing. The keys relating to showing whether services are enabled or not are moving to their own container as `"services": {....}`, instead of having them all in the root level of the json.
 
@@ -70,6 +73,8 @@ This is disabled by default since it requires the installation of additional pac
 * Hidden overflow for long names on tag pages [#5279](https://github.com/diaspora/diaspora/pull/5279)
 * Always reshare absolute root of a post [#5276](https://github.com/diaspora/diaspora/pull/5276)
 * Convert remaining SASS stylesheets to SCSS [#5342](https://github.com/diaspora/diaspora/pull/5342)
+* Update rack-protection [#5403](https://github.com/diaspora/diaspora/pull/5403)
+* Cleanup diaspora.yml [#5426](https://github.com/diaspora/diaspora/pull/5426)
 
 ## Bug fixes
 * orca cannot see 'Add Contact' button [#5158](https://github.com/diaspora/diaspora/pull/5158)
@@ -88,6 +93,9 @@ This is disabled by default since it requires the installation of additional pac
 * More robust URL parsing for oEmbed and OpenGraph [#5347](https://github.com/diaspora/diaspora/pull/5347)
 * Fix Publisher doesn't expand while uloading images [#3098](https://github.com/diaspora/diaspora/issues/3098)
 * Drop unneeded and too open crossdomain.xml
+* Fix hidden aspect dropdown on getting started page [#5407](https://github.com/diaspora/diaspora/pulls/5407)
+* Fix a few issues on Bootstrap pages [#5401](https://github.com/diaspora/diaspora/pull/5401)
+* Improve handling of the `more` link on mobile stream pages [#5400](https://github.com/diaspora/diaspora/pull/5400)
 
 ## Features
 * Don't pull jQuery from a CDN by default [#5105](https://github.com/diaspora/diaspora/pull/5105)
@@ -105,6 +113,9 @@ This is disabled by default since it requires the installation of additional pac
 * Ask for confirmation when leaving a submittable publisher [#5309](https://github.com/diaspora/diaspora/pull/5309)
 * Allow page-specific styling via individual CSS classes [#5282](https://github.com/diaspora/diaspora/pull/5282)
 * Change diaspora logo in the header on hover [#5355](https://github.com/diaspora/diaspora/pull/5355)
+* Display diaspora handle in search results [#5419](https://github.com/diaspora/diaspora/pull/5419)
+* Show a message on the ignored users page when there are none [#5434](https://github.com/diaspora/diaspora/pull/5434)
+* Truncate too long OpenGraph descriptions [#5387](https://github.com/diaspora/diaspora/pull/5387)
 
 # 0.4.1.2
 

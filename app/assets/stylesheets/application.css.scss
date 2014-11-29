@@ -25,7 +25,7 @@
 @import "new_styles/_forms";
 @import "tag";
 @import "photo";
-
+@import "chat";
 
 /* ====== media ====== */
 .media {
@@ -64,6 +64,10 @@ body {
     family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     size: 13px;
   };
+}
+
+header {
+  line-height: 20px;
 }
 
 a {
