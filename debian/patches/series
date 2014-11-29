@@ -15,3 +15,4 @@
 019-loosen-rails-admin.patch
 020-disable-twitter-text.patch
 021-loosen-omniauth-facebook-version.patch
+022-lower-fog-version.patch
