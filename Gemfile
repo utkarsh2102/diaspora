@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-gem 'rails', '4.1.7'
+gem 'rails', '4.1.8'
 
 # Legacy Rails features, remove me!
 
@@ -22,6 +22,7 @@ gem 'json',        '1.8.1'
 
 gem 'devise', '3.4.1'
 gem 'devise_lastseenable', '0.0.4'
+gem 'devise-token_authenticatable', '~> 0.3.0'
 
 # Captcha
 
@@ -29,8 +30,8 @@ gem 'simple_captcha2', '0.3.2', :require => 'simple_captcha'
 
 # Background processing
 
-gem 'sidekiq', '3.2.5'
-gem 'sinatra', '1.3.3'
+gem 'sidekiq', '3.3.0'
+gem 'sinatra', '1.4.5'
 
 # Scheduled processing
 
@@ -58,7 +59,7 @@ gem 'sass-rails',     '4.0.4'
 
 ENV['DB'] ||= 'mysql'
 
-gem 'mysql2', '0.3.16' if ENV['DB'] == 'all' || ENV['DB'] == 'mysql'
+gem 'mysql2', '0.3.17' if ENV['DB'] == 'all' || ENV['DB'] == 'mysql'
 gem 'pg',     '0.17.1' if ENV['DB'] == 'all' || ENV['DB'] == 'postgres'
 
 gem 'activerecord-import', '0.6.0'
@@ -67,8 +68,8 @@ gem 'foreigner',           '1.6.1'
 # File uploading
 
 gem 'carrierwave', '0.10.0'
-gem 'fog',         '1.24.0'
-gem 'mini_magick', '3.8.1'
+gem 'fog',         '1.25.0'
+gem 'mini_magick', '4.0.1'
 gem 'remotipart',  '1.2.1'
 
 # GUID generation
@@ -126,6 +127,10 @@ gem 'omniauth-twitter',  '1.0.1'
 gem 'twitter',           '4.8.1'
 gem 'omniauth-wordpress','0.2.1'
 
+# XMPP chat dependencies
+gem 'diaspora-vines',             '~> 0.1.25'
+gem 'rails-assets-diaspora_jsxc', '~> 0.0.9'
+
 # Tags
 
 gem 'acts-as-taggable-on', '3.4.2'
@@ -149,6 +154,13 @@ gem 'rails-timeago',           '2.11.0'
 # https://github.com/rubyzip/rubyzip#important-note
 gem 'zip-zip'
 
+# Prevent occasions where minitest is not bundled in
+# packaged versions of ruby. See following issues/prs:
+# https://github.com/gitlabhq/gitlabhq/issues/3826
+# https://github.com/gitlabhq/gitlabhq/pull/3852
+# https://github.com/discourse/discourse/pull/238
+gem 'minitest'
+
 
 # Windows and OSX have an execjs compatible runtime built-in, Linux users should
 # install Node.js or use 'therubyracer'.
@@ -170,7 +182,7 @@ group :production do # we don't install these on travis to speed up test runs
 
   # Click-jacking protection
 
-  gem 'rack-protection', '1.2'
+  gem 'rack-protection', '1.5.2'
 
   # Process management
 
@@ -190,13 +202,13 @@ group :development do
   # Automatic test runs
   gem 'guard-cucumber', '1.5.1'
   gem 'guard-rspec',    '4.3.1'
-  gem 'guard',          '2.7.3', :require => false
+  gem 'guard',          '2.8.2', :require => false
   gem 'rb-fsevent',     '0.9.4', :require => false
   gem 'rb-inotify',     '0.9.5', :require => false
 
   # Preloading environment
 
-  gem 'guard-spork', '1.5.1'
+  gem 'guard-spork', '2.0.1'
   gem 'spork',       '1.0.0rc4'
 
   # Debugging
@@ -235,7 +247,7 @@ group :development, :test do
   gem 'cucumber-rails',     '1.4.2', :require => false
 
   # Jasmine (client side application tests (JS))
-  gem 'jasmine',              '2.0.3'
+  gem 'jasmine',              '2.1.0'
   gem 'jasmine-jquery-rails', '2.0.3'
   gem 'sinon-rails',	      '1.10.3'
 end

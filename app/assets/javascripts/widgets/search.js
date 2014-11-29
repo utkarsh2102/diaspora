@@ -10,6 +10,7 @@
         searchFormAction: searchForm.attr("action"),
         searchInput: searchForm.find("input[type='search']"),
         searchInputName: searchForm.find("input[type='search']").attr("name"),
+        searchInputHandle: searchForm.find("input[type='search']").attr("handle"),
         options: {
           cacheLength : 15,
           delay : 800,
@@ -33,11 +34,15 @@
       if (typeof row.search !== "undefined") {
         return Diaspora.I18n.t("search_for", row);
       } else {
-				if (row.avatar) {        
-					return "<img src='"+ row.avatar +"' class='avatar'/>" + row.name;
-				} else {
-					return row.name;				
-				}
+        var item = "";
+        if (row.avatar) {
+          item += "<img src='"+ row.avatar +"' class='avatar'/>";
+        }
+        item += row.name;
+        if (row.handle) {
+          item += "<div class='search_handle'>" + row.handle + "</div>";
+        }
+        return item;
       }
     };
 
