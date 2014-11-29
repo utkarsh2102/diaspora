@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -112,7 +112,7 @@ gem 'messagebus_ruby_api', '>= 1.0.3'
+@@ -113,7 +113,7 @@ gem 'messagebus_ruby_api', '>= 1.0.3'
  gem 'nokogiri',         '1.6.4.1'
  gem 'redcarpet',        '3.2.0'
  gem 'twitter-text',     '1.10.0'

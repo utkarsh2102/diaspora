@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -50,7 +50,7 @@ gem 'rack-cors', '0.2.9', :require => 'r
+@@ -51,7 +51,7 @@ gem 'rack-cors', '0.2.9', :require => 'r
  
  # CSS
  
