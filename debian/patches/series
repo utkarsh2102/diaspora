@@ -5,7 +5,6 @@ remove-gemfile-lock.patch
 007-loosen-roxml-version.patch
 008-loosen-twitter-version.patch
 009-loosen-bootstrap-sass.patch
-010-loosen-rack-protection-version.patch
 012-loosen-rails-version.patch
 013-loosen-sass-rails-version.patch
 014-loosen-entypo-rails-version.patch
