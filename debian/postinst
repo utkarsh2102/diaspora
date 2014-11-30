@@ -86,7 +86,7 @@ case "$1" in
 	sudo -u diaspora -E bundle exec rake assets:precompile
 	sudo -u diaspora  touch public/source.tar.gz
 	echo "Starting diaspora service..."
-	sudo -u diaspora -E nohup ./script/server &
+	sudo -u diaspora -E -i nohup ./script/server &
 	echo "Copy $SERVERNAME-bundle.pem and $SERVERNAME.key to /etc/diaspora/ssl"
 	echo "And reload nginx, run # /etc/init.d  nginx reload"
 	echo "visit your pod at $ENVIRONMENT_URL"
