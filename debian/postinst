@@ -60,7 +60,7 @@ case "$1" in
 		then gem install -v=0.62.0 foreman
 	fi
 
-	if ! gem list devise | grep devise
+	if ! gem list ^devise$ | grep devise
 		then gem install -v=3.4.1 devise
 	fi
 	
