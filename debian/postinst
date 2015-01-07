@@ -37,8 +37,8 @@ dbc_go diaspora $@
 case "$1" in
     configure)
 
-	/usr/lib/diaspora/scripts/adduser.sh
-	/usr/lib/diaspora/scripts/grantpriv.sh
+	/usr/lib/diaspora-common/scripts/adduser.sh
+	/usr/lib/diaspora-common/scripts/grantpriv.sh
 	mkdir -p /var/log/diaspora
 	chown -R diaspora: /usr/share/diaspora
 	cd /usr/share/diaspora
