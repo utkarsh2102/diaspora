@@ -85,7 +85,7 @@ case "$1" in
 	echo "Starting diaspora service..."
 	sudo -u diaspora -E -i nohup ./script/server &
 	echo "Copy $SERVERNAME-bundle.pem and $SERVERNAME.key to /etc/diaspora/ssl"
-	echo "And reload nginx, run # /etc/init.d  nginx reload"
+	echo "And reload nginx, run # /etc/init.d/nginx reload"
 	echo "visit your pod at $ENVIRONMENT_URL"
 	echo "To stop diaspora, run # killall -9 unicorn_rails foreman sidekiq"
 	echo "To see the service status, run # tail -f /usr/share/diaspora/nohup.out"
