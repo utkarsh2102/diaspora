@@ -64,9 +64,6 @@ case "$1" in
 		then gem install -v=3.4.1 devise
 	fi
 	
-	if ! gem list rails-assets-jquery-idletimer | grep rails-assets-jquery-idletimer
-		then gem install --source https://rails-assets.org rails-assets-jquery-idletimer
-	fi
 	if ! grep RAILS_ENV /etc/diaspora.conf
 		then echo export RAILS_ENV=production >> /etc/diaspora.conf
 	fi
