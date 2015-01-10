@@ -88,7 +88,7 @@ case "$1" in
 	echo "And reload nginx, run # /etc/init.d/nginx reload"
 	echo "visit your pod at $ENVIRONMENT_URL"
 	echo "To stop diaspora, run # killall -9 unicorn_rails foreman sidekiq"
-	echo "To see the service status, run # tail -f /usr/share/diaspora/nohup.out"
+	echo "To see the service status, run # /etc/init.d/diaspora status"
    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
