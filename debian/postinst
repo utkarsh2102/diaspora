@@ -52,10 +52,6 @@ case "$1" in
 		then gem install handlebars_assets
 	fi
 	
-	if ! gem list rails-timeago | grep rails-timeago
-		then gem install rails-timeago
-	fi
-	
 	if ! gem list foreman | grep foreman
 		then gem install -v=0.62.0 foreman
 	fi
