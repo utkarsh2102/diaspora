@@ -48,10 +48,6 @@ case "$1" in
 		then gem install backbone-on-rails
 	fi
 	
-	if ! gem list handlebars_assets | grep handlebars_assets
-		then gem install handlebars_assets
-	fi
-	
 	if ! gem list foreman | grep foreman
 		then gem install -v=0.62.0 foreman
 	fi
