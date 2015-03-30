@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Reshare, :type => :model do
-  include Rails.application.routes.url_helpers
-
   it 'has a valid Factory' do
     expect(FactoryGirl.build(:reshare)).to be_valid
   end
@@ -60,6 +58,17 @@ describe Reshare, :type => :model do
     it 'deletates #nsfw to the root post' do
       expect(@sfw_reshare.nsfw).not_to be true
       expect(@nsfw_reshare.nsfw).to be_truthy
+    end
+  end
+
+  describe '#poll' do
+    before do
+      @root_post = FactoryGirl.create(:status_message_with_poll, public: true)
+      @reshare = FactoryGirl.create(:reshare, root: @root_post)
+    end
+
+    it 'contains root poll' do
+      expect(@reshare.poll).to eq @root_post.poll
     end
   end
 
@@ -196,7 +205,15 @@ describe Reshare, :type => :model do
 
           allow(@response).to receive(:body).and_return(@root_object.to_diaspora_xml)
 
-          expect(Faraday.default_connection).to receive(:get).with(@original_author.url + short_post_path(@root_object.guid, :format => "xml")).and_return(@response)
+          expect(Faraday.default_connection).to receive(:get).with(
+            URI.join(
+              @original_author.url,
+              Rails.application.routes.url_helpers.short_post_path(
+                @root_object.guid,
+                format: "xml"
+              )
+            )
+          ).and_return(@response)
           Reshare.from_xml(@xml)
         end
 
@@ -224,7 +241,15 @@ describe Reshare, :type => :model do
         context 'saving the post' do
           before do
             allow(@response).to receive(:body).and_return(@root_object.to_diaspora_xml)
-            allow(Faraday.default_connection).to receive(:get).with(@reshare.root.author.url + short_post_path(@root_object.guid, :format => "xml")).and_return(@response)
+            allow(Faraday.default_connection).to receive(:get).with(
+              URI.join(
+                @reshare.root.author.url,
+                Rails.application.routes.url_helpers.short_post_path(
+                  @root_object.guid,
+                  format: "xml"
+                )
+              )
+            ).and_return(@response)
           end
 
           it 'fetches the root post from root_guid' do

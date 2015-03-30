@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   scope :daily_actives, ->(time = Time.now) { logged_in_since(time - 1.day) }
   scope :yearly_actives, ->(time = Time.now) { logged_in_since(time - 1.year) }
   scope :halfyear_actives, ->(time = Time.now) { logged_in_since(time - 6.month) }
+  scope :active, -> { joins(:person).where(people: {closed_account: false}).where.not(username: nil) }
 
   devise :token_authenticatable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -37,6 +38,8 @@ class User < ActiveRecord::Base
   serialize :hidden_shareables, Hash
 
   has_one :person, :foreign_key => :owner_id
+  has_one :profile, through: :person
+
   delegate :guid, :public_key, :posts, :photos, :owns?, :image_url,
            :diaspora_handle, :name, :public_url, :profile, :url,
            :first_name, :last_name, :gender, :participations, to: :person
@@ -289,6 +292,67 @@ class User < ActiveRecord::Base
     end
   end
 
+  ######### Data export ##################
+  mount_uploader :export, ExportedUser
+
+  def queue_export
+    update exporting: true
+    Workers::ExportUser.perform_async(id)
+  end
+
+  def perform_export!
+    export = Tempfile.new([username, '.json.gz'], encoding: 'ascii-8bit')
+    export.write(compressed_export) && export.close
+    if export.present?
+      update exporting: false, export: export, exported_at: Time.zone.now
+    else
+      update exporting: false
+    end
+  end
+
+  def compressed_export
+    ActiveSupport::Gzip.compress Diaspora::Exporter.new(self).execute
+  end
+
+  ######### Photos export ##################
+  mount_uploader :exported_photos_file, ExportedPhotos
+
+  def queue_export_photos
+    update exporting_photos: true
+    Workers::ExportPhotos.perform_async(id)
+  end
+
+  def perform_export_photos!
+    temp_zip = Tempfile.new([username, '_photos.zip'])
+    begin
+      Zip::ZipOutputStream.open(temp_zip.path) do |zos|
+        photos.each do |photo|
+          begin
+            photo_file = photo.unprocessed_image.file
+            if photo_file
+              photo_data = photo_file.read
+              zos.put_next_entry(photo.remote_photo_name)
+              zos.print(photo_data)
+            else
+              logger.info "Export photos error: No file for #{photo.remote_photo_name} not found"
+            end
+          rescue Errno::ENOENT
+            logger.info "Export photos error: #{photo.unprocessed_image.file.path} not found"
+          end
+        end
+      end
+    ensure
+      temp_zip.close
+    end
+
+    begin
+      update exported_photos_file: temp_zip, exported_photos_at: Time.zone.now if temp_zip.present?
+    ensure
+      restore_attributes if invalid? || temp_zip.present?
+      update exporting_photos: false
+    end
+  end
+
   ######### Mailer #######################
   def mail(job, *args)
     pref = job.to_s.gsub('Workers::Mail::', '').underscore
@@ -456,15 +520,20 @@ class User < ActiveRecord::Base
     AccountDeletion.create(:person => self.person)
   end
 
+  def closed_account?
+    self.person.closed_account
+  end
+
   def clear_account!
     clearable_fields.each do |field|
       self[field] = nil
     end
     [:getting_started,
-     :disable_mail,
      :show_community_spotlight_in_stream].each do |field|
       self[field] = false
     end
+    self[:disable_mail] = true
+    self[:strip_exif] = true
     self[:email] = "deletedaccount_#{self[:id]}@example.org"
 
     random_password = SecureRandom.hex(20)
@@ -488,7 +557,7 @@ class User < ActiveRecord::Base
       self.save
     end
   end
-  
+
   def after_database_authentication
     # remove any possible remove_after timestamp flag set by maintenance.remove_old_users
     unless self.remove_after.nil?
@@ -498,11 +567,14 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def clearable_fields
     self.attributes.keys - ["id", "username", "encrypted_password",
                             "created_at", "updated_at", "locked_at",
                             "serialized_private_key", "getting_started",
                             "disable_mail", "show_community_spotlight_in_stream",
-                            "email", "remove_after"]
+                            "strip_exif", "email", "remove_after",
+                            "export", "exporting", "exported_at",
+                            "exported_photos_file", "exporting_photos", "exported_photos_at"]
   end
 end

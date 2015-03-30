@@ -32,6 +32,7 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, :length => { :maximum => 32 }
   validates :last_name, :length => { :maximum => 32 }
+  validates :location, :length => { :maximum =>255 }
 
   validates_format_of :first_name, :with => /\A[^;]+\z/, :allow_blank => true
   validates_format_of :last_name, :with => /\A[^;]+\z/, :allow_blank => true
@@ -41,6 +42,7 @@ class Profile < ActiveRecord::Base
   belongs_to :person
   before_validation do
     self.tag_string = self.tag_string.split[0..4].join(' ')
+    self.build_tags
   end
 
   before_save do

@@ -15,17 +15,17 @@ describe("app.views.CommentStream", function(){
 
   describe("postRenderTemplate", function(){
     it("applies infield labels", function(){
-      spyOn($.fn, "placeholder")
-      this.view.postRenderTemplate()
-      expect($.fn.placeholder).toHaveBeenCalled()
-      expect($.fn.placeholder.calls.mostRecent().object.selector).toBe("textarea")
+      spyOn($.fn, "placeholder");
+      this.view.postRenderTemplate();
+      expect($.fn.placeholder).toHaveBeenCalled();
+      expect($.fn.placeholder.calls.mostRecent().object.selector).toBe("textarea");
     });
 
     it("autoResizes the new comment textarea", function(){
-      spyOn($.fn, "autoResize")
-      this.view.postRenderTemplate()
-      expect($.fn.autoResize).toHaveBeenCalled()
-      expect($.fn.autoResize.calls.mostRecent().object.selector).toBe("textarea")
+      spyOn($.fn, "autoResize");
+      this.view.postRenderTemplate();
+      expect($.fn.autoResize).toHaveBeenCalled();
+      expect($.fn.autoResize.calls.mostRecent().object.selector).toBe("textarea");
     });
   });
 
@@ -44,21 +44,19 @@ describe("app.views.CommentStream", function(){
       });
 
       it("fires an AJAX request", function() {
-        params = JSON.parse(this.request.params);
-        // TODO: use this, once jasmine-ajax is updated to latest version
-        //params = this.request.data();
+        var params = this.request.data();
 
         expect(params.text).toEqual("a new comment");
       });
 
       it("adds the comment to the view", function() {
-        this.request.response({status: 200, responseText: '[]'});
+        this.request.respondWith({status: 200, responseText: '[]'});
         expect(this.view.$(".comment-content p").text()).toEqual("a new comment");
       });
 
       it("doesn't add the comment to the view, when the request fails", function(){
         Diaspora.I18n.load({failed_to_post_message: "posting failed!"});
-        this.request.response({status: 500});
+        this.request.respondWith({status: 500});
 
         expect(this.view.$(".comment-content p").text()).not.toEqual("a new comment");
         expect($('*[id^="flash"]')).toBeErrorFlashMessage("posting failed!");
@@ -93,7 +91,7 @@ describe("app.views.CommentStream", function(){
       this.view.$("textarea").val("great post!");
       this.view.expandComments();
 
-      jasmine.Ajax.requests.mostRecent().response({ comments : [] });
+      jasmine.Ajax.requests.mostRecent().respondWith({ comments : [] });
 
       expect(this.view.$("textarea").val()).toEqual("great post!");
     });
@@ -108,7 +106,7 @@ describe("app.views.CommentStream", function(){
 
     it("should not submit the form when enter key is pressed", function(){
       this.view.render();
-      var form = this.view.$("form")
+      var form = this.view.$("form");
       form.submit(submitCallback);
 
       var e = $.Event("keydown", { keyCode: 13 });

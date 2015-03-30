@@ -14,6 +14,10 @@ module Diaspora
           processor.instance_exec(&block)
           processor.message
         end
+
+        def normalize message
+          message.delete("\u202a-\u202e\u200b-\u200f")
+        end
       end
 
       attr_reader :message, :options
@@ -90,6 +94,10 @@ module Diaspora
 
       def camo_urls
         @message = Diaspora::Camo.from_markdown(@message)
+      end
+
+      def normalize
+        @message = self.class.normalize(@message)
       end
     end
 
@@ -172,6 +180,7 @@ module Diaspora
     # @param [Hash] opts Override global output options, see {#initialize}
     def plain_text_for_json opts={}
       process(opts) {
+        normalize
         camo_urls if AppConfig.privacy.camo.proxy_markdown_images?
       }
     end
@@ -180,6 +189,7 @@ module Diaspora
     def html opts={}
       process(opts) {
         escape
+        normalize
         render_mentions
         render_tags
         squish
@@ -191,6 +201,7 @@ module Diaspora
     def markdownified opts={}
       process(opts) {
         process_newlines
+        normalize
         camo_urls if AppConfig.privacy.camo.proxy_markdown_images?
         markdownify
         render_mentions
@@ -214,7 +225,7 @@ module Diaspora
         atx_content
       end
 
-      heading &&= heading.strip
+      heading &&= self.class.new(heading).plain_text_without_markdown
 
       if heading && opts[:length]
         heading.truncate opts[:length]
@@ -228,7 +239,7 @@ module Diaspora
     # Extracts all the urls from the raw message and return them in the form of a string
     # Different URLs are seperated with a space
     def urls
-      @urls ||= Twitter::Extractor.extract_urls(@raw_message)
+      @urls ||= Twitter::Extractor.extract_urls(plain_text_without_markdown)
     end
 
     def raw

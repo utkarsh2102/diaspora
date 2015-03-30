@@ -12,10 +12,10 @@ Feature: reactions mobile post
     And a user with email "bob@bob.bob" is connected with "alice@alice.alice"
     When "alice@alice.alice" has posted a status message with a photo
     And I toggle the mobile view
-    And I sign in as "bob@bob.bob"
+    And I sign in as "bob@bob.bob" on the mobile website
 
   Scenario: like on a mobile post
-    When I should see "0 reactions" within ".show_comments"
+    When I should see "No reactions" within ".show_comments"
     And I click on selector "span.show_comments"
     And I click on selector "a.image_link.like_action.inactive"
     Then I should see a "a.image_link.like_action.active"

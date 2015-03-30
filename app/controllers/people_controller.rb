@@ -3,11 +3,8 @@
 #   the COPYRIGHT file.
 
 class PeopleController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :stream, :last_post]
+  before_action :authenticate_user!, except: [:show, :stream]
   before_action :find_person, only: [:show, :stream, :hovercard]
-
-  layout ->(c){ request.format == :mobile ? "application" : "with_header_with_footer" }
-  use_bootstrap_for :index, :show, :contacts
 
   respond_to :html, :except => [:tag_index]
   respond_to :json, :only => [:index, :show]
@@ -87,12 +84,12 @@ class PeopleController < ApplicationController
         end
         gon.preloads[:person] = @person_json
         gon.preloads[:photos] = {
-          count: photos_from(@person).count(:all),
+          count: photos_from(@person, :all).count(:all)
         }
         gon.preloads[:contacts] = {
           count: Contact.contact_contacts_for(current_user, @person).count(:all),
         }
-        respond_with @person
+        respond_with @person, layout: "with_header"
       end
 
       format.mobile do
@@ -128,12 +125,6 @@ class PeopleController < ApplicationController
     end
   end
 
-  def last_post
-    @person = Person.find_from_guid_or_username(params)
-    last_post = Post.visible_from_author(@person, current_user).order('posts.created_at DESC').first
-    redirect_to post_path(last_post)
-  end
-
   def retrieve_remote
     if params[:diaspora_handle]
       Webfinger.in_background(params[:diaspora_handle], :single_aspect_form => true)
@@ -151,14 +142,14 @@ class PeopleController < ApplicationController
       @contacts_of_contact = Contact.contact_contacts_for(current_user, @person)
       gon.preloads[:person] = PersonPresenter.new(@person, current_user).full_hash_with_profile
       gon.preloads[:photos] = {
-        count: photos_from(@person).count(:all),
+        count: photos_from(@person, :all).count(:all)
       }
       gon.preloads[:contacts] = {
         count: @contacts_of_contact.count(:all),
       }
       @contacts_of_contact = @contacts_of_contact.paginate(:page => params[:page], :per_page => (params[:limit] || 15))
       @hashes = hashes_for_people @contacts_of_contact, @aspects
-      respond_with @person
+      respond_with @person, layout: "with_header"
     else
       flash[:error] = I18n.t 'people.show.does_not_exist'
       redirect_to people_path
@@ -175,22 +166,29 @@ class PeopleController < ApplicationController
 
     @contact = current_user.contact_for(@person) || Contact.new
     @aspect = :profile if params[:create]  # let aspect dropdown create new aspects
-    bootstrap = params[:bootstrap] || false
     size = params[:size] || "small"
 
-    render :partial => 'aspect_membership_dropdown', :locals => {:contact => @contact, :person => @person, :hang => 'left', :bootstrap => bootstrap, :size => size}
+    render :partial => 'aspect_membership_dropdown', :locals => {:contact => @contact, :person => @person, :hang => 'left', :size => size}
   end
 
   private
 
   def find_person
-    @person = Person.find_from_guid_or_username({
-      id: params[:id] || params[:person_id],
-      username: params[:username]
-    })
+    username = params[:username]
+    @person = if diaspora_id?(username)
+        Person.where({
+          diaspora_handle: username.downcase
+        }).first
+      else
+        Person.find_from_guid_or_username({
+          id: params[:id] || params[:person_id],
+          username: username
+        })
+      end
 
     # view this profile on the home pod, if you don't want to sign in...
     authenticate_user! if remote_profile_with_no_user_session?
+    raise ActiveRecord::RecordNotFound if @person.nil?
     raise Diaspora::AccountClosed if @person.closed_account?
   end
 
@@ -220,9 +218,9 @@ class PeopleController < ApplicationController
     @person.try(:remote?) && !user_signed_in?
   end
 
-  def photos_from(person)
+  def photos_from(person, limit)
     @photos ||= if user_signed_in?
-      current_user.photos_from(person)
+      current_user.photos_from(person, limit: limit)
     else
       Photo.where(author_id: person.id, public: true)
     end.order('created_at desc')

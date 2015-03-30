@@ -41,13 +41,14 @@ class PostPresenter
         :address => @post.address,
         :poll => @post.poll(),
         :already_participated_in_poll => already_participated_in_poll,
+        :participation => participate?,
 
         :interactions => {
             :likes => [user_like].compact,
             :reshares => [user_reshare].compact,
             :comments_count => @post.comments_count,
             :likes_count => @post.likes_count,
-            :reshares_count => @post.reshares_count,
+            :reshares_count => @post.reshares_count
         }
     }
   end
@@ -86,6 +87,10 @@ class PostPresenter
     end
   end
 
+  def participate?
+    user_signed_in? && @current_user.participations.where(:target_id => @post).exists?
+  end
+
 end
 
 class PostInteractionPresenter
@@ -96,10 +101,13 @@ class PostInteractionPresenter
 
   def as_json(options={})
     {
-        :likes => as_api(@post.likes),
-        :reshares => PostPresenter.collection_json(@post.reshares, @current_user),
-        :comments => CommentPresenter.as_collection(@post.comments.order('created_at ASC')),
-        :participations => as_api(@post.participations)
+        likes:          as_api(@post.likes),
+        reshares:       PostPresenter.collection_json(@post.reshares, @current_user),
+        comments:       CommentPresenter.as_collection(@post.comments.order("created_at ASC")),
+        participations: as_api(@post.participations),
+        comments_count: @post.comments_count,
+        likes_count:    @post.likes_count,
+        reshares_count: @post.reshares_count
     }
   end
 

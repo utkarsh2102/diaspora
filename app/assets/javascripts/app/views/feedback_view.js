@@ -8,18 +8,21 @@ app.views.Feedback = app.views.Base.extend({
   events: {
     "click .like" : "toggleLike",
     "click .reshare" : "resharePost",
-    "click .post_report" : "report"
+
+    "click .post_report" : "report",
+    "click .block_user" : "blockUser",
+    "click .hide_post" : "hidePost",
   },
 
   tooltipSelector : ".label",
 
   initialize : function() {
     this.model.interactions.on('change', this.render, this);
-    this.initViews && this.initViews() // I don't know why this was failing with $.noop... :(
+    this.initViews && this.initViews(); // I don't know why this was failing with $.noop... :(
   },
 
   presenter : function() {
-    var interactions = this.model.interactions
+    var interactions = this.model.interactions;
 
     return _.extend(this.defaultPresenter(),{
       commentsCount : interactions.commentsCount(),
@@ -28,7 +31,7 @@ app.views.Feedback = app.views.Base.extend({
       userCanReshare : interactions.userCanReshare(),
       userLike : interactions.userLike(),
       userReshare : interactions.userReshare()
-    })
+    });
   },
 
   toggleLike: function(evt) {
@@ -40,7 +43,45 @@ app.views.Feedback = app.views.Base.extend({
     if(evt) { evt.preventDefault(); }
     if(!window.confirm(Diaspora.I18n.t("reshares.post", {name: this.model.reshareAuthor().name}))) { return }
     this.model.interactions.reshare();
-  }
+  },
+
+  blockUser: function(evt) {
+    if(evt) { evt.preventDefault(); }
+    if(!confirm(Diaspora.I18n.t('ignore_user'))) { return; }
+
+    this.model.blockAuthor()
+      .done(function() {
+        // return to stream
+        document.location.href = "/stream";
+      })
+      .fail(function() {
+        Diaspora.page.flashMessages.render({
+          success: false,
+          notice: Diaspora.I18n.t('hide_post_failed')
+        });
+      });
+  },
+
+  hidePost : function(evt) {
+    if(evt) { evt.preventDefault(); }
+    if(!confirm(Diaspora.I18n.t('hide_post'))) { return; }
+
+    $.ajax({
+      url : "/share_visibilities/42",
+      type : "PUT",
+      data : {
+        post_id : this.model.id
+      }
+    }).done(function() {
+        // return to stream
+        document.location.href = "/stream";
+      })
+      .fail(function() {
+        Diaspora.page.flashMessages.render({
+          success: false,
+          notice: Diaspora.I18n.t('ignore_post_failed')
+        });
+      });
+  },
 });
 // @license-end
-

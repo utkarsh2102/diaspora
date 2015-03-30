@@ -179,6 +179,16 @@ describe PeopleController, :type => :controller do
       expect(assigns(:person)).to eq(@user.person)
     end
 
+    it "404s if no person is found via diaspora handle" do
+      get :show, :username => 'delicious@pod.net'
+      expect(response.code).to eq("404")
+    end
+
+    it 'finds a person via diaspora handle' do
+      get :show, username: @user.diaspora_handle
+      expect(assigns(:person)).to eq(@user.person)
+    end
+
     it 'redirects home for closed account' do
       @person = FactoryGirl.create(:person, :closed_account => true)
       get :show, :id => @person.to_param
@@ -206,6 +216,18 @@ describe PeopleController, :type => :controller do
       expect(response).to be_success
       expect(assigns(:photos)).not_to include private_photo
       expect(assigns(:photos)).to include public_photo
+    end
+
+    it "displays the correct number of photos" do
+      16.times do |i|
+        eve.post(:photo, :user_file => uploaded_photo, :to => eve.aspects.first.id, :public => true)
+      end
+      get :show, :id => eve.person.to_param
+      expect(response.body).to include '"photos":{"count":16}'
+
+      eve.post(:photo, :user_file => uploaded_photo, :to => eve.aspects.first.id, :public => false)
+      get :show, :id => eve.person.to_param
+      expect(response.body).to include '"photos":{"count":16}' # eve is not sharing with alice
     end
 
     context "when the person is the current user" do
@@ -462,6 +484,18 @@ describe PeopleController, :type => :controller do
       get :contacts, :person_id => 'foo'
       expect(flash[:error]).to be_present
       expect(response).to redirect_to people_path
+    end
+
+    it "displays the correct number of photos" do
+      16.times do |i|
+        eve.post(:photo, :user_file => uploaded_photo, :to => eve.aspects.first.id, :public => true)
+      end
+      get :contacts, :person_id => eve.person.to_param
+      expect(response.body).to include '"photos":{"count":16}'
+
+      eve.post(:photo, :user_file => uploaded_photo, :to => eve.aspects.first.id, :public => false)
+      get :contacts, :person_id => eve.person.to_param
+      expect(response.body).to include '"photos":{"count":16}' # eve is not sharing with alice
     end
   end
 

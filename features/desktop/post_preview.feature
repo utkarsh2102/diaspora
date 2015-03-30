@@ -11,7 +11,6 @@ Feature: preview posts in the stream
         | Alice Smith  | alice@alice.alice |
       And a user with email "bob@bob.bob" is connected with "alice@alice.alice"
       When I sign in as "bob@bob.bob"
-      And I am on the home page
       Then I should not see any posts in my stream
 
     Scenario: preview and post a text-only message
@@ -75,7 +74,7 @@ Feature: preview posts in the stream
       Given I expand the publisher
       When I fill in the following:
           | status_message_fake_text    | I am eating yogurt    |
-      And I press the element "#poll_creator"
+      And I click on selector "#poll_creator"
       When I fill in the following:
           | status_message_fake_text    | I am eating yogurt |
           | poll_question               | What kind of yogurt do you like? |

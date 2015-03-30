@@ -3,6 +3,22 @@ require_relative 'boot'
 require 'rails/all'
 Bundler.require(:default, Rails.env)
 
+# Do not dump the limit of boolean fields on MySQL,
+# since that generates a db/schema.rb that's incompatible
+# with PostgreSQL
+require 'active_record/connection_adapters/abstract_mysql_adapter'
+module ActiveRecord
+  module ConnectionAdapters
+    class Mysql2Adapter < AbstractMysqlAdapter
+      def prepare_column_options(column, *_)
+        super.tap {|spec|
+          spec.delete(:limit) if column.type == :boolean
+        }
+      end
+    end
+  end
+end
+
 # Load asset_sync early
 require_relative 'asset_sync'
 
@@ -52,33 +68,27 @@ module Diaspora
     config.assets.precompile += %w{
       aspect-contacts.js
       contact-list.js
-      home.js
       ie.js
       inbox.js
       jquery.js
       jquery_ujs.js
       jquery-textchange.js
-      mailchimp.js
       main.js
       jsxc.js
-      mobile.js
-      profile.js
+      mobile/mobile.js
       people.js
-      profile.js
       publisher.js
       templates.js
       validation.js
 
-      blueprint.css
       bootstrap.css
       bootstrap-complete.css
       bootstrap-responsive.css
-      default.css
       error_pages.css
       admin.css
       mobile/mobile.css
-      new-templates.css
       rtl.css
+      home.css
     }
 
     # Version of your assets, change this if you want to expire all your assets
@@ -89,5 +99,8 @@ module Diaspora
       g.template_engine :haml
       g.test_framework  :rspec
     end
+
+    # Will be default with Rails 5
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

@@ -59,23 +59,19 @@ Feature: User manages contacts
     And I follow "Cat People"
     And I click on selector "#change_aspect_name"
     And I fill in "aspect_name" with "Unicorn People"
-    And I press "update"
+    And I press "Update"
     Then I should see "Unicorn People" within "#aspect_name"
 
   Scenario: clicking on the contacts link in the header with zero contacts directs a user to the featured users page
     Given I am signed in
     And I have 0 contacts
-    And I am on the home page
-
     And I click on my name in the header
     When I follow "Contacts"
-    Then I should see "Community Spotlight" within ".span9"
+    Then I should see "Community spotlight" within ".span9"
 
   Scenario: clicking on the contacts link in the header with contacts does not send a user to the featured users page
     Given I am signed in
     And I have 2 contacts
-    And I am on the home page
-
     And I click on my name in the header
     When I follow "Contacts"
-    Then I should not see "Community Spotlight" within ".span9"
+    Then I should not see "Community spotlight" within ".span9"
