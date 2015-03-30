@@ -2,12 +2,12 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -106,7 +106,7 @@ gem 'rails-i18n',           '4.0.3'
+@@ -118,7 +118,7 @@ gem "rails-i18n",           "4.0.4"
  # Mail
  
- gem 'markerb',             '1.0.2'
--gem 'messagebus_ruby_api', '1.0.3'
-+gem 'messagebus_ruby_api', '>= 1.0.3'
+ gem "markerb",             "1.0.2"
+-gem "messagebus_ruby_api", "1.0.3"
++gem "messagebus_ruby_api", ">=1.0.3"
  
  # Parsing
  
