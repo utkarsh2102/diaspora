@@ -2,12 +2,12 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -51,7 +51,7 @@ gem 'rack-cors', '0.2.9', :require => 'r
+@@ -53,7 +53,7 @@ gem "rack-cors", "0.3.1", require: "rack
  
  # CSS
  
--gem 'bootstrap-sass', '2.3.2.2'
-+gem 'bootstrap-sass', '~> 2.3'
- gem 'compass-rails',  '2.0.0'
- gem 'sass-rails',     '4.0.4'
- 
+-gem "bootstrap-sass", "2.3.2.2"
++gem "bootstrap-sass", "~>2.3"
+ gem "compass-rails",  "2.0.4"
+ gem "sass-rails",     "5.0.1"
+ gem "autoprefixer-rails", "5.1.7.1"
