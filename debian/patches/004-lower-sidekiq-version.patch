@@ -2,12 +2,12 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -30,7 +30,7 @@ gem 'simple_captcha2', '0.3.2', :require
+@@ -32,7 +32,7 @@ gem "simple_captcha2", "0.3.4", require:
  
  # Background processing
  
--gem 'sidekiq', '3.3.0'
-+gem 'sidekiq', '3.2.6'
- gem 'sinatra', '1.4.5'
+-gem "sidekiq", "3.3.3"
++gem "sidekiq", "3.2.6"
+ gem "sinatra", "1.4.6"
  
  # Scheduled processing
