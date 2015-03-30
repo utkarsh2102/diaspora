@@ -4,9 +4,6 @@
 
 class PhotosController < ApplicationController
   before_action :authenticate_user!, :except => :show
-
-  layout ->(c){ request.format == :mobile ? "application" : "with_header_with_footer" }
-  use_bootstrap_for :index
   respond_to :html, :json
 
   def show
@@ -30,12 +27,12 @@ class PhotosController < ApplicationController
         format.all do
           gon.preloads[:person] = PersonPresenter.new(@person, current_user).full_hash_with_profile
           gon.preloads[:photos] = {
-            count: @posts.count(:all),
+            count: current_user.photos_from(@person, limit: :all).count(:all)
           }
           gon.preloads[:contacts] = {
             count: Contact.contact_contacts_for(current_user, @person).count(:all),
           }
-          render 'people/show'
+          render "people/show", layout: "with_header"
         end
         format.json{ render_for_api :backbone, :json => @posts, :root => :photos }
       end

@@ -5,9 +5,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
-  layout ->(c) { request.format == :mobile ? "application" : "with_header_with_footer" }
-  use_bootstrap_for :index
-
   def update
     note = Notification.where(:recipient_id => current_user.id, :id => params[:id]).first
     if note
@@ -41,10 +38,10 @@ class NotificationsController < ApplicationController
 
       pager.replace(result)
     end
-    @notifications.each do |n|
-      n.note_html = render_to_string( :partial => 'notify_popup_item', :locals => { :n => n } )
+    @notifications.each do |note|
+      note.note_html = render_to_string( :partial => 'notification', :locals => { :note => note } )
     end
-    @group_days = @notifications.group_by{|note| I18n.l(note.created_at, :format => I18n.t('date.formats.fullmonth_day')) }
+    @group_days = @notifications.group_by{|note| note.created_at.strftime('%Y-%m-%d')}
 
     @unread_notification_count = current_user.unread_notifications.count
 

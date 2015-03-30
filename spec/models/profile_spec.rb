@@ -112,6 +112,18 @@ describe Profile, :type => :model do
     end
   end
 
+  describe "of location" do
+    it "can be 255 characters long" do
+      profile = FactoryGirl.build(:profile, :location => "a"*255)
+      expect(profile).to be_valid
+    end
+   
+    it "cannot be 256 characters" do
+      profile = FactoryGirl.build(:profile, :location => "a"*256)
+      expect(profile).not_to be_valid
+    end
+  end
+
   describe '#image_url=' do
     before do
       @profile = FactoryGirl.build(:profile)
@@ -259,6 +271,11 @@ describe Profile, :type => :model do
       @object.tag_string = '#one #two #three #four #five #six'
       @object.save
       expect(@object.tags.count).to eq(5)
+    end
+    it 'should require tag name not be more than 255 characters long' do
+      @object.tag_string = "##{'a' * (255+1)}"
+      @object.save
+      expect(@object).not_to be_valid
     end
     it_should_behave_like 'it is taggable'
   end

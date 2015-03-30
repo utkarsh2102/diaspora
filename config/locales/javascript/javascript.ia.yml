@@ -37,6 +37,7 @@ ia:
       error_add: "Non poteva adder <%= name %> al aspecto."
       error_remove: "Non poteva remover <%= name %> del aspecto."
       remove_contact: "Remover contacto"
+      search_no_results: "Nulle contacto trovate"
     conversation:
       participants: "Participantes"
     delete: "Deler"
@@ -64,6 +65,8 @@ ia:
       search: "Cercar"
       settings: "Configuration"
       view_all: "Vider totes"
+    hide_post: "Celar iste entrata?"
+    hide_post_failed: "Impossibile celar ite entrata"
     ignore: "Ignorar"
     ignore_failed: "Impossibile ignorar iste usator"
     ignore_user: "Ignorar iste usator?"
@@ -98,6 +101,8 @@ ia:
       count:
         one: "1 voto usque ora"
         other: "<%=count%> votos usque ora"
+      go_to_original_post: "Tu pote participar a iste sondage in le <%= original_post_link %>."
+      original_post: "entrata original"
       result: "Resultato"
       show_result: "Monstrar resultato"
       vote: "Votar"
@@ -111,6 +116,7 @@ ia:
       ignoring: "Tu ignora tote le entratas de <%= name %>."
       location: "Loco"
       photos: "Photos"
+      posts: "Entratas"
       you_have_no_tags: "tu non ha etiquettas!"
     publisher:
       add_option: "Adder un responsa"
@@ -120,6 +126,7 @@ ia:
       option: "Responsa"
       public: "Public: le message es visibile pro tote le mundo e trovabile pro motores de recerca"
       question: "Question"
+    remove_post: "Remover iste entrata?"
     report:
       name: "Reporto"
       prompt: "Specifica un motivo:"
@@ -135,6 +142,8 @@ ia:
     show_more: "monstrar plus"
     stream:
       comment: "Commentar"
+      disable_post_notifications: "Disactivar le notificationes pro iste entrata"
+      enable_post_notifications: "Activar le notificationes pro iste entrata"
       follow: "Sequer"
       followed_tag:
         add_a_tag: "Adder un etiquetta"

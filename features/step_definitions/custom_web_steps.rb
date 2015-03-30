@@ -89,7 +89,7 @@ end
 
 When /^I prepare the deletion of the first post$/ do
   within(find('.stream .stream_element')) do
-    ctrl = find('.controls')
+    ctrl = find('.control-icons')
     ctrl.hover
     ctrl.find('.remove_post').click
   end
@@ -102,7 +102,7 @@ end
 
 When /^I click to delete the first comment$/ do
   within("div.comment", match: :first) do
-    find(".controls").hover
+    find(".control-icons").hover
     find(".comment_delete", visible: false).click # TODO: hax to check what's failing on Travis
   end
 end
@@ -160,12 +160,12 @@ end
 
 Then /^(?:|I )should not see a "([^\"]*)"(?: within "([^\"]*)")?$/ do |selector, scope_selector|
   with_scope(scope_selector) do
-    current_scope.has_css?(selector, :visible => true).should be false
+    current_scope.should have_no_css(selector, :visible => true)
   end
 end
 
 Then /^page should (not )?have "([^\"]*)"$/ do |negate, selector|
-  page.has_css?(selector).should ( negate ? (be false) : (be true) )
+  page.should ( negate ? (have_no_css(selector)) : (have_css(selector)) )
 end
 
 When /^I have turned off jQuery effects$/ do
@@ -175,7 +175,7 @@ end
 When /^I search for "([^\"]*)"$/ do |search_term|
   fill_in "q", :with => search_term
   find_field("q").native.send_key(:enter)
-  find("#tags_show .span3")
+  have_content(search_term)
 end
 
 Then /^the "([^"]*)" field(?: within "([^"]*)")? should be filled with "([^"]*)"$/ do |field, selector, value|
@@ -216,7 +216,7 @@ Then /^the notification dropdown scrollbar should be visible$/ do
 end
 
 Then /^there should be (\d+) notifications loaded$/ do |n|
-  result = page.evaluate_script("$('.notification_element').length")
+  result = page.evaluate_script("$('.media.stream_element').length")
   result.should == n.to_i
 end
 

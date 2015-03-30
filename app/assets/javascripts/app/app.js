@@ -35,8 +35,11 @@ var app = {
   events: _.extend({}, Backbone.Events),
 
   user: function(userAttrs) {
-    if(userAttrs) { return this._user = new app.models.User(userAttrs) }
-    return this._user || false
+    if(userAttrs) {
+      this._user = new app.models.User(userAttrs);
+      return this._user;
+    }
+    return this._user || false;
   },
 
   initialize: function() {
@@ -52,25 +55,25 @@ var app = {
   },
 
   hasPreload : function(prop) {
-    return !!(window.gon.preloads && window.gon.preloads[prop]) //returning boolean variable so that parsePreloads, which cleans up properly is used instead
+    return !!(window.gon.preloads && window.gon.preloads[prop]); //returning boolean variable so that parsePreloads, which cleans up properly is used instead
   },
 
   setPreload : function(prop, val) {
-    window.gon.preloads = window.gon.preloads || {}
-    window.gon.preloads[prop] = val
+    window.gon.preloads = window.gon.preloads || {};
+    window.gon.preloads[prop] = val;
   },
 
   parsePreload : function(prop) {
       if(!app.hasPreload(prop)) { return }
 
-      var preload = window.gon.preloads[prop]
-      delete window.gon.preloads[prop] //prevent dirty state across navigates
+      var preload = window.gon.preloads[prop];
+      delete window.gon.preloads[prop]; //prevent dirty state across navigates
 
-      return(preload)
+      return(preload);
   },
 
   setupDummyPreloads: function() {
-    if (window.gon == undefined) {
+    if (window.gon === undefined) {
       window.gon = {preloads:{}};
     }
   },
@@ -101,14 +104,13 @@ var app = {
       evt.preventDefault();
       var link = $(this);
 
-      $(".stream_title").text(link.text())
-      app.router.navigate(link.attr("href").substring(1) ,true)
+      $(".stream_title").text(link.text());
+      app.router.navigate(link.attr("href").substring(1) ,true);
     });
   },
 
   setupGlobalViews: function() {
     app.hovercard = new app.views.Hovercard();
-    app.aspectMembershipsBlueprint = new app.views.AspectMembershipBlueprint();
     $('.aspect_membership_dropdown').each(function(){
       new app.views.AspectMembership({el: this});
     });
@@ -118,7 +120,7 @@ var app = {
   /* mixpanel wrapper function */
   instrument : function(type, name, object, callback) {
     if(!window.mixpanel) { return }
-    window.mixpanel[type](name, object, callback)
+    window.mixpanel[type](name, object, callback);
   },
 
   setupDisabledLinks: function() {
@@ -132,4 +134,3 @@ $(function() {
   app.initialize();
 });
 // @license-end
-

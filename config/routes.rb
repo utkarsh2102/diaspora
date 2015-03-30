@@ -36,7 +36,7 @@ Diaspora::Application.routes.draw do
     resources :poll_participations, :only => [:create]
 
     resources :likes, :only => [:create, :destroy, :index ]
-    resources :participations, :only => [:create, :destroy, :index]
+    resource :participation, :only => [:create, :destroy]
     resources :comments, :only => [:new, :create, :destroy, :index]
   end
 
@@ -101,8 +101,10 @@ Diaspora::Application.routes.draw do
 
   resource :user, :only => [:edit, :update, :destroy], :shallow => true do
     get :getting_started_completed
-    get :export
+    get :export_profile
+    get :download_profile
     get :export_photos
+    get :download_photos
   end
 
   controller :users do
@@ -118,7 +120,6 @@ Diaspora::Application.routes.draw do
   get 'users/edit' => redirect('/user/edit')
 
   devise_for :users, :controllers => {:registrations => "registrations",
-                                      :passwords     => "passwords",
                                       :sessions      => "sessions"}
 
   #legacy routes to support old invite routes
@@ -142,6 +143,8 @@ Diaspora::Application.routes.draw do
 
   namespace :admin do
     post 'users/:id/close_account' => 'users#close_account', :as => 'close_account'
+    post 'users/:id/lock_account' => 'users#lock_account', :as => 'lock_account'
+    post 'users/:id/unlock_account' => 'users#unlock_account', :as => 'unlock_account'
   end
 
   resource :profile, :only => [:edit, :update]
@@ -174,8 +177,8 @@ Diaspora::Application.routes.draw do
       get :tag_index
     end
   end
-  get '/u/:username' => 'people#show', :as => 'user_profile'
-  get '/u/:username/profile_photo' => 'users#user_photo'
+  get '/u/:username' => 'people#show', :as => 'user_profile', :constraints => { :username => /[^\/]+/ }
+  get '/u/:username/profile_photo' => 'users#user_photo', :constraints => { :username => /[^\/]+/ }
 
 
   # Federation
@@ -222,6 +225,7 @@ Diaspora::Application.routes.draw do
 
   # Help
   get 'help' => 'help#faq', :as => 'help'
+  get 'help/:topic' => 'help#faq'
 
   #Protocol Url
   get 'protocol' => redirect("http://wiki.diasporafoundation.org/Federation_Protocol_Overview")

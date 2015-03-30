@@ -9,21 +9,21 @@ Feature: posting from the main page
         | username   |
         | bob        |
         | alice      |
-      And I sign in as "bob@bob.bob"
       And a user with username "bob" is connected with "alice"
-      Given I have following aspects:
+      And I sign in as "bob@bob.bob"
+      And I have following aspects:
         | PostingTo            |
         | NotPostingThingsHere |
       And I have user with username "alice" in an aspect called "PostingTo"
       And I have user with username "alice" in an aspect called "NotPostingThingsHere"
-      And I am on the home page
+      And I go to the home page
 
     Scenario: expanding the publisher
       Given ".markdownIndications" is hidden
       And ".options_and_submit" is hidden
       When I expand the publisher
-      Then I should see "You can use Markdown to format your post" within "#publisher-images"
-      Then I should see "All Aspects" within ".options_and_submit"
+      Then I should see "You can use Markdown to format your post" within ".markdownIndications"
+      Then I should see "All aspects" within ".options_and_submit"
       Then I should see "Preview" within ".options_and_submit"
 
     Scenario: post a text-only message to all aspects
@@ -42,10 +42,12 @@ Feature: posting from the main page
       Given I expand the publisher
       When I write the status message "The World needs more Cats."
       And I submit the publisher
-
-      And I go to the aspects page
       Then "The World needs more Cats." should be post 1
-      Then "The World needs more Cats." should be post 2
+      And "The World needs more Cats." should be post 2
+
+      When I go to the aspects page
+      Then "The World needs more Cats." should be post 1
+      And "The World needs more Cats." should be post 2
 
     Scenario: posting a message appends it to the top of the stream
       When I click the publisher and post "sup dog"
@@ -60,10 +62,12 @@ Feature: posting from the main page
       And I submit the publisher
 
       When I am on the aspects page
+      And I select all aspects
       And I select only "PostingTo" aspect
       Then I should see "I am eating a yogurt"
 
       When I am on the aspects page
+      And I select all aspects
       And I select only "NotPostingThingsHere" aspect
       Then I should not see "I am eating a yogurt"
 
@@ -161,6 +165,7 @@ Feature: posting from the main page
       And I select only "PostingTo" aspect
       Then I should see "I am eating a yogurt"
       When I am on the aspects page
+      And I select all aspects
       And I select only "NotPostingThingsHere" aspect
       Then I should not see "I am eating a yogurt"
 
@@ -181,10 +186,12 @@ Feature: posting from the main page
       And I select only "PostingTo" aspect
       Then I should see "I am eating a yogurt" and "And cornflakes also"
       When I am on the aspects page
+      And I select all aspects
       And I select only "Besties" aspect
       Then I should not see "I am eating a yogurt"
       Then I should see "And cornflakes also"
       When I am on the aspects page
+      And I select all aspects
       And I select only "NotPostingThingsHere" aspect
       Then I should not see "I am eating a yogurt" and "And cornflakes also"
 

@@ -46,7 +46,7 @@ module Configuration
           File.dirname(__FILE__)
         )
         unless File.exist? token_file
-          `bundle exec rake generate:secret_token`
+          `DISABLE_SPRING=1 bin/rake generate:secret_token`
         end
         require token_file
         Diaspora::Application.config.secret_key_base
@@ -119,8 +119,11 @@ module Configuration
     end
 
     def postgres?
-      defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) &&
-      ActiveRecord::Base.connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+      ActiveRecord::Base.connection.adapter_name == "PostgreSQL"
+    end
+
+    def mysql?
+      ActiveRecord::Base.connection.adapter_name == "Mysql2"
     end
 
     def bitcoin_donation_address

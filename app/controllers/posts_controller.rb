@@ -9,8 +9,6 @@ class PostsController < ApplicationController
   before_action :set_format_if_malformed_from_status_net, :only => :show
   before_action :find_post, :only => [:show, :interactions]
 
-  use_bootstrap_for :show
-
   respond_to :html,
              :mobile,
              :json,
@@ -18,7 +16,7 @@ class PostsController < ApplicationController
 
   rescue_from Diaspora::NonPublic do |exception|
     respond_to do |format|
-      format.all { @css_framework = :bootstrap; render :template=>'errors/not_public', :status=>404, :layout => "application"}
+      format.all { render :template=>'errors/not_public', :status=>404, :layout => "application"}
     end
   end
 
@@ -26,10 +24,13 @@ class PostsController < ApplicationController
     mark_corresponding_notifications_read if user_signed_in?
 
     respond_to do |format|
-      format.html{ gon.post = PostPresenter.new(@post, current_user); render 'posts/show', layout: 'with_header_with_footer' }
-      format.xml{ render :xml => @post.to_diaspora_xml }
-      format.mobile{render 'posts/show' }
-      format.json{ render :json => PostPresenter.new(@post, current_user) }
+      format.html {
+        gon.post = PostPresenter.new(@post, current_user)
+        render "posts/show"
+      }
+      format.xml { render xml: @post.to_diaspora_xml }
+      format.mobile { render "posts/show" }
+      format.json { render json: PostPresenter.new(@post, current_user) }
     end
   end
 

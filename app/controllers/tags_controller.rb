@@ -6,10 +6,9 @@ class TagsController < ApplicationController
   skip_before_action :set_grammatical_gender
   before_action :ensure_page, :only => :show
 
-  layout ->(c) { request.format == :mobile ? "application" : "with_header_with_footer" }, :only => [:show]
-  use_bootstrap_for :show
-
   helper_method :tag_followed?
+
+  layout proc { request.format == :mobile ? "application" : "with_header" }, only: :show
 
   respond_to :html, :only => [:show]
   respond_to :json, :only => [:index, :show]

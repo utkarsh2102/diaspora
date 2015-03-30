@@ -12,6 +12,8 @@ es:
       all_aspects: "Todos los aspectos"
       error: "No podrás compartir con <%= name %>. ¿Estás ignorándole?"
       error_remove: "No se pudo eliminar a <%= name %> del aspecto :("
+      mobile_row_checked: "<%= name %> (eliminar)"
+      mobile_row_unchecked: "<%= name %> (añadir)"
       select_aspects: "Elige los aspectos"
       started_sharing_with: "¡Has empezado a compartir con <%= name %>!"
       stopped_sharing_with: "Ya no compartes más con <%= name %>."
@@ -19,6 +21,7 @@ es:
         one: "En <%= count %> aspecto"
         other: "En <%= count %> aspectos"
         zero: "Elige los aspectos"
+      updating: "actualizando..."
     aspect_navigation:
       add_an_aspect: "+ Añadir un aspecto"
       deselect_all: "Desmarcar todos"
@@ -34,6 +37,7 @@ es:
       no_comments: "Aún no hay comentarios."
       show: "mostrar todos los comentarios"
     confirm_dialog: "¿Estás seguro?"
+    confirm_unload: "Por favor, confirma que quieres abandonar esta página. Los datos que no hayas introducido, no serán guardados."
     contacts:
       add_contact: "Añadir contacto"
       aspect_list_is_not_visible: "Los contactos de este aspecto no pueden verse entre ellos."
@@ -41,6 +45,7 @@ es:
       error_add: "No se pudo añadir a <%= name %> al aspecto :("
       error_remove: "No se pudo eliminar <%= name %> del aspecto :("
       remove_contact: "Eliminar contacto"
+      search_no_results: "No se encontraron contactos"
     conversation:
       participants: "Participantes"
     delete: "Eliminar"
@@ -48,6 +53,7 @@ es:
     failed_to_like: "\"Me gusta\" no ha funcionado."
     failed_to_post_message: "¡Error al publicar el mensaje!"
     failed_to_remove: "¡Se produjo un error al eliminar la entrada!"
+    failed_to_reshare: "¡Error al compartir!"
     getting_started:
       alright_ill_wait: "Está bien, esperaré."
       hey: "¡Hola, <%= name %>!"
@@ -61,13 +67,15 @@ es:
       help: "Ayuda"
       home: "Inicio"
       log_out: "Salir"
-      mark_all_as_read: "Marcar todo como leido"
+      mark_all_as_read: "Marcar todo como leído"
       notifications: "Notificaciones"
       profile: "Perfil"
       recent_notifications: "Notificaciones recientes"
       search: "Buscar"
       settings: "Ajustes"
       view_all: "Ver todo"
+    hide_post: "Ocultar esta publicación?"
+    hide_post_failed: "Imposible ocultar esta publicación"
     ignore: "Ignorar"
     ignore_failed: "Imposible ignorar a este usuario"
     ignore_user: "¿Ignorar a este usuario?"
@@ -102,6 +110,8 @@ es:
       count:
         one: "<%=count%> voto por ahora"
         other: "<%=count%> votos por ahora"
+      go_to_original_post: "Puedes participar en esta encuesta en <%= original_post_link %>."
+      original_post: "publicación original"
       result: "Resultados"
       show_result: "Mostrar resultados"
       vote: "Votar"
@@ -115,6 +125,7 @@ es:
       ignoring: "Estás ignorando todas las publicaciones de <%= name %>."
       location: "Ubicación"
       photos: "Fotos"
+      posts: "Mensajes"
       you_have_no_tags: "¡no tienes etiquetas!"
     publisher:
       add_option: "Añadir una respuesta"
@@ -124,6 +135,7 @@ es:
       option: "Respuesta"
       public: "Público - tu publicación es visible para todos, incluyendo buscadores"
       question: "Pregunta"
+    remove_post: "Borrar esta publicación?"
     report:
       name: "Informar"
       prompt: "Por favor introduce un motivo:"
@@ -139,6 +151,8 @@ es:
     show_more: "mostrar más"
     stream:
       comment: "Comentar"
+      disable_post_notifications: "Desactiva los avisos para esta publicación"
+      enable_post_notifications: "Activa los avisos para esta publicación"
       follow: "Seguir"
       followed_tag:
         add_a_tag: "Añadir una etiqueta"

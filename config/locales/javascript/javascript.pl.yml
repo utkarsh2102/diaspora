@@ -37,6 +37,7 @@ pl:
       no_comments: "Póki co nie ma jeszcze żadnych komentarzy."
       show: "wyświetl wszystkie komentarze"
     confirm_dialog: "Czy @{m,f:jesteś|n:na}{ pew}{m:ien|f:na|n:no}?"
+    confirm_unload: "Potwierdź, że chcesz opuścić tą stronę. Dane, które wprowadziłeś, nie zostaną zapisane."
     contacts:
       add_contact: "Dodaj kontakt"
       aspect_list_is_not_visible: "Kontakty z tego aspektu nie widzą się nawzajem."
@@ -108,6 +109,8 @@ pl:
         one: "<%=count%> głos jak do tej pory"
         other: "<%=count%> głosów"
         zero: "Żaden głos nie został na razie oddany"
+      go_to_original_post: "Możesz oddać głos w tej sondzie pod tym adresem: <%= original_post_link %>"
+      original_post: "oryginalny wpis"
       result: "Wynik"
       show_result: "Pokaż wynik"
       vote: "Zagłosuj"
@@ -121,6 +124,7 @@ pl:
       ignoring: "Ignorujesz wszystkie wpisy od <%= name %>."
       location: "Miejscowość"
       photos: "Zdjęcia"
+      posts: "Wpisy"
       you_have_no_tags: "nie masz tagów!"
     publisher:
       add_option: "Dodaj odpowiedź"

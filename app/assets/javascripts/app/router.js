@@ -2,6 +2,8 @@
 
 app.Router = Backbone.Router.extend({
   routes: {
+    "help/:section": "help",
+    "help/": "help",
     "help": "help",
     "contacts": "contacts",
     "conversations": "conversations",
@@ -36,14 +38,22 @@ app.Router = Backbone.Router.extend({
     this.route(/^bookmarklet(?:\?(.*))?/, "bookmarklet");
   },
 
-  help: function() {
+  help: function(section) {
     app.help = new app.views.Help();
     $("#help").prepend(app.help.el);
-    app.help.render();
+    app.help.render(section);
   },
 
   contacts: function() {
-    app.contacts = new app.views.Contacts();
+    app.aspect = new app.models.Aspect(gon.preloads.aspect);
+    app.contacts = new app.collections.Contacts(app.parsePreload('contacts'));
+
+    var stream = new app.views.ContactStream({
+      collection: app.contacts,
+      el: $('.stream.contacts #contact_stream'),
+    });
+
+    app.page = new app.pages.Contacts({stream: stream});
   },
 
   conversations: function() {
@@ -67,7 +77,7 @@ app.Router = Backbone.Router.extend({
 
   //below here is oldness
 
-  stream : function(page) {
+  stream : function() {
     app.stream = new app.models.Stream();
     app.stream.fetch();
     app.page = new app.views.Stream({model : app.stream});
@@ -105,7 +115,8 @@ app.Router = Backbone.Router.extend({
       var followedTagsAction = new app.views.TagFollowingAction(
             {tagText: decodeURIComponent(name).toLowerCase()}
           );
-      $("#author_info").prepend(followedTagsAction.render().el)
+      $("#author_info").prepend(followedTagsAction.render().el);
+      app.tags = new app.views.Tags({tagName: name});
     }
     this._hideInactiveStreamLists();
   },
@@ -134,15 +145,15 @@ app.Router = Backbone.Router.extend({
   },
 
   _hideInactiveStreamLists: function() {
-    if(this.aspects_list && Backbone.history.fragment != "aspects")
+    if(this.aspects_list && Backbone.history.fragment !== "aspects")
       this.aspects_list.hideAspectsList();
 
-    if(this.followedTagsView && Backbone.history.fragment != "followed_tags")
+    if(this.followedTagsView && Backbone.history.fragment !== "followed_tags")
       this.followedTagsView.hideFollowedTags();
   },
 
   bookmarklet: function() {
-    var contents = (window.gon) ? gon.preloads.bookmarklet : {}
+    var contents = (window.gon) ? gon.preloads.bookmarklet : {};
     app.bookmarklet = new app.views.Bookmarklet(
       _.extend({}, {el: $('#bookmarklet')}, contents)
     ).render();
@@ -155,4 +166,3 @@ app.Router = Backbone.Router.extend({
   }
 });
 // @license-end
-

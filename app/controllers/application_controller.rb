@@ -24,9 +24,13 @@ class ApplicationController < ActionController::Base
                 :tags,
                 :open_publisher
 
-  layout ->(c) { request.format == :mobile ? "application" : "centered_with_header_with_footer" }
+  layout proc { request.format == :mobile ? "application" : "with_header_with_footer" }
 
   private
+
+  def default_serializer_options
+    {root: false}
+  end
 
   def ensure_http_referer_is_set
     request.env['HTTP_REFERER'] ||= '/'
@@ -148,12 +152,5 @@ class ApplicationController < ActionController::Base
   def gon_set_preloads
     return unless gon.preloads.nil?
     gon.preloads = {}
-  end
-
-  def self.use_bootstrap_for *routes
-    before_filter -> {
-      @css_framework = :bootstrap
-      gon.bootstrap = true
-    }, only: routes.flatten
   end
 end

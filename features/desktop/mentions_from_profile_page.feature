@@ -5,21 +5,19 @@ Feature: mentioning a contact from their profile page
     I want to mention someone more cool than the average bear
 
     Background:
-      Given I am on the home page
-      And following users exist:
+      Given following users exist:
         | username   |
         | bob        |
         | alice      |
 
-      When I sign in as "bob@bob.bob"
       And a user with username "bob" is connected with "alice"
+      And I sign in as "bob@bob.bob"
       And I have following aspects:
         | PostingTo            |
         | NotPostingThingsHere |
       And I have user with username "alice" in an aspect called "PostingTo"
       And I have user with username "alice" in an aspect called "NotPostingThingsHere"
-
-      And I am on the home page
+      And I go to the home page
 
     Scenario: mentioning while posting to all aspects
       Given I am on "alice@alice.alice"'s page
@@ -50,5 +48,6 @@ Feature: mentioning a contact from their profile page
       Then I should see "I am eating a yogurt"
 
       When I am on the aspects page
+      And I select all aspects
       And I select only "NotPostingThingsHere" aspect
       Then I should not see "I am eating a yogurt"
