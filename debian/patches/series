@@ -6,7 +6,6 @@
 008-loosen-twitter-version.patch
 009-loosen-bootstrap-sass.patch
 018-loosen-rails-timeago.patch
-019-loosen-rails-admin.patch
 020-disable-twitter-text.patch
 021-loosen-omniauth-facebook-version.patch
 022-lower-fog-version.patch
