@@ -10,4 +10,3 @@
 018-loosen-rails-timeago.patch
 021-loosen-omniauth-facebook-version.patch
 022-lower-fog-version.patch
-remove-invalid-source.patch
