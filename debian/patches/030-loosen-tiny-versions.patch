@@ -11,7 +11,7 @@ Index: diaspora/Gemfile
  gem "twitter-text",      "1.11.0"
  gem "roxml",             ">=3.1.6"
  gem "ruby-oembed",       "0.8.12"
-@@ -152,8 +152,8 @@ gem "acts-as-taggable-on", "3.5.0"
+@@ -152,11 +152,11 @@ gem "acts-as-taggable-on", "3.5.0"
  
  # URIs and HTTP
  
@@ -21,4 +21,8 @@ Index: diaspora/Gemfile
 +gem "faraday",            "~> 0.9.0"
  gem "faraday_middleware", "0.9.1"
  gem "faraday-cookie_jar", "0.0.6"
- gem "typhoeus",           "0.7.1"
+-gem "typhoeus",           "0.7.1"
++gem "typhoeus",           "~> 0.7.1"
+ 
+ # Views
+ 
