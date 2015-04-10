@@ -10,5 +10,4 @@
 011-loosen-autoprefixer-rails-version.patch
 018-loosen-rails-timeago.patch
 021-loosen-omniauth-facebook-version.patch
-022-lower-fog-version.patch
 030-loosen-tiny-versions.patch
