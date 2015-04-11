@@ -11,3 +11,4 @@
 018-loosen-rails-timeago.patch
 021-loosen-omniauth-facebook-version.patch
 030-loosen-tiny-versions.patch
+040-disable-raise_in_transactional_callbacks.patch
