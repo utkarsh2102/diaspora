@@ -13,3 +13,4 @@
 030-loosen-tiny-versions.patch
 040-disable-raise_in_transactional_callbacks.patch
 041-require-foreigner.patch
+042-fix-asset-check.patch
