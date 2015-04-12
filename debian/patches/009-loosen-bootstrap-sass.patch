@@ -11,3 +11,20 @@ Index: diaspora/Gemfile
  gem "compass-rails",  "2.0.4"
  gem "sass-rails",     "5.0.1"
  gem "autoprefixer-rails", "5.1.7.1"
+Index: diaspora/app/assets/javascripts/main.js
+===================================================================
+--- diaspora.orig/app/assets/javascripts/main.js
++++ diaspora/app/assets/javascripts/main.js
+@@ -40,8 +40,8 @@
+ //= require view
+ //= require aspects-dropdown
+ //= require mentions
+-//= require bootstrap-tooltip
+-//= require bootstrap-popover
+-//= require bootstrap-dropdown
+-//= require bootstrap-modal
++//= require bootstrap/tooltip
++//= require bootstrap/popover
++//= require bootstrap/dropdown
++//= require bootstrap/modal
+ //= require osmlocator
