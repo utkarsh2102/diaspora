@@ -8,6 +8,7 @@
 009-loosen-bootstrap-sass.patch
 010-loosen-responders-version.patch
 011-loosen-autoprefixer-rails-version.patch
+012-loosen-foreman.patch
 018-loosen-rails-timeago.patch
 021-loosen-omniauth-facebook-version.patch
 030-loosen-tiny-versions.patch

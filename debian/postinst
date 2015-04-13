@@ -44,10 +44,6 @@ case "$1" in
 	cd /usr/share/diaspora
 	echo "Installing gems with rubygems (their debian packages have bugs)..."
 # These gems need more work before they can be apt-get
-	if ! gem list foreman | grep foreman
-		then gem install -v=0.62.0 foreman
-	fi
-
 	if ! gem list ^devise$ | grep devise
 		then gem install -v=3.4.1 devise
 	fi

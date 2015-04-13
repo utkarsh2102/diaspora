@@ -1,0 +1,13 @@
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -200,7 +200,7 @@ group :production do # we don"t install
+ 
+   # Process management
+ 
+-  gem "foreman", "0.62"
++  gem "foreman", "~> 0.62"
+ 
+   # Redirects
+ 
