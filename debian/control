@@ -111,6 +111,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  redis-server,
  sudo,
  ruby-rspec,
+ ruby-foreman,
  net-tools,
  nginx
 Description: distributed social networking service
