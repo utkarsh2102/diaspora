@@ -2,6 +2,15 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
+@@ -71,7 +71,7 @@ gem "activerecord-import", "0.7.0"
+ 
+ gem "carrierwave", "0.10.0"
+ gem "fog",         "1.28.0"
+-gem "mini_magick", "4.2.0"
++gem "mini_magick", "~> 4.2"
+ gem "remotipart",  "1.2.1"
+ 
+ # GUID generation
 @@ -123,7 +123,7 @@ gem "messagebus_ruby_api", ">=1.0.3"
  # Parsing
  
