@@ -5,13 +5,13 @@
 006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
 008-loosen-twitter-version.patch
-009-loosen-bootstrap-sass.patch
 010-loosen-responders-version.patch
 011-loosen-autoprefixer-rails-version.patch
 012-loosen-foreman.patch
 018-loosen-rails-timeago.patch
 021-loosen-omniauth-facebook-version.patch
 030-loosen-tiny-versions.patch
+031-embedded-gems.patch
 040-disable-raise_in_transactional_callbacks.patch
 041-require-foreigner.patch
 042-fix-asset-check.patch
