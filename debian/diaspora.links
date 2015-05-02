@@ -1,4 +1,4 @@
 usr/bin usr/share/diaspora/bin
-usr/share/fonts/truetype/roboto/Roboto-Bold.ttf app/assets/images/fonts/Roboto-Bold.ttf
-usr/share/fonts/truetype/roboto/Roboto-Light.ttf app/assets/images/fonts/Roboto-Light.ttf
-usr/share/fonts/truetype/roboto/Roboto-Regular.ttf app/assets/images/fonts/Roboto-Regular.ttf
+usr/share/fonts/truetype/roboto/Roboto-Bold.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Bold.ttf
+usr/share/fonts/truetype/roboto/Roboto-Light.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Light.ttf
+usr/share/fonts/truetype/roboto/Roboto-Regular.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Regular.ttf
