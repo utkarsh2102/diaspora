@@ -38,23 +38,14 @@ case "$1" in
 #	fi
 	
 	echo "Setting up environment varibales..."
-	/usr/lib/diaspora-common/scripts/set-env-diaspora.sh
+	. /usr/lib/diaspora-common/scripts/set-env-diaspora.sh
 	echo RAILS_ENV=$RAILS_ENV DB=$DB ENVIRONMENT_URL=$ENVIRONMENT_URL
 	
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora -E bundle install --local
-	echo "Initializing database..."
-	sudo -u diaspora -E bundle exec rake db:create db:schema:load
-	echo "Precompiling assets..."
-	sudo -u diaspora -E bundle exec rake assets:precompile
-	sudo -u diaspora  touch public/source.tar.gz
-	echo "Starting diaspora service..."
-	sudo -u diaspora -E -i nohup ./script/server &
-	echo "Copy $SERVERNAME-bundle.pem and $SERVERNAME.key to /etc/diaspora/ssl"
-	echo "And reload nginx, run # /etc/init.d/nginx reload"
-	echo "visit your pod at $ENVIRONMENT_URL"
-	echo "To stop diaspora, run # killall -9 unicorn_rails foreman sidekiq"
-	echo "To see the service status, run # /etc/init.d/diaspora status"
+        
+	echo "Running final rake tasks..."
+	. /usr/lib/diaspora-common/scripts/rake-tasks.sh
    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
