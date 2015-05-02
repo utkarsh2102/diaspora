@@ -26,39 +26,21 @@ set -e
 #     `abort-remove' or `abort-deconfigure'.
 
 
-. /usr/share/debconf/confmodule
-. /usr/share/dbconfig-common/dpkg/postinst.pgsql
-
-dbc_dbname="diaspora_production"
-dbc_dbuser="diaspora"
-
-dbc_go diaspora $@
-
 case "$1" in
     configure)
 
-	/usr/lib/diaspora-common/scripts/adduser.sh
-	/usr/lib/diaspora-common/scripts/grantpriv.sh
-	mkdir -p /var/log/diaspora
-	chown -R diaspora: /usr/share/diaspora
-	cd /usr/share/diaspora
-	echo "Installing gems with rubygems (their debian packages have bugs)..."
+	. /etc/diaspora/diaspora-common.conf
+	cd ${diaspora_home}
+#	echo "Installing gems with rubygems (their debian packages have bugs)..."
 # These gems need more work before they can be apt-get
 #	if ! gem list ^devise$ | grep devise
 #		then gem install -v=3.4.1 devise
 #	fi
 	
-	if ! grep RAILS_ENV /etc/diaspora.conf
-		then echo export RAILS_ENV=production >> /etc/diaspora.conf
-	fi
-
-	if ! grep DB /etc/diaspora.conf 
-		then echo export DB=postgres >> /etc/diaspora.conf
-	fi
+	echo "Setting up environment varibales..."
+	/usr/lib/diaspora-common/scripts/set-env-diaspora.sh
+	echo RAILS_ENV=$RAILS_ENV DB=$DB ENVIRONMENT_URL=$ENVIRONMENT_URL
 	
-	# source diaspora variables	
-	. /etc/diaspora.conf
-	export ENVIRONMENT_URL=https://${SERVERNAME}
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora -E bundle install --local
 	echo "Initializing database..."
@@ -83,8 +65,6 @@ case "$1" in
         exit 1
     ;;
 esac
-
-db_stop
 
 
 exit 0
