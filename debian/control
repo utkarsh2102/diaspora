@@ -131,3 +131,5 @@ Description: distributed social networking service
  experimented with by external developers.
  .
  Learn more about diaspora at http://diasporafoundation.org
+ .
+ This package configures PostgreSQL as the database and Nginx as the web server.
