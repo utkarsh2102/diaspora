@@ -16,6 +16,7 @@ XB-Ruby-Versions: ${ruby:Versions}
 Pre-Depends: postgresql-client, dbconfig-common, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  diaspora-common,
+ diaspora-gems-compat,
  ruby-rails (>= 4.1~),
  ruby-actionpack-action-caching,
  ruby-actionpack-page-caching,
