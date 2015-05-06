@@ -30,6 +30,7 @@ case "$1" in
     configure)
 
 	. /etc/diaspora/diaspora-common.conf
+	chown -R ${diaspora_user}: ${diaspora_home}
 	cd ${diaspora_home}
 #	echo "Installing gems with rubygems (their debian packages have bugs)..."
 # These gems need more work before they can be apt-get
