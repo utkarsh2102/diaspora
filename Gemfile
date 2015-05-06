@@ -92,7 +92,7 @@ gem "js-routes",                                        "1.0.0"
 source "https://rails-assets.org" do
   gem "rails-assets-jquery",                              "1.11.1" # Should be kept in sync with jquery-rails
 
-  gem "rails-assets-markdown-it",                         "4.0.3"
+  gem "rails-assets-markdown-it",                         "4.2.0"
   gem "rails-assets-markdown-it-hashtag",                 "0.3.0"
   gem "rails-assets-markdown-it-diaspora-mention",        "0.3.0"
   gem "rails-assets-markdown-it-sanitizer",               "0.3.0"
@@ -123,7 +123,7 @@ gem "messagebus_ruby_api", "1.0.3"
 # Parsing
 
 gem "nokogiri",          "1.6.6.2"
-gem "redcarpet",         "3.2.2"
+gem "redcarpet",         "3.2.3"
 gem "twitter-text",      "1.11.0"
 gem "roxml",             "3.1.6"
 gem "ruby-oembed",       "0.8.12"
