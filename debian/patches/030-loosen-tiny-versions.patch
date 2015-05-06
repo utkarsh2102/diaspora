@@ -20,6 +20,15 @@ Index: diaspora/Gemfile
  gem "remotipart",  "1.2.1"
  
  # GUID generation
+@@ -92,7 +92,7 @@ gem "js-routes",
+ source "https://rails-assets.org" do
+   gem "rails-assets-jquery",                              "1.11.1" # Should be kept in sync with jquery-rails
+ 
+-  gem "rails-assets-markdown-it",                         "4.2.0"
++  gem "rails-assets-markdown-it",                         "~> 4.2.0"
+   gem "rails-assets-markdown-it-hashtag",                 "0.3.0"
+   gem "rails-assets-markdown-it-diaspora-mention",        "0.3.0"
+   gem "rails-assets-markdown-it-sanitizer",               "0.3.0"
 @@ -123,7 +123,7 @@ gem "messagebus_ruby_api", ">=1.0.3"
  # Parsing
  
