@@ -21,5 +21,3 @@ redis-integration2.conf usr/share/diaspora
 script usr/share/diaspora
 spec usr/share/diaspora
 vendor usr/share/diaspora
-debian/database.yml usr/share/diaspora/config
-debian/diaspora.yml usr/share/diaspora/config
