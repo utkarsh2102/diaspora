@@ -4,7 +4,6 @@
 007-loosen-roxml-version.patch
 010-loosen-responders-version.patch
 018-loosen-rails-timeago.patch
-021-loosen-omniauth-facebook-version.patch
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
 040-disable-raise_in_transactional_callbacks.patch
