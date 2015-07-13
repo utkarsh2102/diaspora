@@ -11,6 +11,15 @@ Index: diaspora/Gemfile
  
  # Database
  
+@@ -83,7 +83,7 @@ gem "entypo-rails", "~> 2.2.2"
+ 
+ # JavaScript
+ 
+-gem "backbone-on-rails",                                "1.1.2.1"
++gem "backbone-on-rails",                                "~> 1.1.2"
+ gem "handlebars_assets",                                "0.20.1"
+ gem "jquery-rails",                                     "4.0.4"
+ gem "jquery-ui-rails",                                  "5.0.3"
 @@ -157,8 +157,8 @@ gem "acts-as-taggable-on", "3.5.0"
  
  # URIs and HTTP
