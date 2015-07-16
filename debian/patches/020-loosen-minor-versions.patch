@@ -38,3 +38,12 @@ Index: diaspora/Gemfile
  gem "roxml",             "~> 3.1"
  gem "ruby-oembed",       "0.8.14"
  gem "open_graph_reader", "0.6.1"
+@@ -209,7 +209,7 @@ group :production do # we don"t install
+ 
+   # Process management
+ 
+-  gem "eye", "0.7.pre"
++  gem "eye", "~> 0.6"
+ 
+   # Redirects
+ 
