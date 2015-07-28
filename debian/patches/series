@@ -1,5 +1,4 @@
 002-remove-development-test-from-gemfile.patch
-005-loosen-rails-version.patch
 006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
 010-loosen-responders-version.patch
