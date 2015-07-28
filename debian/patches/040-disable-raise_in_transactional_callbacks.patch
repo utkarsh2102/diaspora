@@ -4,7 +4,7 @@ Index: diaspora/config/application.rb
 ===================================================================
 --- diaspora.orig/config/application.rb
 +++ diaspora/config/application.rb
-@@ -101,7 +101,7 @@ module Diaspora
+@@ -104,7 +104,7 @@ module Diaspora
      end
  
      # Will be default with Rails 5
