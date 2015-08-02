@@ -28,7 +28,7 @@ Index: diaspora/Gemfile
  
  gem "activerecord-import", "0.8.0"
  
-@@ -70,7 +70,7 @@ gem "activerecord-import", "0.8.0"
+@@ -70,11 +70,11 @@ gem "activerecord-import", "0.8.0"
  
  gem "carrierwave", "0.10.0"
  gem "fog",         "~> 1.30"
@@ -37,6 +37,11 @@ Index: diaspora/Gemfile
  gem "remotipart",  "1.2.1"
  
  # GUID generation
+-gem "uuid", "2.3.8"
++gem "uuid", "~> 2.3.7"
+ 
+ # Icons
+ 
 @@ -82,7 +82,7 @@ gem "entypo-rails", "~> 2.2.2"
  
  # JavaScript
