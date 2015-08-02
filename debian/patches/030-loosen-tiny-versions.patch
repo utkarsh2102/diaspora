@@ -42,7 +42,7 @@ Index: diaspora/Gemfile
  
  # Icons
  
-@@ -82,10 +82,10 @@ gem "entypo-rails", "~> 2.2.2"
+@@ -82,12 +82,12 @@ gem "entypo-rails", "~> 2.2.2"
  
  # JavaScript
  
@@ -54,8 +54,11 @@ Index: diaspora/Gemfile
 -gem "jquery-ui-rails",   "5.0.5"
 +gem "jquery-ui-rails",   "~> 5.0.3"
  gem "js_image_paths",    "0.0.2"
- gem "js-routes",         "1.0.1"
+-gem "js-routes",         "1.0.1"
++gem "js-routes",         "~> 1.0.0"
  
+ source "https://rails-assets.org" do
+   gem "rails-assets-jquery",                              "1.11.2" # Should be kept in sync with jquery-rails
 @@ -155,8 +155,8 @@ gem "acts-as-taggable-on", "3.5.0"
  
  # URIs and HTTP
