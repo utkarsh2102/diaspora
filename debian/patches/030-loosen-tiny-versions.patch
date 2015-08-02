@@ -2,6 +2,15 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
+@@ -31,7 +31,7 @@ gem "simple_captcha2", "0.3.4", require:
+ 
+ # Background processing
+ 
+-gem "sidekiq", "3.4.1"
++gem "sidekiq", "~> 3.4.1"
+ gem "sinatra", "1.4.6"
+ 
+ # Scheduled processing
 @@ -82,7 +82,7 @@ gem "entypo-rails", "~> 2.2.2"
  
  # JavaScript
