@@ -61,7 +61,7 @@ Index: diaspora/Gemfile
 -  gem "rails-assets-jquery",                              "1.11.2" # Should be kept in sync with jquery-rails
 +  gem "rails-assets-jquery",                              "~> 1.11.1" # Should be kept in sync with jquery-rails
  
-   gem "rails-assets-markdown-it",                         "4.4.0"
+   gem "rails-assets-markdown-it",                         "~> 4.2"
    gem "rails-assets-markdown-it-hashtag",                 "0.3.1"
 @@ -155,8 +155,8 @@ gem "acts-as-taggable-on", "3.5.0"
  
