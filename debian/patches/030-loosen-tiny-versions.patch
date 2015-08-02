@@ -11,6 +11,15 @@ Index: diaspora/Gemfile
  gem "sinatra", "1.4.6"
  
  # Scheduled processing
+@@ -55,7 +55,7 @@ gem "rack-cors", "0.4.0", require: "rack
+ gem "bootstrap-sass", "2.3.2.2"
+ gem "compass-rails",  "2.0.4"
+ gem "sass-rails",     "5.0.1"
+-gem "autoprefixer-rails", "5.2.1"
++gem "autoprefixer-rails", "~> 5.2.1"
+ 
+ # Database
+ 
 @@ -82,7 +82,7 @@ gem "entypo-rails", "~> 2.2.2"
  
  # JavaScript
