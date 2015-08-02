@@ -14,9 +14,6 @@
 %:
 	dh $@
 
-override_dh_installinit:
-	dh_installinit -o
-
 clean:
 	dh clean
 	rm -rf .bundle
