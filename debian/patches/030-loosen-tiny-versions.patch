@@ -11,7 +11,7 @@ Index: diaspora/Gemfile
  gem "sinatra", "1.4.6"
  
  # Scheduled processing
-@@ -55,7 +55,7 @@ gem "rack-cors", "0.4.0", require: "rack
+@@ -55,14 +55,14 @@ gem "rack-cors", "0.4.0", require: "rack
  gem "bootstrap-sass", "2.3.2.2"
  gem "compass-rails",  "2.0.4"
  gem "sass-rails",     "5.0.1"
@@ -19,6 +19,14 @@ Index: diaspora/Gemfile
 +gem "autoprefixer-rails", "~> 5.2.1"
  
  # Database
+ 
+ ENV["DB"] ||= "mysql"
+ 
+ gem "mysql2", "0.3.18" if ENV["DB"] == "all" || ENV["DB"] == "mysql"
+-gem "pg",     "0.18.2" if ENV["DB"] == "all" || ENV["DB"] == "postgres"
++gem "pg",     "~> 0.18.1" if ENV["DB"] == "all" || ENV["DB"] == "postgres"
+ 
+ gem "activerecord-import", "0.8.0"
  
 @@ -82,7 +82,7 @@ gem "entypo-rails", "~> 2.2.2"
  
