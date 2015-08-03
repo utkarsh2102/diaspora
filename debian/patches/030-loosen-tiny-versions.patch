@@ -63,6 +63,15 @@ Index: diaspora/Gemfile
  
    gem "rails-assets-markdown-it",                         "~> 4.2"
    gem "rails-assets-markdown-it-hashtag",                 "0.3.1"
+@@ -104,7 +104,7 @@ source "https://rails-assets.org" do
+   # jQuery plugins
+ 
+   gem "rails-assets-jeresig--jquery.hotkeys",       "0.2.0"
+-  gem "rails-assets-jquery-placeholder",            "2.1.2"
++  gem "rails-assets-jquery-placeholder",            "~> 2.1.1"
+   gem "rails-assets-jquery-textchange",             "0.2.3"
+   gem "rails-assets-perfect-scrollbar",             "0.6.3"
+   gem "rails-assets-jakobmattsson--jquery-elastic", "1.6.11"
 @@ -155,8 +155,8 @@ gem "acts-as-taggable-on", "3.5.0"
  
  # URIs and HTTP
