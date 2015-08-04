@@ -102,6 +102,15 @@ Index: diaspora/Gemfile
  
  # Prevent occasions where minitest is not bundled in
  # packaged versions of ruby. See following issues/prs:
+@@ -194,7 +194,7 @@ gem "minitest"
+ group :production do # we don"t install these on travis to speed up test runs
+   # Administration
+ 
+-  gem "rails_admin", "0.6.8"
++  gem "rails_admin", "~> 0.6.7"
+ 
+   # Analytics
+ 
 @@ -203,7 +203,7 @@ group :production do # we don"t install
  
    # Click-jacking protection
