@@ -38,6 +38,15 @@ Index: diaspora/Gemfile
    gem "rails-assets-markdown-it-hashtag",                 "0.3.1"
    gem "rails-assets-markdown-it-diaspora-mention",        "0.3.0"
    gem "rails-assets-markdown-it-sanitizer",               "0.3.1"
+@@ -126,7 +126,7 @@ gem "messagebus_ruby_api", ">=1.0.3"
+ # Parsing
+ 
+ gem "nokogiri",          "1.6.6.2"
+-gem "redcarpet",         "3.3.2"
++gem "redcarpet",         "~> 3.2"
+ gem "twitter-text",      "1.12.0"
+ gem "roxml",             "~> 3.1"
+ gem "ruby-oembed",       "0.8.14"
 @@ -207,7 +207,7 @@ group :production do # we don"t install
  
    # Process management
