@@ -72,7 +72,7 @@ Index: diaspora/Gemfile
    gem "rails-assets-jquery-textchange",             "0.2.3"
    gem "rails-assets-perfect-scrollbar",             "0.6.3"
    gem "rails-assets-jakobmattsson--jquery-elastic", "1.6.11"
-@@ -155,8 +155,8 @@ gem "acts-as-taggable-on", "3.5.0"
+@@ -155,16 +155,16 @@ gem "acts-as-taggable-on", "3.5.0"
  
  # URIs and HTTP
  
@@ -82,8 +82,9 @@ Index: diaspora/Gemfile
 +gem "faraday",            "~> 0.9.0"
  gem "faraday_middleware", "0.9.1"
  gem "faraday-cookie_jar", "0.0.6"
- gem "typhoeus",           "0.7.2"
-@@ -164,7 +164,7 @@ gem "typhoeus",           "0.7.2"
+-gem "typhoeus",           "0.7.2"
++gem "typhoeus",           "~> 0.7.1"
+ 
  # Views
  
  gem "gon",                     "5.2.3"
