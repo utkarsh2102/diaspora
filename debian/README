@@ -1,9 +1,7 @@
 Steps to updating this package.
 
-1. We need to track development by packaging snapshots to keep
- dependencies in sync. We can't wait till a new release to start
- working on packaging.
-2. Once you import the package, refresh patches.
+1. Use experimental to stage updates so we don't break other packages
+2. Once you import the package (uscan, gbp import-orig), refresh patches.
 3. You may need to update some dependencies as Gemfile may specify
  newer versions. Always try to keep the versions in sync.
 4. If needed feel free to loosen (~> x.y or >= x.y.z), or adjust
