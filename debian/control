@@ -61,7 +61,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-twitter,
  ruby-omniauth-wordpress,
  ruby-active-model-serializers,
- ruby-diaspora-vines,
  ruby-rails-assets-diaspora-jsxc,
  ruby-acts-as-taggable-on,
  ruby-addressable,
@@ -125,6 +124,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  fonts-roboto
 Conflicts: diaspora-installer, ruby-jbuilder
 Replaces: diaspora-installer
+Recommends: ruby-diaspora-vines
 Description: distributed social networking service
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
