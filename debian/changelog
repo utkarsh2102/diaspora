@@ -1,3 +1,9 @@
+diaspora (0.5.2.0+debian-3) UNRELEASED; urgency=medium
+
+  * Tighten ruby-compass-rails dependency 
+
+ -- Pirate Praveen <praveen@debian.org>  Wed, 19 Aug 2015 15:59:24 +0530
+
 diaspora (0.5.2.0+debian-2) experimental; urgency=medium
 
   * Move ruby-diaspora-vines to recommends (chat is still alpha)
