@@ -1,4 +1,4 @@
-diaspora (0.5.2.0+debian-3) UNRELEASED; urgency=medium
+diaspora (0.5.2.0+debian-3) experimental; urgency=medium
 
   * Tighten dependencies:
     ruby-compass-rails to fix ruby-sass-rails dependency
@@ -8,7 +8,7 @@ diaspora (0.5.2.0+debian-3) UNRELEASED; urgency=medium
     ruby-omniauth-twitter to update ruby-omniauth-oauth
     ruby-eye to update ruby-celluloid-io
 
- -- Pirate Praveen <praveen@debian.org>  Wed, 19 Aug 2015 15:59:24 +0530
+ -- Pirate Praveen <praveen@debian.org>  Wed, 19 Aug 2015 18:25:36 +0530
 
 diaspora (0.5.2.0+debian-2) experimental; urgency=medium
 
