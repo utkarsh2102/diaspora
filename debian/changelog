@@ -1,8 +1,9 @@
 diaspora (0.5.2.0+debian-2) UNRELEASED; urgency=medium
 
   * Move ruby-diaspora-vines to recommends (chat is still alpha)
-  * Tighten dependency on rails
+  * Tighten dependency on ruby-rails
   * Loosen dependency of ruby-devise-lastseenable
+  * Tighten dependency on ruby-sidekiq
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 18 Aug 2015 22:20:50 +0530
 
