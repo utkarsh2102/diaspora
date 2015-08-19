@@ -4,6 +4,7 @@ diaspora (0.5.2.0+debian-3) UNRELEASED; urgency=medium
     ruby-compass-rails to fix ruby-sass-rails dependency
     ruby-jquery-rails to install ruby-dom-testing
     ruby-sidekiq to update ruby-redis and ruby-redis-namespace
+    ruby-rails to update ruby-i18n and ruby-thread-safe
 
  -- Pirate Praveen <praveen@debian.org>  Wed, 19 Aug 2015 15:59:24 +0530
 
