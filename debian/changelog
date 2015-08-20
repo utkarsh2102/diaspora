@@ -1,6 +1,6 @@
 diaspora (0.5.2.0+debian-4) UNRELEASED; urgency=medium
 
-  * Update ruby-eye dependency to >= 0.7.0~pre-1 
+  * Update ruby-eye dependency to >= 0.7~pre-1 
 
  -- Pirate Praveen <praveen@debian.org>  Thu, 20 Aug 2015 12:17:18 +0530
 
