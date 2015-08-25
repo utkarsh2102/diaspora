@@ -1,8 +1,9 @@
-diaspora (0.5.2.0+debian-4) UNRELEASED; urgency=medium
+diaspora (0.5.2.0+debian-4) experimental; urgency=medium
 
-  * Update ruby-eye dependency to >= 0.7~pre-1 
+  * Update ruby-eye dependency to >= 0.7~pre-1
+  * Change ruby-diaspora-vines to suggests
 
- -- Pirate Praveen <praveen@debian.org>  Thu, 20 Aug 2015 12:17:18 +0530
+ -- Pirate Praveen <praveen@debian.org>  Tue, 25 Aug 2015 17:19:41 +0530
 
 diaspora (0.5.2.0+debian-3) experimental; urgency=medium
 
