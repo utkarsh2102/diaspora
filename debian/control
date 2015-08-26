@@ -120,14 +120,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-rack-ssl,
  ruby-asset-sync,
  imagemagick,
- curl,
- postgresql,
- redis-server,
- sudo,
- ruby-rspec,
  ruby-foreman,
- net-tools,
- nginx,
  fonts-roboto
 Conflicts: diaspora-installer, ruby-jbuilder
 Replaces: diaspora-installer
