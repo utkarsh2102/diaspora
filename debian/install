@@ -20,5 +20,6 @@ redis-integration1.conf usr/share/diaspora
 redis-integration2.conf usr/share/diaspora
 script usr/share/diaspora
 spec usr/share/diaspora
+tmp usr/share/diaspora
 vendor usr/share/diaspora
 debian/gems-compat/bootstrap-sass-2.3.2.2 usr/share/diaspora/vendor/gems

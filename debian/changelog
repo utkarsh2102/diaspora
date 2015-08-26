@@ -1,6 +1,7 @@
 diaspora (0.5.2.0+debian-5) UNRELEASED; urgency=medium
 
   * Set minimum version of 0.2.0-3 for rails-assets-jeresig-jquery.hotkeys
+  * Install 'tmp' directory (for tmp/pids)
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 25 Aug 2015 17:33:25 +0530
 
