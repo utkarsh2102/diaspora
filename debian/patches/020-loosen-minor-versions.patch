@@ -2,15 +2,6 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -8,7 +8,7 @@ gem "responders", "~> 2.0"
- 
- # Appserver
- 
--gem "unicorn", "4.9.0", require: false
-+gem "unicorn", "~> 4.8", require: false
- 
- # Federation
- 
 @@ -69,7 +69,7 @@ gem "activerecord-import", "0.8.0"
  # File uploading
  
