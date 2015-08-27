@@ -4,6 +4,7 @@ diaspora (0.5.2.0+debian-6) UNRELEASED; urgency=medium
   * Set minimum version of diaspora-common to 0.5.2.0+debian1
   * Add symlink to /usr/bin for bin
   * Set minimum version of unicorn to 4.9.0
+  * Remove ruby-foreman dependency (not required)
 
  -- Pirate Praveen <praveen@debian.org>  Thu, 27 Aug 2015 10:35:14 +0530
 
