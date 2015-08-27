@@ -8,6 +8,4 @@
 020-loosen-minor-versions.patch
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
-040-disable-raise_in_transactional_callbacks.patch
-041-require-foreigner.patch
 043-dont-do-git-checks.patch
