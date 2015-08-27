@@ -11,15 +11,6 @@ Index: diaspora/Gemfile
  gem "mini_magick", "4.2.7"
  gem "remotipart",  "1.2.1"
  
-@@ -78,7 +78,7 @@ gem "uuid", "2.3.8"
- 
- # Icons
- 
--gem "entypo-rails", "2.2.3"
-+gem "entypo-rails", "~> 2.2.2"
- 
- # JavaScript
- 
 @@ -92,7 +92,7 @@ gem "js-routes",         "1.0.1"
  source "https://rails-assets.org" do
    gem "rails-assets-jquery",                              "1.11.2" # Should be kept in sync with jquery-rails
