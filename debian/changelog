@@ -4,6 +4,7 @@ diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
   * Remove bin directory before install (to support switching from
      diaspora-installer)
   * Stop diaspora before upgrade
+  * Set minimum version for ruby-rails-assets-markdown-it
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
 
