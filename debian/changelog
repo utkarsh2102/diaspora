@@ -1,3 +1,9 @@
+diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
+
+  * Bump minimum version of diaspora-commin to 0.5.2.0+debian4 
+
+ -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
+
 diaspora (0.5.2.0+debian-6) experimental; urgency=medium
 
   * Remove rails 4.1 compatibility patches
