@@ -1,0 +1,51 @@
+#! /bin/sh
+set -e
+
+# Read variables
+. /etc/diaspora/diaspora-common.conf
+. ${diaspora_conf}
+
+# Remove bin directory if upgrading from diaspora-installer
+if test -d ${diaspora_home}/bin
+then
+    rm -rf ${diaspora_home}/bin
+fi
+
+# Check if PostgreSQL database diaspora_production exist
+if su diaspora -s /bin/sh -c "psql  diaspora_production -c ''"
+then
+    echo "You already have a PostgreSQL database named 'diaspora_production'..."
+    export dbexist='true'
+fi
+
+case "$1" in
+    upgrade)
+        if ! test -z $dbexist
+        then
+            # Show current version of package
+            installed_diaspora_version=`echo $2|cut -d+ -f1`
+            installed_diaspora_major_version=`echo ${installed_diaspora_version} |cut -d. -f1,2`
+	    installed_diaspora_minor_version=`echo ${installed_diaspora_version} |cut -d. -f3,4`
+	    diaspora_minor_version=`echo ${diaspora_version} |cut -d. -f3,4`
+            if test $(echo "${installed_diaspora_major_version} < 0.5" |bc) -eq 1
+            then
+            	echo "Upgrade not supported"
+            elif test $(echo "${installed_diaspora_minor_version} < ${diaspora_minor_version}" |bc) -eq 1
+	    then
+            	echo "Stopping diaspora..."
+            	invoke-rc.d diaspora stop
+            fi
+            
+        fi
+        ;;
+    abort-upgrade|install)
+        ;;
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

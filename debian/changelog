@@ -1,6 +1,9 @@
 diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
 
   * Bump minimum version of diaspora-commin to 0.5.2.0+debian4 
+  * Remove bin directory before install (to support switching from
+     diaspora-installer)
+  * Stop diaspora before upgrade
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
 
