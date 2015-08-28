@@ -4,8 +4,8 @@ diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
   * Remove bin directory before install (to support switching from
      diaspora-installer)
   * Stop diaspora before upgrade
-  * Set minimum version for ruby-rails-assets-markdown-it to 4.4.0
-  * Set minimum version of ruby-fog to 1.31
+  * Set minimum version for ruby-rails-assets-markdown-it, ruby-fog,
+    ruby-rack-rewrite, ruby-uuid, ruby-mini-magick
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
 
