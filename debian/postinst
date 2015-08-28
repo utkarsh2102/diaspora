@@ -32,11 +32,6 @@ case "$1" in
 	. /etc/diaspora/diaspora-common.conf
 	chown -R ${diaspora_user}: ${diaspora_home}
 	cd ${diaspora_home}
-#	echo "Installing gems with rubygems (their debian packages have bugs)..."
-# These gems need more work before they can be apt-get
-#	if ! gem list ^devise$ | grep devise
-#		then gem install -v=3.4.1 devise
-#	fi
 	
 	echo "Setting up environment varibales..."
 	. /usr/lib/diaspora-common/scripts/set-env-diaspora.sh
