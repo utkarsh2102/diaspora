@@ -114,12 +114,3 @@ Index: diaspora/Gemfile
  
    # Analytics
  
-@@ -203,7 +203,7 @@ group :production do # we don"t install
- 
-   # Click-jacking protection
- 
--  gem "rack-protection", "1.5.3"
-+  gem "rack-protection", "~> 1.5.2"
- 
-   # Process management
- 
