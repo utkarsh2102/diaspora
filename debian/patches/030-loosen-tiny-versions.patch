@@ -71,15 +71,6 @@ Index: diaspora/Gemfile
    gem "rails-assets-jquery-textchange",             "0.2.3"
    gem "rails-assets-perfect-scrollbar",             "0.6.3"
    gem "rails-assets-jakobmattsson--jquery-elastic", "1.6.11"
-@@ -155,7 +155,7 @@ gem "acts-as-taggable-on", "3.5.0"
- 
- # URIs and HTTP
- 
--gem "addressable",        "2.3.8", require: "addressable/uri"
-+gem "addressable",        "~> 2.3.6", require: "addressable/uri"
- gem "faraday",            "0.9.1"
- gem "faraday_middleware", "0.9.1"
- gem "faraday-cookie_jar", "0.0.6"
 @@ -167,7 +167,7 @@ gem "gon",                     "5.2.3"
  gem "haml",                    "4.0.6"
  gem "mobile-fu",               "1.3.1"
