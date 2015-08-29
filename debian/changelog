@@ -9,7 +9,7 @@ diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
     ruby-rails-admin, ruby-zip, ruby-haml, ruby-typhoeus, ruby-faraday,
     ruby-addressable, ruby-rails-assets-jquery-placeholder, ruby-js-routes,
     ruby-handlebars-assets
-  * Add ruby-responders to dependencies
+  * Add ruby-responders, ruby-jquery-ui-rails to dependencies
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
 
