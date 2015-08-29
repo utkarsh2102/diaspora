@@ -1,4 +1,4 @@
-diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
+diaspora (0.5.2.0+debian-7) experimental; urgency=medium
 
   * Bump minimum version of diaspora-common to 0.5.2.0+debian4 
   * Remove bin directory before install (to support switching from
@@ -11,7 +11,7 @@ diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
     ruby-handlebars-assets, ruby-pg
   * Add ruby-responders, ruby-jquery-ui-rails to dependencies
 
- -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
+ -- Pirate Praveen <praveen@debian.org>  Sun, 30 Aug 2015 00:13:06 +0530
 
 diaspora (0.5.2.0+debian-6) experimental; urgency=medium
 
