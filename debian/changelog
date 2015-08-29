@@ -6,7 +6,7 @@ diaspora (0.5.2.0+debian-7) UNRELEASED; urgency=medium
   * Stop diaspora before upgrade
   * Set minimum version for ruby-rails-assets-markdown-it, ruby-fog,
     ruby-rack-rewrite, ruby-uuid, ruby-mini-magick, ruby-rack-protection,
-    ruby-rails-admin, ruby-zip, ruby-haml
+    ruby-rails-admin, ruby-zip, ruby-haml, ruby-typhoeus
   * Add ruby-responders to dependencies
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 28 Aug 2015 14:52:07 +0530
