@@ -25,6 +25,11 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+gem_install() {
+if ! gem list ^$1$ | grep "$1 ($2)"
+	then gem install -v=$2 $1
+fi
+}
 
 case "$1" in
     configure)
@@ -35,13 +40,9 @@ case "$1" in
 	echo "supported dependency graph)"
 # These gems need more work before they can be kept in sync
 	invoke-rc.d diaspora stop
-	if ! gem list ^roxml$ | grep "roxml (3.1.6)"
-		then gem install -v=3.1.6 roxml
-	fi
-	
-	if ! gem list ^redcarpet$ | grep "redcarpet (3.3.2)"
-		then gem install -v=3.3.2 redcarpet
-	fi
+	gem_install roxml 3.1.6
+	gem_install redcarpet 3.3.2
+	gem_install rails-timeago 2.11.0
 	
 	echo "Verifying we have all required libraries..."
 	cd ${diaspora_home}
@@ -49,7 +50,9 @@ case "$1" in
 	su diaspora -s /bin/sh -c "rm ${diaspora_home}/Gemfile.lock"
 	su diaspora -s /bin/sh -c 'bundle install --local'
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'	
-	invoke-rc.d diaspora start
+#	invoke-rc.d diaspora start
+# TODO: figure out why inovke-rc.d fails to start diaspora
+	echo "To start diaspora, run # /etc/init.d/diaspora start"
    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
