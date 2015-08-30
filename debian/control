@@ -176,3 +176,5 @@ Description: distributed social networking service - upstream compatibility
  .
  You may be interested in diaspora-installer package which installs diaspora
  with upstream supported gem dependency graph.
+ .
+ This is a dependency package
