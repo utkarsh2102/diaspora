@@ -1,6 +1,5 @@
 042-remove-minified-js-require.patch
 002-remove-development-test-from-gemfile.patch
-006-loosen-messagebus-ruby-api-version.patch
 007-loosen-roxml-version.patch
 019-remove-diaspora-vines.patch
 020-loosen-minor-versions.patch
