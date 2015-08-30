@@ -40,6 +40,7 @@ case "$1" in
 	
 	echo "Verifying we have all required libraries..."
 	cd ${diaspora_home}
+	. ${diaspora_conf}
 	su diaspora -s /bin/sh -c 'bundle install --local'
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'	
    ;;
