@@ -27,7 +27,13 @@ set -e
 
 gem_install() {
 if ! gem list ^$1$ | grep "$1 ($2)"
-	then gem install -v=$2 $1
+	then 
+		if echo $1 |grep ^rails-assets
+		then
+			gem install --source https://rails-assets.org -v=$2 $1
+		else
+			gem install -v=$2 $1
+		fi
 fi
 }
 
@@ -43,6 +49,8 @@ case "$1" in
 	gem_install roxml 3.1.6
 	gem_install redcarpet 3.3.2
 	gem_install rails-timeago 2.11.0
+	gem_install compass-rails 2.0.4
+	gem_install rails-assets-jquery 1.11.2
 	
 	echo "Verifying we have all required libraries..."
 	cd ${diaspora_home}

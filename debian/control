@@ -151,13 +151,22 @@ XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
 Conflicts: ruby-roxml (>> 3.1.6),
  ruby-redcarpet (<< 3.3.2),
- ruby-rails-timeago (>> 2.11.0)
+ ruby-rails-timeago (>> 2.11.0),
+ ruby-rails-assets-jquery (>> 1.11.2),
+ ruby-sass-rails (>> 5.0.1),
+ ruby-compass-rails (>> 2.0.4)
 Replaces: ruby-roxml (>> 3.1.6),
  ruby-redcarpet (<< 3.3.2),
- ruby-rails-timeago (>> 2.11.0)
+ ruby-rails-timeago (>> 2.11.0),
+ ruby-rails-assets-jquery (>> 1.11.2),
+ ruby-sass-rails (>> 5.0.1),
+ ruby-compass-rails (>> 2.0.4)
 Provides: ruby-roxml (= 3.1.6),
  ruby-redcarpet (= 3.3.2),
- ruby-rails-timeago (= 2.11.0)
+ ruby-rails-assets-jquery (= 1.11.2),
+ ruby-rails-timeago (= 2.11.0),
+ ruby-sass-rails (= 5.0.1),
+ ruby-compass-rails (= 2.0.4)
 Description: distributed social networking service - upstream compatibility
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
