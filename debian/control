@@ -143,3 +143,19 @@ Description: distributed social networking service
  Learn more about diaspora at http://diasporafoundation.org
  .
  This package configures PostgreSQL as the database and Nginx as the web server.
+
+Package: diaspora-upstream-compat
+Section: contrib/web
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
+ diaspora (>= 0.5.2.0),
+Description: distributed social networking service - upstream compatibility
+ Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
+ personal web server that implements a distributed social networking service.
+ .
+ This package provides compatibility with upstream gem dependency graph. This 
+ is mainly for reproducing bugs with an upstream supported dependency graph.
+ .
+ You may be interested in diaspora-installer package which installs diaspora
+ with upstream supported gem dependency graph.
