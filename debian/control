@@ -149,7 +149,9 @@ Section: contrib/web
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- diaspora (>= 0.5.2.0),
+Breaks: ruby-roxml (>> 3.1.6)
+Replaces: ruby-roxml (>> 3.1.6)
+Provides: ruby-roxml (= 3.1.6)
 Description: distributed social networking service - upstream compatibility
  Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
  personal web server that implements a distributed social networking service.
