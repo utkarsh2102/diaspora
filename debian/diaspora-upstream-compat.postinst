@@ -34,15 +34,22 @@ case "$1" in
 	echo "(they have a version in debian which differ from upstream"
 	echo "supported dependency graph)"
 # These gems need more work before they can be kept in sync
-	if ! gem list ^roxml$ | grep roxml
+	invoke-rc.d diaspora stop
+	if ! gem list ^roxml$ | grep "roxml (3.1.6)"
 		then gem install -v=3.1.6 roxml
+	fi
+	
+	if ! gem list ^redcarpet$ | grep "redcarpet (3.3.2)"
+		then gem install -v=3.3.2 redcarpet
 	fi
 	
 	echo "Verifying we have all required libraries..."
 	cd ${diaspora_home}
 	. ${diaspora_conf}
+	su diaspora -s /bin/sh -c "rm ${diaspora_home}/Gemfile.lock"
 	su diaspora -s /bin/sh -c 'bundle install --local'
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'	
+	invoke-rc.d diaspora start
    ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
