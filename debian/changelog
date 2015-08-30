@@ -1,3 +1,9 @@
+diaspora (0.5.2.0+debian-8) UNRELEASED; urgency=medium
+
+  * Change ruby-devise-lastseenable dependency to 0.0.5.REALLY.0.0.4 (#796979) 
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 30 Aug 2015 14:39:00 +0530
+
 diaspora (0.5.2.0+debian-7) experimental; urgency=medium
 
   * Bump minimum version of diaspora-common to 0.5.2.0+debian4 
