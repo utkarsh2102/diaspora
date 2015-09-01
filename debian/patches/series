@@ -1,4 +1,3 @@
-042-remove-minified-js-require.patch
 002-remove-development-test-from-gemfile.patch
 007-loosen-roxml-version.patch
 019-remove-diaspora-vines.patch
