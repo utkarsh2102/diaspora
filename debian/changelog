@@ -4,6 +4,8 @@ diaspora (0.5.3.0+debian~rc-1) UNRELEASED; urgency=medium
   * Change ruby-devise-lastseenable dependency to 0.0.5.REALLY.0.0.4 (#796979)
   * Change ruby-messagebus-api dependency to 
     3.0.7+git.20130130.97b34ece.REALLY.1.0.3 (match exact version with Gemfile)
+  * Tighten dependencies
+  * Add json-schema as new dependency
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 01 Sep 2015 11:01:07 +0530
 
