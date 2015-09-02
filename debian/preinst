@@ -1,8 +1,9 @@
 #! /bin/sh
 set -e
 
-# Read variables
-. /etc/diaspora/diaspora-common.conf
+# Hardcore variables as diaspora-common.conf won't be available if both
+# installed together
+diaspora_conf=/etc/diaspora.conf
 . ${diaspora_conf}
 
 # Remove bin directory if upgrading from diaspora-installer
