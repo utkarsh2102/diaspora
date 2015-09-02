@@ -3,8 +3,7 @@ set -e
 
 # Hardcore variables as diaspora-common.conf won't be available if both
 # installed together
-diaspora_conf=/etc/diaspora.conf
-. ${diaspora_conf}
+diaspora_home=/usr/share/diaspora
 
 # Remove bin directory if upgrading from diaspora-installer
 if test -d ${diaspora_home}/bin
