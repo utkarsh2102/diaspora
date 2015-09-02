@@ -2,38 +2,31 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -31,7 +31,7 @@ gem "simple_captcha2", "0.3.4", require:
- 
- # Background processing
- 
--gem "sidekiq", "3.4.1"
-+gem "sidekiq", "~> 3.4.1"
- gem "sinatra", "1.4.6"
- 
- # Scheduled processing
-@@ -53,9 +53,9 @@ gem "rack-cors", "0.4.0", require: "rack
+@@ -54,10 +54,10 @@ gem "rack-cors", "0.4.0", require: "rack
  # CSS
  
  gem "bootstrap-sass", "2.3.2.2"
 -gem "compass-rails",  "2.0.4"
 -gem "sass-rails",     "5.0.1"
--gem "autoprefixer-rails", "5.2.1"
+-gem "autoprefixer-rails", "5.2.1.1"
+-
 +gem "compass-rails",  "~> 2.0.4"
 +gem "sass-rails",     "~> 5.0.1"
 +gem "autoprefixer-rails", "~> 5.2.1"
- 
++ 
  # Database
  
-@@ -82,7 +82,7 @@ gem "entypo-rails", "2.2.3"
+ ENV["DB"] ||= "mysql"
+@@ -83,7 +83,7 @@ gem "entypo-rails", "2.2.3"
  
  # JavaScript
  
--gem "backbone-on-rails", "1.1.2.1"
+-gem "backbone-on-rails", "1.2.0.0"
 +gem "backbone-on-rails", "~> 1.1.2"
  gem "handlebars_assets", "0.20.2"
  gem "jquery-rails",      "4.0.4"
  gem "jquery-ui-rails",   "5.0.5"
-@@ -90,7 +90,7 @@ gem "js_image_paths",    "0.0.2"
+@@ -91,7 +91,7 @@ gem "js_image_paths",    "0.0.2"
  gem "js-routes",         "1.0.1"
  
  source "https://rails-assets.org" do
@@ -42,7 +35,7 @@ Index: diaspora/Gemfile
  
    gem "rails-assets-markdown-it",                         "4.4.0"
    gem "rails-assets-markdown-it-hashtag",                 "0.3.1"
-@@ -167,7 +167,7 @@ gem "gon",                     "5.2.3"
+@@ -168,7 +168,7 @@ gem "gon",                     "6.0.1"
  gem "haml",                    "4.0.6"
  gem "mobile-fu",               "1.3.1"
  gem "will_paginate",           "3.0.7"
