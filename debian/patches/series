@@ -1,5 +1,6 @@
 002-remove-development-test-from-gemfile.patch
 007-loosen-roxml-version.patch
+008-loosen-diaspora-jsxc.patch
 019-remove-diaspora-vines.patch
 020-loosen-minor-versions.patch
 030-loosen-tiny-versions.patch
