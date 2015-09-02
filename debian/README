@@ -9,3 +9,12 @@ Steps to updating this package.
 5. Install and see if bundle can find all dependencies.
 6. Update or adjust versions
 7. If install goes well, test the new installation 
+
+Notes:
+
+1. diaspora use symlink to /usr/bin for bin and for diaspora-installer
+   we symlink /usr/local/bin/bundle to bin/bundle
+2. diaspora uses eye command and diaspora installer uses bundle exec eye
+   this is used in diaspora-common.init
+3. Use diaspora-upstream-compat to reproduce issues when approaching upstream
+   Build it using gbp buildpackage --git-debian-branch=upstream-compat
