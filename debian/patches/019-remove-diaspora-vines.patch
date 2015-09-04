@@ -9,5 +9,5 @@ Index: diaspora/Gemfile
 -gem "diaspora-vines",             "~> 0.2.0.develop"
 +#gem "diaspora-vines",             "~> 0.2.0.develop"
  gem "rails-assets-diaspora_jsxc", "~> 0.1.1", "< 0.1.4.develop", source: "https://rails-assets.org"
+ gem "rails-assets-colorbox", "~> 1.6.3"
  
- # Tags
