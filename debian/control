@@ -17,6 +17,7 @@ Pre-Depends: postgresql-client, dbconfig-common, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  diaspora-common (>= 0.5.2.0+debian4),
  bundler (>= 1.9),
+ rake (>= 10.4.2),
  ruby-rails (>= 2:4.2.4),
  ruby-rails (<< 2:5.0),
  ruby-responders (>= 2.1.0),
