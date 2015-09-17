@@ -1,4 +1,4 @@
-diaspora (0.5.3.0+debian-1) UNRELEASED; urgency=medium
+diaspora (0.5.3.0+debian-1) experimental; urgency=medium
 
   * New upstream release
   * Change ruby-devise-lastseenable dependency to 0.0.6 (#796979)
@@ -7,7 +7,7 @@ diaspora (0.5.3.0+debian-1) UNRELEASED; urgency=medium
   * Tighten dependencies
   * Add json-schema as new dependency
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 01 Sep 2015 11:01:07 +0530
+ -- Pirate Praveen <praveen@debian.org>  Thu, 17 Sep 2015 19:18:15 +0530
 
 diaspora (0.5.2.0+debian-7) experimental; urgency=medium
 
