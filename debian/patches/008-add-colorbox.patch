@@ -14,12 +14,11 @@ Index: diaspora/app/assets/stylesheets/application.scss
 ===================================================================
 --- diaspora.orig/app/assets/stylesheets/application.scss
 +++ diaspora/app/assets/stylesheets/application.scss
-@@ -77,7 +77,7 @@
+@@ -77,7 +77,6 @@
  @import 'stream';
  @import 'stream_element';
  @import 'comments';
 -@import 'colorbox';
-+@import 'jquery.colorbox';
  @import 'diaspora_jsxc';
  @import 'chat';
  @import 'markdown-content';
