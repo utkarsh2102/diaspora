@@ -73,7 +73,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-rails-assets-jquery-fullscreen-plugin,
  ruby-acts-as-taggable-on,
  ruby-addressable (>= 2.3.8~),
- ruby-faraday (>= 0.9.1~)
+ ruby-faraday (>= 0.9.1~),
  ruby-faraday-middleware,
  ruby-faraday-cookie-jar,
  ruby-typhoeus (>= 0.8.0~),
