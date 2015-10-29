@@ -15,7 +15,7 @@ Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Pre-Depends: postgresql-client, dbconfig-common, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- diaspora-common (>= 0.5.2.0+debian4~),
+ diaspora-common (>= 0.5.2.0+debian4),
  bundler (>= 1.9~),
  rake (>= 10.4.2~),
  ruby-rails (>= 2:4.2.4~),
