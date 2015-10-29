@@ -1,6 +1,7 @@
 diaspora (0.5.4.0+debian-1) UNRELEASED; urgency=medium
 
   * New upstream release
+  * Update minimum versions of changed dependencies
 
  -- Pirate Praveen <praveen@debian.org>  Thu, 29 Oct 2015 15:40:55 +0530
 
