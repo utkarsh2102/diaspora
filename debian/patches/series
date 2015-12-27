@@ -6,4 +6,5 @@
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
 032-loosen-rails.patch
+033-relax-nokogiri.patch
 043-dont-do-git-checks.patch
