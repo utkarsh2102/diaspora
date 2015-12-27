@@ -5,4 +5,5 @@
 020-loosen-redcarpet.patch
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
+032-loosen-rails.patch
 043-dont-do-git-checks.patch
