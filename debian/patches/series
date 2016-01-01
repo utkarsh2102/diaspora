@@ -2,9 +2,6 @@
 007-loosen-roxml-version.patch
 008-add-colorbox.patch
 019-remove-diaspora-vines.patch
-020-loosen-redcarpet.patch
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
-032-loosen-rails.patch
-033-relax-nokogiri.patch
 043-dont-do-git-checks.patch

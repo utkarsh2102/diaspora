@@ -19,7 +19,7 @@ Index: diaspora/Gemfile
 -
 -  # Linters
 -  gem "jshintrb", "0.3.0"
--  gem "rubocop",  "0.32.1"
+-  gem "rubocop",  "0.34.2"
 -
 -  # Preloading environment
 -
@@ -47,15 +47,15 @@ Index: diaspora/Gemfile
 -  # Cucumber (integration tests)
 -
 -  gem "capybara",           "2.5.0"
--  gem "database_cleaner" ,  "1.5.0"
+-  gem "database_cleaner" ,  "1.5.1"
 -  gem "selenium-webdriver", "2.47.1"
 -
 -  # General helpers
 -
 -  gem "factory_girl_rails", "4.5.0"
 -  gem "timecop",            "0.8.0"
--  gem "webmock",            "1.21.0", require: false
--  gem "shoulda-matchers",   "2.8.0", require: false
+-  gem "webmock",            "1.22.1", require: false
+-  gem "shoulda-matchers",   "3.0.0"
 -end
 -
 -group :development, :test do
