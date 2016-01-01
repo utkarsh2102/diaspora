@@ -1,3 +1,18 @@
+# 0.5.5.1
+
+* Fix XSS on profile pages
+* Bump nokogiri to fix several libxml2 CVEs, see http://www.ubuntu.com/usn/usn-2834-1/
+
+# 0.5.5.0
+
+## Bug fixes
+* Redirect to sign in page when a background request fails with 401 [#6496](https://github.com/diaspora/diaspora/pull/6496)
+* Correctly skip setting sidekiq logfile on Heroku [#6500](https://github.com/diaspora/diaspora/pull/6500)
+* Fix notifications for interactions by non-contacts [#6498](https://github.com/diaspora/diaspora/pull/6498)
+* Fix issue where the publisher was broken on profile pages [#6503](https://github.com/diaspora/diaspora/pull/6503)
+* Prevent participations being created for invalid interactions [#6552](https://github.com/diaspora/diaspora/pull/6552)
+* Improve federation for reshare related interactions [#6481](https://github.com/diaspora/diaspora/pull/6481)
+
 # 0.5.4.0
 
 ## Refactor
