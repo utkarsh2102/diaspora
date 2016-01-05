@@ -5,3 +5,4 @@
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
 043-dont-do-git-checks.patch
+044-work-around-sprockets3.patch
