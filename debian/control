@@ -127,7 +127,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-rack-ssl,
  ruby-asset-sync,
  imagemagick,
- fonts-roboto
+ fonts-roboto-hinted
 Conflicts: diaspora-installer, ruby-jbuilder
 Replaces: diaspora-installer
 Suggests: ruby-diaspora-vines
