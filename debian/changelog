@@ -4,6 +4,7 @@ diaspora (0.5.5.1+debian-1) UNRELEASED; urgency=medium
   * Add work around for sprockets bug couldn't find file 'favico.js
     (Closes: #809755)
   * Change fonts-roboto dependency to fonts-roboto-hinted
+  * Embed sprockets 2.12.4 for compass-rails compatibility (Closes: #810162)
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 01 Jan 2016 23:00:00 +0530
 
