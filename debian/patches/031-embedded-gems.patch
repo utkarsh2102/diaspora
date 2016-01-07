@@ -2,12 +2,16 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -53,7 +53,7 @@ gem "rack-cors", "0.4.0", require: "rack
+@@ -53,8 +53,11 @@ gem "rack-cors", "0.4.0", require: "rack
  
  # CSS
  
 -gem "bootstrap-sass", "2.3.2.2"
 +gem "bootstrap-sass", "2.3.2.2", path: 'vendor/gems/bootstrap-sass-2.3.2.2'
  gem "compass-rails",  "2.0.5"
++# sprockets > 2.13 breaks compass-rails 
++# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=810162
++gem "sprockets", "< 2.13", path: 'vendor/gems/sprockets-2.12.4'
  gem "sass-rails",     "5.0.3"
  gem "autoprefixer-rails", "6.0.3"
+ 
