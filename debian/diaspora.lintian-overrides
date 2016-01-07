@@ -1,3 +1,6 @@
 # This bootstrap-sass copy is for providing compatibility only
 # It will be removed when diaspora porting to bootstrap 3 is completed upstream
 diaspora: extra-license-file usr/share/diaspora/vendor/gems/bootstrap-sass-2.3.2.2/LICENSE
+# This sprockets copy is for compass-rails compatibility only
+# It will be removed when compass-rails can work with sprockets >= 2.13
+diaspora: extra-license-file usr/share/diaspora/vendor/gems/sprockets-2.12.4/LICENSE
