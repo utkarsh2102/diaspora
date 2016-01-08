@@ -23,4 +23,3 @@ spec usr/share/diaspora
 tmp usr/share/diaspora
 vendor usr/share/diaspora
 debian/gems-compat/bootstrap-sass-2.3.2.2 usr/share/diaspora/vendor/gems
-debian/gems-compat/sprockets-2.12.4 usr/share/diaspora/vendor/gems
