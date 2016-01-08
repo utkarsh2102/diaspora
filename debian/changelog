@@ -1,4 +1,4 @@
-diaspora (0.5.5.1+debian-1) UNRELEASED; urgency=medium
+diaspora (0.5.5.1+debian-1) experimental; urgency=medium
 
   * New upstream release
   * Add work around for sprockets bug couldn't find file 'favico.js
@@ -6,7 +6,7 @@ diaspora (0.5.5.1+debian-1) UNRELEASED; urgency=medium
   * Change fonts-roboto dependency to fonts-roboto-hinted
     Fix links to roboto fonts (add 'hinted' to path)
 
- -- Pirate Praveen <praveen@debian.org>  Fri, 01 Jan 2016 23:00:00 +0530
+ -- Pirate Praveen <praveen@debian.org>  Fri, 08 Jan 2016 13:20:48 +0530
 
 diaspora (0.5.4.0+debian-2) unstable; urgency=medium
 
