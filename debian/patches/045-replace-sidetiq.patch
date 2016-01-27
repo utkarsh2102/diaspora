@@ -1,0 +1,125 @@
+From ab41bef5797b44ea41e7defaaa18af6075c1199d Mon Sep 17 00:00:00 2001
+From: cmrd Senya <senya@riseup.net>
+Date: Mon, 4 Jan 2016 05:40:04 +0300
+Subject: [PATCH] Replace sidetiq with sidekiq-cron
+
+---
+ Gemfile                                |  4 ++--
+ app/workers/clean_cached_files.rb      |  6 +-----
+ app/workers/queue_users_for_removal.rb |  8 ++------
+ config/initializers/sidekiq.rb         |  6 ++++++
+ config/routes.rb                       |  2 +-
+ config/schedule.yml                    | 14 ++++++++++++++
+ 8 files changed, 36 insertions(+), 29 deletions(-)
+ create mode 100644 config/schedule.yml
+
+diff --git a/Gemfile b/Gemfile
+index 67cf53b..5a77859 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -32,12 +32,12 @@ gem "simple_captcha2", "0.3.4", require: "simple_captcha"
+ 
+ # Background processing
+ 
+-gem "sidekiq", "3.4.2"
++gem "sidekiq", "4.0.1"
+ gem "sinatra", "1.4.6"
+ 
+ # Scheduled processing
+ 
+-gem "sidetiq", "0.6.3"
++gem "sidekiq-cron", "0.4.1"
+ 
+ # Compression
+ 
+diff --git a/app/workers/clean_cached_files.rb b/app/workers/clean_cached_files.rb
+index 3497803..3e20e4a 100644
+--- a/app/workers/clean_cached_files.rb
++++ b/app/workers/clean_cached_files.rb
+@@ -1,13 +1,9 @@
+ module Workers
+   class CleanCachedFiles < Base
+-    include Sidetiq::Schedulable
+-
+     sidekiq_options queue: :maintenance
+ 
+-    recurrence { daily }
+-
+     def perform
+       CarrierWave.clean_cached_files!
+     end
+-  end 
++  end
+ end
+diff --git a/app/workers/queue_users_for_removal.rb b/app/workers/queue_users_for_removal.rb
+index b9565f7..bfe3a4e 100644
+--- a/app/workers/queue_users_for_removal.rb
++++ b/app/workers/queue_users_for_removal.rb
+@@ -4,12 +4,8 @@
+ 
+ module Workers
+   class QueueUsersForRemoval < Base
+-    include Sidetiq::Schedulable
+-    
+     sidekiq_options queue: :maintenance
+-    
+-    recurrence { daily }
+-    
++
+     def perform
+       # Queue users for removal due to inactivity
+       if AppConfig.settings.maintenance.remove_old_users.enable?
+@@ -37,5 +33,5 @@ def perform
+         end
+       end
+     end
+-  end 
++  end
+ end
+diff --git a/config/initializers/sidekiq.rb b/config/initializers/sidekiq.rb
+index 9709cc2..fa5ed37 100644
+--- a/config/initializers/sidekiq.rb
++++ b/config/initializers/sidekiq.rb
+@@ -52,3 +52,9 @@ def context
+ Sidekiq.configure_client do |config|
+   config.redis = AppConfig.get_redis_options
+ end
++
++schedule_file = "config/schedule.yml"
++
++if File.exist?(schedule_file) && Sidekiq.server?
++  Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
++end
+diff --git a/config/routes.rb b/config/routes.rb
+index 4babaf6..45c7721 100644
+--- a/config/routes.rb
++++ b/config/routes.rb
+@@ -3,7 +3,7 @@
+ #   the COPYRIGHT file.
+ 
+ require 'sidekiq/web'
+-require 'sidetiq/web'
++require "sidekiq/cron/web"
+ 
+ Diaspora::Application.routes.draw do
+ 
+diff --git a/config/schedule.yml b/config/schedule.yml
+new file mode 100644
+index 0000000..1407cfd
+--- /dev/null
++++ b/config/schedule.yml
+@@ -0,0 +1,14 @@
++clean_cached_files:
++  cron: "0 0 * * *"
++  class: "Workers::CleanCachedFiles"
++  queue: "clean_cached_files"
++
++queue_users_for_removal:
++  cron: "0 0 * * *"
++  class: "Workers::QueueUsersForRemoval"
++  queue: queue_users_for_removal
++
++recurring_pod_check:
++  cron: "0 0 * * *"
++  class: "Workers::RecurringPodCheck"
++  queue: recurring_pod_check

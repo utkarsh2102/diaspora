@@ -1,3 +1,10 @@
+diaspora (0.5.5.1+debian-3) unstable; urgency=medium
+
+  * Replace sidetiq with sidekiq-cron (include upstream patch)
+    - sidetiq is unmaintained and it does not work with siekiq 4.0
+
+ -- Pirate Praveen <praveen@debian.org>  Wed, 27 Jan 2016 18:47:30 +0530
+
 diaspora (0.5.5.1+debian-2) unstable; urgency=medium
 
   * Reupload to unstable 
