@@ -28,7 +28,7 @@ index 67cf53b..5a77859 100644
  # Scheduled processing
  
 -gem "sidetiq", "0.6.3"
-+gem "sidekiq-cron", "0.4.1"
++gem "sidekiq-cron", "~> 0.4.1"
  
  # Compression
  
