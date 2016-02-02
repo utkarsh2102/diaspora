@@ -1,3 +1,9 @@
+diaspora (0.5.5.1+debian-4) unstable; urgency=medium
+
+  * Allow omniauth-facebook 3.0.0 
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 02 Feb 2016 19:23:52 +0530
+
 diaspora (0.5.5.1+debian-3) unstable; urgency=medium
 
   * Replace sidetiq with sidekiq-cron (include upstream patch)
