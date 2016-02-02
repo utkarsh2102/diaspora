@@ -5,6 +5,7 @@
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
 032-relax-omniauth-facebook.patch
+033-relax-rails-minor-version.patch
 043-dont-do-git-checks.patch
 044-work-around-sprockets3.patch
 045-replace-sidetiq.patch
