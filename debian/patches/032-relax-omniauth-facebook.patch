@@ -1,0 +1,25 @@
+From a6e3d587b65dad034d5cda75e6cb169699313489 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonne=20Ha=C3=9F?= <me@jhass.eu>
+Date: Thu, 10 Dec 2015 18:12:57 +0100
+Subject: [PATCH] bump omniauth-facebook
+
+---
+ Gemfile      |  2 +-
+  Gemfile.lock | 10 +++++-----
+   2 files changed, 6 insertions(+), 6 deletions(-)
+
+Bug: https://github.com/diaspora/diaspora/pull/6600
+
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -136,7 +136,7 @@ gem "open_graph_reader", "0.6.1"
+ # Services
+ 
+ gem "omniauth",           "1.2.2"
+-gem "omniauth-facebook",  "2.0.1"
++gem "omniauth-facebook",  "3.0.0"
+ gem "omniauth-tumblr",    "1.1"
+ gem "omniauth-twitter",   "1.2.1"
+ gem "twitter",            "5.15.0"
