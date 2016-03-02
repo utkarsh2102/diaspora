@@ -1,6 +1,13 @@
+diaspora (0.5.5.1+debian-5) unstable; urgency=medium
+
+  * Team upload.
+  * Drop dependency on ruby-foreigner, not used anymore
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 02 Mar 2016 20:24:54 +0100
+
 diaspora (0.5.5.1+debian-4) unstable; urgency=medium
 
-  * Allow omniauth-facebook 3.0.0 
+  * Allow omniauth-facebook 3.0.0
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 02 Feb 2016 19:23:52 +0530
 
