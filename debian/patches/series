@@ -9,3 +9,5 @@
 043-dont-do-git-checks.patch
 044-work-around-sprockets3.patch
 045-replace-sidetiq.patch
+050-relax-stable-libs.patch
+051-relax-patch-release-versions.patch
