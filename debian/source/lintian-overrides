@@ -1,3 +1,4 @@
 # false positive
 #    Diaspora.I18n.load({"tutorials":"tutorials","... is too long
 diaspora source: source-is-missing spec/javascripts/app/views/help_view_spec.js
+diaspora source: source-is-missing spec/javascripts/app/views/help_view_spec.js line length is 22684 characters (>512)
