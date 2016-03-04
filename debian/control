@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Pirate Praveen <praveen@debian.org>
-Build-Depends: debhelper (>= 9~), gem2deb (>= 0.7.5~)
+Build-Depends: debhelper (>= 9~), gem2deb
 Standards-Version: 3.9.7
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/diaspora.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-ruby-extras/diaspora.git;a=summary
