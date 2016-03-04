@@ -1,6 +1,8 @@
 diaspora (0.5.5.1+debian-6) unstable; urgency=medium
 
   * Relax dependencies (allow updating to versions required by next release)
+  * Bump standards version to 3.9.7 (no changes)
+  * Bump debian/compat to 9
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 04 Mar 2016 09:56:55 +0530
 
