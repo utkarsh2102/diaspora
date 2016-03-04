@@ -1,8 +1,8 @@
-diaspora (0.5.5.1+debian-6) UNRELEASED; urgency=medium
+diaspora (0.5.5.1+debian-6) unstable; urgency=medium
 
-  * Relax dependencies
+  * Relax dependencies (allow updating to versions required by next release)
 
- -- Pirate Praveen <praveen@debian.org>  Thu, 03 Mar 2016 23:08:39 +0530
+ -- Pirate Praveen <praveen@debian.org>  Fri, 04 Mar 2016 09:56:55 +0530
 
 diaspora (0.5.5.1+debian-5) unstable; urgency=medium
 
