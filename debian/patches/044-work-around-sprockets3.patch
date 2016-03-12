@@ -5,8 +5,8 @@ Index: diaspora/app/assets/javascripts/jsxc.js
 --- diaspora.orig/app/assets/javascripts/jsxc.js
 +++ diaspora/app/assets/javascripts/jsxc.js
 @@ -1,6 +1,6 @@
- //= require jquery.slimscroll
- //= require colorbox
+ //= require jquery.slimscroll/jquery.slimscroll
+ //= require jquery-colorbox
 -//= require favico.js
 +//= require favico.js/favico.js
  //= require jquery-fullscreen-plugin

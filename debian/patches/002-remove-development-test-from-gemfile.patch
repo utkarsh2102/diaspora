@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -219,71 +219,3 @@ group :production do # we don"t install
+@@ -219,73 +219,3 @@ group :production do # we don"t install
  
    gem "asset_sync", "1.1.0", require: false
  end
@@ -14,16 +14,16 @@ Index: diaspora/Gemfile
 -  gem "guard-rspec",    "4.6.4"
 -  gem "guard-rubocop",  "1.2.0"
 -  gem "guard",          "2.13.0", require: false
--  gem "rb-fsevent",     "0.9.6", require: false
--  gem "rb-inotify",     "0.9.5", require: false
+-  gem "rb-fsevent",     "0.9.7", require: false
+-  gem "rb-inotify",     "0.9.7", require: false
 -
 -  # Linters
 -  gem "jshintrb", "0.3.0"
--  gem "rubocop",  "0.34.2"
+-  gem "rubocop",  "0.35.1"
 -
 -  # Preloading environment
 -
--  gem "spring", "1.4.0"
+-  gem "spring", "1.6.3"
 -  gem "spring-commands-rspec", "1.0.4"
 -  gem "spring-commands-cucumber", "1.0.1"
 -
@@ -33,7 +33,7 @@ Index: diaspora/Gemfile
 -  gem "pry-byebug"
 -
 -  # test coverage
--  gem "simplecov", "0.10.0", require: false
+-  gem "simplecov", "0.11.2", require: false
 -end
 -
 -group :test do
@@ -42,31 +42,33 @@ Index: diaspora/Gemfile
 -  gem "fixture_builder",   "0.4.1"
 -  gem "fuubar",            "2.0.0"
 -  gem "rspec-instafail",   "0.4.0", require: false
--  gem "test_after_commit", "0.4.1"
+-  gem "test_after_commit", "0.4.2"
 -
 -  # Cucumber (integration tests)
 -
--  gem "capybara",           "2.5.0"
+-  gem "capybara",           "2.6.2"
 -  gem "database_cleaner" ,  "1.5.1"
 -  gem "selenium-webdriver", "2.47.1"
 -
 -  # General helpers
 -
--  gem "factory_girl_rails", "4.5.0"
+-  gem "factory_girl_rails", "4.6.0"
 -  gem "timecop",            "0.8.0"
--  gem "webmock",            "1.22.1", require: false
--  gem "shoulda-matchers",   "3.0.0"
+-  gem "webmock",            "1.22.6", require: false
+-  gem "shoulda-matchers",   "3.1.1"
+-
+-  gem "diaspora_federation-test", "0.0.12"
 -end
 -
 -group :development, :test do
 -  # RSpec (unit tests, some integration tests)
--  gem "rspec-rails",     "3.3.3"
+-  gem "rspec-rails", "3.4.2"
 -
 -  # Cucumber (integration tests)
--  gem "cucumber-rails",     "1.4.2", require: false
+-  gem "cucumber-rails", "1.4.3", require: false
 -
 -  # Jasmine (client side application tests (JS))
--  gem "jasmine",                   "2.3.1"
+-  gem "jasmine",                   "2.4.0"
 -  gem "jasmine-jquery-rails",      "2.0.3"
 -  gem "rails-assets-jasmine-ajax", "3.2.0", source: "https://rails-assets.org"
 -  gem "sinon-rails",               "1.15.0"

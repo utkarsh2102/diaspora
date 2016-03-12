@@ -4,57 +4,57 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -18,7 +18,7 @@ gem "diaspora_federation-rails", "0.0.8"
+@@ -18,7 +18,7 @@ gem "diaspora_federation-rails", "0.0.12
  
  gem "acts_as_api", "0.4.2"
  gem "json",        "1.8.3"
--gem "json-schema", "2.5.1"
-+gem "json-schema", "~> 2.5", ">= 2.5.1"
+-gem "json-schema", "2.6.0"
++gem "json-schema", "~> 2.6",
  
  # Authentication
  
 @@ -56,7 +56,7 @@ gem "rack-cors", "0.4.0", require: "rack
  gem "bootstrap-sass", "2.3.2.2", path: 'vendor/gems/bootstrap-sass-2.3.2.2'
  gem "compass-rails",  "2.0.5"
- gem "sass-rails",     "5.0.3"
--gem "autoprefixer-rails", "6.0.3"
-+gem "autoprefixer-rails", "~> 6.0", ">= 6.0.3"
+ gem "sass-rails",     "~> 5.0"
+-gem "autoprefixer-rails", "6.3.1"
++gem "autoprefixer-rails", "~> 6.3", ">= 6.3.1"
  
  # Database
  
-@@ -71,7 +71,7 @@ gem "activerecord-import", "0.10.0"
+@@ -71,7 +71,7 @@ gem "activerecord-import", "0.11.0"
  
  gem "carrierwave", "0.10.0"
- gem "fog",         "1.34.0"
--gem "mini_magick", "4.3.6"
-+gem "mini_magick", "~> 4.3", ">= 4.3.6"
+ gem "fog",         "1.37.0"
+-gem "mini_magick", "4.4.0"
++gem "mini_magick", "~> 4.4"
  gem "remotipart",  "1.2.1"
  
  # GUID generation
-@@ -88,7 +88,7 @@ gem "handlebars_assets", "0.21.0"
- gem "jquery-rails",      "4.0.5"
+@@ -88,7 +88,7 @@ gem "handlebars_assets", "0.23.0"
+ gem "jquery-rails",      "4.1.0"
  gem "jquery-ui-rails",   "5.0.5"
  gem "js_image_paths",    "0.0.2"
--gem "js-routes",         "1.1.2"
-+gem "js-routes",         "~> 1.1", ">= 1.1.2"
+-gem "js-routes",         "1.2.3"
++gem "js-routes",         "~> 1.2"
  
  source "https://rails-assets.org" do
-   gem "rails-assets-jquery",                              "~> 1.11.1" # Should be kept in sync with jquery-rails
+   gem "rails-assets-jquery",                              "1.11.1" # Should be kept in sync with jquery-rails
 @@ -105,7 +105,7 @@ source "https://rails-assets.org" do
    # jQuery plugins
  
    gem "rails-assets-jeresig--jquery.hotkeys",       "0.2.0"
--  gem "rails-assets-jquery-placeholder",            "2.1.3"
-+  gem "rails-assets-jquery-placeholder",            "~> 2.1", ">= 2.1.3"
+-  gem "rails-assets-jquery-placeholder",            "2.3.1"
++  gem "rails-assets-jquery-placeholder",            "~> 2.3", ">= 2.3.1"
    gem "rails-assets-jquery-textchange",             "0.2.3"
-   gem "rails-assets-perfect-scrollbar",             "0.6.7"
+   gem "rails-assets-perfect-scrollbar",             "0.6.10"
    gem "rails-assets-jakobmattsson--jquery-elastic", "1.6.11"
 @@ -117,7 +117,7 @@ gem "facebox-rails", "0.2.0"
  
  gem "http_accept_language", "2.0.5"
  gem "i18n-inflector-rails", "1.0.7"
--gem "rails-i18n",           "4.0.5"
-+gem "rails-i18n",           "~> 4.0", ">= 4.0.5"
+-gem "rails-i18n",           "4.0.8"
++gem "rails-i18n",           "~> 4.0", ">= 4.0.8"
  
  # Mail
  
@@ -62,34 +62,34 @@ Index: diaspora/Gemfile
  
  # Parsing
  
--gem "nokogiri",          "1.6.7.1"
-+gem "nokogiri",          "~> 1.6", ">= 1.6.7.1"
- gem "redcarpet",         "3.3.3"
--gem "twitter-text",      "1.13.0"
-+gem "twitter-text",      "~> 1.13"
- gem "roxml",             "~> 3.1"
- gem "ruby-oembed",       "0.8.14"
+-gem "nokogiri",          "1.6.7.2"
++gem "nokogiri",          "~> 1.6", ">= 1.6.7.2"
+ gem "redcarpet",         "3.3.4"
+-gem "twitter-text",      "1.13.3"
++gem "twitter-text",      "~> 1.13", ">=1.13.3"
+ gem "roxml",             "~> 3.1", ">= 3.1.6"
+ gem "ruby-oembed",       "0.9.0"
  gem "open_graph_reader", "0.6.1"
  
  # Services
  
--gem "omniauth",           "1.2.2"
-+gem "omniauth",           "~> 1.2", ">= 1.2.2"
+-gem "omniauth",           "1.3.1"
++gem "omniauth",           "~> 1.3", ">= 1.3.1"
  gem "omniauth-facebook",  "3.0.0"
--gem "omniauth-tumblr",    "1.1"
-+gem "omniauth-tumblr",    "~> 1.1"
+-gem "omniauth-tumblr",    "1.2"
++gem "omniauth-tumblr",    "~> 1.2"
  gem "omniauth-twitter",   "1.2.1"
--gem "twitter",            "5.15.0"
-+gem "twitter",            "~> 5.15"
+-gem "twitter",            "5.16.0"
++gem "twitter",            "~> 5.16"
  gem "omniauth-wordpress", "0.2.2"
  
  # Serializers
-@@ -168,7 +168,7 @@ gem "typhoeus",           "0.8.0"
+@@ -167,7 +167,7 @@ gem "typhoeus",           "0.8.0"
  gem "gon",                     "6.0.1"
  gem "haml",                    "4.0.7"
  gem "mobile-fu",               "1.3.1"
--gem "will_paginate",           "3.0.7"
-+gem "will_paginate",           "~> 3.0", ">= 3.0.7"
+-gem "will_paginate",           "3.1.0"
++gem "will_paginate",           "~> 3.1"
  gem "rails-timeago",           "~> 2.11.0"
  
  # Logging

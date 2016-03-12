@@ -13,17 +13,17 @@ Subject: [PATCH] Replace sidetiq with sidekiq-cron
  8 files changed, 36 insertions(+), 29 deletions(-)
  create mode 100644 config/schedule.yml
 
-diff --git a/Gemfile b/Gemfile
-index 67cf53b..5a77859 100644
---- a/Gemfile
-+++ b/Gemfile
-@@ -32,12 +32,12 @@ gem "simple_captcha2", "0.3.4", require: "simple_captcha"
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
+@@ -32,12 +32,12 @@ gem "simple_captcha2", "0.4.0", require:
  
  # Background processing
  
 -gem "sidekiq", "3.4.2"
-+gem "sidekiq", "4.0.1"
- gem "sinatra", "1.4.6"
++gem "sidekiq", "~> 4.0"
+ gem "sinatra", "1.4.7"
  
  # Scheduled processing
  
@@ -32,10 +32,10 @@ index 67cf53b..5a77859 100644
  
  # Compression
  
-diff --git a/app/workers/clean_cached_files.rb b/app/workers/clean_cached_files.rb
-index 3497803..3e20e4a 100644
---- a/app/workers/clean_cached_files.rb
-+++ b/app/workers/clean_cached_files.rb
+Index: diaspora/app/workers/clean_cached_files.rb
+===================================================================
+--- diaspora.orig/app/workers/clean_cached_files.rb
++++ diaspora/app/workers/clean_cached_files.rb
 @@ -1,13 +1,9 @@
  module Workers
    class CleanCachedFiles < Base
@@ -51,10 +51,10 @@ index 3497803..3e20e4a 100644
 -  end 
 +  end
  end
-diff --git a/app/workers/queue_users_for_removal.rb b/app/workers/queue_users_for_removal.rb
-index b9565f7..bfe3a4e 100644
---- a/app/workers/queue_users_for_removal.rb
-+++ b/app/workers/queue_users_for_removal.rb
+Index: diaspora/app/workers/queue_users_for_removal.rb
+===================================================================
+--- diaspora.orig/app/workers/queue_users_for_removal.rb
++++ diaspora/app/workers/queue_users_for_removal.rb
 @@ -4,12 +4,8 @@
  
  module Workers
@@ -69,18 +69,18 @@ index b9565f7..bfe3a4e 100644
      def perform
        # Queue users for removal due to inactivity
        if AppConfig.settings.maintenance.remove_old_users.enable?
-@@ -37,5 +33,5 @@ def perform
+@@ -37,5 +33,5 @@ module Workers
          end
        end
      end
 -  end 
 +  end
  end
-diff --git a/config/initializers/sidekiq.rb b/config/initializers/sidekiq.rb
-index 9709cc2..fa5ed37 100644
---- a/config/initializers/sidekiq.rb
-+++ b/config/initializers/sidekiq.rb
-@@ -52,3 +52,9 @@ def context
+Index: diaspora/config/initializers/sidekiq.rb
+===================================================================
+--- diaspora.orig/config/initializers/sidekiq.rb
++++ diaspora/config/initializers/sidekiq.rb
+@@ -52,3 +52,9 @@ end
  Sidekiq.configure_client do |config|
    config.redis = AppConfig.get_redis_options
  end
@@ -90,10 +90,10 @@ index 9709cc2..fa5ed37 100644
 +if File.exist?(schedule_file) && Sidekiq.server?
 +  Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
 +end
-diff --git a/config/routes.rb b/config/routes.rb
-index 4babaf6..45c7721 100644
---- a/config/routes.rb
-+++ b/config/routes.rb
+Index: diaspora/config/routes.rb
+===================================================================
+--- diaspora.orig/config/routes.rb
++++ diaspora/config/routes.rb
 @@ -3,7 +3,7 @@
  #   the COPYRIGHT file.
  
@@ -103,11 +103,10 @@ index 4babaf6..45c7721 100644
  
  Diaspora::Application.routes.draw do
  
-diff --git a/config/schedule.yml b/config/schedule.yml
-new file mode 100644
-index 0000000..1407cfd
+Index: diaspora/config/schedule.yml
+===================================================================
 --- /dev/null
-+++ b/config/schedule.yml
++++ diaspora/config/schedule.yml
 @@ -0,0 +1,14 @@
 +clean_cached_files:
 +  cron: "0 0 * * *"

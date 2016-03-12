@@ -1,10 +1,7 @@
 002-remove-development-test-from-gemfile.patch
 007-loosen-roxml-version.patch
-008-add-colorbox.patch
-019-remove-diaspora-vines.patch
 030-loosen-tiny-versions.patch
 031-embedded-gems.patch
-032-relax-omniauth-facebook.patch
 033-relax-rails-minor-version.patch
 043-dont-do-git-checks.patch
 044-work-around-sprockets3.patch
