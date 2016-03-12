@@ -14,7 +14,7 @@ Copyright: 2014 Pirate Praveen <praveen@debian.org>
 License: AGPL-3+ with OpenSSL exception
 Comment: the Debian packaging is licensed under the same terms as the original package.
 
-Files: debian/bootstrap-sass-2.3.2.2/*
+Files: debian/gems-compat/bootstrap-sass-2.3.2.2/*
 Copyright: 2011 Twitter, Inc.
 License: Apache-2.0
 
