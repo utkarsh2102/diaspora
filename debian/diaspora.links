@@ -1,4 +1,4 @@
-usr/bin usr/share/diaspora/bin
 usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Bold.ttf
 usr/share/fonts/truetype/roboto/hinted/Roboto-Light.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Light.ttf
 usr/share/fonts/truetype/roboto/hinted/Roboto-Regular.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Regular.ttf
+usr/bin usr/share/diaspora/bin
