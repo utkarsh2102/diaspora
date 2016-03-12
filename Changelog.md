@@ -1,3 +1,66 @@
+# 0.5.7.1
+
+This security release disables post fetching for relayables. Due to an insecure implementation, fetching of root posts for relayables could allow an attacker to distribute malicious/spoofed/modified posts for any person.
+
+Disabling the fetching will make the current federation a bit less reliable, but for a hotfix, this is the best solution. We will re-enable the fetching in 0.6.0.0 when we moved out the federation into its own library and are able to implement further validation during fetches.
+
+# 0.5.7.0
+
+## Refactor
+* Internationalize controller rescue\_from text [#6554](https://github.com/diaspora/diaspora/pull/6554)
+* Make mention parsing a bit more robust [#6658](https://github.com/diaspora/diaspora/pull/6658)
+* Remove unlicensed images [#6673](https://github.com/diaspora/diaspora/pull/6673)
+* Removed unused contacts\_title [#6687](https://github.com/diaspora/diaspora/pull/6687)
+
+## Bug fixes
+* Fix plural rules handling more than wanted as "one" [#6630](https://github.com/diaspora/diaspora/pull/6630)
+* Fix `suppress_annoying_errors` eating too much errors [#6653](https://github.com/diaspora/diaspora/pull/6653)
+* Ensure the rubyzip gem is properly loaded [#6659](https://github.com/diaspora/diaspora/pull/6659)
+* Fix mobile registration layout after failed registration [#6677](https://github.com/diaspora/diaspora/pull/6677)
+* Fix mirrored names when using a RTL language [#6680](https://github.com/diaspora/diaspora/pull/6680)
+* Disable submitting a post multiple times in the mobile UI [#6682](https://github.com/diaspora/diaspora/pull/6682)
+
+## Features
+* Keyboard shortcuts now do work on profile pages as well [#6647](https://github.com/diaspora/diaspora/pull/6647/files)
+* Add the podmin email address to 500 errors [#6652](https://github.com/diaspora/diaspora/pull/6652)
+
+# 0.5.6.3
+
+Fix evil regression caused by Active Model no longer exposing
+`include_root_in_json` in instances.
+
+# 0.5.6.2
+
+* Fix [CVE-2016-0751](https://groups.google.com/forum/#!topic/rubyonrails-security/9oLY_FCzvoc) - Possible Object Leak and Denial of Service attack in Action Pack
+* Fix [CVE-2015-7581](https://groups.google.com/forum/#!topic/rubyonrails-security/dthJ5wL69JE) - Object leak vulnerability for wildcard controller routes in Action Pack
+* Fix [CVE-2015-7576](https://groups.google.com/forum/#!topic/rubyonrails-security/ANv0HDHEC3k) - Timing attack vulnerability in basic authentication in Action Controller
+* Fix [CVE-2016-0752](https://groups.google.com/forum/#!topic/rubyonrails-security/335P1DcLG00) - Possible Information Leak Vulnerability in Action View
+* Fix [CVE-2016-0753](https://groups.google.com/forum/#!topic/rubyonrails-security/6jQVC1geukQ) - Possible Input Validation Circumvention in Active Model
+* Fix [CVE-2015-7577](https://groups.google.com/forum/#!topic/rubyonrails-security/cawsWcQ6c8g) - Nested attributes rejection proc bypass in Active Record
+* Fix [CVE-2015-7579](https://groups.google.com/forum/#!topic/rubyonrails-security/OU9ugTZcbjc) - XSS vulnerability in rails-html-sanitizer
+* Fix [CVE-2015-7578](https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI) - Possible XSS vulnerability in rails-html-sanitizer
+
+# 0.5.6.1
+
+* Fix Nokogiri CVE-2015-7499
+* Fix unsafe "Remember me" cookies in Devise
+
+# 0.5.6.0
+
+## Refactor
+* Add more integration tests with the help of the new diaspora-federation gem [#6539](https://github.com/diaspora/diaspora/pull/6539)
+
+## Bug fixes
+* Fix mention autocomplete when pasting the username [#6510](https://github.com/diaspora/diaspora/pull/6510)
+* Use and update updated\_at for notifications [#6573](https://github.com/diaspora/diaspora/pull/6573)
+* Ensure the author signature is checked when receiving a relayable [#6539](https://github.com/diaspora/diaspora/pull/6539)
+* Do not try to display hovercards when logged out [#6587](https://github.com/diaspora/diaspora/pull/6587)
+
+## Features
+
+* Display hovercards without aspect dropdown when logged out [#6603](https://github.com/diaspora/diaspora/pull/6603)
+* Add media.ccc.de as a trusted oEmbed endpoint
+
 # 0.5.5.1
 
 * Fix XSS on profile pages

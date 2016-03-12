@@ -173,9 +173,6 @@ en:
       video_title:
         unknown: "Unknown video title"
   aspects:
-    zero: "No aspects"
-    one: "1 aspect"
-    other: "%{count} aspects"
     contacts_visible: "Contacts in this aspect will be able to see each other."
     contacts_not_visible: "Contacts in this aspect will not be able to see each other."
     edit:
@@ -278,6 +275,8 @@ en:
       success: "Successfully removed person from aspect."
       failure: "Failed to remove person from aspect."
       no_membership: "Could not find the selected person in that aspect."
+      forbidden: "You are not allowed to do that."
+      invalid_statement: "Duplicate record rejected."
 
   bookmarklet:
     heading: "Bookmarklet"
@@ -299,9 +298,6 @@ en:
     other: "%{count} reactions"
 
   contacts:
-    zero: "No contacts"
-    one: "1 contact"
-    other: "%{count} contacts"
     create:
       failure: "Failed to create contact"
     sharing:
@@ -588,6 +584,8 @@ en:
 
   invitation_codes:
     excited: "%{name} is excited to see you here."
+    not_valid: "That invite code is no longer valid"
+    
   invitations:
     create:
       sent: "Invitations have been sent to: %{emails}"
@@ -973,6 +971,7 @@ en:
       destroy: "Delete"
       permalink: "Permalink"
       not_found: "Sorry, we couldn’t find that post."
+      forbidden: "You are not allowed to do that"
       photos_by:
         zero: "No photos by %{author}"
         one: "One photo by %{author}"
@@ -1272,33 +1271,26 @@ en:
 
     mentions:
       title: "@Mentions"
-      contacts_title: "People who mentioned you"
 
     comment_stream:
       title: "Commented posts"
-      contacts_title: "People whose posts you commented on"
 
     like_stream:
       title: "Like stream"
-      contacts_title: "People whose posts you like"
 
     followed_tag:
       title: "#Followed tags"
-      contacts_title: "People who dig these tags"
       add_a_tag: "Add a tag"
       follow: "Follow"
 
     tags:
       title: "Posts tagged: %{tags}"
-      contacts_title: "People who dig this tag"
 
     public:
       title: "Public activity"
-      contacts_title: "Recent posters"
 
     multi:
       title: "Stream"
-      contacts_title: "People in your stream"
 
     aspects:
       title: "My aspects"
@@ -1355,7 +1347,7 @@ en:
         mr_wiggles: "Mr Wiggles will be sad to see you go"
         what_we_delete: "We will delete all of your posts and profile data as soon as possible. Your comments on other people’s posts will still appear, but they will be associated with your diaspora* ID rather than your name."
         locked_out: "You will get signed out and locked out of your account until it has been deleted."
-        lock_username: "Your username will be locked. You will not be able create a new account on this pod with the same ID."
+        lock_username: "Your username will be locked. You will not be able to create a new account on this pod with the same ID."
         no_turning_back: "There is no turning back! If you’re really sure, enter your password below."
         if_you_want_this: "If you really want this to happen, type in your password below and click “Close account”"
 
