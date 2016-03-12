@@ -1,10 +1,10 @@
-diaspora (0.5.7.1+debian-1) UNRELEASED; urgency=medium
+diaspora (0.5.7.1+debian-1) experimental; urgency=medium
 
   * New upstream release
   * Refresh patches
   * Update minimum versions of dependencies
 
- -- Pirate Praveen <praveen@debian.org>  Sat, 12 Mar 2016 11:21:35 +0530
+ -- Pirate Praveen <praveen@debian.org>  Sat, 12 Mar 2016 17:26:34 +0530
 
 diaspora (0.5.5.1+debian-6) unstable; urgency=medium
 
