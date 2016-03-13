@@ -72,9 +72,10 @@ Index: diaspora/Gemfile
  # Parsing
  
 -gem "nokogiri",          "1.6.7.1"
-+gem "nokogiri",          "~> 1.6"
- gem "redcarpet",         "3.3.3"
+-gem "redcarpet",         "3.3.3"
 -gem "twitter-text",      "1.13.0"
++gem "nokogiri",          "~> 1.6"
++gem "redcarpet",         "~> 3.3", ">= 3.3.3"
 +gem "twitter-text",      "~> 1.13"
  gem "roxml",             "~> 3.1"
  gem "ruby-oembed",       "0.8.14"
