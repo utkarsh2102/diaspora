@@ -1,3 +1,9 @@
+diaspora (0.5.5.1+debian-7) unstable; urgency=medium
+
+  * Allow ruby-autoprefixer-rails >= 6.1
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 13 Mar 2016 14:43:49 +0530
+
 diaspora (0.5.5.1+debian-6) unstable; urgency=medium
 
   * Relax dependencies (allow updating to versions required by next release)
