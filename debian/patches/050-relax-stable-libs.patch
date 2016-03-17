@@ -4,7 +4,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -4,7 +4,7 @@ gem "rails", "~> 4.2.5"
+@@ -4,11 +4,11 @@ gem "rails", "~> 4.2.5"
  
  # Legacy Rails features, remove me!
  # responders (class level)
@@ -12,6 +12,11 @@ Index: diaspora/Gemfile
 +gem "responders", "~> 2.1"
  
  # Appserver
+ 
+-gem "unicorn", "4.9.0", require: false
++gem "unicorn", ">= 4.9.0", require: false
+ 
+ # Federation
  
 @@ -18,7 +18,7 @@ gem "diaspora_federation-rails", "0.0.8"
  
