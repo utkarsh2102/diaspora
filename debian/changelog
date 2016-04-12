@@ -1,3 +1,10 @@
+diaspora (0.5.7.1+debian-1.1) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * Refresh patch 
+
+ -- Rahulkrishnan R A <rahulkrishnanfs@gmail.com>  Tue, 12 Apr 2016 13:49:14 +0000
+
 diaspora (0.5.7.1+debian-1) experimental; urgency=medium
 
   * New upstream release
