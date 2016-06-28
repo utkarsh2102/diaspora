@@ -2,17 +2,8 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -55,7 +55,7 @@ gem "rack-cors", "0.4.0", require: "rack
- 
- gem "bootstrap-sass", "2.3.2.2"
- gem "compass-rails",  "2.0.5"
--gem "sass-rails",     "5.0.4"
-+gem "sass-rails",     "~> 5.0"
- gem "autoprefixer-rails", "6.3.1"
- 
- # Database
-@@ -91,7 +91,7 @@ gem "js_image_paths",    "0.0.2"
- gem "js-routes",         "1.2.3"
+@@ -91,7 +91,7 @@ gem "js_image_paths",    "0.1.0"
+ gem "js-routes",         "1.2.4"
  
  source "https://rails-assets.org" do
 -  gem "rails-assets-jquery",                              "1.12.0" # Should be kept in sync with jquery-rails

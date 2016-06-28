@@ -2,6 +2,7 @@ diaspora (0.5.9.1+debian-1) UNRELEASED; urgency=medium
 
   [ Pirate Praveen ]
   * New upstream release
+  * Refresh patches
 
   [ Rahulkrishnan R A ]
   * Refresh patch 

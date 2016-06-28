@@ -2,7 +2,7 @@ Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
 +++ diaspora/Gemfile
-@@ -219,73 +219,3 @@ group :production do # we don"t install
+@@ -219,75 +219,3 @@ group :production do # we don"t install
  
    gem "asset_sync", "1.1.0", require: false
  end
@@ -34,6 +34,8 @@ Index: diaspora/Gemfile
 -
 -  # test coverage
 -  gem "simplecov", "0.11.2", require: false
+-
+-  gem "turbo_dev_assets", "0.0.2"
 -end
 -
 -group :test do
@@ -57,7 +59,7 @@ Index: diaspora/Gemfile
 -  gem "webmock",            "1.22.6", require: false
 -  gem "shoulda-matchers",   "3.1.1"
 -
--  gem "diaspora_federation-test", "0.0.12"
+-  gem "diaspora_federation-test", "0.0.13"
 -end
 -
 -group :development, :test do
