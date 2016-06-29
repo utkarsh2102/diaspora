@@ -9,3 +9,4 @@
 050-relax-stable-libs.patch
 051-relax-patch-release-versions.patch
 060-relax-devise.patch
+061-remove-diaspora-vines.patch
