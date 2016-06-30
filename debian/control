@@ -123,7 +123,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-asset-sync,
  imagemagick,
  fonts-roboto-hinted
-Conflicts: diaspora-installer, ruby-jbuilder
+Conflicts: diaspora-installer, ruby-jbuilder, ruby-bootstrap-sass (>> 3.0)
 Replaces: diaspora-installer
 Suggests: ruby-diaspora-vines
 Description: distributed social networking service
