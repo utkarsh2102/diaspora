@@ -1,3 +1,9 @@
+diaspora (0.5.5.1+debian-9) UNRELEASED; urgency=medium
+
+  * Relax version of addressable 
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 05 Jul 2016 23:57:24 +0530
+
 diaspora (0.5.5.1+debian-8) unstable; urgency=medium
 
   * Relax version of pg and unicorn 
