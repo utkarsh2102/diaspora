@@ -11,3 +11,4 @@
 045-replace-sidetiq.patch
 050-relax-stable-libs.patch
 051-relax-patch-release-versions.patch
+052-relax-diaspora-jsxc.patch
