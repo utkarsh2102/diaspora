@@ -1,9 +1,9 @@
-diaspora (0.5.5.1+debian-9) UNRELEASED; urgency=medium
+diaspora (0.5.5.1+debian-9) unstable; urgency=medium
 
   * Relax version of addressable in Gemfile
   * Relax version of rails-assets-diaspora_jsxc in Gemfile
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 05 Jul 2016 23:57:24 +0530
+ -- Pirate Praveen <praveen@debian.org>  Wed, 06 Jul 2016 18:28:12 +0530
 
 diaspora (0.5.5.1+debian-8) unstable; urgency=medium
 
