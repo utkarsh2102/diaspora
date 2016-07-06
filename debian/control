@@ -13,6 +13,7 @@ XS-Ruby-Versions: all
 Package: diaspora
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
+Pre-Depends: bc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  diaspora-common (>= 0.5.2.0+debian4),
  bundler (>= 1.9~),
