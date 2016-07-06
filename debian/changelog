@@ -1,3 +1,9 @@
+diaspora (0.5.5.1+debian-10) UNRELEASED; urgency=medium
+
+  * Relax active_model_serializers in Gemfile 
+
+ -- Pirate Praveen <praveen@debian.org>  Wed, 06 Jul 2016 19:37:39 +0530
+
 diaspora (0.5.5.1+debian-9) unstable; urgency=medium
 
   * Relax version of addressable in Gemfile
