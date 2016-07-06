@@ -1,4 +1,4 @@
-diaspora (0.5.7.1+debian-2) UNRELEASED; urgency=medium
+diaspora (0.5.7.1+debian-2) experimental; urgency=medium
 
   [ Gemfile changes ]
   * Fix syntax
@@ -8,7 +8,7 @@ diaspora (0.5.7.1+debian-2) UNRELEASED; urgency=medium
   * Disable diaspora-vines
   * Relax addressable
 
- -- Pirate Praveen <praveen@debian.org>  Wed, 06 Jul 2016 20:01:44 +0530
+ -- Pirate Praveen <praveen@debian.org>  Wed, 06 Jul 2016 20:53:27 +0530
 
 diaspora (0.5.7.1+debian-1) experimental; urgency=medium
 
