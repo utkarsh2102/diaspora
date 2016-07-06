@@ -3,6 +3,7 @@ diaspora (0.5.7.1+debian-2) UNRELEASED; urgency=medium
   * Fix syntax in Gemfile 
   * Relax unicorn dependency in Gemfile
   * Relax jquery-rails dependency in Gemfile
+  * Relax rails-assets-jquery in Gemfile
 
  -- Pirate Praveen <praveen@debian.org>  Wed, 06 Jul 2016 20:01:44 +0530
 

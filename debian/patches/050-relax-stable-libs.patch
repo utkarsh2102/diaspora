@@ -40,7 +40,7 @@ Index: diaspora/Gemfile
  gem "remotipart",  "1.2.1"
  
  # GUID generation
-@@ -85,10 +85,10 @@ gem "entypo-rails", "2.2.3"
+@@ -85,13 +85,13 @@ gem "entypo-rails", "2.2.3"
  
  gem "backbone-on-rails", "1.2.0.0"
  gem "handlebars_assets", "0.23.0"
@@ -52,7 +52,11 @@ Index: diaspora/Gemfile
 +gem "js-routes",         "~> 1.2"
  
  source "https://rails-assets.org" do
-   gem "rails-assets-jquery",                              "1.11.1" # Should be kept in sync with jquery-rails
+-  gem "rails-assets-jquery",                              "1.11.1" # Should be kept in sync with jquery-rails
++  gem "rails-assets-jquery",                              "~> 1.11" # Should be kept in sync with jquery-rails
+ 
+   gem "rails-assets-markdown-it",                         "6.0.0"
+   gem "rails-assets-markdown-it-hashtag",                 "0.4.0"
 @@ -105,7 +105,7 @@ source "https://rails-assets.org" do
    # jQuery plugins
  
