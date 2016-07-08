@@ -1,3 +1,9 @@
+diaspora (0.5.7.1+debian-3) unstable; urgency=medium
+
+  * Reupload to unstable 
+
+ -- Pirate Praveen <praveen@debian.org>  Sat, 09 Jul 2016 01:11:39 +0530
+
 diaspora (0.5.7.1+debian-2) experimental; urgency=medium
 
   [ Gemfile changes ]
