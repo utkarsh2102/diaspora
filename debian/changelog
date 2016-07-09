@@ -1,4 +1,4 @@
-diaspora (0.5.9.1+debian-1) UNRELEASED; urgency=medium
+diaspora (0.5.9.1+debian-1) unstable; urgency=medium
 
   [ Pirate Praveen ]
   * New upstream release
@@ -9,7 +9,7 @@ diaspora (0.5.9.1+debian-1) UNRELEASED; urgency=medium
   [ Rahulkrishnan R A ]
   * Refresh patch 
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 28 Jun 2016 19:50:31 +0530
+ -- Pirate Praveen <praveen@debian.org>  Sat, 09 Jul 2016 23:08:59 +0530
 
 diaspora (0.5.7.1+debian-3) unstable; urgency=medium
 
