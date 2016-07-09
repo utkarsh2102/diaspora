@@ -3,6 +3,8 @@ diaspora (0.5.9.1+debian-1) UNRELEASED; urgency=medium
   [ Pirate Praveen ]
   * New upstream release
   * Refresh patches
+  * Relax stable libs to ~> x.y and development libs to ~> x.y.z
+    (SemVer defines stable libs as x.y >= 1.0)
 
   [ Rahulkrishnan R A ]
   * Refresh patch 
