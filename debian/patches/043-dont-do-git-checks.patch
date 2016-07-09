@@ -1,3 +1,5 @@
+don't fail when not a git repo
+
 Index: diaspora/script/server
 ===================================================================
 --- diaspora.orig/script/server

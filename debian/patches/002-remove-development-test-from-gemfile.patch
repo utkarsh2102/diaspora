@@ -1,3 +1,7 @@
+Description: Workaround for bundler
+ bundler can't ignore groups when --local is specified for bundle install
+Bug: https://github.com/bundler/bundler/issues/4023
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

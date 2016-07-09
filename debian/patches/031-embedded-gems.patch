@@ -1,3 +1,5 @@
+debian has an incompatible version packaged
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

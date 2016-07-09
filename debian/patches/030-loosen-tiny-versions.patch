@@ -1,3 +1,5 @@
+relax dependecies
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

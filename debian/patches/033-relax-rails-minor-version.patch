@@ -1,3 +1,5 @@
+allow newer rails patch releases
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

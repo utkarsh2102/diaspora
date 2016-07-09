@@ -1,3 +1,5 @@
+jquery is backword compatible
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

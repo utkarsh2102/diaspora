@@ -1,3 +1,5 @@
+vines is optional
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile

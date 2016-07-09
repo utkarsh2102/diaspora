@@ -1,3 +1,5 @@
+gitlab needs device 4.x
+
 Index: diaspora/Gemfile
 ===================================================================
 --- diaspora.orig/Gemfile
