@@ -1,3 +1,9 @@
+diaspora (0.5.7.1+debian-4) unstable; urgency=medium
+
+  * Allow unicorn 5.0 
+
+ -- Pirate Praveen <praveen@debian.org>  Thu, 21 Jul 2016 18:20:16 +0530
+
 diaspora (0.5.7.1+debian-3) unstable; urgency=medium
 
   * Reupload to unstable 
