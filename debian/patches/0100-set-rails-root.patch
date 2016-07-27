@@ -1,0 +1,11 @@
+--- a/config/load_config.rb
++++ b/config/load_config.rb
+@@ -6,7 +6,7 @@
+ 
+ module Rails
+   def self.root
+-    @__root ||= Pathname.new File.expand_path("../../", __FILE__)
++    @__root ||= Pathname.new '/usr/share/diaspora'
+   end
+ end
+ 

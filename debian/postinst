@@ -39,6 +39,9 @@ case "$1" in
 	
 	echo "Verifying we have all required libraries..."
 	sudo -u diaspora -E bundle install --local
+	
+	echo "Setting up secret_token..."
+        DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token 
         
 	echo "Running final rake tasks..."
 	. /usr/lib/diaspora-common/scripts/rake-tasks.sh

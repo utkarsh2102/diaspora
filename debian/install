@@ -2,7 +2,7 @@ lib usr/share/diaspora
 app usr/share/diaspora
 AUTHORS usr/share/diaspora
 Changelog.md usr/share/diaspora
-config usr/share/diaspora
+config/* etc/diaspora
 config.ru usr/share/diaspora
 COPYRIGHT usr/share/diaspora
 db usr/share/diaspora

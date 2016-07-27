@@ -11,3 +11,4 @@
 060-relax-devise.patch
 061-remove-diaspora-vines.patch
 062-lower-jquery-rails.patch
+0100-set-rails-root.patch

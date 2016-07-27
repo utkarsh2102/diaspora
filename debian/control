@@ -16,7 +16,7 @@ Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Pre-Depends: bc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- diaspora-common (>= 0.5.2.0+debian4),
+ diaspora-common (>= 0.5.9.1+debian4),
  bundler (>= 1.9~),
  rake (>= 10.4.2~),
  ruby-rails (>= 2:4.2.5~),
@@ -125,7 +125,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-asset-sync,
  imagemagick,
  fonts-roboto-hinted
-Conflicts: diaspora-installer, ruby-jbuilder, ruby-bootstrap-sass (>> 3.0)
+Conflicts: diaspora-installer, ruby-bootstrap-sass (>> 3.0)
 Replaces: diaspora-installer
 Suggests: ruby-diaspora-vines
 Description: distributed social networking service

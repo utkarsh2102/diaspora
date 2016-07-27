@@ -1,6 +1,7 @@
 diaspora (0.5.9.1+debian-2) unstable; urgency=medium
 
-  * Enable autopkgtest 
+  * Enable autopkgtest
+  * Move config/* to /etc/diaspora
 
  -- Pirate Praveen <praveen@debian.org>  Wed, 27 Jul 2016 17:18:37 +0530
 
