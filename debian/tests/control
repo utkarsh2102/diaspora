@@ -1,0 +1,2 @@
+Test-Command: echo "Testing installation of diaspora"
+Depends: diaspora
