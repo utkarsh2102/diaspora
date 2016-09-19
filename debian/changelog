@@ -1,6 +1,8 @@
 diaspora (0.6.0.0+debian-1) UNRELEASED; urgency=medium
 
-  * New upstream release 
+  * New upstream release
+  * Remove embedded copy of bootstrap-sass 2.x
+  * Refresh patches
 
  -- Pirate Praveen <praveen@debian.org>  Mon, 19 Sep 2016 15:41:15 +0530
 
