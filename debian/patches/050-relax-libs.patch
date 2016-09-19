@@ -109,7 +109,7 @@ minor versions of stable libraries can be relaxed
 -gem "fog",         "1.38.0"
 -gem "mini_magick", "4.5.1"
 -gem "remotipart",  "1.2.1"
-+gem "carrierwave", "~> 0.11.2"
++gem "carrierwave", "~> 0.10"
 +gem "fog",         "~> 1.38"
 +gem "mini_magick", "~> 4.5", ">= 4.5.1"
 +gem "remotipart",  "~> 1.2", ">= 1.2.1"
