@@ -82,7 +82,7 @@ minor versions of stable libraries can be relaxed
 -gem "sass-rails",     "5.0.6"
 -gem "autoprefixer-rails", "6.4.0.2"
 -gem "bootstrap-switch-rails", "3.3.3"
-+gem "bootstrap-sass", "~> 3.3", ">= 3.3.7"
++gem "bootstrap-sass", "~> 3.3"
 +gem "compass-rails",  "~> 2.0", ">= 2.0.5"
 +gem "sass-rails",     "~> 5.0", ">= 5.0.6"
 +gem "autoprefixer-rails", "~> 6.4", ">= 6.4.0.2"
