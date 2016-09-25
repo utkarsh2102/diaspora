@@ -49,7 +49,10 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-http-accept-language,
  ruby-i18n-inflector-rails,
  ruby-rails-i18n (>= 4.0.8~),
+# Mail
  ruby-markerb (>= 1.1.0~),
+# Map
+ ruby-leaflet-rails,
  ruby-messagebus-api (>= 3.0.7+git.20130130.97b34ece.REALLY.1.0.3~),
  ruby-nokogiri (>= 1.6.8~),
  ruby-rails-autolink,
@@ -63,6 +66,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-omniauth-twitter (>= 1.2.1~),
  ruby-twitter (>= 5.16~),
  ruby-omniauth-wordpress,
+# OpenID Connect
+ ruby-openid-connect,
+# Serializers
  ruby-active-model-serializers (>= 0.9.4~),
 # XMPP chat dependencies
  ruby-diaspora-prosody-config,
