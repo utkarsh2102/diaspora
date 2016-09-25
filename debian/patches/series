@@ -2,5 +2,6 @@
 043-dont-do-git-checks.patch
 044-work-around-sprockets3.patch
 050-relax-libs.patch
+051-relax-eye.patch
 060-use-db-env.patch
 0100-set-rails-root.patch
