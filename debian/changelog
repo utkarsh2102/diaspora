@@ -1,10 +1,10 @@
-diaspora (0.6.0.0+debian-1) UNRELEASED; urgency=medium
+diaspora (0.6.0.0+debian-1) experimental; urgency=medium
 
   * New upstream release
   * Remove embedded copy of bootstrap-sass 2.x
   * Refresh patches
 
- -- Pirate Praveen <praveen@debian.org>  Mon, 19 Sep 2016 15:41:15 +0530
+ -- Pirate Praveen <praveen@debian.org>  Mon, 26 Sep 2016 22:20:10 +0530
 
 diaspora (0.5.9.1+debian-3) unstable; urgency=medium
 
