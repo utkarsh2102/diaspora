@@ -38,11 +38,14 @@ case "$1" in
 	echo RAILS_ENV=$RAILS_ENV DB=$DB ENVIRONMENT_URL=$ENVIRONMENT_URL
 	
 	echo "Verifying we have all required libraries..."
-	sudo -u diaspora -E bundle install --local
+	su diaspora -s /bin/sh -c 'bundle install --local'
 	
 	echo "Setting up secret_token..."
         DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token 
         
+	echo "Precompiling assets..."
+	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
+
 	echo "Running final rake tasks..."
 	. /usr/lib/diaspora-common/scripts/rake-tasks.sh
    ;;
