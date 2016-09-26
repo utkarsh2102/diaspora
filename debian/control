@@ -16,7 +16,7 @@ Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Pre-Depends: bc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- diaspora-common (>= 0.6.0.0+debian1),
+ diaspora-common (>= 0.6.0.0+debian2),
  bundler (>= 1.9~),
  rake (>= 10.4.2~),
  ruby-rails (>= 2:4.2.5~),
@@ -72,7 +72,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-active-model-serializers (>= 0.9.4~),
 # XMPP chat dependencies
  ruby-diaspora-prosody-config,
- ruby-rails-assets-diaspora-jsxc (>= 0.1.4~),
+ ruby-rails-assets-diaspora-jsxc (>= 0.1.5~),
  ruby-rails-assets-jquery-colorbox (>= 1.6.3~),
  ruby-rails-assets-favico.js (>= 0.3.9~dfsg-2~),
  ruby-rails-assets-jquery-fullscreen-plugin,
