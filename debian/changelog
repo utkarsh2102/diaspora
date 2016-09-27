@@ -1,9 +1,9 @@
-diaspora (0.6.0.0+debian-2) UNRELEASED; urgency=medium
+diaspora (0.6.0.0+debian-2) experimental; urgency=medium
 
   * Remove leftover files on uninstall
   * Move log directory to /var 
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 27 Sep 2016 17:42:01 +0530
+ -- Pirate Praveen <praveen@debian.org>  Tue, 27 Sep 2016 19:11:45 +0530
 
 diaspora (0.6.0.0+debian-1) experimental; urgency=medium
 
