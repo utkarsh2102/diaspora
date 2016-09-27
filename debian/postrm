@@ -35,6 +35,8 @@ case "$1" in
     # its configuration purged from the system.
     :
 
+    rm -rf /etc/diaspora/initializers
+
     ;;
   disappear)
     if test "$2" != overwriter; then
