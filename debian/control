@@ -16,7 +16,7 @@ Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Pre-Depends: bc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- diaspora-common (>= 0.6.0.0+debian2),
+ diaspora-common (>= 0.6.0.0+debian3),
  bundler (>= 1.9~),
  rake (>= 10.4.2~),
  ruby-rails (>= 2:4.2.5~),
