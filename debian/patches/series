@@ -4,4 +4,5 @@
 050-relax-libs.patch
 051-relax-eye.patch
 060-use-db-env.patch
+070-relax-jquery.patch
 0100-set-rails-root.patch

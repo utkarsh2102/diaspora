@@ -1,0 +1,25 @@
+--- a/app/helpers/application_helper.rb
++++ b/app/helpers/application_helper.rb
+@@ -54,9 +54,9 @@
+     if AppConfig.privacy.jquery_cdn?
+       version = Jquery::Rails::JQUERY_2_VERSION
+       buf << [ javascript_include_tag("//code.jquery.com/jquery-#{version}.min.js") ]
+-      buf << [javascript_tag("!window.jQuery && document.write(unescape('#{j javascript_include_tag('jquery2')}'));")]
++      buf << [javascript_tag("!window.jQuery && document.write(unescape('#{j javascript_include_tag('jquery')}'));")]
+     else
+-      buf << [javascript_include_tag("jquery2")]
++      buf << [javascript_include_tag("jquery")]
+     end
+     buf << [ javascript_include_tag('jquery_ujs') ]
+     buf << [ javascript_tag("jQuery.ajaxSetup({'cache': false});") ]
+--- a/config/application.rb
++++ b/config/application.rb
+@@ -70,7 +70,7 @@
+       contact-list.js
+       ie.js
+       inbox.js
+-      jquery2.js
++      jquery.js
+       jquery_ujs.js
+       jquery-textchange.js
+       main.js

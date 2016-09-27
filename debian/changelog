@@ -1,3 +1,9 @@
+diaspora (0.6.0.0+debian-3) UNRELEASED; urgency=medium
+
+  * Use jquery in place of jquery2 
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 27 Sep 2016 19:47:40 +0530
+
 diaspora (0.6.0.0+debian-2) experimental; urgency=medium
 
   * Remove leftover files on uninstall
