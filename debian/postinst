@@ -42,7 +42,10 @@ case "$1" in
 	
 	echo "Setting up secret_token..."
         DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token 
-        
+
+	# Initialize database
+        /usr/lib/diaspora-common/scripts/initdb.sh
+ 
 	echo "Precompiling assets..."
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
 
