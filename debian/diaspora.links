@@ -3,3 +3,4 @@ usr/share/fonts/truetype/roboto/hinted/Roboto-Light.ttf usr/share/diaspora/app/a
 usr/share/fonts/truetype/roboto/hinted/Roboto-Regular.ttf usr/share/diaspora/app/assets/images/fonts/Roboto-Regular.ttf
 usr/bin usr/share/diaspora/bin
 etc/diaspora usr/share/diaspora/config
+var/log/diaspora usr/share/diaspora/log
