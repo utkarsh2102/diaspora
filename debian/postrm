@@ -23,6 +23,7 @@ case "$1" in
     rm -rf /usr/share/diaspora/public
     rm -rf /usr/share/diaspora/app/assets/images
     rm -rf /usr/share/diaspora/.bundle
+    rm -rf /usr/share/diaspora/.eye
     rm -rf /usr/share/diaspora/Gemfile.lock
 
     # Remove diversion
