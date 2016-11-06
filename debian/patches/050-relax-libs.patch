@@ -1,7 +1,9 @@
 minor versions of stable libraries can be relaxed
 
---- a/Gemfile
-+++ b/Gemfile
+Index: diaspora/Gemfile
+===================================================================
+--- diaspora.orig/Gemfile
++++ diaspora/Gemfile
 @@ -1,190 +1,190 @@
  source "https://rubygems.org"
  
@@ -239,7 +241,7 @@ minor versions of stable libraries can be relaxed
  # Tags
  
 -gem "acts-as-taggable-on", "3.5.0"
-+gem "acts-as-taggable-on", "~> 3.5"
++gem "acts-as-taggable-on", "~> 4.0"
  
  # URIs and HTTP
  
@@ -279,7 +281,7 @@ minor versions of stable libraries can be relaxed
  
  # Prevent occasions where minitest is not bundled in
  # packaged versions of ruby. See following issues/prs:
-@@ -193,7 +193,7 @@
+@@ -193,7 +193,7 @@ gem "rubyzip", "1.2.0", require: "zip"
  # https://github.com/discourse/discourse/pull/238
  gem "minitest"
  
@@ -288,7 +290,7 @@ minor versions of stable libraries can be relaxed
  
  # Windows and OSX have an execjs compatible runtime built-in, Linux users should
  # install Node.js or use "therubyracer".
-@@ -205,29 +205,29 @@
+@@ -205,29 +205,29 @@ gem "versionist", "1.5.0"
  group :production do # we don"t install these on travis to speed up test runs
    # Administration
  
