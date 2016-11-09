@@ -1,8 +1,9 @@
-diaspora (0.6.0.0+debian-3) UNRELEASED; urgency=medium
+diaspora (0.6.0.0+debian-3) unstable; urgency=medium
 
-  * Use jquery in place of jquery2 
+  * Reupload to unstable
+  * Remove --stop_all option from eye (fixes init script)
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 27 Sep 2016 19:47:40 +0530
+ -- Pirate Praveen <praveen@debian.org>  Wed, 09 Nov 2016 12:53:23 +0530
 
 diaspora (0.6.0.0+debian-2) experimental; urgency=medium
 
