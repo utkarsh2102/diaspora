@@ -1,6 +1,7 @@
 diaspora (0.6.0.0+debian-4) unstable; urgency=medium
 
-  * Fix syntax in Gemfile patch 
+  * Fix syntax in Gemfile patch
+  * Tighten dependency on ruby-oembed to >= 0.10
 
  -- Pirate Praveen <praveen@debian.org>  Thu, 10 Nov 2016 11:10:54 +0530
 
