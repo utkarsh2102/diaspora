@@ -1,3 +1,9 @@
+diaspora (0.6.0.0+debian-4) unstable; urgency=medium
+
+  * Fix syntax in Gemfile patch 
+
+ -- Pirate Praveen <praveen@debian.org>  Thu, 10 Nov 2016 11:10:54 +0530
+
 diaspora (0.6.0.0+debian-3) unstable; urgency=medium
 
   * Reupload to unstable
