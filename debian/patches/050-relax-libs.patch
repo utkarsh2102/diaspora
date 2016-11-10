@@ -241,7 +241,7 @@ Index: diaspora/Gemfile
  # Tags
  
 -gem "acts-as-taggable-on", "3.5.0"
-+gem "acts-as-taggable-on", ">= 3.5","<< 5.0"
++gem "acts-as-taggable-on", ">= 3.5","< 5.0"
  
  # URIs and HTTP
  
