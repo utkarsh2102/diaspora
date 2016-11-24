@@ -1,3 +1,11 @@
+diaspora (0.6.0.0+debian-5) unstable; urgency=medium
+
+  * Remove dependency on ruby-rails-autolink (removed upstream)
+  * Use jquery 3 instead of jquery 2
+  * Tighten dependency on ruby-handlebars-assets
+
+ -- Pirate Praveen <praveen@debian.org>  Thu, 24 Nov 2016 11:16:10 +0530
+
 diaspora (0.6.0.0+debian-4) unstable; urgency=medium
 
   * Fix syntax in Gemfile patch
