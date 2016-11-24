@@ -1,0 +1,67 @@
+From 657d06c49061a499b93ca0e43f35b70cad785a3b Mon Sep 17 00:00:00 2001
+From: cmrd Senya <senya@riseup.net>
+Date: Thu, 10 Nov 2016 17:46:31 +0200
+Subject: [PATCH] jQuery 3 integration
+
+---
+ app/assets/javascripts/jasmine-load-all.js | 2 +-
+ app/helpers/application_helper.rb          | 8 +++++---
+ config/application.rb                      | 2 +-
+ spec/helpers/application_helper_spec.rb    | 2 +-
+ 6 files changed, 12 insertions(+), 10 deletions(-)
+
+Index: diaspora/app/assets/javascripts/jasmine-load-all.js
+===================================================================
+--- diaspora.orig/app/assets/javascripts/jasmine-load-all.js
++++ diaspora/app/assets/javascripts/jasmine-load-all.js
+@@ -1,4 +1,4 @@
+-//= require jquery2
++//= require jquery3
+ //= require handlebars.runtime
+ //= require templates
+ //= require main
+Index: diaspora/app/helpers/application_helper.rb
+===================================================================
+--- diaspora.orig/app/helpers/application_helper.rb
++++ diaspora/app/helpers/application_helper.rb
+@@ -52,11 +52,11 @@ module ApplicationHelper
+   def jquery_include_tag
+     buf = []
+     if AppConfig.privacy.jquery_cdn?
+-      version = Jquery::Rails::JQUERY_2_VERSION
++      version = Jquery::Rails::JQUERY_3_VERSION
+       buf << [ javascript_include_tag("//code.jquery.com/jquery-#{version}.min.js") ]
+-      buf << [javascript_tag("!window.jQuery && document.write(unescape('#{j javascript_include_tag('jquery2')}'));")]
++      buf << [javascript_tag("!window.jQuery && document.write(unescape('#{j javascript_include_tag('jquery3')}'));")]
+     else
+-      buf << [javascript_include_tag("jquery2")]
++      buf << [javascript_include_tag("jquery3")]
+     end
+     buf << [ javascript_include_tag('jquery_ujs') ]
+     buf << [ javascript_tag("jQuery.ajaxSetup({'cache': false});") ]
+Index: diaspora/config/application.rb
+===================================================================
+--- diaspora.orig/config/application.rb
++++ diaspora/config/application.rb
+@@ -70,7 +70,7 @@ module Diaspora
+       contact-list.js
+       ie.js
+       inbox.js
+-      jquery2.js
++      jquery3.js
+       jquery_ujs.js
+       jquery-textchange.js
+       main.js
+Index: diaspora/spec/helpers/application_helper_spec.rb
+===================================================================
+--- diaspora.orig/spec/helpers/application_helper_spec.rb
++++ diaspora/spec/helpers/application_helper_spec.rb
+@@ -74,7 +74,7 @@ describe ApplicationHelper, :type => :he
+       end
+ 
+       it 'includes jquery.js from asset pipeline' do
+-        expect(jquery_include_tag).to match(/jquery2\.js/)
++        expect(jquery_include_tag).to match(/jquery3\.js/)
+         expect(jquery_include_tag).not_to match(/jquery\.com/)
+       end
+     end
