@@ -6,4 +6,3 @@
 060-use-db-env.patch
 0100-set-rails-root.patch
 0110-remove-stop-all-from-eye.patch
-0120-use-jquery-3.patch
