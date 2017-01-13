@@ -1,3 +1,5 @@
+adapt to jquery-ui-rails 6 in debian
+
 --- a/Gemfile
 +++ b/Gemfile
 @@ -96,7 +96,7 @@
