@@ -1,1 +1,1 @@
-dir_to_symlink /usr/share/diaspora/config 0.5.9.1+debian3 diaspora-common
+dir_to_symlink /usr/share/diaspora/config /etc/diaspora 0.5.9.1+debian3 diaspora-common
