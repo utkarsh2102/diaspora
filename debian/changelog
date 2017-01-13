@@ -1,3 +1,10 @@
+diaspora (0.6.0.0+debian-8) unstable; urgency=medium
+
+  [ Julian Gilbey ]
+  * Fix maintscript syntax (Closes: #850575) 
+
+ -- Pirate Praveen <praveen@debian.org>  Fri, 13 Jan 2017 13:10:14 +0530
+
 diaspora (0.6.0.0+debian-7) unstable; urgency=medium
 
   * Use jquery-ui 6 (See #846961) 
