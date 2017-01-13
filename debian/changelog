@@ -1,5 +1,8 @@
 diaspora (0.6.0.0+debian-8) unstable; urgency=medium
 
+  * Remove unused overrides
+  * Add tag for all patches 
+
   [ Julian Gilbey ]
   * Fix maintscript syntax (Closes: #850575) 
 
