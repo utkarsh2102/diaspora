@@ -1,3 +1,9 @@
+diaspora (0.6.0.1+debian-1) unstable; urgency=medium
+
+  * New hotfix release
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 17 Jan 2017 13:38:29 +0530
+
 diaspora (0.6.0.0+debian-8) unstable; urgency=medium
 
   * Remove unused overrides
