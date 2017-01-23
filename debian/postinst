@@ -34,27 +34,29 @@ chown -R ${diaspora_user}: ${diaspora_home}
 cd ${diaspora_home}
 	
 #######################################################################
-# update Gemfile.lock, always
+# update Gemfile.lock, after first install
 #######################################################################
-su ${diaspora_user} -s /bin/sh -c 'truncate -s 0 ${diaspora_home}/Gemfile.lock'
-if ! su ${diaspora_user} -s /bin/sh -c 'bundle --local --quiet'; then
-  if [ "$1" = "triggered" ]; then
-    # probably triggered in the middle of an system upgrade; ignore failure
-    # but abort here
-    echo "#########################################################################"
-    echo "# Failed to detect gitlab dependencies; if you are in the middle of an #"
-    echo "# upgrade, this is probably fine, there will be another attempt later.  #"
-    echo "#                                                                       #"
-    echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
-    echo "# issue. Please report a bug.                                           #"
-    echo "#########################################################################"
-    exit 0
-  else
-    # something is really broken
-    exit 1
+if -e ${diaspora_conf}; then
+  . ${diaspora_conf}
+  su ${diaspora_user} -s /bin/sh -c 'truncate -s 0 ${diaspora_home}/Gemfile.lock'
+  if ! su ${diaspora_user} -s /bin/sh -c 'bundle --local --quiet'; then
+    if [ "$1" = "triggered" ]; then
+      # probably triggered in the middle of an system upgrade; ignore failure
+      # but abort here
+      echo "#########################################################################"
+      echo "# Failed to detect gitlab dependencies; if you are in the middle of an #"
+      echo "# upgrade, this is probably fine, there will be another attempt later.  #"
+      echo "#                                                                       #"
+      echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
+      echo "# issue. Please report a bug.                                           #"
+      echo "#########################################################################"
+      exit 0
+    else
+      # something is really broken
+      exit 1
+    fi
   fi
 fi
-
 case "$1" in
     configure)
 
