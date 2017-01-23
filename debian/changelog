@@ -1,6 +1,7 @@
 diaspora (0.6.0.1+debian-1) unstable; urgency=medium
 
   * New hotfix release
+  * Remove database existence/previous version check in preinst
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 17 Jan 2017 13:38:29 +0530
 
