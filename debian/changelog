@@ -5,6 +5,7 @@ diaspora (0.6.0.1+debian-1) unstable; urgency=medium
   * Create /run/gitlab and use it as tmp (for sockets and pids)
     (Closes: #852187)
   * Always generate Gemfile.lock
+  * Regenerate Gemfile.lock when ruby packages are updated
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 17 Jan 2017 13:38:29 +0530
 
