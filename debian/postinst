@@ -73,7 +73,7 @@ case "$1" in
         /usr/lib/diaspora-common/scripts/initdb.sh
  
 	echo "Precompiling assets..."
-	chown -R ${diaspora_user}: ~/app-assets ~/public 
+	chown -R ${diaspora_user}: /var/lib/diaspora/{app-assets,public}
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
 
 	echo "Running final rake tasks..."
