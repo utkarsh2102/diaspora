@@ -14,6 +14,9 @@
 %:
 	dh $@
 
+override_dh_install:
+	dh_install
+	rm -rf debian/diaspora/usr/share/diaspora/app/assets
 clean:
 	dh clean
 	rm -rf .bundle

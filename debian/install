@@ -1,4 +1,5 @@
 lib usr/share/diaspora
+app/assets/* var/lib/diaspora/app-assets
 app usr/share/diaspora
 AUTHORS usr/share/diaspora
 Changelog.md usr/share/diaspora
