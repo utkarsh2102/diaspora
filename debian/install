@@ -15,7 +15,7 @@ GNU-AGPL-3.0 usr/share/diaspora
 graphics usr/share/diaspora
 Guardfile usr/share/diaspora
 Procfile usr/share/diaspora
-public usr/share/diaspora
+public var/lib/diaspora
 Rakefile usr/share/diaspora
 README.md usr/share/diaspora
 redis-integration1.conf usr/share/diaspora
