@@ -17,6 +17,9 @@
 override_dh_install:
 	dh_install
 	rm -rf debian/diaspora/usr/share/diaspora/app/assets
+	rm -f debian/diaspora/usr/share/diaspora/db/schema.rb
+	mv debian/diaspora/var/lib/diaspora/schema.rb \
+	debian/diaspora/var/lib/diaspora/db-schema.rb.template
 clean:
 	dh clean
 	rm -rf .bundle

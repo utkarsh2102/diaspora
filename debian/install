@@ -6,6 +6,7 @@ Changelog.md usr/share/diaspora
 config/* etc/diaspora
 config.ru usr/share/diaspora
 COPYRIGHT usr/share/diaspora
+db/schema.rb var/lib/diaspora
 db usr/share/diaspora
 features usr/share/diaspora
 FederationProcfile usr/share/diaspora
