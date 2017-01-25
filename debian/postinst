@@ -30,7 +30,6 @@ set -e
 # Read debian specific configuration
 #######################################################################
 . /etc/diaspora/diaspora-common.conf
-chown -R ${diaspora_user}: ${diaspora_home}
 cd ${diaspora_home}
 	
 #######################################################################
