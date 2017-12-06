@@ -31,11 +31,11 @@ set -e
 #######################################################################
 . /etc/diaspora/diaspora-common.conf
 cd ${diaspora_home}
-	
+
 #######################################################################
 # update Gemfile.lock, after first install
 #######################################################################
-if -e ${diaspora_conf}; then
+if [ -e ${diaspora_conf} ]; then
   . ${diaspora_conf}
   su ${diaspora_user} -s /bin/sh -c 'truncate -s 0 ${diaspora_home}/Gemfile.lock'
   if ! su ${diaspora_user} -s /bin/sh -c 'bundle --local --quiet'; then
@@ -62,16 +62,16 @@ case "$1" in
 	echo "Setting up environment varibales..."
 	. /usr/lib/diaspora-common/scripts/set-env-diaspora.sh
 	echo RAILS_ENV=$RAILS_ENV DB=$DB ENVIRONMENT_URL=$ENVIRONMENT_URL
-	
+
 	echo "Verifying we have all required libraries..."
 	su diaspora -s /bin/sh -c 'bundle install --local'
-	
+
 	echo "Setting up secret_token..."
-        DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token 
+        DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token
 
 	# Initialize database
         /usr/lib/diaspora-common/scripts/initdb.sh
- 
+
 	echo "Precompiling assets..."
 	chown -R ${diaspora_user}: /var/lib/diaspora/app-assets /var/lib/diaspora/public
 	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
