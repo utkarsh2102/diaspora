@@ -4,11 +4,10 @@ Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Pirate Praveen <praveen@debian.org>
 Build-Depends: debhelper (>= 9~), gem2deb
-Standards-Version: 3.9.8
+Standards-Version: 4.1.2
 Vcs-Git: https://anonscm.debian.org/git/pkg-ruby-extras/diaspora.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-ruby-extras/diaspora.git
 Homepage: http://diasporafoundation.org
-Testsuite: autopkgtest
 XS-Ruby-Versions: all
 
 Package: diaspora
