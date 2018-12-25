@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Diaspora
   module Federation
     class Dispatcher
@@ -14,25 +16,18 @@ module Diaspora
 
           return if targets.empty?
 
-          entity = Entities.build(object)
-          Workers::SendPublic.perform_async(sender.id, entity.to_s, targets, salmon_xml(entity))
+          Workers::SendPublic.perform_async(sender.id, entity.to_s, targets, magic_envelope.to_xml)
         end
 
         def target_urls(people)
-          Pod.where(id: people.map(&:pod_id).uniq).map {|pod| pod.url_to("/receive/public") }
+          active, inactive = Pod.where(id: people.map(&:pod_id).uniq).partition(&:active?)
+          logger.info "ignoring inactive pods: #{inactive.join(', ')}" if inactive.any?
+          active.map {|pod| pod.url_to("/receive/public") }
         end
 
         def additional_target_urls
           return [] unless AppConfig.relay.outbound.send? && object.instance_of?(StatusMessage)
           [AppConfig.relay.outbound.url]
-        end
-
-        def salmon_xml(entity)
-          DiasporaFederation::Salmon::Slap.generate_xml(
-            sender.diaspora_handle,
-            sender.encryption_key,
-            entity
-          )
         end
 
         def deliver_to_hub

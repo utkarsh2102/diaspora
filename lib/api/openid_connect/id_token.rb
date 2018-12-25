@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2011 nov matake
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -51,7 +53,7 @@ module Api
       def claims
         sub = build_sub
         @claims ||= {
-          iss:       AppConfig.environment.url,
+          iss:       Rails.application.routes.url_helpers.root_url,
           sub:       sub,
           aud:       @authorization.o_auth_application.client_id,
           exp:       @expires_at.to_i,

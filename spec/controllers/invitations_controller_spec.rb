@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe InvitationsController, type: :controller do
   describe "#create" do
@@ -19,16 +19,16 @@ describe InvitationsController, type: :controller do
 
       it "does not create an EmailInviter" do
         expect(Workers::Mail::InviteEmail).not_to receive(:perform_async)
-        post :create, invite_params
+        post :create, params: invite_params
       end
 
       it "returns to the previous page" do
-        post :create, invite_params
+        post :create, params: invite_params
         expect(response).to redirect_to referer
       end
 
       it "flashes an error" do
-        post :create, invite_params
+        post :create, params: invite_params
         expect(flash[:error]).to eq(I18n.t("invitations.create.empty"))
       end
     end
@@ -41,16 +41,16 @@ describe InvitationsController, type: :controller do
         expect(Workers::Mail::InviteEmail).to receive(:perform_async).with(
           emails, alice.id, invite_params[:email_inviter]
         )
-        post :create, invite_params
+        post :create, params: invite_params
       end
 
       it "returns to the previous page on success" do
-        post :create, invite_params
+        post :create, params: invite_params
         expect(response).to redirect_to referer
       end
 
       it "flashes a notice" do
-        post :create, invite_params
+        post :create, params: invite_params
         expected = I18n.t("invitations.create.sent", emails: emails)
         expect(flash[:notice]).to eq(expected)
       end
@@ -62,16 +62,16 @@ describe InvitationsController, type: :controller do
 
       it "does not create an InviteEmail worker" do
         expect(Workers::Mail::InviteEmail).not_to receive(:perform_async)
-        post :create, invite_params
+        post :create, params: invite_params
       end
 
       it "returns to the previous page" do
-        post :create, invite_params
+        post :create, params: invite_params
         expect(response).to redirect_to referer
       end
 
       it "flashes an error" do
-        post :create, invite_params
+        post :create, params: invite_params
 
         expected = I18n.t("invitations.create.rejected", emails: emails)
         expect(flash[:error]).to eq(expected)
@@ -87,16 +87,16 @@ describe InvitationsController, type: :controller do
         expect(Workers::Mail::InviteEmail).to receive(:perform_async).with(
           valid_emails, alice.id, invite_params[:email_inviter]
         )
-        post :create, invite_params
+        post :create, params: invite_params
       end
 
       it "returns to the previous page" do
-        post :create, invite_params
+        post :create, params: invite_params
         expect(response).to redirect_to referer
       end
 
       it "flashes a notice" do
-        post :create, invite_params
+        post :create, params: invite_params
         expected = I18n.t("invitations.create.sent", emails: valid_emails.split(",").join(", ")) + ". " +
           I18n.t("invitations.create.rejected", emails: invalid_emails)
         expect(flash[:error]).to eq(expected)
@@ -111,7 +111,7 @@ describe InvitationsController, type: :controller do
       it "displays an error if invitations are closed" do
         AppConfig.settings.invitations.open = false
 
-        post :create, invite_params
+        post :create, params: invite_params
 
         expect(flash[:error]).to eq(I18n.t("invitations.create.closed"))
       end
@@ -119,7 +119,7 @@ describe InvitationsController, type: :controller do
       it "displays an error when no invitations are left" do
         alice.invitation_code.update_attributes(count: 0)
 
-        post :create, invite_params
+        post :create, params: invite_params
 
         expect(flash[:error]).to eq(I18n.t("invitations.create.no_more"))
       end
@@ -129,7 +129,7 @@ describe InvitationsController, type: :controller do
       AppConfig.settings.invitations.open = false
       alice.invitation_code.update_attributes(count: 0)
 
-      post :create, invite_params
+      post :create, params: invite_params
 
       expect(flash[:error]).to be_nil
     end

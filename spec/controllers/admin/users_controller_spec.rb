@@ -1,5 +1,4 @@
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Admin::UsersController, :type => :controller do
   before do
@@ -15,7 +14,7 @@ describe Admin::UsersController, :type => :controller do
       expect(other_user).to receive(:close_account!)
       allow(User).to receive(:find).and_return(other_user)
 
-      post :close_account, id: other_user.id
+      post :close_account, params: {id: other_user.id}
     end
   end
 

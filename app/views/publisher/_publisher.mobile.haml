@@ -2,7 +2,8 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
-= form_for StatusMessage.new, html: {class: "control-group", data: {ajax: false}} do |status|
+= form_for StatusMessage.new, url: status_messages_path, as: :status_message,
+    html: {class: "control-group", data: {ajax: false}} do |status|
   .form-group
     = status.hidden_field :provider_display_name, value: 'mobile'
     = status.text_area :text, placeholder: t('shared.publisher.whats_on_your_mind'), rows: 4, autofocus: "autofocus", class: "form-control"
@@ -27,11 +28,11 @@
           = "· #{aspect.name}"
 
     .clear
-    #publisher_textarea_wrapper
+    #publisher-textarea-wrapper
       %ul#photodropzone
     #fileInfo-publisher
 
-    #file-upload-publisher{title: t('shared.publisher.upload_photos'), class: 'btn btn-default'}
+    #file-upload-publisher{class: "btn btn-default"}
       %i.entypo-camera.middle
     #publisher_mobile
       = submit_tag t("shared.publisher.share"),

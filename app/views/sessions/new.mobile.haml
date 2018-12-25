@@ -2,13 +2,13 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
-.stream#main_stream
+.stream#main-stream
   - flash.each do |name, msg|
     .expose#flash-container
       .flash-message{class: "message alert alert-#{flash_class name}", role: "alert"}
         = msg
 
-  #login_form
+  .login-form
     .login-container
       = render partial: "form", locals: {mobile: true}
 

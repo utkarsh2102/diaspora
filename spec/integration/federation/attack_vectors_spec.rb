@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-require "spec_helper"
 require "integration/federation/federation_helper"
 
 describe "attack vectors", type: :request do
@@ -24,7 +25,7 @@ describe "attack vectors", type: :request do
 
     alice.share_with(eve.person, alices_aspect)
 
-    post_message(generate_xml(Diaspora::Federation::Entities.post(original_message), bob, alice), alice)
+    post_message(generate_payload(Diaspora::Federation::Entities.post(original_message), bob, alice), alice)
 
     # alice still should not see eves original post, even though bob sent it to her
     expect(alice.reload.visible_shareables(Post).where(guid: original_message.guid)).to be_blank
@@ -35,36 +36,39 @@ describe "attack vectors", type: :request do
       profile = eve.profile.clone
       profile.first_name = "Not BOB"
 
-      post_message(generate_xml(Diaspora::Federation::Entities.profile(profile), alice, bob), bob)
+      post_message(generate_payload(Diaspora::Federation::Entities.profile(profile), alice, bob), bob)
 
-      expect(eve.profile(true).first_name).not_to eq("Not BOB")
+      expect(eve.profile.reload.first_name).not_to eq("Not BOB")
     end
 
     it "public post should not be spoofed from another author" do
       post = FactoryGirl.build(:status_message, public: true, author: eve.person)
 
-      post_message(generate_xml(Diaspora::Federation::Entities.post(post), alice))
+      post_message(generate_payload(Diaspora::Federation::Entities.post(post), alice))
 
       expect(StatusMessage.exists?(guid: post.guid)).to be_falsey
     end
 
     it "should not receive retractions where the retractor and the salmon author do not match" do
       original_message = eve.post(:status_message, text: "store this!", to: eves_aspect.id)
+      retraction = Retraction.for(original_message)
 
       expect {
-        post_message(generate_xml(Diaspora::Federation::Entities.retraction(original_message), alice, bob), bob)
+        post_message(generate_payload(Diaspora::Federation::Entities.retraction(retraction), alice, bob), bob)
       }.to_not change { bob.visible_shareables(Post).count(:all) }
     end
 
     it "should not receive contact retractions from another person" do
       # we are banking on bob being friends with alice and eve
       # here, alice is trying to disconnect bob and eve
-      contact = bob.contacts(true).find_by(person_id: eve.person.id)
+      contact = bob.contacts.reload.find_by(person_id: eve.person.id)
       expect(contact).to be_sharing
 
-      post_message(generate_xml(Diaspora::Federation::Entities.retraction(contact), alice, bob), bob)
+      post_message(
+        generate_payload(Diaspora::Federation::Entities.retraction(ContactRetraction.for(contact)), alice, bob), bob
+      )
 
-      expect(bob.contacts(true).find_by(person_id: eve.person.id)).to be_sharing
+      expect(bob.contacts.reload.find_by(person_id: eve.person.id)).to be_sharing
     end
   end
 
@@ -80,7 +84,7 @@ describe "attack vectors", type: :request do
       author: alice.person
     )
 
-    post_message(generate_xml(Diaspora::Federation::Entities.post(malicious_message), alice, bob), bob)
+    post_message(generate_payload(Diaspora::Federation::Entities.post(malicious_message), alice, bob), bob)
 
     expect(original_message.reload.author_id).to eq(eve.person.id)
   end
@@ -93,7 +97,7 @@ describe "attack vectors", type: :request do
     # eve tries to send me another message with the same ID
     malicious_message = FactoryGirl.build(:status_message, id: original_message.id, text: "BAD!!!", author: eve.person)
 
-    post_message(generate_xml(Diaspora::Federation::Entities.post(malicious_message), eve, bob), bob)
+    post_message(generate_payload(Diaspora::Federation::Entities.post(malicious_message), eve, bob), bob)
 
     expect(original_message.reload.text).to eq("store this!")
   end
@@ -109,7 +113,7 @@ describe "attack vectors", type: :request do
     )
 
     expect {
-      post_message(generate_xml(retraction, alice, bob), bob)
+      post_message(generate_payload(retraction, alice, bob), bob)
     }.to_not change(StatusMessage, :count)
   end
 
@@ -122,7 +126,7 @@ describe "attack vectors", type: :request do
     new_message.height = 23
     new_message.width = 42
 
-    post_message(generate_xml(Diaspora::Federation::Entities.photo(new_message), alice, bob), bob)
+    post_message(generate_payload(Diaspora::Federation::Entities.photo(new_message), alice, bob), bob)
 
     expect(original_message.reload.text).to eq("store this!")
   end

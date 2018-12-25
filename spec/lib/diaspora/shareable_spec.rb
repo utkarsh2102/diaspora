@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Diaspora::Shareable do
   describe "scopes" do

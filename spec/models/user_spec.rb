@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe User, :type => :model do
   context "relations" do
@@ -306,11 +306,12 @@ describe User, :type => :model do
         expect(alice).not_to be_valid
       end
 
-      it "resets a matching unconfirmed_email on save" do
-        eve.update_attribute :unconfirmed_email, "new@example.com"
-        alice.update_attribute :email, "new@example.com"
+      it "resets a matching unconfirmed_email and confirm_email_token on save" do
+        eve.update_attributes(unconfirmed_email: "new@example.com", confirm_email_token: SecureRandom.hex(15))
+        alice.update_attribute(:email, "new@example.com")
         eve.reload
         expect(eve.unconfirmed_email).to eql(nil)
+        expect(eve.confirm_email_token).to eql(nil)
       end
     end
 
@@ -564,16 +565,11 @@ describe User, :type => :model do
     end
   end
 
-  describe 'account deletion' do
-    describe '#destroy' do
-      it 'removes all service connections' do
-        Services::Facebook.create(:access_token => 'what', :user_id => alice.id)
-        expect {
-          alice.destroy
-        }.to change {
-          alice.services.count
-        }.by(-1)
-      end
+  describe "#destroy" do
+    it "raises error" do
+      expect {
+        alice.destroy
+      }.to raise_error "Never destroy users!"
     end
   end
 
@@ -779,7 +775,7 @@ describe User, :type => :model do
 
     context "posts" do
       it "sends a retraction" do
-        expect(Retraction).to receive(:for).with(post, bob).and_return(retraction)
+        expect(Retraction).to receive(:for).with(post).and_return(retraction)
         expect(retraction).to receive(:defer_dispatch).with(bob)
         expect(retraction).to receive(:perform)
 
@@ -876,6 +872,12 @@ describe User, :type => :model do
         user.send_welcome_message
         expect(user.conversations.count).to eq 0
       end
+
+      it "should send no welcome message if podmin is invalid" do
+        AppConfig.admins.account = "invalid"
+        user.send_welcome_message
+        expect(user.conversations.count).to eq 0
+      end
     end
 
     context "with welcome message disabled" do
@@ -930,105 +932,154 @@ describe User, :type => :model do
         end
       end
 
-      it 'disables mail' do
+      it "disables mail" do
         @user.disable_mail = false
         @user.clear_account!
         expect(@user.reload.disable_mail).to be true
       end
 
-      it 'sets getting_started and show_community_spotlight_in_stream fields to false' do
+      it "sets getting_started and show_community_spotlight_in_stream and post_default_public fields to false" do
         @user.clear_account!
         expect(@user.reload.getting_started).to be false
         expect(@user.reload.show_community_spotlight_in_stream).to be false
+        expect(@user.reload.post_default_public).to be false
+      end
+
+      it "removes export archives" do
+        @user.perform_export!
+        @user.perform_export_photos!
+        @user.clear_account!
+        @user.reload
+        expect(@user.export).not_to be_present
+        expect(@user.exported_at).to be_nil
+        expect(@user.exported_photos_file).not_to be_present
+        expect(@user.exported_photos_at).to be_nil
       end
     end
 
     describe "#clearable_attributes" do
-      it 'returns the clearable fields' do
+      it "returns the clearable fields" do
         user = FactoryGirl.create :user
-        expect(user.send(:clearable_fields).sort).to eq(%w(
-          language
-          reset_password_sent_at
-          reset_password_token
-          remember_created_at
-          sign_in_count
-          current_sign_in_at
-          last_sign_in_at
-          current_sign_in_ip
-          hidden_shareables
-          last_sign_in_ip
-          invited_by_id
-          authentication_token
-          auto_follow_back
-          auto_follow_back_aspect_id
-          unconfirmed_email
-          confirm_email_token
-          last_seen
-          color_theme
-        ).sort)
+        expect(user.send(:clearable_fields)).to match_array(
+          %w(
+            language
+            reset_password_sent_at
+            reset_password_token
+            remember_created_at
+            sign_in_count
+            current_sign_in_at
+            last_sign_in_at
+            current_sign_in_ip
+            hidden_shareables
+            last_sign_in_ip
+            invited_by_id
+            authentication_token
+            auto_follow_back
+            auto_follow_back_aspect_id
+            unconfirmed_email
+            confirm_email_token
+            last_seen
+            color_theme
+            post_default_public
+            exported_at
+            exported_photos_at
+          )
+        )
       end
+    end
+  end
+
+  describe "#export" do
+    it "doesn't change the filename when the user is saved" do
+      user = FactoryGirl.create(:user)
+
+      filename = user.export.filename
+      user.save!
+
+      expect(User.find(user.id).export.filename).to eq(filename)
     end
   end
 
   describe "queue_export" do
     it "queues up a job to perform the export" do
-      user = FactoryGirl.create :user
+      user = FactoryGirl.create(:user)
+      user.update export: Tempfile.new([user.username, ".json.gz"]), exported_at: Time.zone.now
       expect(Workers::ExportUser).to receive(:perform_async).with(user.id)
       user.queue_export
       expect(user.exporting).to be_truthy
+      expect(user.export).not_to be_present
+      expect(user.exported_at).to be_nil
     end
   end
 
   describe "perform_export!" do
+    let(:user) { FactoryGirl.create(:user, exporting: true) }
+
     it "saves a json export to the user" do
-      user = FactoryGirl.create :user, exporting: true
       user.perform_export!
       expect(user.export).to be_present
       expect(user.exported_at).to be_present
       expect(user.exporting).to be_falsey
-      expect(user.export.filename).to match /.json/
+      expect(user.export.filename).to match(/.json/)
       expect(ActiveSupport::Gzip.decompress(user.export.file.read)).to include user.username
     end
 
     it "compresses the result" do
-      user = FactoryGirl.create :user, exporting: true
       expect(ActiveSupport::Gzip).to receive :compress
       user.perform_export!
+    end
+
+    it "resets exporting to false when failing" do
+      expect_any_instance_of(Diaspora::Exporter).to receive(:execute).and_raise("Unexpected error!")
+      user.perform_export!
+      expect(user.exporting).to be_falsey
+      expect(user.export).not_to be_present
     end
   end
 
   describe "queue_export_photos" do
     it "queues up a job to perform the export photos" do
-      user = FactoryGirl.create :user
+      user = FactoryGirl.create(:user)
+      user.update exported_photos_file: Tempfile.new([user.username, ".zip"]), exported_photos_at: Time.zone.now
       expect(Workers::ExportPhotos).to receive(:perform_async).with(user.id)
       user.queue_export_photos
       expect(user.exporting_photos).to be_truthy
+      expect(user.exported_photos_file).not_to be_present
+      expect(user.exported_photos_at).to be_nil
     end
   end
 
   describe "perform_export_photos!" do
+    let(:user) { FactoryGirl.create(:user_with_aspect, exporting: true) }
+
     before do
-      @user = alice
-      filename  = 'button.png'
-      image = File.join(File.dirname(__FILE__), '..', 'fixtures', filename)
-      @saved_image = @user.build_post(:photo, :user_file => File.open(image), :to => alice.aspects.first.id)
+      image = File.join(File.dirname(__FILE__), "..", "fixtures", "button.png")
+      @saved_image = user.build_post(:photo, user_file: File.open(image), to: user.aspects.first.id)
       @saved_image.save!
     end
 
     it "saves a zip export to the user" do
-      @user.perform_export_photos!
-      expect(@user.exported_photos_file).to be_present
-      expect(@user.exported_photos_at).to be_present
-      expect(@user.exporting_photos).to be_falsey
-      expect(@user.exported_photos_file.filename).to match /.zip/
-      expect(Zip::File.open(@user.exported_photos_file.path).entries.count).to eq(1)
+      user.perform_export_photos!
+      expect(user.exported_photos_file).to be_present
+      expect(user.exported_photos_at).to be_present
+      expect(user.exporting_photos).to be_falsey
+      expect(user.exported_photos_file.filename).to match(/.zip/)
+      expect(Zip::File.open(user.exported_photos_file.path).entries.count).to eq(1)
     end
 
     it "does not add empty entries when photo not found" do
-      File.unlink @user.photos.first.unprocessed_image.path
-      @user.perform_export_photos!
-      expect(@user.exported_photos_file.filename).to match /.zip/
-      expect(Zip::File.open(@user.exported_photos_file.path).entries.count).to eq(0)
+      File.unlink user.photos.first.unprocessed_image.path
+      user.perform_export_photos!
+      expect(user.exporting_photos).to be_falsey
+      expect(user.exported_photos_file.filename).to match(/.zip/)
+      expect(Zip::File.open(user.exported_photos_file.path).entries.count).to eq(0)
+    end
+
+    it "resets exporting_photos to false when failing" do
+      expect_any_instance_of(PhotoExporter).to receive(:perform).and_raise("Unexpected error!")
+      user.perform_export_photos!
+      expect(user.exporting_photos).to be_falsey
+      expect(user.exported_photos_file).not_to be_present
     end
   end
 
@@ -1069,7 +1120,7 @@ describe User, :type => :model do
     end
 
     it "#flags user for removal" do
-      remove_at = Time.now+5.days
+      remove_at = Time.now.change(usec: 0).utc + 5.days
       @user.flag_for_removal(remove_at)
       expect(@user.remove_after).to eq(remove_at)
     end

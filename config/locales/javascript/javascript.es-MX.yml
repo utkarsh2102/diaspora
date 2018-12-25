@@ -32,7 +32,6 @@ es-MX:
     confirm_dialog: "¿Estás seguro?"
     delete: "Borrar"
     edit: "Editar"
-    failed_to_like: "¡No se pudo marcar como «Me gusta»!"
     failed_to_post_message: "¡No se pudo publicar el mensaje!"
     failed_to_remove: "¡Se produjo un error al eliminar la entrada!"
     getting_started:
@@ -69,11 +68,8 @@ es-MX:
       looking_good: "¡Ah, te ves increíble!"
       size_error: "El archivo {file} es demasiado grande, el tamaño máximo de un archivo es {sizeLimit}."
     publisher:
-      limited: "Limitado – tu publicación solo será vista por ia gente con quien compartes"
       near_from: "Publicado desde: <%= location %>"
-      public: "Público – tu publicación será visible para todos, y encontrada por buscadores"
     reshares:
-      duplicate: "Qué bien, ¿eh? ¡Ya has compartido esa publicación!"
       post: "¿Compartir la publicación de <%= name %>?"
       successful: "¡La publicación se compartió exitosamente!"
     show_more: "mostrar más"

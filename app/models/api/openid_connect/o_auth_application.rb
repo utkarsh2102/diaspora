@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2011 nov matake
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -25,7 +27,7 @@ require "digest"
 
 module Api
   module OpenidConnect
-    class OAuthApplication < ActiveRecord::Base
+    class OAuthApplication < ApplicationRecord
       has_many :authorizations, dependent: :destroy
       has_many :user, through: :authorizations
 

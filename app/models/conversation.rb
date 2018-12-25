@@ -1,4 +1,6 @@
-class Conversation < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Conversation < ApplicationRecord
   include Diaspora::Federated::Base
   include Diaspora::Fields::Guid
   include Diaspora::Fields::Author
@@ -7,12 +9,7 @@ class Conversation < ActiveRecord::Base
   has_many :participants, class_name: "Person", through: :conversation_visibilities, source: :person
   has_many :messages, -> { order("created_at ASC") }, inverse_of: :conversation
 
-  validate :max_participants
   validate :local_recipients
-
-  def max_participants
-    errors.add(:max_participants, "too many participants") if participants.count > 20
-  end
 
   def local_recipients
     recipients.each do |recipient|
@@ -38,10 +35,10 @@ class Conversation < ActiveRecord::Base
   end
 
   def set_read(user)
-    if visibility = self.conversation_visibilities.where(:person_id => user.person.id).first
-      visibility.unread = 0
-      visibility.save
-    end
+    visibility = conversation_visibilities.find_by(person_id: user.person.id)
+    return unless visibility
+    visibility.unread = 0
+    visibility.save
   end
 
   def participant_handles
@@ -57,7 +54,7 @@ class Conversation < ActiveRecord::Base
   def last_author
     return unless @last_author.present? || messages.size > 0
     @last_author_id ||= messages.pluck(:author_id).last
-    @last_author ||= Person.includes(:profile).where(id: @last_author_id).first
+    @last_author ||= Person.includes(:profile).find_by(id: @last_author_id)
   end
 
   def ordered_participants

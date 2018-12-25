@@ -4,7 +4,7 @@
 
 - conversation = visibility.conversation
 .conversation-wrapper{ :"data-conversation-path" => conversation_path(conversation) }
-  .stream_element.conversation{data:  {guid: conversation.id},
+  .stream-element.conversation{data:  {guid: conversation.id},
                                class: conversation_class(conversation, visibility.unread, @conversation.try(:id))}
     .media
       .img
@@ -26,7 +26,7 @@
             = conversation.subject
         .timestamp
           = timeago(conversation.updated_at)
-        .last_author
+        .last-author
           - if conversation.last_author.present?
             = conversation.last_author.name
         .last_message

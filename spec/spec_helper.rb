@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -9,12 +11,12 @@ Coveralls.wear!('rails')
 
 require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require Rails.root.join("spec", "helper_methods")
-require Rails.root.join("spec", "spec-doc")
 require "rspec/rails"
 require "webmock/rspec"
 require "factory_girl"
 require "sidekiq/testing"
 require "shoulda/matchers"
+require "diaspora_federation/schemas"
 
 include HelperMethods
 
@@ -22,10 +24,10 @@ Dir["#{File.dirname(__FILE__)}/shared_behaviors/**/*.rb"].each do |f|
   require f
 end
 
+RSpec::Matchers.define_negated_matcher :remain, :change
+
 ProcessedImage.enable_processing = false
 UnprocessedImage.enable_processing = false
-Rails.application.routes.default_url_options[:host] = AppConfig.pod_uri.host
-Rails.application.routes.default_url_options[:port] = AppConfig.pod_uri.port
 
 def alice
   @alice ||= User.find_by(username: "alice")
@@ -82,9 +84,6 @@ def client_assertion_with_nonexistent_client_id_path
                                                            "client_assertion_with_nonexistent_client_id.txt")
 end
 
-# Force fixture rebuild
-FileUtils.rm_f(Rails.root.join("tmp", "fixture_builder.yml"))
-
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 fixture_builder_file = "#{File.dirname(__FILE__)}/support/fixture_builder.rb"
@@ -93,6 +92,9 @@ support_files.each {|f| require f }
 require fixture_builder_file
 
 RSpec.configure do |config|
+  config.fixture_path = Rails.root.join("spec", "fixtures")
+  config.global_fixtures = :all
+
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.mock_with :rspec
@@ -107,8 +109,6 @@ RSpec.configure do |config|
     I18n.locale = :en
     stub_request(:post, "https://pubsubhubbub.appspot.com/")
     $process_queue = false
-    allow(Workers::SendPublic).to receive(:perform_async)
-    allow(Workers::SendPrivate).to receive(:perform_async)
   end
 
   config.expect_with :rspec do |expect_config|
@@ -135,11 +135,27 @@ RSpec.configure do |config|
   end
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.include JSON::SchemaMatchers
+  config.json_schemas[:archive_schema] = "lib/schemas/archive-format.json"
+
+  JSON::Validator.add_schema(
+    JSON::Schema.new(
+      DiasporaFederation::Schemas.federation_entities,
+      Addressable::URI.parse(DiasporaFederation::Schemas::FEDERATION_ENTITIES_URI)
+    )
+  )
 end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
+  end
+end
+
+shared_context suppress_csrf_verification: :none do
+  before do
+    ActionController::Base.allow_forgery_protection = true
   end
 end

@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe LanguageHelper, type: :helper do
   describe "#get_javascript_strings_for" do

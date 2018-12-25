@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe Contact, type: :model do
   describe "aspect_memberships" do
@@ -22,12 +22,12 @@ describe Contact, type: :model do
 
     it "requires a user" do
       contact.valid?
-      expect(contact.errors.full_messages).to include "User can't be blank"
+      expect(contact.errors.full_messages).to include "User must exist"
     end
 
     it "requires a person" do
       contact.valid?
-      expect(contact.errors.full_messages).to include "Person can't be blank"
+      expect(contact.errors.full_messages).to include "Person must exist"
     end
 
     it "validates uniqueness" do
@@ -156,63 +156,6 @@ describe Contact, type: :model do
         FactoryGirl.create(:contact) # contact2
 
         expect(Contact.all_contacts_of_person(person)).to eq([contact1])
-      end
-    end
-  end
-
-  describe "#contacts" do
-    before do
-      bob.aspects.create(name: "next")
-      bob.aspects(true)
-
-      @original_aspect = bob.aspects.where(name: "generic").first
-      @new_aspect = bob.aspects.where(name: "next").first
-
-      @people1 = []
-      @people2 = []
-
-      1.upto(5) do
-        person = FactoryGirl.build(:person)
-        bob.contacts.create(person: person, aspects: [@original_aspect])
-        @people1 << person
-      end
-      1.upto(5) do
-        person = FactoryGirl.build(:person)
-        bob.contacts.create(person: person, aspects: [@new_aspect])
-        @people2 << person
-      end
-      # eve <-> bob <-> alice
-    end
-
-    context "on a contact for a local user" do
-      before do
-        alice.reload
-        alice.aspects.reload
-        @contact = alice.contact_for(bob.person)
-      end
-
-      it "returns the target local user's contacts that are in the same aspect" do
-        expect(@contact.contacts.map(&:id)).to match_array([eve.person].concat(@people1).map(&:id))
-      end
-
-      it "returns nothing if contacts_visible is false in that aspect" do
-        @original_aspect.contacts_visible = false
-        @original_aspect.save
-        expect(@contact.contacts).to eq([])
-      end
-
-      it "returns no duplicate contacts" do
-        [alice, eve].each {|c| bob.add_contact_to_aspect(bob.contact_for(c.person), bob.aspects.last) }
-        contact_ids = @contact.contacts.map(&:id)
-        expect(contact_ids.uniq).to eq(contact_ids)
-      end
-    end
-
-    context "on a contact for a remote user" do
-      let(:contact) { bob.contact_for @people1.first }
-
-      it "returns an empty array" do
-        expect(contact.contacts).to eq([])
       end
     end
   end

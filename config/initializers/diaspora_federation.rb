@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 # configure the federation engine
 DiasporaFederation.configure do |config|
   # the pod url
   config.server_uri = AppConfig.pod_uri
 
   config.certificate_authorities = AppConfig.environment.certificate_authorities.get
+
+  config.webfinger_http_fallback = Rails.env == "development"
 
   config.http_concurrency = AppConfig.settings.typhoeus_concurrency.to_i
   config.http_verbose = AppConfig.settings.typhoeus_verbose?
@@ -13,16 +17,22 @@ DiasporaFederation.configure do |config|
       person = Person.where(diaspora_handle: diaspora_id, closed_account: false).where.not(owner: nil).first
       if person
         DiasporaFederation::Discovery::WebFinger.new(
-          acct_uri:      "acct:#{person.diaspora_handle}",
-          alias_url:     AppConfig.url_to("/people/#{person.guid}"),
-          hcard_url:     AppConfig.url_to(DiasporaFederation::Engine.routes.url_helpers.hcard_path(person.guid)),
-          seed_url:      AppConfig.pod_uri,
-          profile_url:   person.profile_url,
-          atom_url:      person.atom_url,
-          salmon_url:    person.receive_url,
-          subscribe_url: AppConfig.url_to("/people?q={uri}"),
-          guid:          person.guid,
-          public_key:    person.serialized_public_key
+          {
+            acct_uri:      "acct:#{person.diaspora_handle}",
+            hcard_url:     AppConfig.url_to(DiasporaFederation::Engine.routes.url_helpers.hcard_path(person.guid)),
+            seed_url:      AppConfig.pod_uri,
+            profile_url:   person.profile_url,
+            atom_url:      person.atom_url,
+            salmon_url:    person.receive_url,
+            subscribe_url: AppConfig.url_to("/people?q={uri}")
+          },
+          aliases: [AppConfig.url_to("/people/#{person.guid}")],
+          links:   [
+            {
+              rel:  OpenIDConnect::Discovery::Provider::Issuer::REL_VALUE,
+              href: Rails.application.routes.url_helpers.root_url
+            }
+          ]
         )
       end
     end
@@ -72,8 +82,7 @@ DiasporaFederation.configure do |config|
     end
 
     on :fetch_public_key do |diaspora_id|
-      key = Person.find_or_fetch_by_identifier(diaspora_id).serialized_public_key
-      OpenSSL::PKey::RSA.new(key) unless key.nil?
+      Person.find_or_fetch_by_identifier(diaspora_id).public_key
     end
 
     on :fetch_related_entity do |entity_type, guid|
@@ -93,7 +102,9 @@ DiasporaFederation.configure do |config|
       end
     end
 
-    on :receive_entity do |entity, recipient_id|
+    on :receive_entity do |entity, sender, recipient_id|
+      Person.by_account_identifier(sender).pod.try(:schedule_check_if_needed)
+
       case entity
       when DiasporaFederation::Entities::AccountDeletion
         Diaspora::Federation::Receive.account_deletion(entity)
@@ -106,8 +117,13 @@ DiasporaFederation.configure do |config|
     end
 
     on :fetch_public_entity do |entity_type, guid|
-      entity = Diaspora::Federation::Mappings.model_class_for(entity_type).find_by(guid: guid, public: true)
-      Diaspora::Federation::Entities.post(entity) if entity.is_a? Post
+      entity = Diaspora::Federation::Mappings.model_class_for(entity_type).all_public.find_by(guid: guid)
+      case entity
+      when Post
+        Diaspora::Federation::Entities.post(entity)
+      when Poll
+        Diaspora::Federation::Entities.status_message(entity.status_message)
+      end
     end
 
     on :fetch_person_url_to do |diaspora_id, path|

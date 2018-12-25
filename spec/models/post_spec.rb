@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe Post, :type => :model do
   describe 'scopes' do
@@ -67,12 +67,12 @@ describe Post, :type => :model do
 
       it 'calls includes_for_a_stream' do
         expect(Post).to receive(:includes_for_a_stream)
-        Post.for_a_stream(double, double)
+        Post.for_a_stream(Time.zone.now, "created_at")
       end
 
       it 'calls excluding_blocks if a user is present' do
         expect(Post).to receive(:excluding_blocks).with(alice).and_return(Post)
-        Post.for_a_stream(double, double, alice)
+        Post.for_a_stream(Time.zone.now, "created_at", alice)
       end
     end
 
@@ -170,9 +170,53 @@ describe Post, :type => :model do
           it "returns them in reverse creation order" do
             posts = Post.for_visible_shareable_sql(Time.now + 1, "created_at")
             expect(posts.first.text).to eq("second")
-            expect(posts.at(1).text).to eq("first")
+            expect(posts.second.text).to eq("first")
             expect(posts.last.text).to eq("alice - 5")
           end
+        end
+      end
+    end
+
+    describe ".subscribed_by" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      context "when the user has a participation on a post" do
+        let(:post) { FactoryGirl.create(:status_message_with_participations, participants: [user]) }
+
+        it "includes the post to the result set" do
+          expect(Post.subscribed_by(user)).to eq([post])
+        end
+      end
+
+      context "when the user doens't have a participation on a post" do
+        before do
+          FactoryGirl.create(:status_message)
+        end
+
+        it "returns empty result set" do
+          expect(Post.subscribed_by(user)).to be_empty
+        end
+      end
+    end
+
+    describe ".reshared_by" do
+      let(:person) { FactoryGirl.create(:person) }
+
+      context "when the person has a reshare for a post" do
+        let(:post) { FactoryGirl.create(:reshare, author: person).root }
+
+        it "includes the post to the result set" do
+          expect(Post.reshared_by(person)).to eq([post])
+        end
+      end
+
+      context "when the person has no reshare for a post" do
+        before do
+          FactoryGirl.create(:status_message)
+        end
+
+        it "returns empty result set" do
+          expect(Post.reshared_by(person)).to be_empty
         end
       end
     end
@@ -343,6 +387,15 @@ describe Post, :type => :model do
     it "sets #interacted_at" do
       post = FactoryGirl.create(:status_message)
       expect(post.interacted_at).not_to be_blank
+    end
+  end
+
+  describe "#before_destroy" do
+    it "removes root_guid from reshares" do
+      post = FactoryGirl.create(:status_message, author: alice.person, public: true)
+      reshare = FactoryGirl.create(:reshare, author: bob.person, root: post)
+      post.destroy!
+      expect(reshare.reload.root_guid).to be_nil
     end
   end
 end

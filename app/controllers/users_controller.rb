@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i(new create public user_photo)
+  before_action :authenticate_user!, except: %i(new create public)
   respond_to :html
 
   def edit
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
       flash[:error] = t("users.update.settings_not_updated")
     end
 
-    redirect_to :back
+    redirect_back fallback_location: privacy_settings_path
   end
 
   def destroy
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
       else
         flash[:error] = t "users.destroy.no_password"
       end
-      redirect_to :back
+      redirect_back fallback_location: edit_user_path
     end
   end
 
@@ -87,6 +89,7 @@ class UsersController < ApplicationController
     @person   = @user.person
     @profile  = @user.profile
     gon.preloads[:inviter] = PersonPresenter.new(current_user.invited_by.try(:person), current_user).as_json
+    gon.preloads[:tagsArray] = current_user.followed_tags.map {|tag| {name: "##{tag.name}", value: "##{tag.name}"} }
 
     render "users/getting_started"
   end
@@ -118,16 +121,6 @@ class UsersController < ApplicationController
     redirect_to current_user.exported_photos_file.url
   end
 
-  def user_photo
-    username = params[:username].split('@')[0]
-    user = User.find_by_username(username)
-    if user.present?
-      redirect_to user.image_url
-    else
-      render :nothing => true, :status => 404
-    end
-  end
-
   def confirm_email
     if current_user.confirm_email(params[:token])
       flash[:notice] = I18n.t("users.confirm_email.email_confirmed", email: current_user.email)
@@ -135,6 +128,11 @@ class UsersController < ApplicationController
       flash[:error] = I18n.t("users.confirm_email.email_not_confirmed")
     end
     redirect_to edit_user_path
+  end
+
+  def auth_token
+    current_user.ensure_authentication_token!
+    render status: 200, json: {token: current_user.authentication_token}
   end
 
   private
@@ -153,16 +151,8 @@ class UsersController < ApplicationController
       :auto_follow_back,
       :auto_follow_back_aspect_id,
       :getting_started,
-      email_preferences: %i(
-        someone_reported
-        also_commented
-        mentioned
-        comment_on_post
-        private_message
-        started_sharing
-        liked
-        reshared
-      )
+      :post_default_public,
+      email_preferences: UserPreference::VALID_EMAIL_TYPES.map(&:to_sym)
     )
   end
   # rubocop:enable Metrics/MethodLength
@@ -176,6 +166,8 @@ class UsersController < ApplicationController
       change_email(user_data)
     elsif user_data[:auto_follow_back]
       change_settings(user_data, "users.update.follow_settings_changed", "users.update.follow_settings_not_changed")
+    elsif user_data[:post_default_public]
+      change_post_default(user_data)
     elsif user_data[:color_theme]
       change_settings(user_data, "users.update.color_theme_changed", "users.update.color_theme_not_changed")
     else
@@ -191,6 +183,18 @@ class UsersController < ApplicationController
       flash.now[:error] = t("users.update.password_not_changed")
       false
     end
+  end
+
+  def change_post_default(user_data)
+    # by default user_data[:post_default_public] is set to  false
+    case params[:aspect_ids].try(:first)
+    when "public"
+      user_data[:post_default_public] = true
+    when "all_aspects"
+      params[:aspect_ids] = @user.aspects.map {|a| a.id.to_s }
+    end
+    @user.update_post_default_aspects params[:aspect_ids].to_a
+    change_settings(user_data)
   end
 
   # change email notifications
@@ -209,15 +213,23 @@ class UsersController < ApplicationController
   end
 
   def change_email(user_data)
-    @user.unconfirmed_email = user_data[:email]
-    if @user.save
-      @user.send_confirm_email
-      if @user.unconfirmed_email
+    if AppConfig.mail.enable?
+      @user.unconfirmed_email = user_data[:email]
+      if @user.save
+        @user.send_confirm_email
         flash.now[:notice] = t("users.update.unconfirmed_email_changed")
+      else
+        @user.reload # match user object with the database
+        flash.now[:error] = t("users.update.unconfirmed_email_not_changed")
       end
     else
-      @user.reload # match user object with the database
-      flash.now[:error] = t("users.update.unconfirmed_email_not_changed")
+      @user.email = user_data[:email]
+      if @user.save
+        flash.now[:notice] = t("users.update.settings_updated")
+      else
+        @user.reload
+        flash.now[:error] = t("users.update.unconfirmed_email_not_changed")
+      end
     end
   end
 

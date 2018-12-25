@@ -53,8 +53,8 @@ pt-BR:
           other: "Há <%= count %> servidores sem versão (servidores antigos, sem NodeInfo)."
     admins:
       dashboard:
-        compare_versions: "A versão mais recente de diaspora* é <%= latestVersion %>; a versão instalada no seu servidor é <%= podVersion %>."
-        error: "Não foi possível encontrar a versão mais recente de diaspora*."
+        compare_versions: "A versão mais recente da diaspora* é <%= latestVersion %>; a versão instalada no seu servidor é <%= podVersion %>."
+        error: "Não foi possível encontrar a versão mais recente da diaspora*."
         outdated: "Seu servidor está desatualizado."
         up_to_date: "Seu servidor está atualizado!"
     and: "e"
@@ -82,10 +82,9 @@ pt-BR:
         add_a_new_aspect: "Adicionar novo aspecto"
         failure: "A criação do aspecto falhou."
         success: "Seu novo aspecto <%= name %> foi criado"
-      make_aspect_list_visible: "Deseja tornar os contatos deste aspecto visíveis entre si?"
       name: "Nome"
     bookmarklet:
-      post_something: "Publicar em diaspora*"
+      post_something: "Publicar na diaspora*"
       post_submit: "Enviando publicação..."
       post_success: "Publicado! Fechando janela popup..."
     cancel: "Cancelar"
@@ -100,23 +99,22 @@ pt-BR:
       add_contact: "Adicionar contato"
       aspect_chat_is_enabled: "Contatos neste aspecto podem bater papo com você."
       aspect_chat_is_not_enabled: "Contatos neste aspecto não podem bater papo com você."
-      aspect_list_is_not_visible: "Contatos neste aspecto não podem ver uns aos outros."
-      aspect_list_is_visible: "Contatos neste aspecto podem ver uns aos outros."
       error_add: "Não foi possível adicionar <%= name %> ao aspecto. :("
       error_remove: "Não foi possível remover <%= name %> do aspecto. :("
       remove_contact: "Remover contato"
       search_no_results: "Nenhum contato encontrado"
     conversation:
+      create:
+        no_recipient: "Ei, primeiro você precisa adicionar um destinatário!"
       new:
         no_contacts: "Você precisa adicionar contatos antes de começar uma conversa."
     create: "Criar"
     delete: "Apagar"
     edit: "Editar"
-    failed_to_comment: "Falha ao comentar. Será que estão ignorando você?"
-    failed_to_like: "Falha ao curtir. Será que o autor está ignorando você?"
+    errors:
+      connection: "Não foi possível conectar ao servidor."
     failed_to_post_message: "Falha na publicação da mensagem!"
     failed_to_remove: "Falha ao remover a entrada!"
-    failed_to_reshare: "Falha ao recompartilhar!"
     getting_started:
       alright_ill_wait: "Tudo bem, vou esperar."
       hey: "Ei, <%= name %>!"
@@ -137,7 +135,7 @@ pt-BR:
       recent_notifications: "Notificações recentes"
       search: "Encontrar pessoas ou #tags"
       settings: "Configurações"
-      toggle_mobile: "Versão para celular"
+      toggle_mobile: "Versão móvel"
       toggle_navigation: "Alternar navegação"
       view_all: "Ver todas"
     hide_post: "Esconder esta publicação?"
@@ -152,6 +150,9 @@ pt-BR:
     notifications:
       mark_read: "Marcar como lida"
       mark_unread: "Marcar como não lida"
+      new_notifications:
+        one: "Você tem <%= count %> notificação não lida"
+        other: "Você tem <%= count %> notificações não lidas"
     people:
       edit_my_profile: "Editar meu perfil"
       helper:
@@ -166,8 +167,9 @@ pt-BR:
       empty: "{file} está vazio, por favor selecione arquivos novamente sem este."
       error: "Ocorreu um problema ao fazer upload do arquivo <%= file %>"
       invalid_ext: "{file} possui extensão inválida. Somente {extensions} são permitidas."
-      looking_good: "OMG, veja você é incrível!"
+      looking_good: "Uau, arrasou!"
       size_error: "{file} é muito grande, o tamanho máximo do arquivo é {sizeLimit}."
+      upload_photos: "Subir fotos"
     poll:
       answer_count:
         one: "Um voto"
@@ -182,11 +184,11 @@ pt-BR:
       result: "Resultado"
       show_result: "Mostrar resultado"
       vote: "Votar"
+      your_vote: "Seu voto"
     profile:
       add_some: "Adicione algumas"
-      bio: "Apresentação Pessoal"
+      bio: "Bio"
       born: "Data de Aniversário"
-      contacts: "Contatos"
       edit: "Editar"
       gender: "Sexo"
       location: "Localização"
@@ -195,7 +197,6 @@ pt-BR:
       you_have_no_tags: "Você não tem tags!"
     publisher:
       add_option: "Adicionar uma resposta"
-      limited: "Limitada: a sua publicação será visível apenas para as pessoas com quem você compartilha."
       markdown_editor:
         preview: "Pré-visualizar"
         texts:
@@ -224,32 +225,36 @@ pt-BR:
           quote: "Inserir citação"
           write: "Editar mensagem"
         write: "Escrever"
+      mention_success: "Mencionados com sucesso: <%= names %>"
       near_from: "Publicado de: <%= location %>"
       option: "Resposta"
-      public: "Pública: a sua publicação será totalmente visível na Web e poderá ser encontrada por meio de mecanismos de buscas"
       question: "Pergunta"
     remove_post: "Remover esta publicação?"
     report:
       name: "Relatar"
-      prompt: "Por favor entre um motivo:"
+      prompt: "Por favor, informe um motivo:"
       prompt_default: "p. ex. conteúdo ofensivo"
       status:
         created: "O relato foi criado com sucesso"
         exists: "O relato já existe"
     reshares:
-      duplicate: "Que bom, hein? Você já recompartilhou essa publicação!"
       post: "Recompartilhar a publicação de <%= name %>?"
       successful: "A publicação foi recompartilhada com sucesso!"
+    show_all: "Mostrar tudo"
     show_more: "Mostrar mais"
     stream:
       comment: "Comentar"
+      comments:
+        one: "<%= count %> comentário"
+        other: "<%= count %> comentários"
+        zero: "<%= count %> comentário"
       disable_post_notifications: "Desativar notificações para esta publicação"
       enable_post_notifications: "Ativar notificações para esta publicação"
       follow: "Seguir"
       followed_tag:
         add_a_tag: "Adicionar uma tag"
         follow: "Seguir"
-        title: "#Seguindo Tags"
+        title: "#Seguindo tags"
       hide: "Ocultar"
       hide_nsfw_posts: "Ocultar publicações #nsfw"
       like: "Curtir"
@@ -259,17 +264,13 @@ pt-BR:
         zero: "Nenhuma curtida"
       limited: "Limitado"
       more_comments:
-        one: "Mostre mais <%= count %> comentário"
-        other: "Mostre mais <%= count %> comentários"
-        zero: "Mostre mais <%= count %> comentário"
+        one: "Mostrar mais <%= count %> comentário"
+        other: "Mostrar mais <%= count %> comentários"
+        zero: "Mostrar mais <%= count %> comentário"
       no_posts_yet: "Ainda não há publicações para exibir aqui."
       original_post_deleted: "A publicação original foi apagada pelo autor."
       permalink: "Link permanente"
       public: "Público"
-      reactions:
-        one: "Uma reação"
-        other: "<%= count%> reações"
-        zero: "Nenhuma reação"
       reshare: "Recompartilhar"
       reshares:
         one: "<%= count %> recompartilhamento"

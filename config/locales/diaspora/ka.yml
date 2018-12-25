@@ -20,10 +20,6 @@ ka:
           attributes:
             diaspora_handle:
               taken: "უკვე დაკავებულია."
-        request:
-          attributes:
-            from_id:
-              taken: "არის უკვე არსებული მოთხოვნის ასლი."
         reshare:
           attributes:
             root_guid:
@@ -116,7 +112,6 @@ ka:
       commenting: "დაკომენტარება"
   contacts:
     index:
-      add_a_new_aspect: "დაამატე ახალი ასპექტი"
       all_contacts: "ყველა კონტაქტი"
       community_spotlight: "საზოგადოების ყურადღების ცენტრში"
       my_contacts: "ჩემი კონტაქტები"
@@ -156,9 +151,6 @@ ka:
   fill_me_out: "შევსება"
   find_people: "იპოვეთ ადამიანები ან #ტეგები"
   invitations:
-    a_facebook_user: "Facebook-ის მომხმარებელი"
-    check_token:
-      not_found: "მოწვევა არ არის ნაპოვნი"
     create:
       no_more: "თქვენ ამოგეწურათ მოსაწვევები."
       rejected: "შემდეგ ელ-ფოსტებს აქვთ პრობლემა: "
@@ -243,7 +235,6 @@ ka:
       other: "%{actors} mentioned you in a deleted post."
       two: "%{actors} mentioned you in a deleted post."
       zero: "%{actors} mentioned you in a deleted post."
-    post: "გამოქვეყნება"
     private_message:
       few: "%{actors} sent you a message."
       many: "%{actors} sent you a message."
@@ -327,14 +318,8 @@ ka:
       type_error: "ფოტოს ატვირთვა ვერ მოხერხდა.  დარწმუნებული ხარ რომ სურათი დაამატე?"
     destroy:
       notice: "სურათი წაშლილია."
-    new_photo:
-      empty: "{file} არის ცარიელი, გთხოვთ აირჩიოთ ფაილები მის გარეშე"
-      invalid_ext: "{file} აქვს არასწორი გაფართოება. მხოლოდ {extensions} გაფართოებები არის დაშვებული."
-      size_error: "{file} ზომაზე დიდია, მაქსიმალური ზომა არის {sizeLimit}."
     new_profile_photo:
       upload: "ახალი პროფილის ფოტოს ატვირთვა!"
-    show:
-      show_original_post: "ორიგინალი პოსტის ჩვენება"
   posts:
     show:
       photos_by:
@@ -365,13 +350,6 @@ ka:
       failed: "პროფილის განახლება ვერ მოხერხდა"
       updated: "პროფილი განახლდა"
   public: "საჯაროდ"
-  reactions:
-    few: "%{count} reactions"
-    many: "%{count} reactions"
-    one: "1 reaction"
-    other: "%{count} reactions"
-    two: "%{count} reactions"
-    zero: "0 reactions"
   registrations:
     closed: "რეგისტრაცია დახურულია დიასპორას ამ პოდზე."
     create:
@@ -438,13 +416,10 @@ ka:
         newhere: "ახალი"
       posting: "დაპოსტვა"
       share: "გაზიარება"
-      upload_photos: "ფოტოების ატვირთვა"
       whats_on_your_mind: "რას ფიქრობ ?"
     stream_element:
       via: "via %{link}"
   status_messages:
-    create:
-      success: "წარმატებით აღნიშნე: %{names}"
     new:
       mentioning: "Mentioning: %{person}"
     too_long: "{\"few\"=>\"please make your status messages less than %{count} characters\", \"many\"=>\"please make your status messages less than %{count} characters\", \"one\"=>\"please make your status messages less than %{count} character\", \"other\"=>\"please make your status messages less than %{count} characters\", \"two\"=>\"please make your status messages less than %{count} characters\", \"zero\"=>\"please make your status messages less than %{count} characters\"}"

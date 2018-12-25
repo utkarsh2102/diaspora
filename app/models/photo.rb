@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2009, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   include Diaspora::Federated::Base
   include Diaspora::Commentable
   include Diaspora::Shareable
@@ -18,7 +20,8 @@ class Photo < ActiveRecord::Base
       {
         small:  photo.url(:thumb_small),
         medium: photo.url(:thumb_medium),
-        large:  photo.url(:scaled_full)
+        large:  photo.url(:scaled_full),
+        raw:    photo.url
       }
     }, :as => :sizes
     t.add lambda { |photo|
@@ -37,7 +40,7 @@ class Photo < ActiveRecord::Base
   mount_uploader :processed_image, ProcessedImage
   mount_uploader :unprocessed_image, UnprocessedImage
 
-  belongs_to :status_message, :foreign_key => :status_message_guid, :primary_key => :guid
+  belongs_to :status_message, foreign_key: :status_message_guid, primary_key: :guid, optional: true
   validates_associated :status_message
   delegate :author_name, to: :status_message, prefix: true
 

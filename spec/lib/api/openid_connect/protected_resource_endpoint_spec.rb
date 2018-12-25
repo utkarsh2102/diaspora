@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Api::OpenidConnect::ProtectedResourceEndpoint, type: :request do
   let(:auth_with_read) { FactoryGirl.create(:auth_with_read) }
@@ -13,7 +13,7 @@ describe Api::OpenidConnect::ProtectedResourceEndpoint, type: :request do
 
   context "when valid access token is provided" do
     before do
-      get api_openid_connect_user_info_path, access_token: access_token_with_read
+      get api_openid_connect_user_info_path, params: {access_token: access_token_with_read}
     end
 
     it "includes private in the cache-control header" do
@@ -23,7 +23,7 @@ describe Api::OpenidConnect::ProtectedResourceEndpoint, type: :request do
 
   context "when access token is expired" do
     before do
-      get api_openid_connect_user_info_path, access_token: expired_access_token
+      get api_openid_connect_user_info_path, params: {access_token: expired_access_token}
     end
 
     it "should respond with a 401 Unauthorized response" do
@@ -49,7 +49,7 @@ describe Api::OpenidConnect::ProtectedResourceEndpoint, type: :request do
 
   context "when an invalid access token is provided" do
     before do
-      get api_openid_connect_user_info_path, access_token: invalid_token
+      get api_openid_connect_user_info_path, params: {access_token: invalid_token}
     end
 
     it "should respond with a 401 Unauthorized response" do
@@ -68,7 +68,7 @@ describe Api::OpenidConnect::ProtectedResourceEndpoint, type: :request do
   context "when authorization has been destroyed" do
     before do
       auth_with_read.destroy
-      get api_openid_connect_user_info_path, access_token: access_token_with_read
+      get api_openid_connect_user_info_path, params: {access_token: access_token_with_read}
     end
 
     it "should respond with a 401 Unauthorized response" do

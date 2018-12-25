@@ -1,12 +1,16 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-class Mention < ActiveRecord::Base
-  belongs_to :post
+class Mention < ApplicationRecord
+  belongs_to :mentions_container, polymorphic: true
   belongs_to :person
-  validates :post, presence: true
-  validates :person, presence: true
+
+  scope :local, -> {
+    joins(:person).where.not(people: {owner_id: nil})
+  }
 
   after_destroy :delete_notification
 

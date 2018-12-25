@@ -59,7 +59,7 @@ de_formal:
     aspect_dropdown:
       add_to_aspect: "Kontakt hinzufügen"
       all_aspects: "Alle Aspekte"
-      error: "Konnte nicht anfangen, mit <%= name %> zu teilen.  Ignorieren Sie ihn/sie?"
+      error: "Teilen mit <%= name %> nicht möglich. Ignorieren Sie sie/ihn?"
       error_remove: "Konnte <%= name %> nicht aus dem Aspekt entfernen :("
       mobile_row_checked: "<%= name %> (entfernen)"
       mobile_row_unchecked: "<%= name %> (hinzufügen)"
@@ -69,7 +69,6 @@ de_formal:
       toggle:
         one: "In <%= count %> Aspekt"
         other: "In <%= count %> Aspekten"
-        zero: "Aspekt auswählen"
       updating: "aktualisiere..."
     aspect_navigation:
       add_an_aspect: "+ Aspekt hinzufügen"
@@ -81,7 +80,6 @@ de_formal:
         add_a_new_aspect: "Einen neuen Aspekt hinzufügen"
         failure: "Fehler beim Erstellen des Aspekts."
         success: "Ihr neuer Aspekt <%= name %> wurde erstellt"
-      make_aspect_list_visible: "Kontakte in diesem Aspekt gegenseitig sichtbar machen?"
       name: "Name"
     bookmarklet:
       post_something: "Erstellen Sie einen Beitrag in diaspora*"
@@ -94,32 +92,31 @@ de_formal:
       no_comments: "Bisher sind keine Kommentare vorhanden."
       show: "Alle Kommentare zeigen"
     confirm_dialog: "Sind Sie sich sicher?"
-    confirm_unload: "Bitte bestätigen Sie, dass Sie diese Seite verlassen möchten. Die von Ihnen eingegebenen Daten werden nicht gespeichert werden."
+    confirm_unload: "Bitte bestätigen Sie, dass Sie diese Seite verlassen wollen. - Von Ihnen eingegebene Daten werden nicht gespeichert."
     contacts:
       add_contact: "Kontakt hinzufügen"
       aspect_chat_is_enabled: "Kontakte in diesem Askekt können mit Ihnen chatten."
       aspect_chat_is_not_enabled: "Kontakte in diesem Aspekt können nicht mit Ihnen chatten."
-      aspect_list_is_not_visible: "Kontakte in diesem Aspekt können einander nicht sehen."
-      aspect_list_is_visible: "Kontakte in diesem Aspekt können einander sehen."
       error_add: "Konnte <%= name %> nicht zum Aspekt hinzufügen :("
       error_remove: "Konnte <%= name %> nicht aus dem Aspekt entfernen :("
       remove_contact: "Kontakt entfernen"
       search_no_results: "Keine Kontakte gefunden"
     conversation:
+      create:
+        no_recipient: "Hey, Sie müssen erst einen Empfänger angeben!"
       new:
         no_contacts: "Sie müssen einige Kontakte hinzufügen, bevor Sie eine Konversation anfangen können."
     create: "Erstellen"
     delete: "Löschen"
     edit: "Bearbeiten"
-    failed_to_comment: "Konnte nicht kommentieren. Vielleicht ignoriert Sie der Autor?"
-    failed_to_like: "Gefällt mir ist fehlgeschlagen. Vielleicht ignoriert Sie der Autor?"
+    errors:
+      connection: "Konnte keine Verbindung mit dem Server aufbauen."
     failed_to_post_message: "Konnte Beitrag nicht senden!"
     failed_to_remove: "Fehler beim Entfernen des Beitrags!"
-    failed_to_reshare: "Fehler beim Weitersagen!"
     getting_started:
       alright_ill_wait: "Alles klar, ich warte."
       hey: "Hey, <%= name %>!"
-      no_tags: "Hey, Sie folgen noch keinen Tags!  Trotzdem weitermachen?"
+      no_tags: "Hey, Sie folgen noch keinen Tags! Trotzdem weitermachen?"
       preparing_your_stream: "Ihr personalisierter Stream wird zusammengestellt..."
     header:
       admin: "Administration"
@@ -129,7 +126,7 @@ de_formal:
       help: "Hilfe"
       home: "Startseite"
       log_out: "Abmelden"
-      mark_all_as_read: "Markiere alle als gelesen"
+      mark_all_as_read: "Alle als gelesen markieren"
       moderator: "Moderator"
       notifications: "Benachrichtigungen"
       profile: "Profil"
@@ -151,6 +148,9 @@ de_formal:
     notifications:
       mark_read: "Als gelesen markieren"
       mark_unread: "Als ungelesen markieren"
+      new_notifications:
+        one: "Sie haben <%= count %> ungelesene Benachrichtigung"
+        other: "Sie haben <%= count %> ungelesene Benachrichtigungen"
     people:
       edit_my_profile: "Mein Profil bearbeiten"
       helper:
@@ -159,7 +159,7 @@ de_formal:
       mention: "Erwähnen"
       message: "Nachricht"
       not_found: "... und niemand wurde gefunden"
-      stop_ignoring: "Ignorieren beenden"
+      stop_ignoring: "Nicht mehr ignorieren"
     photo_uploader:
       completed: "<%= file %> hochgeladen"
       empty: "{file} ist leer, bitte wählen Sie erneut Dateien ohne diese aus."
@@ -167,6 +167,7 @@ de_formal:
       invalid_ext: "{file} hat eine ungültige Erweiterung. Nur {extensions} sind erlaubt."
       looking_good: "OMG, Sie sehen toll aus!"
       size_error: "{file} ist zu groß. Die maximale Dateigröße beträgt {sizeLimit}."
+      upload_photos: "Fotos hochladen"
     poll:
       answer_count:
         one: "Eine Stimme"
@@ -181,11 +182,11 @@ de_formal:
       result: "Ergebnis"
       show_result: "Ergebnis anzeigen"
       vote: "Abstimmen"
+      your_vote: "Ihre Stimme"
     profile:
       add_some: "Füge neue hinzu"
       bio: "Beschreibung"
       born: "Geburtstag"
-      contacts: "Kontakte"
       edit: "Bearbeiten"
       gender: "Geschlecht"
       location: "Ort"
@@ -194,7 +195,6 @@ de_formal:
       you_have_no_tags: "Sie haben keine Tags!"
     publisher:
       add_option: "Antwortmöglichkeit hinzufügen"
-      limited: "Eingeschränkt: Ihr Beitrag wird nur von Leuten gesehen werden können, mit denen Sie teilen"
       markdown_editor:
         preview: "Vorschau"
         texts:
@@ -208,7 +208,7 @@ de_formal:
           italic: "kursive Schrift"
           list: "Listentext hier"
           quote: "Zitattext hier"
-          strong: "wichtiger Text"
+          strong: "fetter Text"
         tooltips:
           bold: "Fett"
           cancel: "Nachricht verwerfen"
@@ -216,16 +216,16 @@ de_formal:
           heading: "Überschrift"
           insert_image: "Bild einfügen"
           insert_link: "Link einfügen"
-          insert_ordered_list: "Geordnete Liste einfügen"
+          insert_ordered_list: "Nummerierte Liste einfügen"
           insert_unordered_list: "Ungeordnete Liste einfügen"
           italic: "Kursiv"
           preview: "Vorschau der Nachricht ansehen"
           quote: "Zitat einfügen"
           write: "Nachricht bearbeiten"
         write: "Verfassen"
+      mention_success: "Erfolgreich erwähnt: <%= names %>"
       near_from: "In der Nähe von <%= location %>"
       option: "Antwort"
-      public: "Öffentlich: Ihr Beitrag wird von allen gesehen und von Suchmaschinen gefunden werden können"
       question: "Frage"
     remove_post: "Diesen Beitrag löschen?"
     report:
@@ -236,12 +236,16 @@ de_formal:
         created: "Die Meldung ist erfolgreich erstellt worden"
         exists: "Die Meldung existiert bereits"
     reshares:
-      duplicate: "Sie haben diesen Beitrag bereits weitergesagt!"
       post: "<%= name %>s Beitrag weitersagen?"
       successful: "Der Beitrag wurde erfolgreich weitergesagt!"
+    show_all: "Alle anzeigen"
     show_more: "Mehr zeigen"
     stream:
       comment: "Kommentieren"
+      comments:
+        one: "<%= count %> Kommentar"
+        other: "<%= count %> Kommentare"
+        zero: "<%= count %> Kommentare"
       disable_post_notifications: "Benachrichtigungen für diesen Beitrag deaktivieren"
       enable_post_notifications: "Benachrichtigungen für diesen Beitrag aktivieren"
       follow: "Folgen"
@@ -265,15 +269,11 @@ de_formal:
       original_post_deleted: "Originalbeitrag wurde vom Autor gelöscht"
       permalink: "Permalink"
       public: "Öffentlich"
-      reactions:
-        one: "Eine Reaktion"
-        other: "<%= count%> Reaktionen"
-        zero: "Keine Reaktionen"
       reshare: "Weitersagen"
       reshares:
-        one: "<%= count %> mal weitergeteilt"
-        other: "<%= count %> mal weitergeteilt"
-        zero: "<%= count %> mal weitergeteilt"
+        one: "<%= count %> mal weitergesagt"
+        other: "<%= count %> mal weitergesagt"
+        zero: "<%= count %> mal weitergesagt"
       show_nsfw_post: "Beitrag anzeigen"
       show_nsfw_posts: "Zeige alle"
       tags:
@@ -282,7 +282,7 @@ de_formal:
         following: "Sie folgen #<%= tag %>"
         stop_following: "Aufhören #<%= tag %> zu folgen"
         stop_following_confirm: "Aufhören, #<%= tag %> zu folgen?"
-        stop_following_error: "<%= tag %> konnte nicht entfolgt werden :("
+        stop_following_error: "Konnte nicht aufhören <%= tag %> zu folgen :("
       unfollow: "Nicht mehr folgen"
       unlike: "Gefällt mir nicht mehr"
       via: "via <%= provider %>"
@@ -311,7 +311,7 @@ de_formal:
       seconds: "wenigen Sekunden"
       suffixAgo: ""
       suffixFromNow: "ab jetzt"
-      wordSeparator: " "
+      wordSeparator: ""
       year: "etwa einem Jahr"
       years:
         one: "1 Jahr"

@@ -31,10 +31,6 @@ nds:
           attributes:
             poll:
               already_participated: "Du hest an disse Ümfroog schon deelnommen!"
-        request:
-          attributes:
-            from_id:
-              taken: "is een Dubbel von een Anfroog, de dat schon gift."
         reshare:
           attributes:
             root_guid:
@@ -199,7 +195,6 @@ nds:
       commenting: "Kommenteer..."
   contacts:
     index:
-      add_a_new_aspect: "Dau een nee’en Kontakt dortau"
       add_contact: "Kontakt schluten"
       all_contacts: "Alle Kontakte"
       community_spotlight: "vörstellten Gemeenschaftsmitglieder"
@@ -216,7 +211,6 @@ nds:
   conversations:
     create:
       fail: "Ungültige Noricht"
-      no_contact: "He, du muss erst Kontakt schluten!"
       sent: "Noricht afschickt"
     destroy:
       delete_success: "Schnack erfolgriek löscht"
@@ -260,7 +254,6 @@ nds:
       change_aspect_of_post_q: "Kann ik de Aspekte ännern, de een Bidrag seen künnt, wenn ik em schon afschickt heb?"
       contacts_know_aspect_a: "Nee. Se künnt den Noom von den Aspekt ünner keene Ümstände sehn."
       contacts_know_aspect_q: "Weet miene Kontakte, in welche Aspekte ik jüm doon heb?"
-      contacts_visible_q: "Wat heet „Kontakte in dissen Aspekt to sik sülbst sichtbor moken“?"
       delete_aspect_q: "Wie lösch ik een Aspekt?"
       person_multiple_aspects_q: "Kann ik eene Person in mehrere Aspekte daun?"
       post_multiple_aspects_q: "Kann ik Inhalt an mehrere Aspekte op eenmol schrieben?"
@@ -304,7 +297,6 @@ nds:
     markdown: "Markdown"
     mentions:
       how_to_mention_q: "Wie kann ik wen erwähnen, wenn ik een Bidrag schriev?"
-      mention_in_comment_a: "Nee, grood nich."
       mention_in_comment_q: "Kann ik wen in een Kommentar erwähnen?"
       see_mentions_a: "Ja, klick in de linke Spalte von diene Startsiet op „@Erwähnungen”."
       see_mentions_q: "Gift dat eene Mööglichkeit, de Bidräg to seen, in de ik erwähnt worn bin?"
@@ -327,10 +319,6 @@ nds:
       embed_multimedia_q: "Wie bau ik een Video, Toon oder annern Multimedia-Inhalt in miene Bidräg in?"
       format_text_q: "Wie kann ik den Text in miene Bidräg formatieren (fett, kursiv und so wieder)?"
       hide_posts_q: "Wie verstek ik een Bidrag?"
-      image_text: "Bildtext"
-      image_url: "Bildadress"
-      insert_images_comments_a1: "Du kannst keene Bilder in Kommentare hochloden, aber du kannst den folgenden Markdown-Code"
-      insert_images_comments_a2: "bruken üm Bilder ut’n Internet sowohl in Kommentare as uk in Bidräg intobringen."
       insert_images_comments_q: "Kan ik Bilder in Kommentare inbringen?"
       insert_images_q: "Wie kann ik Bilder in miene Bidräg inbringen?"
       size_of_images_a: "Nee. De Grött von Bilder ward automatisch so ännert, dat se in den Stream oder de Inkelbidragsansicht rinpasst. Markdown het keenen Code, um de Grött von een Bild antogeben."
@@ -348,14 +336,6 @@ nds:
       title: "Private Bidräg"
       who_sees_post_a: "Nur anmeldte Bruker von diaspora*, de du in den Aspekt rindoon haast, bevör du den Bidrag schreeben hest, künnt em sehn."
       who_sees_post_q: "Wenn ik een Bidrag an een Aspekt schriev (t.B. een privaten Bidrag), wer kann em sehn?"
-    private_profiles:
-      title: "Private Profile"
-      whats_in_profile_a: "In dien privates Profil sind diene Beschriebung, dien Ort, dien Geschlecht und dien Geburtsdag, falls du disse Felder utfüllt hest. Alle disse Informationen sind freewillig – Dat ligt in diene Hand, op du jüm bereetstellst. Anmeldte Bruker, de du to diene Aspekte dortaudoon hest, sind de eenzigen Lüüd, de dien privates Profil sehn künnt. Wenn se diene Profilsiet beseukt, ward se neben diene öffentlichen Bidräg uk diene privaten Bidräg sehn, de du an de Aspekte schreeben hest, in de du jüm insortiert hest."
-      whats_in_profile_q: "Wat is in mien privates Profil?"
-      who_sees_profile_a: "Jede anmeldte Bruker, mit den du deelst (dat heet, de du to een von diene Aspekte dortaudoon hest). Lüüd, de di folgt ohne dat du jüm folgst, ward aber nur diene öffentlichen Informationen sehn."
-      who_sees_profile_q: "Wer sütt mien privates Profil?"
-      who_sees_updates_a: "Jeder in diene Aspekte sütt Ännerungen an dien privates Profil. "
-      who_sees_updates_q: "Wer sütt Ännerungen an mien privates Profil?"
     public_posts:
       can_comment_reshare_like_a: "Jede anmeldte Bruker von diaspora* kann diene öffentlichen Bidräg kommentieren, widerseggen oder Gefallen an em bekunden."
       can_comment_reshare_like_q: "Wer kann mien öffentlichen Bidrag kommentieren, widerseggen oder Gefallen an em bekunden?"
@@ -364,13 +344,6 @@ nds:
       title: "Öffentliche Bidräg"
       who_sees_post_a: "Grundsätzlich kann jeder, de dat Internet brukt, een Bidrag sehn, den du as öffentlich markiert hest, also weest die sicher, dat dien Bidrag wirklich öffentlich ween schall. Dat is eene tolle Mööglichkeit, de wide Welt to erreichen."
       who_sees_post_q: "Wer sütt dat, wenn ik wat öffentlich schriev?"
-    public_profiles:
-      title: "Öffentliche Profile"
-      what_do_tags_do_q: "Wat mokt de Tags op mien öffentliches Profil?"
-      whats_in_profile_q: "Wat is in mien öffentliches Profil?"
-      who_sees_profile_q: "Wer sütt mien öffentliches Profil?"
-      who_sees_updates_a: "Jeder kann Ännerungen sehn, wen he diene Profilsiet besöcht."
-      who_sees_updates_q: "Wer sütt Ännerungen an mien öffentliches Profil?"
     resharing_posts:
       reshare_private_post_aspects_q: "Kan ik een privaten Bidrag an bestimmte Aspekte widerseggen?"
       reshare_public_post_aspects_q: "Kan ik een öffentlichen Bidrag an bestimmte Aspekte widerseggen?"
@@ -389,9 +362,6 @@ nds:
     tutorials: "Anleidungen"
     wiki: "Wiki"
   invitations:
-    a_facebook_user: "Een Facebook-Bruker"
-    check_token:
-      not_found: "Inlodungstoken nich funnen"
     create:
       empty: "Bidde geev minstens eene E-Mail-Adress in."
       no_more: "Du kannst keene Inlodungen mehr schicken."
@@ -470,7 +440,6 @@ nds:
       one: "%{actors} het di in een löschten Bidrag erwähnt."
       other: "%{actors} hebbt di in een löschten Bidrag erwähnt."
       zero: "Keener het di in een löschten Bidrag erwähnt."
-    post: "Bidrag"
     private_message:
       one: "%{actors} het di eene Noricht schickt"
       other: "%{actors} hebbt di eene Noricht schickt"
@@ -580,14 +549,8 @@ nds:
       type_error: "Hoochloden von dat Bild fehlschloon.  Bist du di sicher, dat du een Bild dortaudoon hest?"
     destroy:
       notice: "Bild löscht."
-    new_photo:
-      empty: "{file} is leer, bidde wähl de Dateien noch mol ohne er ut."
-      invalid_ext: "{file} het een ungültiges Enn. Nur {extensions} sind erlaubt."
-      size_error: "{file} is to groot, Dateien dröfft höchstens {sizeLimit} groot ween."
     new_profile_photo:
       upload: "Nee’es Profilbild hoochloden!"
-    show:
-      show_original_post: "Originalbidrag anzeigen"
   posts:
     presenter:
       title: "Een Bidrag von %{name}"
@@ -619,10 +582,6 @@ nds:
       failed: "Kun Profil nich aktualisieren"
       updated: "Profil aktualisiert"
   public: "Öffentlich"
-  reactions:
-    one: "1 Reaktion"
-    other: "%{count} Reaktionen"
-    zero: "Keene Reaktionen"
   registrations:
     closed: "Registrerungen sind op dissen diaspora*-Pod schloten."
     create:
@@ -644,7 +603,7 @@ nds:
     confirm_deletion: "Bist du di sicher, dat du den Indrag löschen willst?"
     delete_link: "Indrag löschen"
     post_label: "<b>Bidrag:</b>: %{title}"
-    reason_label: "Grund: %{text}"
+    reason_label: "Grund:"
     reported_label: "<b>Meld von</b> %{person}"
     status:
       destroyed: "De Bidrag is löscht worn"
@@ -675,7 +634,6 @@ nds:
       not_logged_in: "Grood nich anmeld."
       really_disconnect: "Verbinnung to %{service} trennen?"
     provider:
-      facebook: "Facebook"
       tumblr: "Tumblr"
       twitter: "Twitter"
       wordpress: "WordPress"
@@ -709,7 +667,6 @@ nds:
         newhere: "neehier"
       posting: "Schriev..."
       share: "Deelen"
-      upload_photos: "Biller hoochloden"
       whats_on_your_mind: "Wat geiht di dörch den Kopp?"
     stream_element:
       via: "Öber %{link}"
@@ -734,8 +691,6 @@ nds:
     total_users: "Bruker insgesamt"
     version: "Version"
   status_messages:
-    create:
-      success: "Erfolgriek erwähnt: %{names}"
     new:
       mentioning: "Erwähn: %{person}"
     too_long: "Bidde mok dien Bidrag kötter as %{count} Teken. In Moment is he %{current_length} Teken lang"
@@ -833,7 +788,6 @@ nds:
     getting_started:
       awesome_take_me_to_diaspora: "Toll! Bring mi to diaspora*"
       community_welcome: "De Gemeenschaft von diaspora* freit sik, di an Boord to hebben!"
-      connect_to_facebook_link: "Mit dien Facebook-Konto verbinnen"
       hashtag_explanation: "Mit Hashtags kannst du öber diene Interessen schnacken und jüm folgen.  Se sind ok eene tolle Mööglichkeit, üm nee'e Lüüd op diaspora* kennen to lernen."
       hashtag_suggestions: "Verseuk mol, Tags wie #Kunst, #Filme, #gif oder so to folgen"
       well_hello_there: "Naja, hallo erstmol!"

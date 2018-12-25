@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonPresenter < BasePresenter
   def base_hash
     {
@@ -40,6 +42,10 @@ class PersonPresenter < BasePresenter
     }
   end
 
+  def self.people_names(people)
+    people.map(&:name).join(", ")
+  end
+
   protected
 
   def own_profile?
@@ -48,7 +54,6 @@ class PersonPresenter < BasePresenter
 
   def relationship
     return false unless current_user
-    return :blocked if is_blocked?
 
     contact = current_user_person_contact
     return :not_sharing unless contact

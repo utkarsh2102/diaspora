@@ -11,6 +11,8 @@
     initialize: function() {
       var self = this;
 
+      new Diaspora.MarkdownEditor(".comment-box");
+
       this.stream().on("tap click", "a.show-comments", function(evt){
         evt.preventDefault();
         self.toggleComments($(this));
@@ -18,19 +20,30 @@
 
       this.stream().on("tap click", "a.comment-action", function(evt) {
         evt.preventDefault();
-        self.showCommentBox($(this));
         var bottomBar = $(this).closest(".bottom-bar").first();
+        var toggleReactionsLink = bottomBar.find("a.show-comments").first();
+
+        if (toggleReactionsLink.length === 0) {
+          self.showCommentBox($(this));
+        } else {
+          if (toggleReactionsLink.hasClass("loading")) {
+            return;
+          }
+          if (!toggleReactionsLink.hasClass("active")) {
+            self.showComments(toggleReactionsLink);
+          }
+        }
         var commentContainer = bottomBar.find(".comment-container").first();
         self.scrollToOffset(commentContainer);
       });
 
-      this.stream().on("submit", ".new_comment", this.submitComment);
+      this.stream().on("submit", ".new-comment", this.submitComment);
     },
 
     submitComment: function(evt){
       evt.preventDefault();
       var form = $(this);
-      var commentBox = form.find(".comment_box");
+      var commentBox = form.find(".comment-box");
       var commentText = $.trim(commentBox.val());
       if(!commentText){
         commentBox.focus();
@@ -39,8 +52,9 @@
 
       $.post(form.attr("action") + "?format=mobile", form.serialize(), function(data){
         Diaspora.Mobile.Comments.updateStream(form, data);
-      }, "html").fail(function(){
-        Diaspora.Mobile.Comments.resetCommentBox(this);
+      }, "html").fail(function(response) {
+        Diaspora.Mobile.Alert.handleAjaxError(response);
+        Diaspora.Mobile.Comments.resetCommentBox(form);
       });
 
       autosize($(".add-comment-switcher:not(.hidden) textarea"));
@@ -155,7 +169,7 @@
 
     showCommentBox: function(link){
       var bottomBar = link.closest(".bottom-bar").first();
-      var textArea = bottomBar.find("textarea.comment_box").first()[0];
+      var textArea = bottomBar.find("textarea.comment-box").first()[0];
       bottomBar.find(".add-comment-switcher").removeClass("hidden");
       autosize(textArea);
     },
@@ -189,13 +203,13 @@
     increaseReactionCount: function(bottomBar) {
       var toggleReactionsLink = bottomBar.find(".show-comments").first();
       var count = toggleReactionsLink.text().match(/.*(\d+).*/);
-      var text = "";
+      count = parseInt(count, 10) || 0;
+      var text = Diaspora.I18n.t("stream.comments", {count: count + 1});
 
       // No previous comment
-      if(!count){
-        text = Diaspora.I18n.t("stream.reactions", {count: 1});
+      if (count === 0) {
         var parent = toggleReactionsLink.parent();
-        var postGuid = bottomBar.parents(".stream_element").data("guid");
+        var postGuid = bottomBar.parents(".stream-element").data("guid");
 
         toggleReactionsLink.remove();
         toggleReactionsLink = $("<a/>", {"class": "show-comments", "href": Routes.postComments(postGuid) + ".mobile"})
@@ -204,8 +218,6 @@
         bottomBar.removeClass("inactive").addClass("active");
       }
       else {
-        count = parseInt(count, 10) + 1;
-        text = Diaspora.I18n.t("stream.reactions", {count: count});
         toggleReactionsLink.html(text + "<i class='entypo-chevron-up'/>");
       }
     },

@@ -46,6 +46,9 @@ ia:
           one: "Il ha ancora un pod non verificate."
           other: "Il ha ancora <%= count %> pods non verificate."
         unknown: "incognite"
+        version_failed:
+          one: "Il ha un pod que non ha version (pod ancian sin NodeInfo)."
+          other: "Il ha <%= count %> pods que non ha version (pods ancian sin NodeInfo)."
     admins:
       dashboard:
         compare_versions: "Le ultime version de diaspora* es <%= latestVersion %>; iste pod executa <%= podVersion %>."
@@ -63,10 +66,13 @@ ia:
       select_aspects: "Seliger aspectos"
       started_sharing_with: "Tu ha comenciate a divider con <%= name %>!"
       stopped_sharing_with: "Tu ha cessate de divider con <%= name %>."
+      toggle:
+        one: "In <%= count %> aspecto"
+        other: "In <%= count %> aspectos"
       updating: "actualisa…"
     aspect_navigation:
       add_an_aspect: "+ Adder un aspecto"
-      deselect_all: "Deseliger totes"
+      deselect_all: "Dismarcar totes"
       no_aspects: "Nulle aspecto seligite"
       select_all: "Seliger totes"
     aspects:
@@ -74,7 +80,6 @@ ia:
         add_a_new_aspect: "Adder un nove aspecto"
         failure: "Le creation del aspecto ha fallite."
         success: "Tu nove aspecto <%= name %> ha essite create"
-      make_aspect_list_visible: "Render contactos in iste aspecto visibile le unes pro le alteres?"
       name: "Nomine"
     bookmarklet:
       post_something: "Inviar a diaspora*"
@@ -83,30 +88,31 @@ ia:
     cancel: "Cancellar"
     comma: ","
     comments:
-      hide: "celar commentos"
+      hide: "Celar commentos"
       no_comments: "Il non ha ancora commentos."
-      show: "revelar tote le commentos"
+      show: "Monstrar tote le commentos"
     confirm_dialog: "Es tu secur?"
     confirm_unload: "Per favor, confirma que tu vole quitar iste pagina. Le datos que tu ha inserite non essera salveguardate."
     contacts:
       add_contact: "Adder contacto"
-      aspect_list_is_not_visible: "Le contactos in iste aspecto non pote vider le un le altere."
-      aspect_list_is_visible: "Le contactos in iste aspecto pote vider le un le altere."
+      aspect_chat_is_enabled: "Le contactos in iste aspecto pote chattar con te."
+      aspect_chat_is_not_enabled: "Le contactos in iste aspecto non pote chattar con te."
       error_add: "Non poteva adder <%= name %> al aspecto."
       error_remove: "Non poteva remover <%= name %> del aspecto."
       remove_contact: "Remover contacto"
       search_no_results: "Nulle contacto trovate"
     conversation:
+      create:
+        no_recipient: "Es necessari adder un destinatario primo."
       new:
         no_contacts: "Es necessari adder alcun contactos ante de poter initiar un conversation."
     create: "Crear"
     delete: "Deler"
     edit: "Modificar"
-    failed_to_comment: "Commento fallite. Es possibile que le autor te ignora."
-    failed_to_like: "Appreciation fallite!"
+    errors:
+      connection: "Impossibile connecter al servitor."
     failed_to_post_message: "Publication del entrata fallite!"
     failed_to_remove: "Le remotion del entrata ha fallite."
-    failed_to_reshare: "Repetition fallite!"
     getting_started:
       alright_ill_wait: "Ben, io attendera."
       hey: "Hallo, <%= name %>!"
@@ -114,7 +120,7 @@ ia:
       preparing_your_stream: "Fluxo personalisate in preparation..."
     header:
       admin: "Administration"
-      close: "clauder"
+      close: "Clauder"
       contacts: "Contactos"
       conversations: "Conversationes"
       help: "Adjuta"
@@ -142,6 +148,9 @@ ia:
     notifications:
       mark_read: "Marcar como legite"
       mark_unread: "Marcar como non legite"
+      new_notifications:
+        one: "Tu ha <%= count %> notification non legite"
+        other: "Tu ha <%= count %> notificationes non legite"
     people:
       edit_my_profile: "Modificar mi profilo"
       helper:
@@ -149,7 +158,7 @@ ia:
         is_sharing: "<%= name %> divide cosas con te"
       mention: "Mention"
       message: "Message"
-      not_found: "e nemo ha essite trovate..."
+      not_found: "... e nemo ha essite trovate"
       stop_ignoring: "Cessar de ignorar"
     photo_uploader:
       completed: "<%= file %> complete"
@@ -158,6 +167,7 @@ ia:
       invalid_ext: "{file} ha un extension inadmissibile. Solmente {extensions} es permittite."
       looking_good: "Oh, tu pare splendide!"
       size_error: "{file} es troppo grande. Le dimension maxime es {sizeLimit}."
+      upload_photos: "Incargar photos"
     poll:
       answer_count:
         one: "1 voto"
@@ -172,39 +182,70 @@ ia:
       result: "Resultato"
       show_result: "Monstrar resultato"
       vote: "Votar"
+      your_vote: "Tu voto"
     profile:
-      add_some: "adder alcunes"
+      add_some: "Adder alcunes"
       bio: "Bio"
       born: "Data de nascentia"
-      contacts: "Contactos"
-      edit: "modificar"
+      edit: "Modificar"
       gender: "Sexo"
       location: "Loco"
       photos: "Photos"
       posts: "Entratas"
-      you_have_no_tags: "tu non ha etiquettas!"
+      you_have_no_tags: "Tu non ha etiquettas."
     publisher:
       add_option: "Adder un responsa"
-      limited: "Limitate: le message es visibile solmente pro le personas con qui tu lo divide"
+      markdown_editor:
+        preview: "Previsualisar"
+        texts:
+          code: "scribe hic le codice"
+          heading: "texto de titulo"
+          insert_image_description_text: "describe hic le imagine"
+          insert_image_help_text: "Inserer hic un ligamine a un imagine"
+          insert_image_title: "scribe hic le titulo del imagine"
+          insert_link_description_text: "describe hic le ligamine"
+          insert_link_help_text: "Inserer ligamine hic"
+          italic: "texto italic"
+          list: "scribe hic le texto del lista"
+          quote: "scribe hic le texto del citation"
+          strong: "texto forte"
+        tooltips:
+          bold: "Grasse"
+          cancel: "Cancellar message"
+          code: "Inserer codice"
+          heading: "Titulo"
+          insert_image: "Inserer imagine"
+          insert_link: "Inserer ligamine"
+          insert_ordered_list: "Inserer lista ordinate"
+          insert_unordered_list: "Inserer lista non ordinate"
+          italic: "Italic"
+          preview: "Previsualisar message"
+          quote: "Inserer citation"
+          write: "Modificar message"
+        write: "Scriber"
+      mention_success: "Ha essite mentionate: <%= names %>"
       near_from: "Inviate ab: <%= location %>"
       option: "Responsa"
-      public: "Public: le message es visibile pro tote le mundo e trovabile pro motores de recerca"
       question: "Question"
     remove_post: "Remover iste entrata?"
     report:
-      name: "Reporto"
+      name: "Reportar"
       prompt: "Specifica un motivo:"
-      prompt_default: "contento offensive"
+      prompt_default: "p.ex. contento offensive"
       status:
         created: "Le creation del reporto ha succedite"
         exists: "Le reporto jam existe"
     reshares:
-      duplicate: "Tu ha jam repetite iste entrata."
       post: "Repeter le entrata de <%= name %>?"
       successful: "Le entrata ha essite repetite con successo."
-    show_more: "monstrar plus"
+    show_all: "Monstrar totes"
+    show_more: "Monstrar plus"
     stream:
       comment: "Commentar"
+      comments:
+        one: "<%= count %> commento"
+        other: "<%= count %> commentos"
+        zero: "<%= count %> commentos"
       disable_post_notifications: "Disactivar le notificationes pro iste entrata"
       enable_post_notifications: "Activar le notificationes pro iste entrata"
       follow: "Sequer"
@@ -216,13 +257,10 @@ ia:
       hide_nsfw_posts: "Celar entratas #nsfw (improprie pro le travalio)"
       like: "Appreciar"
       limited: "Limitate"
-      original_post_deleted: "Le entrata original ha essite delite per le autor."
+      no_posts_yet: "Il non ha ancora entratas a monstrar hic."
+      original_post_deleted: "Entrata original delite per autor"
       permalink: "Permaligamine"
       public: "Public"
-      reactions:
-        one: "<%= count%> reaction"
-        other: "<%= count%> reactiones"
-        zero: "<%= count%> reactiones"
       reshare: "Repeter"
       show_nsfw_post: "Monstrar entrata"
       show_nsfw_posts: "Monstrar totes"
@@ -241,15 +279,20 @@ ia:
     timeago:
       day: "un die"
       days:
+        one: "1 die"
         other: "%d dies"
       hour: "circa un hora"
       hours:
+        one: "circa 1 hora"
         other: "circa %d horas"
+      inPast: "a qualcunque momento"
       minute: "circa un minuta"
       minutes:
+        one: "1 minuta"
         other: "%d minutas"
       month: "circa un mense"
       months:
+        one: "1 mense"
         other: "%d menses"
       prefixAgo: ""
       prefixFromNow: ""
@@ -259,6 +302,7 @@ ia:
       wordSeparator: " "
       year: "circa un anno"
       years:
+        one: "1 anno"
         other: "%d annos"
     unblock_failed: "Le action de disblocar iste usator ha fallite"
     viewer:

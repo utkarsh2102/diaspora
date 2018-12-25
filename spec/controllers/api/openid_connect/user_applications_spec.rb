@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Api::OpenidConnect::UserApplicationsController, type: :controller do
   before do

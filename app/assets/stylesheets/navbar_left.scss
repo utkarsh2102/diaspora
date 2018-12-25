@@ -24,22 +24,20 @@
     }
 
     &:hover, &:hover a, &:hover [class^="entypo"] {
-      background-color: $blue;
-      border-color: $blue;
+      background-color: $brand-primary;
+      border-color: $brand-primary;
       color: $white;
     }
   }
 
-  .all-aspects .hoverable.selected,
-  .followed-tags-sidebar .hoverable.selected,
+  .nested-list .hoverable.selected,
   .selected > .hoverable {
     color: $white;
     background: $gray;
     border-color: $gray;
   }
 
-  .all-aspects ul,
-  .followed-tags-sidebar ul {
+  .nested-list ul {
     background: $left-navbar-drawer-background;
     li { padding: 0; }
     .entypo-check { visibility: hidden; }
@@ -57,6 +55,16 @@
       visibility: hidden;
     }
     .hoverable:hover > .action { visibility: visible; }
+  }
+
+  .my-activity {
+    ul {
+      display: none;
+    }
+
+    &.activity-stream-selected ul {
+      display: block;
+    }
   }
 
   #tags_list {
@@ -106,16 +114,23 @@
   padding: 10px 20px 0;
 
   .excellence-box,
-  .info-links {
+  .info-links,
+  .powered-box {
     border-top: 1px solid $border-grey;
     padding: 5px;
   }
 
   .excellence-box {
     margin-top: 10px;
+    text-align: center;
 
     .content {
       font-size: $font-size-base;
+    }
+
+    a,
+    a:hover {
+      color: $link-grey;
     }
   }
 
@@ -162,7 +177,6 @@
 
     ul {
       list-style: none;
-      margin-bottom: 5px;
       padding-left: 0;
     }
 
@@ -185,7 +199,6 @@
     }
     text-align: center;
 
-    .social-media-logos-facebook-24x24,
     .social-media-logos-twitter-24x24,
     .social-media-logos-tumblr-24x24,
     .social-media-logos-wordpress-24x24 {

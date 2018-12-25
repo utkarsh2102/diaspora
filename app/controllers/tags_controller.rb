@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
 class TagsController < ApplicationController
-  skip_before_action :set_grammatical_gender
   before_action :ensure_page, :only => :show
 
   helper_method :tag_followed?
@@ -25,8 +26,8 @@ class TagsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json{ render :nothing => true, :status => 422 }
-        format.html{ redirect_to tag_path('partytimeexcellent') }
+        format.json { head :unprocessable_entity }
+        format.html { redirect_to tag_path("partytimeexcellent") }
       end
     end
   end

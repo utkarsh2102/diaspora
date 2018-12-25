@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe Message, type: :model do
   let(:create_hash) {
@@ -41,11 +41,6 @@ describe Message, type: :model do
       message = Message.create(author: local_luke.person, text: "yo", conversation: remote_conv)
       expect(message.subscribers).to match_array([local_luke.person, local_leia.person, remote_raphael])
     end
-
-    it "returns only remote participants, if the conversation is local, but the author is remote" do
-      message = Message.create(author: remote_raphael, text: "yo", conversation: local_conv)
-      expect(message.subscribers).to match_array([remote_raphael])
-    end
   end
 
   describe "#increase_unread" do
@@ -57,4 +52,6 @@ describe Message, type: :model do
       expect(conf.reload.unread).to eq(1)
     end
   end
+
+  it_behaves_like "a reference source"
 end

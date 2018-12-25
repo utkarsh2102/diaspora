@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -42,7 +44,7 @@ class InvitationsController < ApplicationController
         t("invitations.create.rejected", emails: invalid_emails.join(", "))
     end
 
-    redirect_to :back
+    redirect_back fallback_location: stream_path
   end
 
   private
@@ -55,7 +57,7 @@ class InvitationsController < ApplicationController
                     else
                       t("invitations.create.closed")
                     end
-    redirect_to :back
+    redirect_back fallback_location: stream_path
   end
 
   def valid_email?(email)
@@ -71,6 +73,6 @@ class InvitationsController < ApplicationController
   end
 
   def inviter_params
-    params.require(:email_inviter).permit(:message, :locale, :emails)
+    params.require(:email_inviter).permit(:message, :locale, :emails).to_h
   end
 end

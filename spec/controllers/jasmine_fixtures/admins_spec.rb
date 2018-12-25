@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe AdminsController, type: :controller do
   describe "#dashboard" do

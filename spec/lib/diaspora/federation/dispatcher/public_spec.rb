@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Diaspora::Federation::Dispatcher::Public do
   let(:post) { FactoryGirl.create(:status_message, author: alice.person, text: "hello", public: true) }
@@ -50,7 +50,9 @@ describe Diaspora::Federation::Dispatcher::Public do
     end
 
     context "deliver to remote user" do
-      let(:salmon_xml) { "<diaspora/>" }
+      let(:encryption_key) { double }
+      let(:magic_env) { double }
+      let(:magic_env_xml) { double(to_xml: "<diaspora/>") }
 
       it "queues a public send job" do
         alice.share_with(remote_raphael, alice.aspects.first)
@@ -59,15 +61,19 @@ describe Diaspora::Federation::Dispatcher::Public do
           expect(user_id).to eq(alice.id)
           expect(urls.size).to eq(1)
           expect(urls[0]).to eq(remote_raphael.pod.url_to("/receive/public"))
-          expect(xml).to eq(salmon_xml)
+          expect(xml).to eq(magic_env_xml.to_xml)
         end
 
-        expect(DiasporaFederation::Salmon::Slap).to receive(:generate_xml).and_return(salmon_xml)
+        expect(alice).to receive(:encryption_key).and_return(encryption_key)
+        expect(DiasporaFederation::Salmon::MagicEnvelope).to receive(:new).with(
+          instance_of(DiasporaFederation::Entities::StatusMessage), alice.diaspora_handle
+        ).and_return(magic_env)
+        expect(magic_env).to receive(:envelop).with(encryption_key).and_return(magic_env_xml)
 
         Diaspora::Federation::Dispatcher.build(alice, post).dispatch
       end
 
-      it "does not queue a private send job when no remote recipients specified" do
+      it "does not queue a public send job when no remote recipients specified" do
         expect(Workers::SendPublic).not_to receive(:perform_async)
 
         Diaspora::Federation::Dispatcher.build(alice, post).dispatch
@@ -78,12 +84,35 @@ describe Diaspora::Federation::Dispatcher::Public do
           expect(user_id).to eq(alice.id)
           expect(urls.size).to eq(1)
           expect(urls[0]).to eq(remote_raphael.pod.url_to("/receive/public"))
-          expect(xml).to eq(salmon_xml)
+          expect(xml).to eq(magic_env_xml.to_xml)
         end
 
-        expect(DiasporaFederation::Salmon::Slap).to receive(:generate_xml).and_return(salmon_xml)
-
+        expect(alice).to receive(:encryption_key).and_return(encryption_key)
+        expect(DiasporaFederation::Salmon::MagicEnvelope).to receive(:new).with(
+          instance_of(DiasporaFederation::Entities::StatusMessage), alice.diaspora_handle
+        ).and_return(magic_env)
+        expect(magic_env).to receive(:envelop).with(encryption_key).and_return(magic_env_xml)
         Diaspora::Federation::Dispatcher.build(alice, post, subscribers: [remote_raphael]).dispatch
+      end
+
+      it "only queues a public send job for a active pods" do
+        offline_pod = FactoryGirl.create(:pod, status: :net_failed, offline_since: DateTime.now.utc - 15.days)
+        offline_person = FactoryGirl.create(:person, pod: offline_pod)
+
+        expect(Workers::SendPublic).to receive(:perform_async) do |user_id, _entity_string, urls, xml|
+          expect(user_id).to eq(alice.id)
+          expect(urls.size).to eq(1)
+          expect(urls[0]).to eq(remote_raphael.pod.url_to("/receive/public"))
+          expect(xml).to eq(magic_env_xml.to_xml)
+        end
+
+        expect(alice).to receive(:encryption_key).and_return(encryption_key)
+        expect(DiasporaFederation::Salmon::MagicEnvelope).to receive(:new).with(
+          instance_of(DiasporaFederation::Entities::StatusMessage), alice.diaspora_handle
+        ).and_return(magic_env)
+        expect(magic_env).to receive(:envelop).with(encryption_key).and_return(magic_env_xml)
+
+        Diaspora::Federation::Dispatcher.build(alice, post, subscribers: [remote_raphael, offline_person]).dispatch
       end
     end
   end

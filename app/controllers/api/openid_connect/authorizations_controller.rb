@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module OpenidConnect
     class AuthorizationsController < ApplicationController
@@ -125,6 +127,7 @@ module Api
         session[:response_type] = @response_type
         session[:redirect_uri] = @redirect_uri
         session[:scopes] = scopes_as_space_seperated_values
+        session[:state] = params[:state]
         session[:nonce] = params[:nonce]
       end
 
@@ -149,6 +152,7 @@ module Api
         session.delete(:response_type)
         session.delete(:redirect_uri)
         session.delete(:scopes)
+        session.delete(:state)
         session.delete(:nonce)
       end
 
@@ -162,6 +166,7 @@ module Api
         req.update_param("redirect_uri", session[:redirect_uri])
         req.update_param("response_type", response_type_as_space_seperated_values)
         req.update_param("scope", session[:scopes])
+        req.update_param("state", session[:state])
         req.update_param("nonce", session[:nonce])
       end
 
@@ -202,7 +207,7 @@ module Api
         if prompt && prompt.include?("none")
           handle_prompt_none
         elsif prompt && prompt.include?("login")
-          new_params = params.except("controller", "action").merge(prompt: prompt.remove("login"))
+          new_params = params.except("controller", "action").permit!.to_h.merge(prompt: prompt.remove("login"))
           reauthenticate(new_params)
         else
           authenticate_user!

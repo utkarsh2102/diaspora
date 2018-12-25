@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -18,8 +20,6 @@ class StatusMessagesController < ApplicationController
       @contact = current_user.contact_for(@person)
       if @contact
         @aspects_with_person = @contact.aspects.load
-        @aspect_ids = @aspects_with_person.map(&:id)
-        gon.aspect_ids = @aspect_ids
         render layout: nil
       else
         @aspects_with_person = []
@@ -27,8 +27,6 @@ class StatusMessagesController < ApplicationController
     elsif request.format == :mobile
       @aspect = :all
       @aspects = current_user.aspects.load
-      @aspect_ids = @aspects.map(&:id)
-      gon.aspect_ids = @aspect_ids
     else
       redirect_to stream_path
     end
@@ -36,7 +34,6 @@ class StatusMessagesController < ApplicationController
 
   def bookmarklet
     @aspects = current_user.aspects
-    @aspect_ids = current_user.aspect_ids
 
     gon.preloads[:bookmarklet] = {
       content: params[:content],
@@ -47,18 +44,13 @@ class StatusMessagesController < ApplicationController
   end
 
   def create
-    normalized_params = params.merge(
-      services:   normalize_services,
-      aspect_ids: normalize_aspect_ids,
-      public:     normalize_public_flag
-    )
-    status_message = StatusMessageCreationService.new(current_user).create(normalized_params)
-    handle_mention_feedback(status_message)
+    status_message = StatusMessageCreationService.new(current_user).create(normalize_params)
     respond_to do |format|
-      format.html { redirect_to :back }
       format.mobile { redirect_to stream_path }
       format.json { render json: PostPresenter.new(status_message, current_user), status: 201 }
     end
+  rescue StatusMessageCreationService::BadAspectsIDs
+    render status: 422, plain: I18n.t("status_messages.bad_aspects")
   rescue StandardError => error
     handle_create_error(error)
   end
@@ -72,15 +64,9 @@ class StatusMessagesController < ApplicationController
   def handle_create_error(error)
     logger.debug error
     respond_to do |format|
-      format.html { redirect_to :back }
       format.mobile { redirect_to stream_path }
-      format.json { render text: error.message, status: 403 }
+      format.json { render plain: error.message, status: 403 }
     end
-  end
-
-  def handle_mention_feedback(status_message)
-    return unless comes_from_others_profile_page?
-    flash[:notice] = t("status_messages.create.success", names: status_message.mentioned_people_names)
   end
 
   def comes_from_others_profile_page?
@@ -95,8 +81,19 @@ class StatusMessagesController < ApplicationController
     request.env["HTTP_REFERER"].include?("/people/" + current_user.guid)
   end
 
-  def normalize_services
-    [*params[:services]].compact
+  def normalize_params
+    params.permit(
+      :location_address,
+      :location_coords,
+      :poll_question,
+      status_message: %i[text provider_display_name],
+      poll_answers:   []
+    ).to_h.merge(
+      services:   [*params[:services]].compact,
+      aspect_ids: normalize_aspect_ids,
+      public:     [*params[:aspect_ids]].first == "public",
+      photos:     [*params[:photos]].compact
+    )
   end
 
   def normalize_aspect_ids
@@ -106,10 +103,6 @@ class StatusMessagesController < ApplicationController
     else
       aspect_ids
     end
-  end
-
-  def normalize_public_flag
-    [*params[:aspect_ids]].first == "public"
   end
 
   def remove_getting_started

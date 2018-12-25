@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe SessionsController, type: :controller do
   let(:mock_access_token) { Object.new }
@@ -17,14 +17,14 @@ describe SessionsController, type: :controller do
 
   describe "#create" do
     it "redirects to /stream for a non-mobile user" do
-      post :create, {"user" => {"remember_me" => "0", "username" => @user.username, "password" => "evankorth"}}
+      post :create, params: {user: {remember_me: "0", username: @user.username, password: "evankorth"}}
       expect(response).to be_redirect
       expect(response.location).to match /^#{stream_url}\??$/
     end
 
     it "redirects to /stream for a mobile user" do
       request.headers["X_MOBILE_DEVICE"] = true
-      post :create, {"user" => {"remember_me" => "0", "username" => @user.username, "password" => "evankorth"}}
+      post :create, params: {user: {remember_me: "0", username: @user.username, password: "evankorth"}}
       expect(response).to be_redirect
       expect(response.location).to match /^#{stream_url}\??$/
     end

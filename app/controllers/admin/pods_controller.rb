@@ -1,7 +1,9 @@
 
+# frozen_string_literal: true
+
 module Admin
   class PodsController < AdminController
-    respond_to :html, :json
+    respond_to :html, :json, :mobile
 
     def index
       pods_json = PodPresenter.as_collection(Pod.all)
@@ -15,6 +17,7 @@ module Admin
 
           render "admins/pods"
         end
+        format.mobile { render "admins/pods" }
         format.json { render json: pods_json }
       end
     end

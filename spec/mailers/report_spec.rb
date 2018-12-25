@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe Report, type: :mailer do
   describe "#make_notification" do
@@ -41,6 +41,12 @@ describe Report, type: :mailer do
       ReportMailer.new_report(@post_report.id).each(&:deliver_now)
       expect(ActionMailer::Base.deliveries[0].to[0]).to include(@user.email)
       expect(ActionMailer::Base.deliveries[1].to[0]).to include(@user2.email)
+    end
+
+    it "FROM: header should be the pod name + default sender address" do
+      ReportMailer.new_report(@post_report.id).each(&:deliver_now)
+      pod_name = AppConfig.settings.pod_name
+      expect(ReportMailer.default[:from].to_s).to eq("\"#{pod_name}\" <#{AppConfig.mail.sender_address}>")
     end
 
     it "should send mail in recipent's prefered language" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MetaDataHelper
   include ActionView::Helpers::AssetUrlHelper
   include ActionView::Helpers::TagHelper
@@ -11,7 +13,7 @@ module MetaDataHelper
   end
 
   def default_image_url
-    asset_url "assets/branding/logos/asterisk.png"
+    asset_url("assets/branding/logos/asterisk.png", skip_pipeline: true)
   end
 
   def default_author_name

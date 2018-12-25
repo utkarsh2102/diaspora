@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe StatusMessagesController, :type => :controller do
   before do
@@ -29,16 +29,18 @@ describe StatusMessagesController, :type => :controller do
     end
 
     it 'accepts get params' do
-      get :bookmarklet, { url:   'https://www.youtube.com/watch?v=0Bmhjf0rKe8',
-                          title: 'Surprised Kitty',
-                          notes: 'cute kitty' }
+      get :bookmarklet, params: {
+        url:   "https://www.youtube.com/watch?v=0Bmhjf0rKe8",
+        title: "Surprised Kitty",
+        notes: "cute kitty"
+      }
       expect(response).to be_success
     end
   end
 
   describe '#new' do
     it 'succeeds' do
-      get :new, :person_id => bob.person.id
+      get :new, params: {person_id: bob.person.id}
       expect(response).to be_success
     end
 
@@ -57,43 +59,31 @@ describe StatusMessagesController, :type => :controller do
       }
     }
 
-    it 'creates with valid html' do
-      post :create, status_message_hash
-      expect(response.status).to eq(302)
-      expect(response).to be_redirect
-    end
-
-    it 'creates with invalid html' do
-      post :create, status_message_hash.merge(:status_message => { :text => "0123456789" * 7000 })
-      expect(response.status).to eq(302)
-      expect(response).to be_redirect
-    end
-
     it 'creates with valid json' do
-      post :create, status_message_hash.merge(:format => 'json')
+      post :create, params: status_message_hash, format: :json
       expect(response.status).to eq(201)
     end
 
     it 'creates with invalid json' do
-      post :create, status_message_hash.merge(:status_message => { :text => "0123456789" * 7000 }, :format => 'json')
+      post :create, params: status_message_hash.merge(status_message: {text: "0123456789" * 7000}), format: :json
       expect(response.status).to eq(403)
     end
 
     it 'creates with valid mobile' do
-      post :create, status_message_hash.merge(:format => 'mobile')
+      post :create, params: status_message_hash, format: :mobile
       expect(response.status).to eq(302)
       expect(response).to be_redirect
     end
 
     it 'creates with invalid mobile' do
-      post :create, status_message_hash.merge(:status_message => { :text => "0123456789" * 7000 }, :format => 'mobile')
+      post :create, params: status_message_hash.merge(status_message: {text: "0123456789" * 7000}), format: :mobile
       expect(response.status).to eq(302)
       expect(response).to be_redirect
     end
 
     it 'removes getting started from new users' do
       expect(@controller).to receive(:remove_getting_started)
-      post :create, status_message_hash
+      post :create, params: status_message_hash
     end
 
     context "with aspect_ids" do
@@ -102,69 +92,72 @@ describe StatusMessagesController, :type => :controller do
       end
 
       it "takes one aspect as array in aspect_ids" do
-        post :create, status_message_hash
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash, format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.aspect_visibilities.map(&:aspect)).to eq([@aspect1])
       end
 
       it "takes one aspect as string in aspect_ids" do
-        post :create, status_message_hash.merge(aspect_ids: @aspect1.id.to_s)
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash.merge(aspect_ids: @aspect1.id.to_s), format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.aspect_visibilities.map(&:aspect)).to eq([@aspect1])
       end
 
       it "takes public as array in aspect_ids" do
-        post :create, status_message_hash.merge(aspect_ids: ["public"])
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash.merge(aspect_ids: ["public"]), format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.public).to be_truthy
       end
 
       it "takes public as string in aspect_ids" do
-        post :create, status_message_hash.merge(aspect_ids: "public")
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash.merge(aspect_ids: "public"), format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.public).to be_truthy
       end
 
       it "takes all_aspects as array in aspect_ids" do
-        post :create, status_message_hash.merge(aspect_ids: ["all_aspects"])
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash.merge(aspect_ids: ["all_aspects"]), format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.aspect_visibilities.map(&:aspect)).to match_array([@aspect1, @aspect2])
       end
 
       it "takes all_aspects as string in aspect_ids" do
-        post :create, status_message_hash.merge(aspect_ids: "all_aspects")
-        expect(response.status).to eq(302)
+        post :create, params: status_message_hash.merge(aspect_ids: "all_aspects"), format: :json
+        expect(response.status).to eq(201)
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.aspect_visibilities.map(&:aspect)).to match_array([@aspect1, @aspect2])
+      end
+
+      it "responses 422 when aspect_ids don't contain any applicable aspect identifiers" do
+        bad_ids = [Aspect.ids.max.next, bob.aspects.first.id]
+        post :create, params: status_message_hash.merge(aspect_ids: bad_ids.to_s), format: :json
+        expect(response.status).to eq(422)
       end
     end
 
     it "dispatches the post to the specified services" do
-      s1 = Services::Facebook.new
-      alice.services << s1
       alice.services << Services::Twitter.new
-      status_message_hash[:services] = ['facebook']
+      status_message_hash[:services] = ["twitter"]
       service_types = Service.titles(status_message_hash[:services])
-      expect(alice).to receive(:dispatch_post).with(anything(), hash_including(:service_types => service_types))
-      post :create, status_message_hash
+      expect(alice).to receive(:dispatch_post).with(anything, hash_including(service_types: service_types))
+      post :create, params: status_message_hash
     end
 
     it "works if services is a string" do
-      s1 = Services::Facebook.new
-      alice.services << s1
-      status_message_hash[:services] = "facebook"
-      expect(alice).to receive(:dispatch_post).with(anything(), hash_including(:service_types => ["Services::Facebook"]))
-      post :create, status_message_hash
+      alice.services << Services::Twitter.new
+      status_message_hash[:services] = "twitter"
+      expect(alice).to receive(:dispatch_post).with(anything, hash_including(service_types: ["Services::Twitter"]))
+      post :create, params: status_message_hash
     end
 
     it "doesn't overwrite author_id" do
       status_message_hash[:status_message][:author_id] = bob.person.id
-      post :create, status_message_hash
+      post :create, params: status_message_hash
       new_message = StatusMessage.find_by_text(text)
       expect(new_message.author_id).to eq(alice.person.id)
     end
@@ -172,7 +165,7 @@ describe StatusMessagesController, :type => :controller do
     it "doesn't overwrite id" do
       old_status_message = alice.post(:status_message, :text => "hello", :to => @aspect1.id)
       status_message_hash[:status_message][:id] = old_status_message.id
-      post :create, status_message_hash
+      post :create, params: status_message_hash
       expect(old_status_message.reload.text).to eq('hello')
     end
 
@@ -180,18 +173,18 @@ describe StatusMessagesController, :type => :controller do
       expect(alice).to receive(:dispatch_post) {|post, _opts|
         expect(post.subscribers).to eq([bob.person])
       }
-      post :create, status_message_hash
+      post :create, params: status_message_hash
     end
 
     it 'respsects provider_display_name' do
       status_message_hash.merge!(:aspect_ids => ['public'])
       status_message_hash[:status_message].merge!(:provider_display_name => "mobile")
-      post :create, status_message_hash
+      post :create, params: status_message_hash
       expect(StatusMessage.first.provider_display_name).to eq('mobile')
     end
 
     it "has no participation" do
-      post :create, status_message_hash
+      post :create, params: status_message_hash
       new_message = StatusMessage.find_by_text(text)
       expect(new_message.participations.count).to eq(0)
     end
@@ -210,19 +203,19 @@ describe StatusMessagesController, :type => :controller do
 
       it "will post a photo without text" do
         @hash.delete :text
-        post :create, @hash
-        expect(response).to be_redirect
+        post :create, params: @hash, format: :json
+        expect(response.status).to eq(201)
       end
 
       it "attaches all referenced photos" do
-        post :create, @hash
+        post :create, params: @hash, format: :json
         status_message = StatusMessage.find_by_text(text)
         expect(status_message.photos.map(&:id)).to match_array([@photo1, @photo2].map(&:id))
       end
 
       it "sets the pending bit of referenced photos" do
         inlined_jobs do
-          post :create, @hash
+          post :create, params: @hash, format: :json
         end
 
         expect(@photo1.reload.pending).to be false

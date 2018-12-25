@@ -1,7 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Services::Twitter, :type => :model do
-
   before do
     @user = alice
     @post = @user.post(:status_message, :text => "hello", :to =>@user.aspects.first.id, :photos => [])
@@ -42,8 +41,8 @@ describe Services::Twitter, :type => :model do
 
   describe "message size limits" do
     before :each do
-      @long_message_start = SecureRandom.hex(25)
-      @long_message_end = SecureRandom.hex(25)
+      @long_message_start = SecureRandom.hex(165)
+      @long_message_end = SecureRandom.hex(165)
     end
 
     it "should not truncate a short message" do
@@ -53,9 +52,11 @@ describe Services::Twitter, :type => :model do
     end
 
     it "should truncate a long message" do
-      long_message = SecureRandom.hex(220)
+      long_message = SecureRandom.hex(360)
       long_post = double(message: double(plain_text_without_markdown: long_message), id: 1, photos: [])
-      expect(@service.send(:build_twitter_post, long_post).length).to be < long_message.length
+      answer = @service.send(:build_twitter_post, long_post)
+      expect(answer.length).to be < long_message.length
+      expect(answer).to include "http:"
     end
 
     it "should not truncate a long message with an http url" do
@@ -68,7 +69,9 @@ describe Services::Twitter, :type => :model do
     end
 
     it "should not cut links when truncating a post" do
-      long_message = SecureRandom.hex(40) + " http://joindiaspora.com/a-very-long-url-name-that-will-be-shortened.html " + SecureRandom.hex(55)
+      long_message = SecureRandom.hex(40) +
+         " http://joindiaspora.com/a-very-long-url-name-that-will-be-shortened.html " +
+         SecureRandom.hex(195)
       long_post = double(message: double(plain_text_without_markdown: long_message), id: 1, photos: [])
       answer = @service.send(:build_twitter_post, long_post)
 
@@ -77,7 +80,9 @@ describe Services::Twitter, :type => :model do
     end
 
     it "should append the otherwise-cut link when truncating a post" do
-      long_message = "http://joindiaspora.com/a-very-long-decoy-url.html " + SecureRandom.hex(20) + " http://joindiaspora.com/a-very-long-url-name-that-will-be-shortened.html " + SecureRandom.hex(55) + " http://joindiaspora.com/a-very-long-decoy-url-part-2.html"
+      long_message = "http://joindiaspora.com/a-very-long-decoy-url.html " + SecureRandom.hex(20) +
+         " http://joindiaspora.com/a-very-long-url-name-that-will-be-shortened.html " + SecureRandom.hex(195) +
+         " http://joindiaspora.com/a-very-long-decoy-url-part-2.html"
       long_post = double(message: double(plain_text_without_markdown: long_message), id: 1, photos: [])
       answer = @service.send(:build_twitter_post, long_post)
 
@@ -101,11 +106,11 @@ describe Services::Twitter, :type => :model do
     end
 
     it "should not truncate a message of maximum length" do
-        exact_size_message = SecureRandom.hex(70)
-        exact_size_post = double(message: double(plain_text_without_markdown: exact_size_message), id:  1, photos: [])
-        answer = @service.send(:build_twitter_post, exact_size_post)
+      exact_size_message = SecureRandom.hex(140)
+      exact_size_post = double(message: double(plain_text_without_markdown: exact_size_message), id: 1, photos: [])
+      answer = @service.send(:build_twitter_post, exact_size_post)
 
-        expect(answer).to match exact_size_message
+      expect(answer).to match exact_size_message
     end
 
   end

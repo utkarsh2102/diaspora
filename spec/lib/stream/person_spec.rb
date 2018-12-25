@@ -1,4 +1,5 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
 require Rails.root.join('spec', 'shared_behaviors', 'stream')
 
 describe Stream::Person do
@@ -33,7 +34,7 @@ describe Stream::Person do
     end
 
     posts = posts.reverse.slice(0..14)
-    fetched_posts = fetched_posts.slice(0..14)
+    fetched_posts = fetched_posts.first(15)
 
     expect(fetched_posts).to eq(posts)
   end

@@ -21,10 +21,6 @@ nn:
           attributes:
             diaspora_handle:
               taken: "er allereie i bruk"
-        request:
-          attributes:
-            from_id:
-              taken: "er ein kopi av førespurnad som finst frå før."
         reshare:
           attributes:
             root_guid:
@@ -93,7 +89,8 @@ nn:
   are_you_sure_delete_account: "Er du heilt sikker på at du vil stenge kontoen din? Dette kan ikkje gjerast om!"
   aspect_memberships:
     destroy:
-      failure: "Klarte ikkje å fjerna personen frå aspektet"
+      failure: "Fekk ikkje fjerna personen frå aspektet"
+      forbidden: "Du har ikkje lov til å gjere det."
       no_membership: "Fann ikkje den valde personen i det aspektet"
       success: "Fjerna personen frå aspektet"
   aspects:
@@ -118,6 +115,7 @@ nn:
       updating: "oppdaterer"
     index:
       donate: "Doner"
+      donate_liberapay: "Doner med Liberapay"
       help:
         any_problem: "Har du eit problem?"
         contact_podmin: "Ta kontakt med administratoren (podminen) på poden din."
@@ -169,12 +167,13 @@ nn:
     post_something: "denne lenkja"
   cancel: "Avbryt"
   comments:
+    create:
+      error: "Fekk ikkje kommentert."
     new_comment:
       comment: "Kommenter"
       commenting: "Kommenterer …"
   contacts:
     index:
-      add_a_new_aspect: "Legg til eit nytt aspekt"
       all_contacts: "Alle kontaktane"
       community_spotlight: "Kreative medlemer"
       my_contacts: "Kontaktane mine"
@@ -189,7 +188,6 @@ nn:
   conversations:
     create:
       fail: "Ugyldig melding"
-      no_contact: "Hei, du må leggje til kontakten først!"
       sent: "Meldinga er sendt"
     index:
       inbox: "Innkorg"
@@ -213,10 +211,39 @@ nn:
   error_messages:
     helper:
       correct_the_following_errors_and_try_again: "Rett opp desse feila og prøv på nytt."
+  errors:
+    messages:
+      carrierwave_download_error: "kan ikkje lastast ned"
+      carrierwave_integrity_error: "er ikkje ein lovleg filtype"
+      carrierwave_processing_error: "vart ikkje handsama"
+      content_type_blacklist_error: "Du har ikkje lov å lasta opp %{content_type}-filer"
+      content_type_whitelist_error: "Du har ikkje lov å lasta opp %{content_type}-filer"
+      extension_blacklist_error: "Du har ikkje lov å lasta opp %{extension}-filer. Forbodne filtypar: %{prohibited_types}"
+      extension_whitelist_error: "Du har ikkje lov å lasta opp %{extension}-filer. Lovlege filtypar: %{allowed_types}"
+      max_size_error: "Fila bør vera mindre enn %{max_size}"
+      min_size_error: "Fila bør vera større enn %{min_size}"
+      mini_magick_processing_error: |-
+          Greidde ikkje endra fila med MiniMagick, kanskje det ikkje er eit bilete?
+          Opphaveleg feil: %{e}
+      rmagick_processing_error: "Greidde ikkje endra fila med magick, kanskje det ikkje er eit bilete?"
   fill_me_out: "Fyll meg ut"
   find_people: "Finn personar eller #grindmerke"
   help:
+    account_and_data_management:
+      close_account_q: "Korleis slettar eg kontoen min?"
+      data_visible_to_podmin_q: "Kor mykje av informasjonen min kan pod-administratoren min sjå?"
+      move_pods_a: "I versjon 0.7.0.0 av diaspora* kan du for fyrste gong flytta kontoen din: Du kan eksportera alle data frå \"Konto\"-delen av innstillingane. Hald opplysingane dine trygt lagra! I seinare versjonar av diaspora* kan du flytta heile kontoen din, inkludert innlegg og kontakter, til ein annan pod."
+      move_pods_q: "Korleis flyttar eg kontoen min frå ein pod til ein annan?"
+      title: "Konto- og datastyring"
+    foundation_website: "nettstaden til diaspora*-stiftinga"
     getting_help:
+      get_support_a_hashtag: "Spør i eit offentleg innlegg med %{question}-grindmerket"
+      get_support_a_irc: "Bli med på %{irc} (nettprat)"
+      get_support_a_tutorials: "Sjekk %{tutorials}"
+      get_support_a_website: "Gå til %{link}"
+      get_support_a_wiki: "Søk i %{link}"
+      get_support_q: "Kva om spørsmålet mitt ikkje står i lista over vanlege spørsmål? Kvar elles kan eg få hjelp?"
+      getting_started_a: "Du har flaks. Prøv %{tutorial_series} på nettstaden vår. Der vil du få ein gjennomgang av korleis du registrere deg, og du vil læra alt du treng om å bruka diaspora*."
       getting_started_q: "Hjelp! Eg treng nokon til å hjelpe meg i gang!"
       title: "Få hjelp"
     getting_started_tutorial: "Innføringsserie for å komme i gang"
@@ -227,11 +254,11 @@ nn:
     tutorial: "innføring"
     tutorials: "innføringar"
     wiki: "wiki"
+  invitation_codes:
+    already_logged_in: "Du er blitt invitert til å registrere deg på denne poden av %{inviter}, men du er allereie logga inn."
   invitations:
-    a_facebook_user: "Ein Facebook-brukar"
-    check_token:
-      not_found: "Fann ikkje invitasjonskoda"
     create:
+      closed: "Det er ikkje mogleg å invitere nokon til denne Diaspora*-poden."
       empty: "Skriv inn minst ei e-post-adresse."
       no_more: "Du har ingen fleire invitasjonar."
       note_already_sent: "Invitasjonar er allereie sende til: %{emails}"
@@ -261,6 +288,11 @@ nn:
       logout: "Logg ut"
       profile: "Profil"
       settings: "Innstillingar"
+  likes:
+    create:
+      error: "Fekk ikkje likt."
+    destroy:
+      error: "Likar framleis."
   limited: "Avgrensa"
   more: "Meir"
   no_results: "Fann ingen resultat"
@@ -325,7 +357,6 @@ nn:
       other: "%{actors} nemnde deg i eit sletta innlegg."
       two: "%{actors} nemnde deg i eit sletta innlegg."
       zero: "%{actors} nemnde deg i eit sletta innlegg."
-    post: "innlegg"
     private_message:
       few: "%{actors} sende deg ei melding."
       many: "%{actors} sende deg ei melding."
@@ -420,14 +451,8 @@ nn:
       type_error: "Klarte ikkje å lasta opp biletet. Er du sikker på at du la til eit bilete?"
     destroy:
       notice: "Biletet er sletta."
-    new_photo:
-      empty: "{file} er tom, vel filer utan å ta ho med."
-      invalid_ext: "{file} har ein ugyldig filtype. Berre {extensions} er tillatne."
-      size_error: "{file} er for stor, kan ikkje vera større enn {sizeLimit}."
     new_profile_photo:
       upload: "Last opp eit nytt profilbilete."
-    show:
-      show_original_post: "Syn den opphavlege meldinga"
   posts:
     presenter:
       title: "Eit innlegg av %{name}"
@@ -457,10 +482,6 @@ nn:
       failed: "Klarte ikkje å oppdatera profilen"
       updated: "Profilen vart oppdatert"
   public: "Offentleg"
-  reactions:
-    one: "1 reaksjon"
-    other: "%{count} reaksjonar"
-    zero: "ingen reaksjonar"
   registrations:
     closed: "Kan ikkje oppretta brukarar på denne Diaspora-poden."
     create:
@@ -478,6 +499,8 @@ nn:
       username: "BRUKARNAMN"
   reshares:
     comment_email_subject: "%{resharer} si deling av %{author} sitt innlegg"
+    create:
+      error: "Fekk ikkje delt."
     reshare:
       deleted: "Forfattaren har sletta originalinnlegget."
       reshare_confirmation: "Vil du dele %{author} sitt innlegg?"
@@ -498,6 +521,7 @@ nn:
       edit_services: "Endra tenester"
       logged_in_as: "pålogga som"
       really_disconnect: "kopla frå %{service}?"
+      services_explanation: "Viss du koplar til delingstenester frå tredjepartar, kan du leggja ut postar til dei etter kvart som du skriv dei i diaspora*."
   settings: "Innstillingar"
   shared:
     aspect_dropdown:
@@ -525,6 +549,7 @@ nn:
       visibility_dropdown: "Nytt denne rullegardinmenyen for å endra synlegheita til innlegga dine.  (Me foreslår at du gjer det første innlegget offentleg.)"
     publisher:
       discard_post: "Forkast innlegget"
+      get_location: "Hent plasseringa di"
       new_user_prefill:
         hello: "Hei alle saman! Eg er #%{new_user_tag}. "
         i_like: "Eg interesserer meg for %{tags}. "
@@ -532,14 +557,12 @@ nn:
         newhere: "NyHer"
       posting: "Sender …"
       share: "Del"
-      upload_photos: "Last opp bilete"
       whats_on_your_mind: "Kva tenkjer du på?"
     stream_element:
       via: "via %{link}"
       via_mobile: "via mobiltelefon"
   status_messages:
-    create:
-      success: "Nemnde: %{names}"
+    bad_aspects: "Desse aspekt-IDane kan ikkje brukast (finst ikkje, eller ikkje eigde)"
     new:
       mentioning: "Nemner: %{person}"
     too_long: "{\"few\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"many\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"one\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"other\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"two\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\", \"zero\"=>\"sjå til at statusmeldingane dine har færre enn %{count} teikn\"}"
@@ -547,6 +570,7 @@ nn:
     activity:
       title: "Min aktivitet"
     aspects:
+      all: "Alle aspekta"
       title: "Aspekta mine"
     aspects_stream: "Aspektar"
     comment_stream:
@@ -631,8 +655,6 @@ nn:
     getting_started:
       awesome_take_me_to_diaspora: "Kult! Ta meg med til Diaspora*"
       community_welcome: "Diaspora* sin fellesskap er glade for å ha deg ombord!"
-      connect_to_facebook: "Me kan få fart på sakane ved å %{link} til Diaspora. Dette vil hente namnet og profilbilete ditt derfrå og sette i gong kryss-posting."
-      connect_to_facebook_link: "kopla til Facebook-kontoen din"
       hashtag_explanation: "Grindmerke (#) gjer at du kan tala om og følgja interessene dine. Dei er òg ein fin måte å finna nye Diaspora-brukarar på."
       hashtag_suggestions: "Prøv å følgje tags som #kunst, #film, #åtgaum, #katt, etc."
       well_hello_there: "Neimen, hei der!"

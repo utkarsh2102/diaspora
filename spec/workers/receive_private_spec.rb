@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Workers::ReceivePrivate do
   let(:data) { "<xml></xml>" }

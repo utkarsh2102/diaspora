@@ -1,4 +1,4 @@
-@import 'perfect-scrollbar';
+@import 'utatti-perfect-scrollbar/css/perfect-scrollbar';
 
 @import 'color-variables';
 @import 'bootstrap-complete';
@@ -9,7 +9,6 @@
 @import 'media-box';
 @import 'entypo';
 @import 'icons';
-@import 'mentions';
 @import 'animations';
 @import 'flash_messages';
 @import 'sprites';
@@ -18,7 +17,6 @@
 @import 'interactions';
 @import 'spinner';
 @import 'timeago';
-@import 'vendor/fileuploader';
 @import 'vendor/autoSuggest';
 @import 'typeahead';
 @import 'colors';
@@ -89,6 +87,7 @@
 @import 'chat';
 @import 'markdown-content';
 @import 'oembed';
+@import 'media-embed';
 @import 'post-content';
 
 // contacts

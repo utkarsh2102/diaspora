@@ -25,7 +25,6 @@ tr:
       show: "tüm yorumları görüntüle"
     confirm_dialog: "Emin misiniz?"
     delete: "Sil"
-    failed_to_like: "Beğenme başarısız oldu!"
     failed_to_post_message: "Gönderi başarısız oldu!"
     getting_started:
       alright_ill_wait: "Tamam, ben bekleyeceğim."
@@ -54,11 +53,10 @@ tr:
     photo_uploader:
       looking_good: "OMG, harika görünüyorsun!"
     publisher:
-      limited: "Sınırlı - gönderi sadece paylaşılan kişiler tarafından görünür"
       markdown_editor:
         preview: "Önizle"
         texts:
-          code: "buraya kodu"
+          code: "kod buraya"
           heading: "başlığı metni"
           insert_image_description_text: "buraya imaj açıklama girin"
           insert_image_help_text: "buraya imaj bağlantısını sokun"
@@ -83,9 +81,7 @@ tr:
           quote: "Ekle tırnak"
           write: "düzenle mesajı"
         write: "yazma"
-      public: "Genel - gönderi herkes tarafından görünür ve arama motorları tarafından bulunur olacak"
     reshares:
-      duplicate: "Bu iyi, değil mi? Zaten bu gönderiyi tekrar paylaştın!"
       post: "<%= name %> kişisinin gönderisini yeniden paylaşamak istiyor musun?"
       successful: "Gönderi başarıyla yeniden paylaşıldı!"
     show_more: "daha fazlasını göster"

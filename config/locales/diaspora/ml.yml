@@ -21,10 +21,6 @@ ml:
           attributes:
             diaspora_handle:
               taken: "മുൻപേ ഉപയോഗത്തിലുണ്ട്."
-        request:
-          attributes:
-            from_id:
-              taken: "നിലവിലുള്ള ഒരു അപേക്ഷയുടെ പകര്‍പ്പാണ്."
         reshare:
           attributes:
             root_guid:
@@ -174,7 +170,6 @@ ml:
       commenting: "അഭിപ്രായം രേഖപ്പെടുത്തുന്നു..."
   contacts:
     index:
-      add_a_new_aspect: "പുതിയ പരിചയം ചേര്‍ക്കൂ"
       all_contacts: "എല്ലാ സമ്പര്‍ക്കവും"
       community_spotlight: "സാമൂഹിക പ്രാധാന്യം"
       my_contacts: "എന്റെ സമ്പര്‍ക്കങ്ങള്‍"
@@ -189,7 +184,6 @@ ml:
   conversations:
     create:
       fail: "സാധുവല്ലാത്ത സന്ദേശം"
-      no_contact: "നമസ്കാരം, താങ്കൾ ആദ്യം ഒരു ബന്ധം ചേർക്കണം!"
       sent: "സന്ദേശം അയച്ചു."
     index:
       inbox: "ഇന്‍ബോക്സ്"
@@ -231,7 +225,6 @@ ml:
       change_aspect_of_post_q: "ഞാനൊരിക്കല്‍ പോസ്റ്റ് ചെയ്ത് കഴിഞ്ഞാല്‍ അത് കാണാന്‍ സാധിക്കുന്ന് പരിചയങ്ങള്‍ തിരുത്താമോ?"
       contacts_know_aspect_a: "ഇല്ല. അവര്‍ക്കു ഒരു സാഹചര്യത്തിലും പരിചയത്തിന്റെ പേര് കാണാന്‍ കഴിയുന്നതല്ല."
       contacts_know_aspect_q: "എന്റെ സമ്പര്‍ക്കങ്ങള്‍ക്ക് ഏത് പരിചയത്തിലാണു ഞാന്‍ അവരെ സ്ഥാപിച്ചിരിക്കുന്നതെന്നു അറിയുവാന്‍ കഴിയുമൊ?"
-      contacts_visible_q: "\"പരിചയം ദൃശ്യമാക്കുക\" എന്നാൽ എന്താണ്?"
       delete_aspect_q: "എനിക്ക് എങ്ങനെ ഒരു പരിചയം ഒഴിവാക്കാന്‍ സാധിക്കും?"
       person_multiple_aspects_q: "എനിക്ക് ഒരു വ്യക്ത്തിയെ പല പരിചയങ്ങളിലേക്ക് ചേര്‍ക്കാന്‍ സാധിക്കുമോ?"
       post_multiple_aspects_q: "എനിക്ക് പല പരിചയങ്ങളിലേക്ക് ഒരേ സമയം ഒരാശയം പോസ്റ്റ് ചെയ്യാന്‍ സാധിക്കുമോ?"
@@ -261,7 +254,6 @@ ml:
     markdown: "മാര്‍ക്ക്ഡൌണ്‍"
     mentions:
       how_to_mention_q: "ഒരു പോസ്റ്റ് ഉണ്ടാക്കുമ്പോള്‍ എങ്ങനെ ഒരാളെ സൂചിപ്പിക്കാം?"
-      mention_in_comment_a: "ഇല്ല, ഇപ്പോഴില്ല."
       mention_in_comment_q: "അഭിപ്രായത്തില്‍ ഒരാളെ സൂചിപ്പിക്കാന്‍ പറ്റുമോ?"
       see_mentions_a: "പൂമുഖത്തിന്റെ ഇടതുവശത്തെ \"സൂചനകള്‍\" നോക്കു."
       see_mentions_q: "എന്നെ സൂചിപ്പിച്ച പോസ്റ്റുകള്‍ കാണാന്‍ വഴിയുണ്ടോ?"
@@ -291,10 +283,6 @@ ml:
       embed_multimedia_q: "ഞാന്‍ എങ്ങനെ വീഡിയോ, ഓഡിയോ, അല്ലെങ്കില്‍ മറ്റു മള്‍ട്ടിമീഡിയ വിവരങ്ങള്‍ കുറിപ്പിലെക്കു ഉറപ്പിക്കും?"
       format_text_q: "എനിക്ക് എന്റെ കുറിപ്പുകളിലെ അക്ഷരങ്ങള്‍ എങ്ങനെ മാറ്റം വരുത്താം(കട്ടിയെഴുത്ത്,ചെരിവെഴുത്ത്‌, തുടങ്ങിയവ.)?"
       hide_posts_q: "എങ്ങനെ ഒരു കുറിപ്പ് മറയ്ക്കാം.?/ എങ്ങനെ ഞാന്‍ അഭിപ്രായം രേഖപ്പെടുതിയ ഒരു കുറിപ്പിനെ കുറിച്ചുള്ള അറിയിപ്പുകള്‍ ലഭിക്കുന്നത് നിര്‍ത്തലാക്കാം?"
-      image_text: "അടികുറുപ്പ്"
-      image_url: "ചിത്രത്തിന്റെ വിലാസം."
-      insert_images_comments_a1: "താഴെയുള്ള മാര്‍ക്ക്ഡൌണ്‍ കോഡ്"
-      insert_images_comments_a2: "കുറിപ്പുകളില്‍ എന്നപോലെ അഭിപ്രായവും ചിത്രമായി വെബില്‍ നീന്നു ചേര്‍ക്കാവുന്നതാണു."
       insert_images_comments_q: "അഭിപ്രായം രേഖപ്പെടുത്തുമ്പോള്‍ ചിത്രങ്ങളും ഉള്‍പ്പെടുത്താമോ?"
       insert_images_q: "ചിത്രങ്ങൾ എപ്രകാരം പോസ്റ്റിൽ ഉൾപ്പെടുത്താം?"
       size_of_images_a: "ഇല്ല. ചിത്രങ്ങള്‍ സ്ട്രീമിലേക്ക് കൊള്ളിക്കുന്നതിനായി തനിയെ വലിപ്പം മാറ്റും. മാര്‍ക്ക്ഡൌണില്‍ വലിപ്പം പറയാനുള്ള കോഡില്ല"
@@ -312,12 +300,6 @@ ml:
       title: "സ്വകാര്യ പോസ്റ്റുകള്‍"
       who_sees_post_a: "ആ പരിചയത്തില്‍ ഉള്ള ഡയസ്പോറയില്‍ പ്രവേശിച്ചിരിക്കുന്ന ഉപയോക്താക്കള്‍ക്കു മാത്രമേ താങ്കളുടെ സ്വകാര്യ കുറിപ്പുകള്‍ കാണാന്‍ കഴിയു."
       who_sees_post_q: "ഞാന്‍ ഒരു ഭാവത്തിലേക്കു സന്ദേശം  പോസ്റ്റ് ചെയ്തത് (i.e., സ്വകാര്യ കുറിപ്പുകള്‍), ആര്‍ക്കെല്ലാം കാണാന്‍ കഴിയും?"
-    private_profiles:
-      title: "സ്വകാര്യ പ്രൊഫൈലുകൾ"
-      whats_in_profile_q: "എന്റെ സ്വകാര്യ പ്രൊഫൈലിൽ എന്തെല്ലാം ഉൾപ്പെടുന്നു?"
-      who_sees_profile_q: "ആര്‍ക്കെല്ലാം എന്റെ സ്വകാര്യ പ്രൊഫൈല്‍ കാണാന്‍ കഴിയും?"
-      who_sees_updates_a: "താങ്കളുടെ പരിചയത്തില്‍ ഉള്ളവര്‍ക്കെല്ലാം താങ്കളുടെ സ്വകാര്യ പ്രൊഫൈലിലെ മാറ്റങ്ങള്‍ കാണാന്‍ കഴിയും. "
-      who_sees_updates_q: "ആർക്കെല്ലാം എന്റെ സ്വകാര്യ പ്രൊഫൈലിലെ മാറ്റങ്ങള്‍ കാണാന്‍ കഴിയും?"
     public_posts:
       can_comment_reshare_like_a: "എല്ലാ പ്രവേശിച്ചിരിക്കുന്ന ഡയസ്പോറ* ഉപയോക്താക്കള്‍ക്കും അഭിപ്രായം, ഇഷ്ട്ടപ്പെടല്‍, വീണ്ടും പങ്കിടല്‍ തുടങ്ങിയവ ചെയ്യാനാകും"
       can_comment_reshare_like_q: "എന്റെ പൊതു കുറിപ്പില്‍ അര്‍ക്കാക്കെ ഇഷ്ട്ടപ്പെടാന്‍, അഭിപ്രായം പറയാന്‍, വീണ്ടും പങ്കിടാന്‍ പറ്റും?"
@@ -325,13 +307,6 @@ ml:
       title: "പൊതുവായ കുറിപ്പുകൾ"
       who_sees_post_a: "ഇന്റെര്‍നെറ്റ് ഉപയോഗിക്കുന്ന ഏതൊരാള്‍ക്കും നിങ്ങളുടെ പൊതു കുറിപ്പ് കാണാന്‍ പറ്റും. അതുകൊണ്ട് കുറിപ്പ് പൊതുവാക്കണോ എന്ന് ശരിക്ക് ഉറപ്പാക്കുക. അത് എല്ലാവരിലേക്കും എത്താന്‍ വളരെ നല്ല ഒരു വഴിയാണ്"
       who_sees_post_q: "ഞാനെന്തെങ്കിലും പൊതുവായി കൂറിക്കുമ്പോള്‍ ആര്‍ക്കൊക്കെ കാണാന്‍ പറ്റും?"
-    public_profiles:
-      title: "പൊതുവായ പ്രൊഫൈലുകൾ"
-      what_do_tags_do_q: "എന്റെ പൊതു പ്രൊഫൈലിലുള്ള ടാഗുകള്‍ എന്താ ചെയ്യുന്നത്?"
-      whats_in_profile_q: "എന്റെ പൊതു പ്രൊഫൈലില്‍ എന്താണുള്ളത്?"
-      who_sees_profile_q: "എന്റെ പൊതു പ്രൊഫൈല്‍ ആരൊക്കെ കാണും?"
-      who_sees_updates_a: "താങ്കളുടെ പ്രൊഫൈല്‍ സന്ദര്‍ശിക്കുന്ന ആര്‍ക്കും മാറ്റങ്ങള്‍ കാണാം"
-      who_sees_updates_q: "എന്റെ പൊതു പ്രാഫൈലിലെ പുതുക്കലുകള്‍ ആര്‍ക്കൊക്കെ കാണാന്‍ പറ്റും?"
     resharing_posts:
       reshare_private_post_aspects_q: "ചില പരിചയങ്ങള്‍ക്ക് മാത്രമായി സ്വകാര്യ പോസ്റ്റ് പങ്കിടാന്‍ പറ്റുമോ?"
       reshare_public_post_aspects_q: "പൊതു കുറിപ്പുകള്‍ പ്രത്യേക പരിചയത്തിലായി മാത്രം പങ്കിടാന്‍ പറ്റുമോ?"
@@ -348,9 +323,6 @@ ml:
     tutorials: "പഠനോപകരണങ്ങള്‍"
     wiki: "വിക്കി"
   invitations:
-    a_facebook_user: "ഒരു ഫേസ്ബുക്ക് ഉപയോക്താവ്"
-    check_token:
-      not_found: "ക്ഷണത്തിന്റെ ടോക്കണ്‍ കാണുന്നില്ല"
     create:
       empty: "ദയവായി കുറഞ്ഞത് ഒരു ഈമെയിൽ വിലാസമെങ്കിലും നൽകുക"
       no_more: "താങ്കള്‍ക്ക് ഇനി ക്ഷണങ്ങളൊന്നും ബാക്കിയില്ല."
@@ -436,7 +408,6 @@ ml:
       other: "%{actors} mentioned you in a deleted post."
       two: "%{actors} mentioned you in a deleted post."
       zero: "%{actors} mentioned you in a deleted post."
-    post: "കുറിപ്പ്"
     private_message:
       one: "%{actors} താങ്കള്‍ക്ക് ഒരു സന്ദേശം അയച്ചു."
       other: "%{actors} താങ്കള്‍ക്ക് ഒരു സന്ദേശം അയച്ചു."
@@ -530,14 +501,8 @@ ml:
       type_error: "ചിത്രം അപ്‌ലോഡ് പരാജയപ്പെട്ടു..  താങ്കള്‍ ഒരു ചിത്രം അപ്‌ലോഡ് ചെയ്യാന്‍ തിരഞ്ഞെടുത്തിരുന്നോ?"
     destroy:
       notice: "ചിത്രം നീക്കം ചെയ്തു."
-    new_photo:
-      empty: "{file} ശൂന്യമാണ്, അതല്ലാത്ത ഫയലുകള്‍ ദയവായി വീണ്ടും തെരഞ്ഞെടുക്കുക."
-      invalid_ext: "{file} ന് തെറ്റായ extension ആണ്.  {extensions} മാത്രം അനുവദിച്ചിരിക്കുന്നു."
-      size_error: "{file} വളരെ വലുതാണ്, കൂടിയ ഫയല്‍ വലിപ്പം {sizeLimit} ആകുന്നു."
     new_profile_photo:
       upload: "പുതിയ പ്രൊഫൈല്‍ ചിത്രം ചേര്‍ക്കുക!"
-    show:
-      show_original_post: "Show original post"
   posts:
     presenter:
       title: "%{name}ല്‍ നിന്നുള്ള കുറിപ്പ്"
@@ -567,10 +532,6 @@ ml:
       failed: "പ്രൊഫൈല്‍ തിരുത്തുന്നത് പരാജയപ്പെട്ടിരിക്കുന്നു."
       updated: "പ്രൊഫൈല്‍ വിജയകരമായൊ തിരുത്തിയിരിക്കുന്നു."
   public: "പൊതുവായി"
-  reactions:
-    one: "ഒരു പ്രതികരണം"
-    other: "%{count} പ്രതികരണങ്ങള്‍"
-    zero: "0 പ്രതികരണങ്ങള്‍"
   registrations:
     closed: "ഈ ഡയാസ്പുറ പോഡില്‍ ചേരുന്നത് അടച്ചിരിക്കുന്നു."
     create:
@@ -644,14 +605,11 @@ ml:
         newhere: "NewHere"
       posting: "കുറിക്കുന്നു..."
       share: "പങ്കുവെയ്ക്കുക"
-      upload_photos: "Upload photos"
       whats_on_your_mind: "എന്താണ് നിങ്ങളുടെ മനസ്സില്‍?"
     stream_element:
       via: "via %{link}"
       via_mobile: "മൊബൈൽ ഉപയോഗിച്ച്"
   status_messages:
-    create:
-      success: "വിജയകരമായി സൂചിപ്പിച്ചു: %{names}"
     new:
       mentioning: "സൂചിപ്പിക്കുന്നു: %{person}"
     too_long: "{\"few\"=>\"please make your status messages less than %{count} characters\", \"many\"=>\"please make your status messages less than %{count} characters\", \"one\"=>\"please make your status messages less than %{count} character\", \"other\"=>\"please make your status messages less than %{count} characters\", \"two\"=>\"please make your status messages less than %{count} characters\", \"zero\"=>\"please make your status messages less than %{count} characters\"}"
@@ -734,8 +692,6 @@ ml:
     getting_started:
       awesome_take_me_to_diaspora: "കിടിലം! എന്നെ ഡയസ്പോറ*യിലെത്തിക്കു"
       community_welcome: "Diaspora's community is happy to have you aboard!"
-      connect_to_facebook: "ഡയസ്പോറയിലേക്ക് %{link} വഴി ഞങ്ങൾക്ക് കാര്യങ്ങൾ കുറച്ചുകൂടി വേഗത്തിലാക്കാൻ പറ്റും. ഇങ്ങനെ ചെയ്യുന്നത് താങ്കളുടെ പേരും ചിത്രവും വലിച്ചെടുക്കുകയും, ക്രോസ് പോസ്റ്റിങ്ങ് സാധുവാക്കുകയും ചെയ്യും."
-      connect_to_facebook_link: "താങ്കളുടെ ഫേസ്ബുക്ക് അക്കൗണ്ട് ബന്ധിപ്പിക്കുക"
       hashtag_explanation: "Hashtags allow you to talk about and follow your interests.  They're also a great way to find new people on Diaspora."
       hashtag_suggestions: "Try following tags like #art, #movies, #gif, etc."
       well_hello_there: "Well, hello there!"
