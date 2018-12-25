@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -19,7 +21,7 @@ class HomeController < ApplicationController
           partial_dir.join("_show.html.erb").exist? ||
           partial_dir.join("_show.haml").exist?
       render :show
-    elsif User.count > 1 && Role.where(name: "admin").any?
+    elsif Role.admins.any?
       render :default
     else
       redirect_to podmin_path
@@ -33,7 +35,7 @@ class HomeController < ApplicationController
   def toggle_mobile
     session[:mobile_view] = session[:mobile_view].nil? ? true : !session[:mobile_view]
 
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
 
   def force_mobile

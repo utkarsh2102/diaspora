@@ -81,7 +81,6 @@ es-AR:
         add_a_new_aspect: "Agregar un nuevo aspecto"
         failure: "Error al crear el aspecto."
         success: "Tu nuevo aspecto <%= name %> fue creado"
-      make_aspect_list_visible: "¿Hacer visible los contactos de este aspecto entre ellos?"
       name: "Nombre"
     bookmarklet:
       post_something: "Publicar en diaspora*"
@@ -99,23 +98,22 @@ es-AR:
       add_contact: "Agregar contacto"
       aspect_chat_is_enabled: "Los contactos de este aspecto pueden chatear con vos."
       aspect_chat_is_not_enabled: "Los contactos de este aspecto no pueden chatear con vos."
-      aspect_list_is_not_visible: "La lista de contactos de este aspecto no es visible."
-      aspect_list_is_visible: "La lista de contactos de este aspecto es visible."
       error_add: "No se puede agregar a <%= name %> a este aspecto :("
       error_remove: "No se puede eliminar a <%= name %> de este aspecto :("
       remove_contact: "Eliminar contacto"
       search_no_results: "No se han encontrado contactos con ese nombre."
     conversation:
+      create:
+        no_recipient: "¡Hey! primero tenes que agregar un destinatario"
       new:
         no_contacts: "Necesitas agregar algunos contactos antes de iniciar una conversación."
     create: "Crear"
     delete: "Borrar"
     edit: "Editar"
-    failed_to_comment: "Error al comentar. ¿Puede ser que el autor te esté ignorando?"
-    failed_to_like: "¡No pudo marcarse como \"Me gusta\"! ¿Tal vez el autor de la publicación te está ignorando?"
+    errors:
+      connection: "No es posible conectarse al servidor."
     failed_to_post_message: "¡No pudo publicarse el mensaje!"
     failed_to_remove: "Fallo al eliminar la entrada!"
-    failed_to_reshare: "Error al volver a compartir"
     getting_started:
       alright_ill_wait: "Todo bien, voy a esperar."
       hey: "¡Hola, <%= name %>!"
@@ -151,6 +149,9 @@ es-AR:
     notifications:
       mark_read: "Marcar como leído"
       mark_unread: "Marcar como no leído"
+      new_notifications:
+        one: "Tenés una notificación sin leer"
+        other: "Tenés <%= count %> notificaciones sin leer"
     people:
       edit_my_profile: "Editar mi perfil"
       helper:
@@ -167,6 +168,7 @@ es-AR:
       invalid_ext: "El archivo {file} tiene una extensión inválida. Solo las extensiones {extensions} están permitidas."
       looking_good: "¡Apa, te ves muy bien!"
       size_error: "El archivo {file} es demasiado grande, el tamaño máximo permitido es {sizeLimit}."
+      upload_photos: "Subir fotos"
     poll:
       answer_count:
         one: "1 voto"
@@ -181,11 +183,11 @@ es-AR:
       result: "Resultados"
       show_result: "Mostrar resultados"
       vote: "Votar"
+      your_vote: "Tu voto"
     profile:
       add_some: "Agregar algo"
       bio: "Biografía"
       born: "Fecha de nacimiento"
-      contacts: "Contactos"
       edit: "Editar"
       gender: "Género"
       location: "Ubicación"
@@ -194,7 +196,6 @@ es-AR:
       you_have_no_tags: "¡No tenés etiquetas!"
     publisher:
       add_option: "Añadir respuesta"
-      limited: "Limitada: tu publicación será vista solo por la gente con quien la compartes"
       markdown_editor:
         preview: "Vista previa"
         texts:
@@ -223,9 +224,9 @@ es-AR:
           quote: "Insertar cita"
           write: "Editar post"
         write: "Escribir"
+      mention_success: "Mencionados exitosamente: <%= names %>"
       near_from: "Cerca de: <%= location %>"
       option: "Respuesta"
-      public: "Publica: tu publicación será visible para cualquiera en Internet y los buscadores podrán encontrarla"
       question: "Pregunta"
     remove_post: "¿Eliminar esta publicación?"
     report:
@@ -236,12 +237,16 @@ es-AR:
         created: "El reporte se ha creado exitosamente"
         exists: "El reporte ya existe"
     reshares:
-      duplicate: "¿Te gustó eh? ¡Ya habías compartido esa publicación!"
       post: "¿Compartir la publicación de <%= name %>?"
       successful: "¡La publicación se compartió correctamente!"
+    show_all: "Mostrar todos"
     show_more: "Mostrar más"
     stream:
       comment: "Comentar"
+      comments:
+        one: "<%= count %> comentario"
+        other: "<%= count %> comentarios"
+        zero: "<%= count %> comentarios"
       disable_post_notifications: "Desactivar las notificaciones para esta publicación"
       enable_post_notifications: "Activar las notificaciones para esta publicación"
       follow: "Seguir"
@@ -265,10 +270,6 @@ es-AR:
       original_post_deleted: "La publicación original fue eliminada por el autor"
       permalink: "Enlace permanente"
       public: "Pública"
-      reactions:
-        one: "<%= count%> reacción"
-        other: "<%= count%> reacciones"
-        zero: "<%= count%> reacciones"
       reshare: "Compartir"
       reshares:
         one: "Compartido <%= count %> vez"

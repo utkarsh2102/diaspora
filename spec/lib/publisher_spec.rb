@@ -1,5 +1,4 @@
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Publisher do
   before do
@@ -16,14 +15,7 @@ describe Publisher do
     end
   end
 
-  describe '#text' do
-    it 'is a formatted version of the prefill' do
-      p = Publisher.new(alice, prefill: "@{alice; #{alice.diaspora_handle}}")
-      expect(p.text).to eq("alice")
-    end
-  end
-
-  ["open", "public", "explain"].each do |property|
+  %w(open public).each do |property|
     describe "##{property}" do
       it 'defaults to closed' do
         expect(@publisher.send("#{property}".to_sym)).to be_falsey

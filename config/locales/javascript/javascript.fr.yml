@@ -60,7 +60,7 @@ fr:
       add_to_aspect: "Ajouter le contact"
       all_aspects: "Tous les aspects"
       error: "Impossible de partager avec <%= name %>. Ignorez-vous cette personne ?"
-      error_remove: "Ne peut pas supprimer <%= name %> de l'aspect :("
+      error_remove: "Impossible de retirer <%= name %> de cet aspect :("
       mobile_row_checked: "<%= name %> (retirer)"
       mobile_row_unchecked: "<%= name %> (ajouter)"
       select_aspects: "Choisir les aspects"
@@ -69,7 +69,6 @@ fr:
       toggle:
         one: "Dans <%= count %> aspect"
         other: "Dans <%= count %> aspects"
-        zero: "Sélectionnez les aspects"
       updating: "Mise à jour..."
     aspect_navigation:
       add_an_aspect: "+ Ajouter un aspect"
@@ -81,7 +80,6 @@ fr:
         add_a_new_aspect: "Ajouter un nouvel aspect"
         failure: "La création de l'aspect a échoué."
         success: "Votre nouvel aspect <%= name %> a été créé"
-      make_aspect_list_visible: "Permettre aux contacts de cet aspect de se voir entre eux ?"
       name: "Nom"
     bookmarklet:
       post_something: "Publier sur diaspora*"
@@ -94,36 +92,35 @@ fr:
       no_comments: "Il n'y a pas encore de commentaires."
       show: "Afficher tous les commentaires"
     confirm_dialog: "Êtes-vous certain-e ?"
-    confirm_unload: "Merci de confirmer que vous voulez quitter cette page — les données saisies ne seront pas sauvegardées."
+    confirm_unload: "Merci de confirmer que vous voulez quitter cette page. Les données saisies ne seront pas enregistrées."
     contacts:
       add_contact: "Ajouter ce contact"
       aspect_chat_is_enabled: "Les contacts de cet aspect peuvent discuter avec vous."
       aspect_chat_is_not_enabled: "Les contacts de cet aspect ne peuvent pas discuter avec vous."
-      aspect_list_is_not_visible: "Les contacts de cette facette ne peuvent pas se voir entre eux."
-      aspect_list_is_visible: "Les contacts de cette facette peuvent se voir entre eux."
-      error_add: "Impossible d'ajouter <%= name %> à cette facette :("
-      error_remove: "Impossible de retirer <%= name %> de cette facette :("
+      error_add: "Impossible d'ajouter <%= name %> à cet aspect :("
+      error_remove: "Impossible de retirer <%= name %> de cet aspect :("
       remove_contact: "Retirer ce contact"
       search_no_results: "Aucun contact trouvé"
     conversation:
+      create:
+        no_recipient: "Vous avez d'abord besoin d'ajouter un destinataire."
       new:
         no_contacts: "Vous devez ajouter des contacts avant de pouvoir démarrer une conversation."
     create: "Créer"
     delete: "Effacer"
     edit: "Éditer"
-    failed_to_comment: "Impossible de commenter. Peut-être que l'auteur vous ignore ?"
-    failed_to_like: "Impossible d'aimer !"
+    errors:
+      connection: "Impossible de se connecter au serveur."
     failed_to_post_message: "Impossible de partager le message !"
     failed_to_remove: "L'entrée n'a pu être supprimée"
-    failed_to_reshare: "Échec du repartage"
     getting_started:
       alright_ill_wait: "Bon, je vais attendre."
       hey: "Hey, <%= name %> !"
-      no_tags: "Hey, vous ne suivez aucun tag ! Continuer quand même ?"
+      no_tags: "Hé, vous ne suivez aucun tag ! Continuer quand même ?"
       preparing_your_stream: "Préparation de votre flux personnalisé..."
     header:
       admin: "Administration"
-      close: "fermer"
+      close: "Fermer"
       contacts: "Contacts"
       conversations: "Discussions"
       help: "Aide"
@@ -151,6 +148,9 @@ fr:
     notifications:
       mark_read: "Marquer comme lu"
       mark_unread: "Marquer comme non lu"
+      new_notifications:
+        one: "Vous avez une notification non lue."
+        other: "Vous avez <%= count %> notifications non lues."
     people:
       edit_my_profile: "Modifier mon profil"
       helper:
@@ -158,7 +158,7 @@ fr:
         is_sharing: "<%= name %> partage avec vous"
       mention: "Mentionner"
       message: "Message"
-      not_found: "Et personne n'a été trouvé ..."
+      not_found: "... et personne n'a été trouvé"
       stop_ignoring: "Ne plus ignorer"
     photo_uploader:
       completed: "<%= file %> complété"
@@ -167,6 +167,7 @@ fr:
       invalid_ext: "{file} a une extension invalide. Seules {extensions} sont permises."
       looking_good: "Impressionnant, vous avez un super look !"
       size_error: "{file} est trop gros, la taille maximum est de {sizeLimit}."
+      upload_photos: "Envoyer des photos"
     poll:
       answer_count:
         one: "<%=count%> vote"
@@ -182,20 +183,19 @@ fr:
       result: "Résultat"
       show_result: "Afficher les résultats"
       vote: "Vote"
+      your_vote: "Votre vote"
     profile:
-      add_some: "ajouter"
+      add_some: "En ajouter quelques-uns"
       bio: "Biographie"
       born: "Anniversaire"
-      contacts: "Contacts"
-      edit: "modifier"
+      edit: "Modifier"
       gender: "Genre"
       location: "Localisation"
       photos: "Photos"
       posts: "Messages"
-      you_have_no_tags: "vous n'avez pas de tag !"
+      you_have_no_tags: "Vous n'avez pas de tags !"
     publisher:
       add_option: "Ajouter un choix"
-      limited: "Limité - votre message ne sera vu que par des gens avec qui vous partagez"
       markdown_editor:
         preview: "Aperçu"
         texts:
@@ -224,32 +224,36 @@ fr:
           quote: "Insérer une citation"
           write: "Modifier le message"
         write: "Écrire"
+      mention_success: "Mentions réussies : <%= names %>"
       near_from: "Posté à : <%= location %>"
       option: "Choix"
-      public: "Public - votre message sera visible de tous et trouvé par les moteurs de recherche"
       question: "Question"
     remove_post: "Supprimer ce message ?"
     report:
       name: "Signaler"
       prompt: "Merci de saisir un motif :"
-      prompt_default: "Contenu offensant"
+      prompt_default: "par ex. contenu offensant"
       status:
-        created: "Le signalement a été crée avec succès."
+        created: "Le signalement a été créé avec succès."
         exists: "Le signalement existe déjà"
     reshares:
-      duplicate: "C'est si bien que ça ? Vous avez déjà repartagé ce message !"
       post: "Repartager le message de <%= name %> ?"
       successful: "Le message a été repartagé !"
+    show_all: "Afficher tout"
     show_more: "Voir plus"
     stream:
       comment: "Commenter"
+      comments:
+        one: "<%= count %> commentaire"
+        other: "<%= count %> commentaires"
+        zero: "<%= count %> commentaire"
       disable_post_notifications: "Désactiver les notifications pour ce message"
       enable_post_notifications: "Activer les notifications pour ce message"
       follow: "Suivre"
       followed_tag:
         add_a_tag: "Ajouter un tag"
         follow: "Suivre"
-        title: "#tags suivis"
+        title: "#Tags suivis"
       hide: "Masquer"
       hide_nsfw_posts: "Masquer les messages #nsfw"
       like: "J'aime"
@@ -269,10 +273,6 @@ fr:
       original_post_deleted: "Le message original a été effacé par son auteur."
       permalink: "Lien permanent"
       public: "Public"
-      reactions:
-        one: "<%= count%> réaction"
-        other: "<%= count%> réactions"
-        zero: "<%= count%> réactions"
       reshare: "Repartager"
       reshares:
         few: "<%= count %> repartages"
@@ -294,21 +294,25 @@ fr:
       unlike: "Je n'aime plus"
       via: "via <%= provider %>"
     tags:
-      wasnt_that_interesting: "Ok, je suppose que #<%= tagName %> n'est pas la seule chose qui vous intéresse..."
+      wasnt_that_interesting: "OK, je suppose que #<%= tagName %> n’est pas la seule chose qui vous intéresse…"
     timeago:
       day: "environ un jour"
       days:
+        one: "un jour"
         other: "environ %d jours"
       hour: "environ une heure"
       hours:
+        one: "environ une heure"
         other: "environ %d heures"
       inPast: "très bientôt"
       minute: "environ une minute"
       minutes:
-        other: "environ %d minutes"
+        one: "1 minute"
+        other: "%d minutes"
       month: "environ un mois"
       months:
-        other: "environ %d mois"
+        one: "un mois"
+        other: "%d mois"
       prefixAgo: "il y a"
       prefixFromNow: "d'ici"
       seconds: "moins d'une minute"
@@ -317,6 +321,7 @@ fr:
       wordSeparator: " "
       year: "un an"
       years:
+        one: "un an"
         other: "%d ans"
     unblock_failed: "Impossible de débloquer cet utilisateur"
     viewer:

@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe ActsAsTaggableOn::Tag, :type => :model do
   subject(:tag) { ActsAsTaggableOn::Tag }

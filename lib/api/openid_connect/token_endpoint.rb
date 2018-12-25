@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Inspired by https://github.com/nov/openid_connect_sample/blob/master/lib/token_endpoint.rb
 
 module Api
@@ -50,7 +52,7 @@ module Api
       end
 
       def app_valid?(o_auth_app, req)
-        o_auth_app.client_secret == req.client_secret
+        o_auth_app.try(:client_secret) == req.client_secret
       end
     end
   end

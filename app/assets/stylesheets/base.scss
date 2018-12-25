@@ -60,10 +60,6 @@ pre { word-wrap: break-word; }
   }
 }
 
-.author-name {
-  color: inherit;
-}
-
 .back-to-top {
   background-color: $border-dark-grey;
   border-radius: 4px;
@@ -74,20 +70,29 @@ pre { word-wrap: break-word; }
   height: 50px;
   line-height: 50px;
   opacity: 0;
+  pointer-events: none;
   position: fixed;
-  right: 54px;
+  right: 20px;
+  text-decoration: none;
   transition: opacity ease 400ms;
   width: 50px;
   z-index: 49;
 
   &:hover,
-  &.visible:hover {
+  &:focus,
+  &:active {
     color: $white;
-    opacity: .85;
     text-decoration: none;
   }
 
-  &.visible { opacity: .5; }
+  &.visible {
+    opacity: .5;
+    pointer-events: auto;
+
+    &:hover {
+      opacity: .85;
+    }
+  }
 }
 
 .noscript {

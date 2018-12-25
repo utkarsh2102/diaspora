@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe UsersHelper, type: :helper do
   include Devise::Test::ControllerHelpers

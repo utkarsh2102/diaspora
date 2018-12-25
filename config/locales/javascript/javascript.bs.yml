@@ -34,7 +34,6 @@ bs:
     confirm_dialog: "Jeste sigurni?"
     delete: "Izbriši"
     edit: "Uredi"
-    failed_to_like: "Neuspješno sviđanje"
     failed_to_post_message: "Neuspješno objavljivanje poruke!"
     getting_started:
       alright_ill_wait: "Dobro, čekat ću."
@@ -68,11 +67,8 @@ bs:
       looking_good: "Bože, izgledate fenomenalno!"
       size_error: "{file} je prevelika, maksimalna veličina datoteke je {sizeLimit}."
     publisher:
-      limited: "Ograničeno - vaša objava će biti vidljiva od ljudi s kojima dijelite"
       near_from: "Objavljeno sa: <%= location %>"
-      public: "Javno - vaša objava će biti vidljiva svima i može biti pronađena od pretraživača"
     reshares:
-      duplicate: "Tako dobro, ha?  Već ste ponovo dijelili tu objavu!"
       post: "Ponovo dijeli objavu od <%= name %>?"
       successful: "Objava je uspješno ponovo dijeljenja!"
     show_more: "pokaži više"

@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe StreamsController, :type => :controller do
   describe '#aspects' do
@@ -24,14 +24,14 @@ describe StreamsController, :type => :controller do
       end
 
       it "generates a jasmine fixture with a prefill", :fixture => true do
-        get :aspects, :prefill => "reshare things"
+        get :aspects, params: {prefill: "reshare things"}
         save_fixture(html_for("body"), "aspects_index_prefill")
       end
 
       it 'generates a jasmine fixture with services', :fixture => true do
-        alice.services << Services::Facebook.create(:user_id => alice.id)
-        alice.services << Services::Twitter.create(:user_id => alice.id)
-        get :aspects, :prefill => "reshare things"
+        alice.services << Services::Twitter.create(user_id: alice.id)
+        alice.services << Services::Tumblr.create(user_id: alice.id)
+        get :aspects, params: {prefill: "reshare things"}
         save_fixture(html_for("body"), "aspects_index_services")
       end
 
@@ -46,7 +46,7 @@ describe StreamsController, :type => :controller do
       it 'generates a jasmine fixture with only posts', :fixture => true do
         2.times { bob.post(:status_message, :text => "Is anyone out there?", :to => @bob.aspects.where(:name => "generic").first.id) }
 
-        get :aspects, :only_posts => true
+        get :aspects, params: {only_posts: true}
 
         save_fixture(response.body, "aspects_index_only_posts")
       end

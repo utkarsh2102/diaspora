@@ -2,10 +2,14 @@
 -#   licensed under the Affero General Public License version 3 or later.  See
 -#   the COPYRIGHT file.
 
+- flash.each do |name, msg|
+  .alert{class: "alert-#{flash_class name}", role: "alert"}
+    = msg
+
 - content_for :page_title do
   = t(".title")
 
-.settings_container.container-fluid
+.settings-container.container-fluid
   .row
     .col-md-12
       = render "shared/settings_nav"

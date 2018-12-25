@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2011 nov matake
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -24,17 +26,6 @@
 module Api
   module OpenidConnect
     class DiscoveryController < ApplicationController
-      def webfinger
-        jrd = {
-          links: [{
-            rel:  OpenIDConnect::Discovery::Provider::Issuer::REL_VALUE,
-            href: root_url
-          }]
-        }
-        jrd[:subject] = params[:resource] if params[:resource].present?
-        render json: jrd, content_type: "application/jrd+json"
-      end
-
       def configuration
         render json: OpenIDConnect::Discovery::Provider::Config::Response.new(
           issuer:                                      root_url,

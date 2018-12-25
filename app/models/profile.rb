@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-class Profile < ActiveRecord::Base
+class Profile < ApplicationRecord
   self.include_root_in_json = false
 
   include Diaspora::Federated::Base
   include Diaspora::Taggable
 
   attr_accessor :tag_string
-  acts_as_taggable_on :tags
+  acts_as_ordered_taggable
   extract_tags_from :tag_string
   validates :tag_list, :length => { :maximum => 5 }
 
@@ -38,6 +40,10 @@ class Profile < ActiveRecord::Base
 
   def subscribers
     Person.joins(:contacts).where(contacts: {user_id: person.owner_id})
+  end
+
+  def public?
+    public_details?
   end
 
   def diaspora_handle
@@ -102,10 +108,6 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  def formatted_birthday
-    birthday.to_s(:long).gsub(/, 100[0|4]/, "") if birthday.present?
-  end
-
   def bio_message
     @bio_message ||= Diaspora::MessageRenderer.new(bio)
   end
@@ -126,6 +128,7 @@ class Profile < ActiveRecord::Base
   end
 
   def tombstone!
+    @tag_string = nil
     self.taggings.delete_all
     clearable_fields.each do |field|
       self[field] = nil
@@ -154,8 +157,9 @@ class Profile < ActiveRecord::Base
   end
 
   private
+
   def clearable_fields
-    self.attributes.keys - ["id", "created_at", "updated_at", "person_id"]
+    attributes.keys - %w[id created_at updated_at person_id tag_list]
   end
 
   def build_image_url(url)

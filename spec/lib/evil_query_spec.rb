@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe EvilQuery::MultiStream do
   let(:evil_query) { EvilQuery::MultiStream.new(alice, "created_at", Time.zone.now, true) }
@@ -29,6 +29,18 @@ describe EvilQuery::MultiStream do
       private_post = eve.post(:status_message, text: "private post", to: eve.aspects.first.id, public: false)
       expect(evil_query.make_relation!.map(&:id)).not_to include(public_post.id)
       expect(evil_query.make_relation!.map(&:id)).not_to include(private_post.id)
+    end
+
+    it "doesn't include posts with tags from ignored users" do
+      tag = ActsAsTaggableOn::Tag.find_or_create_by(name: "test")
+      alice.tag_followings.create(tag_id: tag.id)
+      alice.blocks.create(person_id: eve.person_id)
+
+      bob_post = bob.post(:status_message, text: "public #test post 1", to: "all", public: true)
+      eve_post = eve.post(:status_message, text: "public #test post 2", to: "all", public: true)
+
+      expect(evil_query.make_relation!.map(&:id)).to include(bob_post.id)
+      expect(evil_query.make_relation!.map(&:id)).not_to include(eve_post.id)
     end
   end
 end
@@ -72,8 +84,6 @@ describe EvilQuery::Participation do
 
         alice.comment!(@status_messageE, "party")
       end
-
-      Timecop.return
     end
 
     let(:posts) {EvilQuery::Participation.new(alice).posts}
@@ -83,8 +93,8 @@ describe EvilQuery::Participation do
       expect(posts.map(&:id)).to match_array([@status_messageA.id, @status_messageB.id, @status_messageE.id])
     end
 
-    it "returns the posts that the user has commented on or liked with the most recently acted on ones first" do
-      expect(posts.map(&:id)).to eq([@status_messageE.id, @status_messageA.id, @status_messageB.id])
+    it "returns the posts that the user has commented on most recently first" do
+      expect(posts.map(&:id)).to eq([@status_messageE.id, @status_messageB.id, @status_messageA.id])
     end
   end
 

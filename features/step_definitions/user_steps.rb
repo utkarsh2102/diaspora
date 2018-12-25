@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given /^a user with username "([^\"]*)" and password "([^\"]*)"$/ do |username, password|
   @me ||= FactoryGirl.create(:user, :username => username, :password => password,
                   :password_confirmation => password, :getting_started => false)
@@ -25,6 +27,15 @@ Given /^a nsfw user with email "([^\"]*)"$/ do |email|
   user.profile.update_attributes(:nsfw => true)
 end
 
+Given /^a moderator with email "([^\"]*)"$/ do |email|
+  user = create_user(email: email)
+  Role.add_moderator(user)
+end
+
+Given /^an admin with email "([^\"]*)"$/ do |email|
+  user = create_user(email: email)
+  Role.add_admin(user)
+end
 
 Given /^(?:|[tT]hat )?following user[s]?(?: exist[s]?)?:$/ do |table|
   table.hashes.each do |hash|
@@ -37,7 +48,6 @@ Given /^(?:|[tT]hat )?following user[s]?(?: exist[s]?)?:$/ do |table|
     end
   end
 end
-
 
 Given /^I have been invited by an admin$/ do
   admin = FactoryGirl.create(:user)
@@ -100,6 +110,13 @@ Given /^there is a user "([^\"]*)" who's tagged "([^\"]*)"$/ do |full_name, tag|
   user.profile.save!
 end
 
+Given /^a user with email "([^\"]*)" is tagged "([^\"]*)"$/ do |email, tags|
+  user = User.find_by_email(email)
+  user.profile.tag_string = tags
+  user.profile.build_tags
+  user.profile.save!
+end
+
 Given /^many posts from alice for bob$/ do
   alice = FactoryGirl.create(:user_with_aspect, :username => 'alice', :email => 'alice@alice.alice', :password => 'password', :getting_started => false)
   bob = FactoryGirl.create(:user_with_aspect, :username => 'bob', :email => 'bob@bob.bob', :password => 'password', :getting_started => false)
@@ -153,10 +170,14 @@ Then /^I should have (\d+) email delivery$/ do |n|
   ActionMailer::Base.deliveries.length.should == n.to_i
 end
 
-Then /^I should not see "([^\"]*)" in the last sent email$/ do |text|
+Then /^I should( not)? see "([^\"]*)" in the last sent email$/ do |negate, text|
   email_text = Devise.mailer.deliveries.first.body.to_s
   email_text = Devise.mailer.deliveries.first.html_part.body.raw_source if email_text.blank?
-  email_text.should_not match(text)
+  if negate
+    expect(email_text).to_not have_content(text)
+  else
+    expect(email_text).to have_content(text)
+  end
 end
 
 When /^"([^\"]+)" has posted a (public )?status message with a photo$/ do |email, public_status|
@@ -214,7 +235,7 @@ end
 
 And /^I should be able to friend "([^\"]*)"$/ do |email|
   user = User.find_by_email(email)
-  step 'I should see a ".aspect_dropdown"'
+  step 'I should see a ".aspect-dropdown"'
   step "I should see \"#{user.name}\""
 end
 

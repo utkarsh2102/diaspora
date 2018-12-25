@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe TagFollowingsController, type: :controller do
   describe "#manage" do

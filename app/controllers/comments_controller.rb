@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -8,15 +10,25 @@ class CommentsController < ApplicationController
   respond_to :html, :mobile, :json
 
   rescue_from ActiveRecord::RecordNotFound do
-    render nothing: true, status: 404
+    head :not_found
+  end
+
+  rescue_from Diaspora::NonPublic do
+    authenticate_user!
   end
 
   def create
-    comment = comment_service.create(params[:post_id], params[:text])
+    begin
+      comment = comment_service.create(params[:post_id], params[:text])
+    rescue ActiveRecord::RecordNotFound
+      render plain: I18n.t("comments.create.error"), status: 404
+      return
+    end
+
     if comment
       respond_create_success(comment)
     else
-      render nothing: true, status: 404
+      render plain: I18n.t("comments.create.error"), status: 422
     end
   end
 
@@ -51,24 +63,24 @@ class CommentsController < ApplicationController
   def respond_create_success(comment)
     respond_to do |format|
       format.json { render json: CommentPresenter.new(comment), status: 201 }
-      format.html { render nothing: true, status: 201 }
+      format.html { head :created }
       format.mobile { render partial: "comment", locals: {comment: comment} }
     end
   end
 
   def respond_destroy_success
     respond_to do |format|
-      format.mobile { redirect_to :back }
-      format.js { render nothing: true, status: 204 }
-      format.json { render nothing: true, status: 204 }
+      format.mobile { redirect_back fallback_location: stream_path }
+      format.js { head :no_content }
+      format.json { head :no_content }
     end
   end
 
   def respond_destroy_error
     respond_to do |format|
-      format.mobile { redirect_to :back }
-      format.js { render nothing: true, status: 403 }
-      format.json { render nothing: true, status: 403 }
+      format.mobile { redirect_back fallback_location: stream_path }
+      format.js { head :forbidden }
+      format.json { head :forbidden }
     end
   end
 end

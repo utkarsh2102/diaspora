@@ -21,10 +21,6 @@ bs:
           attributes:
             diaspora_handle:
               taken: "je već uzeto."
-        request:
-          attributes:
-            from_id:
-              taken: "je duplikat već postojećeg zahtjeva."
         reshare:
           attributes:
             root_guid:
@@ -186,7 +182,6 @@ bs:
       commenting: "Komentarišem..."
   contacts:
     index:
-      add_a_new_aspect: "Dodaj novi aspekt"
       all_contacts: "Svi Kontakti"
       community_spotlight: "U Centru Pažnje"
       my_contacts: "Moji Kontakti"
@@ -201,7 +196,6 @@ bs:
   conversations:
     create:
       fail: "Nevažeća poruka"
-      no_contact: "Hej, morate prvo dodati kontakt!"
       sent: "Poruka poslata"
     index:
       inbox: "Pošta"
@@ -271,11 +265,6 @@ bs:
       can_reshare_q: "Ko može ponovo dijeliti moje privatne objave?"
       title: "Privatne objave"
       who_sees_post_q: "Kada objavim poruku na aspekt (tj. privatnu objavu), ko je može vidjeti?"
-    private_profiles:
-      title: "Privatni profili"
-      whats_in_profile_q: "Šta je u mojem privatnom profilu?"
-      who_sees_profile_q: "Ko vidi moj privatni profil?"
-      who_sees_updates_q: "Ko vidi ažuriranja na mojem privatnom profilu?"
     public_posts:
       can_comment_reshare_like_q: "Ko može komentarisati na, ponovo dijeliti, ili sviđati moju javnu objavu="
       find_public_post_q: "Kako drugi ljudi mogu pronaći moje javne objave?"
@@ -285,9 +274,6 @@ bs:
     tutorials: "tutorijali"
     wiki: "wiki"
   invitations:
-    a_facebook_user: "Facebook korisnik"
-    check_token:
-      not_found: "Znakovi pozivnice nisu pronađeni"
     create:
       empty: "Molimo unesite najmanje jednu email adresu."
       no_more: "Nemate više pozivnica."
@@ -377,7 +363,6 @@ bs:
       one: "%{actors} vas je spomenulo u izbrisanoj objavi."
       other: "%{actors} su vas spomenuli u izbrisanoj objavi."
       zero: "%{actors} vas je spomenulo u izbrisanoj objavi."
-    post: "objava"
     private_message:
       few: "%{actors} vam je poslalo poruku."
       many: "%{actors} vam je poslalo poruku."
@@ -477,14 +462,8 @@ bs:
       type_error: "Objavljivanje fotografije neuspješno.  Jeste li sigurni da je slika dodana?"
     destroy:
       notice: "Fotografija izbrisana."
-    new_photo:
-      empty: "{file} je prazno, molimo izaberite datoteke ponovo bez toga."
-      invalid_ext: "{file} ima nevažeću ekstenziju. Samo {extensions} su dozvoljene."
-      size_error: "{file} je preveliko, maksimalna veličina datoteke je {sizeLimit}."
     new_profile_photo:
       upload: "Objavi novu fotografiju profila!"
-    show:
-      show_original_post: "Pokaži originalnu objavu"
   posts:
     presenter:
       title: "Objava od %{name}"
@@ -516,12 +495,6 @@ bs:
       failed: "Neuspješno ažuriranje profila"
       updated: "Profil ažuriran"
   public: "Javno"
-  reactions:
-    few: "%{count} reakcija"
-    many: "%{count} reakcija"
-    one: "%{count} reakcija"
-    other: "%{count} reakcije"
-    zero: "0 reakcija"
   registrations:
     closed: "Prijave su zatvorene na ovom Diaspora podu."
     create:
@@ -594,14 +567,11 @@ bs:
         newhere: "NoviOvdje"
       posting: "Objavljujem..."
       share: "Dijeli"
-      upload_photos: "Objavi fotografije"
       whats_on_your_mind: "Šta vam je na umu?"
     stream_element:
       via: "putem %{link}"
       via_mobile: "putem mobitela"
   status_messages:
-    create:
-      success: "Uspješno spomenuti: %{names}"
     new:
       mentioning: "Spominje %{person}"
     too_long: "{\"few\"=>\"molimo da vaše poruke statusa sadrže manje nego %{count} karaktera\", \"many\"=>\"molimo da vaše poruke statusa sadrže manje nego %{count} karaktera\", \"one\"=>\"molimo da vaše poruke statusa sadrže manje nego %{count} karakter\", \"other\"=>\"molimo da vaše poruke statusa sadrže manje nego %{count} karaktera\", \"zero\"=>\"molimo da vaše poruke statusa sadrže manje nego %{count} karaktera\"}"
@@ -684,8 +654,6 @@ bs:
     getting_started:
       awesome_take_me_to_diaspora: "Odlično! Vodi me na diasporu*"
       community_welcome: "Diaspora zajednica je sretna što vas ima!"
-      connect_to_facebook: "Možemo malo ubrzati stvari sa %{link} na Diasporu. Ovo će povući vaše ime i fotografiju, i omogućiti ukršteno objavljivanje."
-      connect_to_facebook_link: "povezivanjem vašeg Facebook računa"
       hashtag_explanation: "Oznake vam omogućavaju da pričate o i pratite vaše interese.  Također su dobar način da pronađete nove ljude na Diaspori."
       hashtag_suggestions: "Pokušajte pratiti oznake kao što su #umjetnost, #filmovi, #gif, itd."
       well_hello_there: "Dobro, zdravo!"

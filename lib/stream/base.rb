@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Stream::Base
   TYPES_OF_POST_IN_STREAM = ['StatusMessage', 'Reshare']
 
@@ -49,11 +51,6 @@ class Stream::Base
       includes(:profile)
   end
 
-  # @return [String]
-  def contacts_link
-    Rails.application.routes.url_helpers.contacts_path
-  end
-
   # @return [Boolean]
   def for_all_aspects?
     true
@@ -62,16 +59,12 @@ class Stream::Base
   #NOTE: MBS bad bad methods the fact we need these means our views are foobared. please kill them and make them
   #private methods on the streams that need them
   def aspects
-    user.aspects
+    user.post_default_aspects
   end
 
   # @return [Aspect] The first aspect in #aspects
   def aspect
     aspects.first
-  end
-
-  def aspect_ids
-    aspects.map{|x| x.id}
   end
 
   def max_time=(time_string)

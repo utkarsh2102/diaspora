@@ -20,10 +20,6 @@ lt:
           attributes:
             diaspora_handle:
               taken: "Užimtas"
-        request:
-          attributes:
-            from_id:
-              taken: "Šis reikalavimas kartojasi"
         reshare:
           attributes:
             root_guid:
@@ -109,7 +105,6 @@ lt:
       commenting: "Siunčiamas komentaras..."
   contacts:
     index:
-      add_a_new_aspect: "Sukurti kategoriją"
       all_contacts: "Visi kontaktai"
       community_spotlight: "Bendruomenės dėmesio centre"
       my_contacts: "Mano kontaktai"
@@ -148,9 +143,6 @@ lt:
   fill_me_out: "Užpildykite"
   find_people: "Rasti žmones arba žymes"
   invitations:
-    a_facebook_user: "Facebook vartotojas"
-    check_token:
-      not_found: "Pakvietimo raktas nerastas"
     create:
       no_more: "Daugiau pakvietimų neturi."
       rejected: "Šie el. pašto adresai neveikė: "
@@ -219,7 +211,6 @@ lt:
       one: "%{actors} paminėjo Jus ištrintame įraše."
       other: "%{actors} paminėjo Jus ištrintame įraše."
       zero: "%{actors} paminėjo Jus ištrintame įraše."
-    post: "Siųsti"
     private_message:
       few: "Atsiuntė %{actors} pranešimus"
       one: "Atsiuntė %{actors} pranešimą"
@@ -283,14 +274,11 @@ lt:
       born: "gimimo data"
       gender: "lytis"
     show:
+      closed_account: "Ši paskyra buvo uždaryta."
       does_not_exist: "Asmuo neegzistuoja!"
   photos:
     destroy:
       notice: "Nuotrauka pašalinta."
-    new_photo:
-      empty: "{file} yra tuščias, pasirink failus iš naujo."
-      invalid_ext: "{file} turi neteisingą galūnę. Yra leidžiamos tik {extensions}."
-      size_error: "{file} yra per didelis, maksimalus failo dydis yra {sizeLimit}."
   posts:
     show:
       photos_by:
@@ -302,14 +290,14 @@ lt:
   profile: "Anketa"
   profiles:
     edit:
+      allow_search: "Leisti kitiems surasti jus diaspora* tinkle"
+      update_profile: "Atnaujinti profilį"
       your_tags: "You: in 5 #tags"
       your_tags_placeholder: "i.e. #diaspora #ironing #kittens #music"
+    update:
+      failed: "Nepavyko atnaujinti profilio"
+      updated: "Profilis atnaujintas"
   public: "Viešas"
-  reactions:
-    few: "%{count} reakcijos"
-    one: "1 reakcija"
-    other: "%{count} reakcijų"
-    zero: "0 reakcijų"
   registrations:
     closed: "Naujų paskyrų kūrimas šiame Diasporos serveryje yra uždarytas."
     create:
@@ -320,8 +308,11 @@ lt:
       enter_password_again: "Įveskite tą patį slaptažodį kaip ir anksčiau"
       enter_username: "Pasirinkite naudotojo vardą (naudokite tik raides, skaičius ir pabraukimus)"
   reshares:
+    comment_email_subject: "%{resharer} pasidalino %{author} įrašu"
     reshare:
+      deleted: "Originalų įrašą ištrynė jo autorius."
       reshare_confirmation: "Reshare %{author} - %{text}?"
+      reshared_via: "Pasidalinta per"
   search: "Paieška"
   services:
     create:
@@ -330,6 +321,7 @@ lt:
       success: "Atjungimas sėkmingas."
     index:
       disconnect: "atjungti"
+      edit_services: "Redaguoti paslaugas"
       logged_in_as: "sujungta su"
       really_disconnect: "atjungti %{service}?"
   settings: "Nustatymai"

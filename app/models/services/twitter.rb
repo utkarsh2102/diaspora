@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Services::Twitter < Service
   include Rails.application.routes.url_helpers
 
-  MAX_CHARACTERS = 140
-  SHORTENED_URL_LENGTH = 21
+  MAX_CHARACTERS = 280
+  SHORTENED_URL_LENGTH = 23
   LINK_PATTERN = %r{https?://\S+}
 
   def provider
@@ -67,7 +69,7 @@ class Services::Twitter < Service
       host: AppConfig.pod_uri.authority
     )
 
-    truncated_text = post_text.truncate max_characters - SHORTENED_URL_LENGTH + 1
+    truncated_text = post_text.truncate max_characters - SHORTENED_URL_LENGTH - 1
     truncated_text = restore_truncated_url truncated_text, post_text, max_characters
 
     "#{truncated_text} #{post_url}"
@@ -106,6 +108,6 @@ class Services::Twitter < Service
   end
 
   def delete_from_twitter service_post_id
-    client.status_destroy service_post_id
+    client.destroy_status service_post_id
   end
 end

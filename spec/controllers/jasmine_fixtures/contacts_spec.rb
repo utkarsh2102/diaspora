@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe ContactsController, :type => :controller do
   describe '#index' do
@@ -15,12 +15,15 @@ describe ContactsController, :type => :controller do
     end
 
     it "generates the aspects_manage fixture", :fixture => true do
-      get :index, :a_id => @aspect.id
+      get :index, params: {a_id: @aspect.id}
       save_fixture(html_for("body"), "aspects_manage")
     end
 
     it "generates the aspects_manage_contacts_json fixture", fixture: true do
-      get :index, format: :json, a_id: @aspect.id, page: "1"
+      # adds one not mutual contact
+      bob.share_with(FactoryGirl.create(:person), @aspect)
+
+      get :index, params: {a_id: @aspect.id, page: "1"}, format: :json
       save_fixture(response.body, "aspects_manage_contacts_json")
     end
 

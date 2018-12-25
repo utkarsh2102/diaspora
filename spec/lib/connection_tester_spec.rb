@@ -1,5 +1,4 @@
-
-require "spec_helper"
+# frozen_string_literal: true
 
 describe ConnectionTester do
   let(:url) { "https://pod.example.com" }
@@ -119,8 +118,7 @@ describe ConnectionTester do
       ni_document = NodeInfo.build do |doc|
         doc.version = "1.0"
         doc.open_registrations = true
-        doc.protocols.inbound << "diaspora"
-        doc.protocols.outbound << "diaspora"
+        doc.protocols.protocols << "diaspora"
         doc.software.name = "diaspora"
         doc.software.version = "a.b.c.d"
       end

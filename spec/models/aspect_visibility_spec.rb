@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe AspectVisibility, type: :model do
   let(:status_message) { FactoryGirl.create(:status_message) }

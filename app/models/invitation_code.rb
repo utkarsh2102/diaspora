@@ -1,7 +1,7 @@
-class InvitationCode < ActiveRecord::Base
-  belongs_to :user
+# frozen_string_literal: true
 
-  validates_presence_of :user
+class InvitationCode < ApplicationRecord
+  belongs_to :user
 
   before_create :generate_token, :set_default_invite_count
 

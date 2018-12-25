@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe StatusMessagesController, :type => :controller do
   describe '#bookmarklet' do
@@ -27,7 +27,7 @@ describe StatusMessagesController, :type => :controller do
       aspect = alice.aspects.create(:name => 'people')
       contact.aspects << aspect
       contact.save
-      get :new, :person_id => bob.person.id
+      get :new, params: {person_id: bob.person.id}
       save_fixture(html_for("body"), "status_message_new")
     end
   end

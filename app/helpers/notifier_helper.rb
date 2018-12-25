@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module NotifierHelper
+  include PostsHelper
 
   # @param post [Post] The post object.
   # @param opts [Hash] Optional hash.  Accepts :length parameters.
   # @return [String] The formatted post.
   def post_message(post, opts={})
     if post.respond_to? :message
-      post.message.plain_text_without_markdown
+      post.message.try(:plain_text_without_markdown).presence || post_page_title(post)
     else
-      I18n.translate 'notifier.a_post_you_shared'
+      I18n.translate "notifier.a_post_you_shared"
     end
   end
 
@@ -17,7 +20,7 @@ module NotifierHelper
     if comment.post.public?
       comment.message.plain_text_without_markdown
     else
-      I18n.translate 'notifier.a_limited_post_comment'
+      I18n.translate "notifier.a_limited_post_comment"
     end
   end
 end

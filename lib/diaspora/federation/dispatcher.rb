@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Diaspora
   module Federation
     class Dispatcher
@@ -31,12 +33,22 @@ module Diaspora
 
       attr_reader :sender, :object, :opts
 
+      def entity
+        @entity ||= Entities.build(object)
+      end
+
+      def magic_envelope
+        @magic_envelope ||= DiasporaFederation::Salmon::MagicEnvelope.new(
+          entity, sender.diaspora_handle
+        ).envelop(sender.encryption_key)
+      end
+
       def deliver_to_services
         deliver_to_user_services if opts[:service_types]
       end
 
       def deliver_to_subscribers
-        local_people, remote_people = subscribers.partition(&:local?)
+        local_people, remote_people = subscribers.uniq(&:id).partition(&:local?)
 
         deliver_to_local(local_people) unless local_people.empty?
         deliver_to_remote(remote_people)

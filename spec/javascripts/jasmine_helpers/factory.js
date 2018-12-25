@@ -21,6 +21,16 @@ var factory = {
     return _.extend(defaultAttrs, overrides);
   },
 
+  reshare: function(overrides) {
+    var defaultAttrs = {
+      "created_at": "2012-01-04T00:55:30Z",
+      "author": this.author(),
+      "guid": this.guid(),
+      "id": this.id.next()
+    };
+    return _.extend(defaultAttrs, overrides);
+  },
+
   aspectMembershipAttrs: function(overrides) {
     var id = this.id.next();
     var defaultAttrs = {
@@ -53,6 +63,23 @@ var factory = {
     };
 
     return new app.models.Contact(_.extend(attrs, overrides));
+  },
+
+  notification: function(overrides) {
+    var noteId = this.id.next();
+    var defaultAttrs = {
+      "type": "reshared",
+      "id": noteId,
+      "target_type": "Post",
+      "target_id": this.id.next(),
+      "recipient_id": this.id.next(),
+      "unread": true,
+      "created_at": "2012-01-04T00:55:30Z",
+      "updated_at": "2012-01-04T00:55:30Z",
+      "note_html": "This is a notification!"
+    };
+
+    return new app.models.Notification(_.extend(defaultAttrs, overrides));
   },
 
   user : function(overrides) {
@@ -111,9 +138,11 @@ var factory = {
       "full_name": "bob grimm",
       "gender": "robot",
       "id": id,
-      "image_url": "http://localhost:3000/assets/user/default.png",
-      "image_url_medium": "http://localhost:3000/assets/user/default.png",
-      "image_url_small": "http://localhost:3000/assets/user/default.png",
+      "avatar": {
+        "small": "http://localhost:3000/assets/user/default.png",
+        "medium": "http://localhost:3000/assets/user/default.png",
+        "large": "http://localhost:3000/assets/user/default.png"
+      },
       "last_name": "Grimm",
       "location": "Earth",
       "nsfw": false,
@@ -136,6 +165,7 @@ var factory = {
       "name": "Bob Grimm",
       "diaspora_id": "bob@localhost:3000",
       "relationship": "sharing",
+      "block": false,
       "is_own_profile": false
     };
     return _.extend({}, defaults, overrides);
@@ -183,9 +213,27 @@ var factory = {
   },
 
   postWithPoll :  function(overrides) {
-    var defaultAttrs = _.extend(factory.postAttrs(),  {"author" : this.author()});
-    defaultAttrs = _.extend(defaultAttrs,  {"already_participated_in_poll" : false});
-    defaultAttrs = _.extend(defaultAttrs,  {"poll" : factory.poll()});
+    var defaultAttrs = _.extend(factory.postAttrs(), {"author": this.author()});
+    defaultAttrs = _.extend(defaultAttrs, {"poll_participation_answer_id": null});
+    defaultAttrs = _.extend(defaultAttrs, {"poll": factory.poll()});
+    return new app.models.Post(_.extend(defaultAttrs, overrides));
+  },
+
+  postWithInteractions: function(overrides) {
+    var likes = _.range(10).map(function() { return factory.like(); });
+    var reshares = _.range(15).map(function() { return factory.reshare(); });
+    var comments = _.range(20).map(function() { return factory.comment(); });
+    var defaultAttrs = _.extend(factory.postAttrs(), {
+      "author": this.author(),
+      "interactions": {
+        "reshares_count": 15,
+        "likes_count": 10,
+        "comments_count": 20,
+        "comments": comments,
+        "likes": likes,
+        "reshares": reshares
+      }
+    });
     return new app.models.Post(_.extend(defaultAttrs, overrides));
   },
 

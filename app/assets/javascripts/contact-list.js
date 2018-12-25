@@ -9,7 +9,7 @@ var List = {
   },
 
   handleSearchRefresh: function( data ) {
-    var streamEl = $("#people_stream.stream");
+    var streamEl = $("#people-stream.stream");
     var string = data.search_html || $("<p>", {
         text : Diaspora.I18n.t("people.not_found")
       });
@@ -18,7 +18,7 @@ var List = {
 
     if (data.contacts) {
       var contacts = new app.collections.Contacts(data.contacts);
-      $(".aspect_membership_dropdown.placeholder").each(function() {
+      $(".aspect-membership-dropdown.placeholder").each(function() {
         var personId = $(this).data("personId");
         var view = new app.views.AspectMembership({person: contacts.findWhere({"person_id": personId}).person});
         $(this).html(view.render().$el);
@@ -30,4 +30,10 @@ var List = {
     setTimeout( "List.runDelayedSearch('" + theSearch + "')", 10000);
   }
 };
+
+$(document).ready(function() {
+  if (gon.preloads.background_query) {
+    List.startSearchDelay(gon.preloads.background_query);
+  }
+});
 // @license-end

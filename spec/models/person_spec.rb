@@ -1,11 +1,10 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-require 'spec_helper'
-
 describe Person, :type => :model do
-
   before do
     @user = bob
     @person = FactoryGirl.create(:person)
@@ -26,16 +25,6 @@ describe Person, :type => :model do
         expect {
           Person.for_json.first.serialized_public_key
         }.to raise_error ActiveModel::MissingAttributeError
-      end
-
-      it 'selects distinct people' do
-        aspect = bob.aspects.create(:name => 'hilarious people')
-        aspect.contacts << bob.contact_for(eve.person)
-        person_ids = Person.for_json.joins(:contacts => :aspect_memberships).
-          where(:contacts => {:user_id => bob.id},
-               :aspect_memberships => {:aspect_id => bob.aspect_ids}).map{|p| p.id}
-
-        expect(person_ids.uniq).to eq(person_ids)
       end
     end
 
@@ -95,6 +84,118 @@ describe Person, :type => :model do
         sm = FactoryGirl.create(:status_message, :author => alice.person, :public => true)
         reshare = FactoryGirl.create(:reshare, :root => sm)
         expect(Person.who_have_reshared_a_users_posts(alice)).to eq([reshare.author])
+      end
+    end
+
+    describe ".find_by_substring" do
+      it "returns \"none\" when the substring is less than 1 non-space character" do
+        expect(Person.find_by_substring("R")).to eq(Person.none)
+        expect(Person.find_by_substring("R  ")).to eq(Person.none)
+        expect(Person.find_by_substring("")).to eq(Person.none)
+        expect(Person.find_by_substring("  ")).to eq(Person.none)
+      end
+
+      it "finds a person with a profile name containing the substring" do
+        substring = r_str
+        person = FactoryGirl.create(:person, first_name: "A#{substring}A")
+        expect(Person.find_by_substring(substring)).to include(person)
+      end
+
+      it "finds a person with a diaspora ID starting with the substring" do
+        substring = r_str
+        person = FactoryGirl.create(:person, diaspora_handle: "#{substring}A@pod.tld")
+        expect(Person.find_by_substring(substring)).to include(person)
+      end
+    end
+
+    describe ".allowed_to_be_mentioned_in_a_comment_to" do
+      let(:status_bob) { bob.post(:status_message, text: "hello", to: bob.aspects.first.id) }
+
+      it "returns the author and people who have commented or liked the private post" do
+        kate = FactoryGirl.create(:user_with_aspect, friends: [bob])
+        olga = FactoryGirl.create(:user_with_aspect, friends: [bob])
+        alice.comment!(status_bob, "why so formal?")
+        eve.comment!(status_bob, "comment text")
+        kate.like!(status_bob)
+        olga.participate!(status_bob)
+        expect(
+          Person.allowed_to_be_mentioned_in_a_comment_to(status_bob).ids
+        ).to match_array([alice, bob, eve, kate].map(&:person_id))
+      end
+
+      it "selects distinct people" do
+        alice.comment!(status_bob, "hi")
+        alice.comment!(status_bob, "how are you?")
+        expect(
+          Person.allowed_to_be_mentioned_in_a_comment_to(status_bob).ids
+        ).to match_array([alice, bob].map(&:person_id))
+      end
+
+      it "returns all for public posts" do
+        status_bob.update(public: true) # set parent public
+        expect(Person.allowed_to_be_mentioned_in_a_comment_to(status_bob).ids).to match_array(Person.ids)
+      end
+    end
+
+    describe ".sort_for_mention_suggestion" do
+      let(:status_message) { FactoryGirl.create(:status_message) }
+
+      it "returns people sorted in the order: post author > commenters > likers > contacts" do
+        like = FactoryGirl.create(:like, target: status_message)
+        comment = FactoryGirl.create(:comment, post: status_message)
+        current_user = FactoryGirl.create(:user_with_aspect, friends: [alice])
+        result = Person.select(:id, :guid).sort_for_mention_suggestion(status_message, current_user)
+        expect(result[0]).to eq(status_message.author)
+        expect(result[1]).to eq(comment.author)
+        expect(result[2]).to eq(like.author)
+        expect(result[3]).to eq(alice.person) # a contact of the current user
+      end
+
+      it "sorts people of the same priority by profile name" do
+        current_user = FactoryGirl.create(:user_with_aspect)
+        person1 = FactoryGirl.create(:person, first_name: "x2")
+        person2 = FactoryGirl.create(:person, first_name: "x1")
+        result = Person
+                 .select(:id, :guid)
+                 .where(id: [person1.id, person2.id])
+                 .sort_for_mention_suggestion(status_message, current_user)
+        expect(result[0].id).to eq(person2.id)
+        expect(result[1].id).to eq(person1.id)
+      end
+
+      it "sorts people of the same priority and same names by diaspora ID" do
+        current_user = FactoryGirl.create(:user_with_aspect)
+        person1 = FactoryGirl.create(:person, diaspora_handle: "x2@pod.tld")
+        person1.profile.update(first_name: "John", last_name: "Doe")
+        person2 = FactoryGirl.create(:person, diaspora_handle: "x1@pod.tld")
+        person2.profile.update(first_name: "John", last_name: "Doe")
+        result = Person
+                 .select(:id, :guid)
+                 .where(id: [person1.id, person2.id])
+                 .sort_for_mention_suggestion(status_message, current_user)
+        expect(result[0].id).to eq(person2.id)
+        expect(result[1].id).to eq(person1.id)
+      end
+    end
+
+    describe ".in_aspects" do
+      it "returns person that is in the aspect" do
+        aspect = FactoryGirl.create(:aspect)
+        contact = FactoryGirl.create(:contact, user: aspect.user)
+        aspect.contacts << contact
+        expect(Person.in_aspects([aspect.id])).to include(contact.person)
+      end
+
+      it "returns same person in multiple aspects only once" do
+        user = bob
+        contact = FactoryGirl.create(:contact, user: user)
+        ids = Array.new(2) do
+          aspect = FactoryGirl.create(:aspect, user: user, name: r_str)
+          aspect.contacts << contact
+          aspect.id
+        end
+
+        expect(Person.in_aspects(ids)).to eq([contact.person])
       end
     end
   end
@@ -299,6 +400,7 @@ describe Person, :type => :model do
       @yevgeniy_dodis = FactoryGirl.build(:person)
       @casey_grippi = FactoryGirl.build(:person)
       @invisible_person = FactoryGirl.build(:person)
+      @closed_account = FactoryGirl.build(:person, closed_account: true)
 
       @robert_grimm.profile.first_name = "Robert"
       @robert_grimm.profile.last_name = "Grimm"
@@ -325,6 +427,11 @@ describe Person, :type => :model do
       @invisible_person.profile.searchable = false
       @invisible_person.profile.save
       @invisible_person.reload
+
+      @closed_account.profile.first_name = "Closed"
+      @closed_account.profile.last_name = "Account"
+      @closed_account.profile.save
+      @closed_account.reload
     end
 
     it 'orders results by last name' do
@@ -377,6 +484,12 @@ describe Person, :type => :model do
 
     it "doesn't display people that are neither searchable nor contacts" do
       expect(Person.search("Johnson", @user)).to be_empty
+    end
+
+    it "doesn't display closed accounts" do
+      expect(Person.search("Closed", @user)).to be_empty
+      expect(Person.search("Account", @user)).to be_empty
+      expect(Person.search(@closed_account.diaspora_handle, @user)).to be_empty
     end
 
     it "displays contacts that are not searchable" do
@@ -467,6 +580,19 @@ describe Person, :type => :model do
         people = Person.search(@robert_grimm.diaspora_handle, @user, only_contacts: true)
         expect(people).to eq([@robert_grimm])
       end
+    end
+  end
+
+  describe "#public_key" do
+    it "returns the public key for the person" do
+      key = @person.public_key
+      expect(key).to be_a(OpenSSL::PKey::RSA)
+      expect(key.to_s).to eq(@person.serialized_public_key)
+    end
+
+    it "handles broken keys and returns nil" do
+      @person.update_attributes(serialized_public_key: "broken")
+      expect(@person.public_key).to be_nil
     end
   end
 

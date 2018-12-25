@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 # Inspired by https://github.com/nov/openid_connect_sample/blob/master/app/models/authorization.rb
 
 module Api
   module OpenidConnect
-    class Authorization < ActiveRecord::Base
+    class Authorization < ApplicationRecord
       belongs_to :user
       belongs_to :o_auth_application
 
-      validates :user, presence: true, uniqueness: {scope: :o_auth_application}
-      validates :o_auth_application, presence: true
+      validates :user, uniqueness: {scope: :o_auth_application}
       validate :validate_scope_names
       serialize :scopes, JSON
 

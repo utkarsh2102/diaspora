@@ -59,7 +59,7 @@ da:
     aspect_dropdown:
       add_to_aspect: "Tilføj kontakt"
       all_aspects: "Alle aspekter"
-      error: "Kunne ikke begynde at dele med <%= name %>.  Ignorerer du vedkommende?"
+      error: "Kunne ikke begynde at dele med <%= name %>. Ignorerer du vedkommende?"
       error_remove: "Kunne ikke fjerne <%= name %> fra aspektet. :("
       mobile_row_checked: "<%= name %> (fjern)"
       mobile_row_unchecked: "<%= name %> (tilføj)"
@@ -80,7 +80,6 @@ da:
         add_a_new_aspect: "Tilføj et nyt aspekt"
         failure: "Fejl under oprettelse af aspektet."
         success: "Aspektet <%= name %> er blevet oprettet"
-      make_aspect_list_visible: "Skal kontakter i dette aspekt være synlige for hinanden?"
       name: "Navn"
     bookmarklet:
       post_something: "Lav et indlæg på Diaspora"
@@ -98,27 +97,26 @@ da:
       add_contact: "Tilføj kontakt"
       aspect_chat_is_enabled: "Kontakter i dette aspekt kan chatte med dig."
       aspect_chat_is_not_enabled: "Kontakter i dette aspekt kan ikke chatte med dig."
-      aspect_list_is_not_visible: "Kontakter i dette aspekt kan ikke se hinanden"
-      aspect_list_is_visible: "Kontakter i dette aspekt kan se hinanden"
       error_add: "Kunne ikke tilføje <%= name %> til aspektet :("
       error_remove: "Kunne ikke fjerne <%= name %> fra aspektet :("
       remove_contact: "Fjern kontakt"
       search_no_results: "Ingen kontakter fundet"
     conversation:
+      create:
+        no_recipient: "Husk at tilføje en modtager!"
       new:
         no_contacts: "Du skal tilføje en eller flere kontakter før du kan starte en samtale."
     create: "Opret"
     delete: "Slet"
     edit: "Rediger"
-    failed_to_comment: "Din kommentar blev ikke lagt op. Måske ignorerer indlæggets ophavsmand dig?"
-    failed_to_like: "Kunne ikke synes om! Måske ignorere ophavsmanden dig?"
+    errors:
+      connection: "Kan ikke forbinde til serveren."
     failed_to_post_message: "Kunne ikke indsende besked!"
     failed_to_remove: "Det lykkedes ikke at fjerne indlægget!"
-    failed_to_reshare: "Kunne ikke dele indlægget!"
     getting_started:
       alright_ill_wait: "Okay, jeg venter."
       hey: "Hej <%= name %>!"
-      no_tags: "Du har ikke fulgt nogen tags!  Vil du fortsætte alligevel?"
+      no_tags: "Du har ikke fulgt nogen tags! Vil du fortsætte alligevel?"
       preparing_your_stream: "Forbereder din personlige strøm..."
     header:
       admin: "Admin"
@@ -150,6 +148,9 @@ da:
     notifications:
       mark_read: "Marker som læst"
       mark_unread: "Marker som ulæst"
+      new_notifications:
+        one: "Du har <%= count %> ulæst notifikation"
+        other: "Du har <%= count %> ulæste notifikationer"
     people:
       edit_my_profile: "Rediger min profil"
       helper:
@@ -166,6 +167,7 @@ da:
       invalid_ext: "{file} har en ugyldig filtype. Kun {extensions} er tilladt."
       looking_good: "Du ser virkelig pæn ud!"
       size_error: "{file} er for stor. Maksimal filstørrelse er {sizeLimit}."
+      upload_photos: "Upload fotografier"
     poll:
       answer_count:
         one: "1 stemme"
@@ -180,11 +182,11 @@ da:
       result: "Resultat"
       show_result: "Vis resultat"
       vote: "Stem"
+      your_vote: "Din stemme"
     profile:
       add_some: "Tilføj nogen"
       bio: "Biografi"
       born: "Fødselsdag"
-      contacts: "Kontakter"
       edit: "Rediger"
       gender: "Køn"
       location: "Sted"
@@ -193,14 +195,19 @@ da:
       you_have_no_tags: "Du har ingen tags!"
     publisher:
       add_option: "Tilføj et svar"
-      limited: "Begrænset - dit indlæg vil kun blive set af dem du deler med"
       markdown_editor:
         preview: "Forhåndsvisning"
         texts:
+          code: "kode her"
           heading: "Overskriftstekst"
+          insert_image_description_text: "skriv billedbeskrivelse her"
+          insert_image_help_text: "indsæt billed-link her"
+          insert_image_title: "skriv billedtitel her"
           insert_link_description_text: "skriv link-beskrivelse her"
           insert_link_help_text: "Indsæt link her"
           italic: "tekst i kursiv"
+          list: "listetekst her"
+          quote: "citattekst her"
           strong: "fed tekst"
         tooltips:
           bold: "Fed"
@@ -216,9 +223,9 @@ da:
           quote: "Indsæt citat"
           write: "Rediger besked"
         write: "Skriv"
+      mention_success: "<%= names %> blev omtalt."
       near_from: "Sendt fra: <%= location %>"
       option: "Svar"
-      public: "Offentlig - dit indlæg vil være synligt for alle og kan findes af søgemaskiner"
       question: "Spørgsmål"
     remove_post: "Fjern dette indlæg?"
     report:
@@ -229,12 +236,16 @@ da:
         created: "Der blev lavet en rapport"
         exists: "Der eksisterer allerede en rapport"
     reshares:
-      duplicate: "Du har allerede delt indlægget!"
       post: "Videredel <%= name %>s indlæg?"
       successful: "Indlægget er blevet videredelt!"
+    show_all: "Vis alle"
     show_more: "Vis mere"
     stream:
       comment: "Kommenter"
+      comments:
+        one: "<%= count %> kommentar"
+        other: "<%= count %> kommentarer"
+        zero: "<%= count %> kommentarer"
       disable_post_notifications: "Slå notifikationer fra for dette indlæg"
       enable_post_notifications: "Slå notifikationer til for dette indlæg"
       follow: "Følg"
@@ -264,10 +275,6 @@ da:
       original_post_deleted: "Oprindeligt indlæg er slettet af forfatteren"
       permalink: "Permalink"
       public: "Offentlig"
-      reactions:
-        one: "<%= count%> reaktion"
-        other: "<%= count%> reaktioner"
-        zero: "<%= count%> reaktioner"
       reshare: "Videredel"
       reshares:
         few: "<%= count %> videredelinger"

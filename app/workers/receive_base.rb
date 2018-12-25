@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Workers
   class ReceiveBase < Base
     sidekiq_options queue: :urgent
@@ -8,10 +10,11 @@ module Workers
     def filter_errors_for_retry
       yield
     rescue DiasporaFederation::Entity::ValidationError,
-           DiasporaFederation::Entity::InvalidRootNode,
+           DiasporaFederation::Parsers::BaseParser::InvalidRootNode,
            DiasporaFederation::Entity::InvalidEntityName,
            DiasporaFederation::Entity::UnknownEntity,
-           DiasporaFederation::Entities::Relayable::SignatureVerificationFailed,
+           DiasporaFederation::Entities::Signable::PublicKeyNotFound,
+           DiasporaFederation::Entities::Signable::SignatureVerificationFailed,
            DiasporaFederation::Entities::Participation::ParentNotLocal,
            DiasporaFederation::Federation::Receiver::InvalidSender,
            DiasporaFederation::Federation::Receiver::NotPublic,

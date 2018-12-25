@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -29,7 +31,6 @@ class PhotosController < ApplicationController
         format.all do
           gon.preloads[:person] = @presenter.as_json
           gon.preloads[:photos_count] = Photo.visible(current_user, @person).count(:all)
-          gon.preloads[:contacts_count] = Contact.contact_contacts_for(current_user, @person).count(:all)
           render "people/show", layout: "with_header"
         end
         format.mobile { render "people/show" }
@@ -43,18 +44,7 @@ class PhotosController < ApplicationController
 
   def create
     rescuing_photo_errors do
-      if remotipart_submitted?
-        @photo = current_user.build_post(:photo, photo_params)
-        if @photo.save
-          respond_to do |format|
-            format.json { render :json => {"success" => true, "data" => @photo.as_api_response(:backbone)} }
-          end
-        else
-          respond_with @photo, :location => photos_path, :error => message
-        end
-      else
-        legacy_create
-      end
+      legacy_create
     end
   end
 
@@ -77,10 +67,10 @@ class PhotosController < ApplicationController
                             :status => 201}
         end
       else
-        render :nothing => true, :status => 422
+        head :unprocessable_entity
       end
     else
-      render :nothing => true, :status => 422
+      head :unprocessable_entity
     end
   end
 
@@ -91,7 +81,7 @@ class PhotosController < ApplicationController
       current_user.retract(photo)
 
       respond_to do |format|
-        format.json{ render :nothing => true, :status => 204 }
+        format.json { head :no_content }
         format.html do
           flash[:notice] = I18n.t 'photos.destroy.notice'
           if StatusMessage.find_by_guid(photo.status_message_guid)
@@ -136,27 +126,28 @@ class PhotosController < ApplicationController
   end
 
   def legacy_create
-    if params[:photo][:aspect_ids] == "all"
-      params[:photo][:aspect_ids] = current_user.aspects.collect { |x| x.id }
-    elsif params[:photo][:aspect_ids].is_a?(Hash)
-      params[:photo][:aspect_ids] = params[:photo][:aspect_ids].values
+    photo_params = params.require(:photo).permit(:pending, :set_profile_photo, aspect_ids: [])
+    if photo_params[:aspect_ids] == "all"
+      photo_params[:aspect_ids] = current_user.aspects.map(&:id)
+    elsif photo_params[:aspect_ids].is_a?(Hash)
+      photo_params[:aspect_ids] = params[:photo][:aspect_ids].values
     end
 
-    params[:photo][:user_file] = file_handler(params)
+    photo_params[:user_file] = file_handler(params)
 
-    @photo = current_user.build_post(:photo, params[:photo])
+    @photo = current_user.build_post(:photo, photo_params)
 
     if @photo.save
 
       unless @photo.pending
         unless @photo.public?
-          aspects = current_user.aspects_from_ids(params[:photo][:aspect_ids])
+          aspects = current_user.aspects_from_ids(photo_params[:aspect_ids])
           current_user.add_to_streams(@photo, aspects)
         end
-        current_user.dispatch_post(@photo, :to => params[:photo][:aspect_ids])
+        current_user.dispatch_post(@photo, to: photo_params[:aspect_ids])
       end
 
-      if params[:photo][:set_profile_photo]
+      if photo_params[:set_profile_photo]
         profile_params = {:image_url => @photo.url(:thumb_large),
                           :image_url_medium => @photo.url(:thumb_medium),
                           :image_url_small => @photo.url(:thumb_small)}

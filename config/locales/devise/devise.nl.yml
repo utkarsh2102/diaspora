@@ -12,6 +12,7 @@ nl:
         resend_confirmation: "Stuur bevestigingsinstructies nogmaals"
       send_instructions: "Je ontvangt binnen enkele minuten een e-mail met instructies om je account te activeren."
     failure:
+      already_authenticated: "Je bent al ingelogd."
       inactive: "Je account is nog niet geactiveerd."
       invalid: "Gebruikersnaam of wachtwoord ongeldig."
       invalid_token: "Ongeldig authenticatietoken."
@@ -34,6 +35,8 @@ nl:
         accept_at: "op %{url}, je kunt deze accepteren via onderstaande link."
         has_invited_you: "%{name}"
         have_invited_you: "%{names} heeft je uitgenodigd om lid te worden van diaspora*"
+      password_change:
+        subject: "Wachtwoord gewijzigd"
       reset_password_instructions:
         change: "Wijzig mijn wachtwoord"
         ignore: "Als je hier niet om hebt gevraagd kun je deze mail gewoon negeren."
@@ -59,11 +62,13 @@ nl:
         send_password_instructions: "Stuur mij instructies om mijn wachtwoord te resetten"
       send_instructions: "Je ontvangt binnen enkele minuten een e-mail met instructies om je wachtwoord opnieuw in te stellen."
       updated: "Je wachtwoord is veranderd. Je bent nu ingelogd."
+      updated_not_active: "Je wachtwoord is succesvol gewijzigd."
     registrations:
       destroyed: "Tot ziens! Je account is succesvol verwijderd. We hopen je snel terug te zien."
       signed_up: "Je bent succesvol geregistreerd. Indien aangevinkt is er een bevestiging naar je e-mail gestuurd."
       updated: "Je account is succesvol geüpdate."
     sessions:
+      already_signed_out: "Succesvol uitgelogd."
       new:
         login: "Inloggen"
         modern_browsers: "ondersteunt alleen moderne browsers."
@@ -85,9 +90,11 @@ nl:
       new:
         resend_unlock: "Stuur ontgrendelinstructies nogmaals"
       send_instructions: "Je ontvangt binnen enkele minuten een e-mail met instructies om je account te deblokkeren."
+      send_paranoid_instructions: "Als je account bestaat, dan ontvang je een email met instructies hoe de blokkering op te heffen, binnen een paar minuten."
       unlocked: "Je account is succesvol gedeblokkeerd. Je bent nu ingelogd."
   errors:
     messages:
       already_confirmed: "is al geactiveerd"
+      expired: "is vervallen, vraag een nieuwe aan"
       not_found: "niet gevonden"
       not_locked: "is niet geblokkeerd"

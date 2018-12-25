@@ -9,7 +9,8 @@ Diaspora.MarkdownEditor.prototype = {
     this.options = {
       resize: "none",
       onHidePreview: $.noop,
-      onPostPreview: $.noop
+      onPostPreview: $.noop,
+      onChange: function(e) { autosize.update(e.$textarea); }
     };
 
     $.extend(this.options, opts);
@@ -65,7 +66,7 @@ Diaspora.MarkdownEditor.prototype = {
     var tabElement = $("<ul class='nav nav-tabs btn-group write-preview-tabs'></ul>");
 
     var writeTab = $("<li class='active full-height' role='presentation'></li>");
-    this.writeLink = $("<a class='full-height md-write-tab' href='#'></a>")
+    this.writeLink = $("<a class='full-height md-write-tab' href='#' data-target=' '></a>")
       .attr("title", Diaspora.I18n.t("publisher.markdown_editor.tooltips.write"));
 
     this.writeLink.append($("<i class='visible-sm visible-xs visible-md diaspora-custom-compose'></i>"));
@@ -80,7 +81,7 @@ Diaspora.MarkdownEditor.prototype = {
     writeTab.append(this.writeLink);
 
     var previewTab = $("<li class='full-height' role='presentation'></li>");
-    this.previewLink = $("<a class='full-height md-preview-tab' href='#'></a>")
+    this.previewLink = $("<a class='full-height md-preview-tab' href='#' data-target=' '></a>")
       .attr("title", Diaspora.I18n.t("publisher.markdown_editor.tooltips.preview"));
 
     this.previewLink.append($("<i class='visible-sm visible-xs visible-md entypo-search'>"));
@@ -130,6 +131,14 @@ Diaspora.MarkdownEditor.prototype = {
     }
   },
 
+  isPreviewMode: function() {
+    return this.instance !== undefined && this.instance.$editor.find(".md-preview").length > 0;
+  },
+
+  userInputEmpty: function() {
+    return this.instance === undefined || this.instance.getContent().length === 0;
+  },
+
   localize: function() {
     var locale = Diaspora.I18n.language;
 
@@ -159,4 +168,8 @@ Diaspora.MarkdownEditor.prototype = {
 
     return locale;
   }
+};
+
+Diaspora.MarkdownEditor.simplePreview = function($mdInstance) {
+  return "<div class='preview-content'>" + app.helpers.textFormatter($mdInstance.getContent()) + "</div>";
 };

@@ -4,17 +4,12 @@ Feature: Navigate between pages using the header menu and the drawer
   I want to be able navigate between the pages of the mobile version
 
   Background:
-    Given following users exist:
-      | username     | email             |
-      | Bob Jones    | bob@bob.bob       |
-      | Alice Smith  | alice@alice.alice |
-
-    And a user with email "bob@bob.bob" is connected with "alice@alice.alice"
+    Given a user with email "alice@alice.alice"
     And I sign in as "alice@alice.alice" on the mobile website
 
   Scenario: navigate to the stream page
     When I go to the activity stream page
-    And I click on selector "#header-title"
+    And I click on selector ".header-title"
     Then I should be on the stream page
 
   Scenario: navigate to the notification page
@@ -41,6 +36,11 @@ Feature: Navigate between pages using the header menu and the drawer
     When I search for "#bob"
     Then I should be on the tag page for "bob"
 
+  Scenario: navigate to the stream page
+    When I open the drawer
+    And I click on "Stream" in the drawer
+    Then I should be on the stream page
+
   Scenario: navigate to my activity page
     When I open the drawer
     And I click on "My activity" in the drawer
@@ -51,14 +51,29 @@ Feature: Navigate between pages using the header menu and the drawer
     And I click on "@Mentions" in the drawer
     Then I should be on the mentioned stream page
 
-  Scenario: navigate to my aspects page
-    Given "bob@bob.bob" has a public post with text "bob's text"
+  Scenario: navigate to aspects pages
+    Given I have a limited post with text "Hi you!" in the aspect "Besties"
+    When I open the drawer
+    Then I should not see "All aspects" within "#drawer"
+    And I click on "My aspects" in the drawer
+    And I click on "All aspects" in the drawer
+    Then I should be on the aspects page
+    And I should see "Hi you!" within "#main-stream"
     When I open the drawer
     And I click on "My aspects" in the drawer
-    And I click on "Besties" in the drawer
-    Then I should see "bob's text" within "#main_stream"
+    And I click on "Unicorns" in the drawer
+    And I should not see "Hi you!" within "#main-stream"
 
   Scenario: navigate to the followed tags page
+    When I follow the "boss" tag
+    And I go to the stream page
+    And I open the drawer
+    Then I should not see "All tags" within "#drawer"
+    And I click on "#Followed tags" in the drawer
+    And I click on "All tags" in the drawer
+    Then I should be on the followed tags stream page
+
+  Scenario: navigate to the boss tag page
     When I follow the "boss" tag
     And I go to the stream page
     And I open the drawer
@@ -70,6 +85,11 @@ Feature: Navigate between pages using the header menu and the drawer
     And I click on "#Followed tags" in the drawer
     And I click on "Manage followed tags" in the drawer
     Then I should be on the manage tag followings page
+
+  Scenario: navigate to the public stream page
+    When I open the drawer
+    And I click on "Public activity" in the drawer
+    Then I should be on the public stream page
 
   Scenario: navigate to my profile page
     When I open the drawer
@@ -85,3 +105,44 @@ Feature: Navigate between pages using the header menu and the drawer
     When I open the drawer
     And I click on "Settings" in the drawer
     Then I should be on my account settings page
+
+  Scenario: navigate to the moderation page
+    Given a moderator with email "bob@bob.bob"
+    And I sign in as "bob@bob.bob" on the mobile website
+    When I open the drawer
+    Then I should not see "Admin" within "#drawer"
+    And I should see "Reports" within "#drawer"
+    When I click on "Reports" in the drawer
+    Then I should see "Reports overview" within "#main h1"
+
+  Scenario: navigate to the admin pages
+    Given an admin with email "bob@bob.bob"
+    And I sign in as "bob@bob.bob" on the mobile website
+    When I open the drawer
+    Then I should not see "Reports" within "#drawer"
+    Then I should not see "Dashboard" within "#drawer"
+    When I click on "Admin" in the drawer
+    And I click on "Dashboard" in the drawer
+    Then I should see "Pod status" within "#main h2"
+    When I click on "Admin" in the drawer
+    And I click on "User search" in the drawer
+    Then I should see "User search" within "#main h3"
+    When I click on "Admin" in the drawer
+    And I click on "Weekly user stats" in the drawer
+    Then I should see "Current server date is " within "#main h2"
+    When I click on "Admin" in the drawer
+    And I click on "Pod stats" in the drawer
+    Then I should see "Usage statistics" within "#main h1"
+    When I click on "Admin" in the drawer
+    And I click on "Reports" in the drawer
+    Then I should see "Reports overview" within "#main h1"
+    When I click on "Admin" in the drawer
+    And I click on "Pod network" in the drawer
+    Then I should see "Pod network" within "#main h2"
+    When I click on "Admin" in the drawer
+    Then I should see "Sidekiq monitor" within "#drawer"
+
+  Scenario: users doesn't have access to the admin pages
+    When I open the drawer
+    Then I should not see "Admin" within "#drawer"
+    Then I should not see "Reports" within "#drawer"

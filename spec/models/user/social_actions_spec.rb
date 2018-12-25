@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe User::SocialActions, type: :model do
   let(:status) { FactoryGirl.create(:status_message, public: true, author: bob.person) }

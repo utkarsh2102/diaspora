@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require 'spec_helper'
 
 describe User::Querying, :type => :model do
   before do
@@ -74,7 +74,7 @@ describe User::Querying, :type => :model do
       end
 
       it "does not pull back hidden posts" do
-        @status.share_visibilities(Post).where(user_id: alice.id).first.update_attributes(hidden: true)
+        @status.share_visibilities.where(user_id: alice.id).first.update_attributes(hidden: true)
         expect(alice.visible_shareable_ids(Post).include?(@status.id)).to be false
       end
     end

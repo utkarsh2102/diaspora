@@ -2,9 +2,15 @@ describe("app.views.Help", function(){
   beforeEach(function(){
     gon.appConfig = {chat: {enabled: false}};
     this.locale = JSON.parse(spec.readFixture("locale_en_help_json"));
+    Diaspora.I18n.reset();
     Diaspora.I18n.load(this.locale, "en");
     this.view = new app.views.Help();
     Diaspora.Page = "HelpFaq";
+  });
+
+  afterEach(function() {
+    Diaspora.I18n.reset();
+    Diaspora.I18n.load(spec.defaultLocale);
   });
 
   describe("render", function(){
@@ -46,24 +52,19 @@ describe("app.views.Help", function(){
       expect(this.view.$el.find('#faq').children().first().hasClass('faq_question_private_posts')).toBeTruthy();
     });
 
-    it('should show private profiles section', function(){
-      this.view.$el.find('a[data-section=private_profiles]').trigger('click');
-      expect(this.view.$el.find('#faq').children().first().hasClass('faq_question_private_profiles')).toBeTruthy();
-    });
-
     it('should show public posts section', function(){
       this.view.$el.find('a[data-section=public_posts]').trigger('click');
       expect(this.view.$el.find('#faq').children().first().hasClass('faq_question_public_posts')).toBeTruthy();
     });
 
-    it('should show public profiles section', function(){
-      this.view.$el.find('a[data-section=public_profiles]').trigger('click');
-      expect(this.view.$el.find('#faq').children().first().hasClass('faq_question_public_profiles')).toBeTruthy();
-    });
-
     it('should show resharing posts section', function(){
       this.view.$el.find('a[data-section=resharing_posts]').trigger('click');
       expect(this.view.$el.find('#faq').children().first().hasClass('faq_question_resharing_posts')).toBeTruthy();
+    });
+
+    it("should show profile section", function() {
+      this.view.$el.find("a[data-section=profile]").trigger("click");
+      expect(this.view.$el.find("#faq").children().first().hasClass("faq_question_profile")).toBeTruthy();
     });
 
     it('should show sharing section', function(){

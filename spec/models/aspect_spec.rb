@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe Aspect, :type => :model do
   describe "creation" do
@@ -28,10 +28,6 @@ describe Aspect, :type => :model do
       expect(aspect.contacts.where(person_id: alice.person.id)).to be_empty
       expect(aspect.contacts.where(person_id: eve.person.id)).not_to be_empty
       expect(aspect.contacts.size).to eq(1)
-    end
-
-    it "has a contacts_visible? method" do
-      expect(alice.aspects.first.contacts_visible?).to be true
     end
 
     it "sets an order_id" do

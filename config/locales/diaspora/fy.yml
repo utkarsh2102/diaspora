@@ -59,7 +59,6 @@ fy:
   email: "E-mail"
   find_people: "Minsken of #labels Sykje"
   invitations:
-    a_facebook_user: "In Facebook brûker"
     new:
       invite_someone_to_join: "Immen útnoadigje foar Diaspora!"
       language: "Taal"
@@ -74,8 +73,6 @@ fy:
       settings: "Ynstellingen"
   more: "Mear"
   no_results: "Gjin Risseltaten Fûn"
-  notifications:
-    post: "berjocht"
   notifier:
     a_post_you_shared: "in berjocht."
     click_here: "klik hjirre"

@@ -20,7 +20,7 @@ de:
         ms:
           one: "<%= count %>ms"
           other: "<%= count %>ms"
-        no_info: "Zur Zeit keine weiteren Informationen verfügbar"
+        no_info: "Zurzeit keine weiteren Informationen verfügbar"
         not_available: "nicht verfügbar"
         offline_since: "offline seit:"
         pod: "Pod"
@@ -69,7 +69,6 @@ de:
       toggle:
         one: "In einem Aspekt"
         other: "In <%= count %> Aspekten"
-        zero: "In keinem Aspekt"
       updating: "aktualisiere..."
     aspect_navigation:
       add_an_aspect: "+ Aspekt hinzufügen"
@@ -81,7 +80,6 @@ de:
         add_a_new_aspect: "Einen neuen Aspekt hinzufügen"
         failure: "Fehler beim Erstellen des Aspekts."
         success: "Dein neuer Aspekt <%= name %> wurde erstellt."
-      make_aspect_list_visible: "Kontakte aus diesem Aspekt gegenseitig sichtbar machen?"
       name: "Name"
     bookmarklet:
       post_something: "Erstelle einen Beitrag in diaspora*"
@@ -94,28 +92,27 @@ de:
       no_comments: "Bisher sind keine Kommentare vorhanden."
       show: "Alle Kommentare zeigen"
     confirm_dialog: "Bist du dir sicher?"
-    confirm_unload: "Bitte bestätige, dass du diese Seite verlassen willst - Daten, welche du eingegeben hast würden nicht gespeichert werden."
+    confirm_unload: "Bitte bestätige, dass du diese Seite verlassen willst. - Von dir eingegebene Daten werden nicht gespeichert."
     contacts:
       add_contact: "Kontakt hinzufügen"
       aspect_chat_is_enabled: "Kontakte in diesem Aspekt können mit dir chatten."
       aspect_chat_is_not_enabled: "Kontakte in diesem Aspekt können nicht mit dir chatten."
-      aspect_list_is_not_visible: "Kontakte in diesem Aspekt können einander nicht sehen."
-      aspect_list_is_visible: "Kontakte in diesem Aspekt können einander sehen"
       error_add: "Konnte <%= name %> nicht zum Aspekt hinzufügen :("
       error_remove: "Konnte <%= name %> nicht aus dem Aspekt entfernen :("
       remove_contact: "Kontakt entfernen"
       search_no_results: "Keine Kontakte gefunden"
     conversation:
+      create:
+        no_recipient: "Hey, du musst erst einen Empfänger hinzufügen!"
       new:
         no_contacts: "Du musst einige Kontakte hinzufügen, bevor du eine Konversation anfangen kannst."
     create: "Erstellen"
     delete: "Löschen"
     edit: "Bearbeiten"
-    failed_to_comment: "Konnte nicht kommentieren. Vielleicht ignoriert dich der Autor?"
-    failed_to_like: "Gefällt mir ist fehlgeschlagen. Vielleicht ignoriert dich der Autor?"
+    errors:
+      connection: "Konnte keine Verbindung mit dem Server aufbauen."
     failed_to_post_message: "Konnte Beitrag nicht senden!"
     failed_to_remove: "Fehler beim Entfernen des Beitrags!"
-    failed_to_reshare: "Fehler beim Weitersagen!"
     getting_started:
       alright_ill_wait: "Alles klar, ich warte."
       hey: "Hey, <%= name %>!"
@@ -151,6 +148,9 @@ de:
     notifications:
       mark_read: "Als gelesen markieren"
       mark_unread: "Als ungelesen markieren"
+      new_notifications:
+        one: "Du hast <%= count %> ungelesene Benachrichtigung"
+        other: "Du hast <%= count %> ungelesene Benachrichtigungen"
     people:
       edit_my_profile: "Mein Profil bearbeiten"
       helper:
@@ -167,6 +167,7 @@ de:
       invalid_ext: "{file} hat eine ungültige Erweiterung. Nur {extensions} sind erlaubt."
       looking_good: "OMG, du siehst toll aus!"
       size_error: "{file} ist zu groß. Die maximale Dateigröße beträgt {sizeLimit}."
+      upload_photos: "Fotos hochladen"
     poll:
       answer_count:
         one: "1 Stimme"
@@ -181,11 +182,11 @@ de:
       result: "Ergebnis"
       show_result: "Ergebnis anzeigen"
       vote: "Abstimmen"
+      your_vote: "Deine Stimme"
     profile:
       add_some: "Füge neue hinzu"
       bio: "Bio"
       born: "Geburtstag"
-      contacts: "Kontakte"
       edit: "Bearbeiten"
       gender: "Geschlecht"
       location: "Ort"
@@ -194,7 +195,6 @@ de:
       you_have_no_tags: "Du hast keine Tags!"
     publisher:
       add_option: "Antwortmöglichkeit hinzufügen"
-      limited: "Eingeschränkt - dein Beitrag wird nur Leuten sichtbar sein, mit denen du teilst"
       markdown_editor:
         preview: "Vorschau"
         texts:
@@ -208,7 +208,7 @@ de:
           italic: "kursive Schrift"
           list: "Listentext hier"
           quote: "Zitattext hier"
-          strong: "wichtiger Text"
+          strong: "fetter Text"
         tooltips:
           bold: "Fett"
           cancel: "Nachricht verwerfen"
@@ -216,32 +216,36 @@ de:
           heading: "Überschrift"
           insert_image: "Bild einfügen"
           insert_link: "Link einfügen"
-          insert_ordered_list: "Geordnete Liste einfügen"
+          insert_ordered_list: "Nummerierte Liste einfügen"
           insert_unordered_list: "Ungeordnete Liste einfügen"
           italic: "Kursiv"
           preview: "Vorschau der Nachricht ansehen"
           quote: "Zitat einfügen"
           write: "Nachricht bearbeiten"
         write: "Verfassen"
+      mention_success: "Erfolgreich erwähnt: <%= names %>"
       near_from: "Gesendet aus <%= location %>"
       option: "Antwort"
-      public: "Öffentlich - dein Beitrag ist für alle sichtbar und kann von Suchmaschinen gefunden werden"
       question: "Frage"
     remove_post: "Diesen Beitrag löschen?"
     report:
-      name: "Meldung"
+      name: "Beitrag melden"
       prompt: "Bitte gib einen Grund an:"
       prompt_default: "z.B. anstößiger Inhalt"
       status:
         created: "Die Meldung wurde erfolgreich erstellt"
         exists: "Die Meldung existiert bereits"
     reshares:
-      duplicate: "Du hast diesen Beitrag bereits weitergesagt!"
       post: "<%= name %>s Beitrag weitersagen?"
       successful: "Der Beitrag wurde erfolgreich weitergesagt!"
+    show_all: "Alle anzeigen"
     show_more: "Mehr zeigen"
     stream:
-      comment: "Kommentar"
+      comment: "Kommentieren"
+      comments:
+        one: "<%= count %> Kommentar"
+        other: "<%= count %> Kommentare"
+        zero: "<%= count %> Kommentare"
       disable_post_notifications: "Benachrichtigungen für diesen Beitrag deaktivieren"
       enable_post_notifications: "Benachrichtigungen für diesen Beitrag aktivieren"
       follow: "Folgen"
@@ -253,12 +257,9 @@ de:
       hide_nsfw_posts: "#nsfw-Beiträge verstecken"
       like: "Gefällt mir"
       likes:
-        few: "<%= count %> Personen gefällt das"
-        many: "<%= count %> Personen gefällt das"
-        one: " Einer Person gefällt das"
+        one: "Einer Person gefällt das"
         other: "<%= count %> Personen gefällt das"
-        two: "<%= count %> Personen gefällt das"
-        zero: "Keinem gefällt das"
+        zero: "Niemandem gefällt das"
       limited: "Begrenzt"
       more_comments:
         one: "Zeige einen weiteren Kommentar"
@@ -268,10 +269,6 @@ de:
       original_post_deleted: "Originalbeitrag wurde vom Autor entfernt."
       permalink: "Permanentlink"
       public: "Öffentlich"
-      reactions:
-        one: "<%= count%> Reaktion"
-        other: "<%= count%> Reaktionen"
-        zero: "<%= count%> Reaktionen"
       reshare: "Weitersagen"
       reshares:
         few: "<%= count %> mal weitergesagt"

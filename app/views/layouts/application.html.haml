@@ -3,48 +3,19 @@
 -#   the COPYRIGHT file.
 
 !!!
-%html{lang:  I18n.locale.to_s, dir:  (rtl?) ? 'rtl' : 'ltr'}
+%html{lang: I18n.locale.to_s, dir: (rtl? ? "rtl" : "ltr")}
   %head{prefix: og_prefix}
-    %title
-      = page_title yield(:page_title)
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}/
 
-    %meta{charset:  'utf-8'}/
-    %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=utf-8"}/
-    %meta{name:  "viewport", content:  "width=device-width, initial-scale=1"}/
-    = content_for?(:meta_data) ? yield(:meta_data) : metas_tags
-
-    %link{rel:  'shortcut icon', href:  "#{image_path('favicon.png')}" }
-
-    = chartbeat_head_block
-    = include_mixpanel
+    - content_for :javascript do
+      = javascript_include_tag :main
+      = load_javascript_locales
 
     = include_color_theme
-
-    - if rtl?
-      = stylesheet_link_tag :rtl, media:  'all'
-
-    - if Rails.env.test?
-      = stylesheet_link_tag :poltergeist_disable_transition, media: "all"
-
-    = old_browser_js_support
-    <!--[if IE]>
-    = javascript_include_tag :ie
-    <![endif]-->
-
-    = jquery_include_tag
-    = javascript_include_tag :main, :templates
-    = load_javascript_locales
-
+    = render "head"
     = translation_missing_warnings
-    = current_user_atom_tag
 
-    = yield(:head)
-    = csrf_meta_tag
-
-
-    = include_gon(camel_case:  true)
-
-  %body{ class:  "page-#{controller_name} action-#{action_name}" }
+  %body{class: "page-#{controller_name} action-#{action_name}"}
     = yield :before_content
 
     %noscript
@@ -55,12 +26,8 @@
 
     = yield :after_content
 
-    = include_chartbeat
-    = include_mixpanel_guid
-
     .blueimp-gallery.blueimp-gallery-controls#blueimp-gallery
       .slides
-      %h3.title
       %a.prev
         .entypo-chevron-small-left
       %a.next
@@ -71,3 +38,5 @@
       %ol.indicator
 
     #flash-container= flash_messages
+
+    %a.entypo-chevron-up.back-to-top#back-to-top{title: t("layouts.application.back_to_top"), href: "#"}

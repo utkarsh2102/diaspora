@@ -7,24 +7,38 @@ app.views.CommentStream = app.views.Base.extend({
   className : "comment_stream",
 
   events: {
-    "keydown .comment_box": "keyDownOnCommentBox",
+    "keydown .comment-box": "keyDownOnCommentBox",
     "submit form": "createComment",
-    "focus .comment_box": "commentTextareaFocused",
-    "click .toggle_post_comments": "expandComments"
+    "click .toggle_post_comments": "expandComments",
+    "click form": "openForm"
   },
 
-  initialize: function(options) {
-    this.commentTemplate = options.commentTemplate;
-
+  initialize: function() {
+    this.CommentView = app.views.Comment;
     this.setupBindings();
   },
 
   setupBindings: function() {
-    this.model.comments.bind('add', this.appendComment, this);
+    this.model.comments.bind("add", this.appendComment, this);
+    this.model.comments.bind("remove", this.removeComment, this);
+    $(document.body).click(this.onFormBlur.bind(this));
   },
 
   postRenderTemplate : function() {
     this.model.comments.each(this.appendComment, this);
+    this.commentBox = this.$(".comment-box");
+    this.commentSubmitButton = this.$("input[name='commit']");
+    this.mentions = new app.views.CommentMention({el: this.$el, postId: this.model.get("id")});
+
+    this.mdEditor = new Diaspora.MarkdownEditor(this.$(".comment-box"), {
+      onPreview: function($mdInstance) {
+        var renderedText = app.helpers.textFormatter($mdInstance.getContent(), this.mentions.getMentionedPeople());
+        return "<div class='preview-content'>" + renderedText + "</div>";
+      }.bind(this),
+      onFocus: this.openForm.bind(this)
+    });
+
+    this.$("form").areYouSure();
   },
 
   presenter: function(){
@@ -38,19 +52,42 @@ app.views.CommentStream = app.views.Base.extend({
   createComment: function(evt) {
     if(evt){ evt.preventDefault(); }
 
-    var commentText = $.trim(this.$('.comment_box').val());
-    this.$(".comment_box").val("");
-    this.$(".comment_box").css("height", "");
-    if(commentText) {
-      this.model.comment(commentText);
-      return this;
-    } else {
-      this.$(".comment_box").focus();
+    var commentText = $.trim(this.commentBox.val());
+    if (commentText === "") {
+      this.commentBox.focus();
+      return;
     }
+
+    this.disableCommentBox();
+
+    this.model.comment(commentText, {
+      success: function() {
+        this.commentBox.val("");
+        this.enableCommentBox();
+        this.mdEditor.hidePreview();
+        this.closeForm();
+        autosize.update(this.commentBox);
+      }.bind(this),
+      error: function() {
+        this.enableCommentBox();
+        this.mdEditor.hidePreview();
+        this.openForm();
+      }.bind(this)
+    });
+  },
+
+  disableCommentBox: function() {
+    this.commentBox.prop("disabled", true);
+    this.commentSubmitButton.prop("disabled", true);
+  },
+
+  enableCommentBox: function() {
+    this.commentBox.removeAttr("disabled");
+    this.commentSubmitButton.removeAttr("disabled");
   },
 
   keyDownOnCommentBox: function(evt) {
-    if(evt.which === Keycodes.ENTER && evt.ctrlKey) {
+    if (evt.which === Keycodes.ENTER && (evt.metaKey || evt.ctrlKey)) {
       this.$("form").submit();
       return false;
     }
@@ -83,32 +120,64 @@ app.views.CommentStream = app.views.Base.extend({
     // on post ownership in the Comment view.
     comment.set({parent : this.model.toJSON()});
 
-    var commentHtml = new app.views.Comment({model: comment}).render().el;
+    var commentView = new this.CommentView({model: comment});
+    var commentHtml = commentView.render().el;
     var commentBlocks = this.$(".comments div.comment.media");
     this._moveInsertPoint(comment.get("created_at"), commentBlocks);
-    if (this._insertPoint === commentBlocks.length) {
+    if (this._insertPoint >= commentBlocks.length) {
       this.$(".comments").append(commentHtml);
+    } else if (this._insertPoint <= 0) {
+      this.$(".comments").prepend(commentHtml);
     } else {
       commentBlocks.eq(this._insertPoint).before(commentHtml);
     }
-    this._insertPoint++;
+    commentView.renderPluginWidgets();
   },
 
-  commentTextareaFocused: function(){
-    this.$("form").removeClass('hidden').addClass("open");
+  removeComment: function(comment) {
+    this.$("#" + comment.get("guid")).closest(".comment.media").remove();
   },
 
   expandComments: function(evt){
+    this.$(".loading-comments").removeClass("hidden");
     if(evt){ evt.preventDefault(); }
-    var self = this;
-
     this.model.comments.fetch({
-      success : function(resp){
-        self.$("div.comment.show_comments").addClass("hidden");
-
-        self.model.trigger("commentsExpanded", self);
-      }
+      success: function() {
+        this.$("div.comment.show_comments").addClass("hidden");
+        this.$(".loading-comments").addClass("hidden");
+      }.bind(this)
     });
+  },
+
+  openForm: function() {
+    this.$("form").addClass("open");
+    this.$(".md-editor").addClass("active");
+  },
+
+  closeForm: function() {
+    this.$("form").removeClass("open");
+    this.$(".md-editor").removeClass("active");
+    this.commentBox.blur();
+    autosize.update(this.commentBox);
+  },
+
+  isCloseAllowed: function() {
+    if (this.mdEditor === undefined) {
+      return true;
+    }
+    return !this.mdEditor.isPreviewMode() && this.mdEditor.userInputEmpty();
+  },
+
+  onFormBlur: function(evt) {
+    if (!this.isCloseAllowed()) {
+      return;
+    }
+
+    var $target = $(evt.target);
+    var isForm = $target.hasClass("new-comment") || $target.parents(".new-comment").length !== 0;
+    if (!isForm && !$target.hasClass("focus_comment_textarea")) {
+      this.closeForm();
+    }
   }
 });
 // @license-end

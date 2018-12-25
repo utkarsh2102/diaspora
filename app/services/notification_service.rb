@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class NotificationService
   NOTIFICATION_TYPES = {
-    Comment       => [Notifications::CommentOnPost, Notifications::AlsoCommented],
+    Comment       => [Notifications::MentionedInComment, Notifications::CommentOnPost, Notifications::AlsoCommented],
     Like          => [Notifications::Liked],
-    StatusMessage => [Notifications::Mentioned],
+    StatusMessage => [Notifications::MentionedInPost],
     Conversation  => [Notifications::PrivateMessage],
     Message       => [Notifications::PrivateMessage],
     Reshare       => [Notifications::Reshared],

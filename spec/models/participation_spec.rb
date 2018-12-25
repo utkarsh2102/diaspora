@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Participation, type: :model do
   let(:status) { bob.post(:status_message, text: "hello", to: bob.aspects.first.id) }

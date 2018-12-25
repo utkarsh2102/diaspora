@@ -21,10 +21,6 @@ el:
           attributes:
             diaspora_handle:
               taken: "είναι ήδη σε χρήση"
-        request:
-          attributes:
-            from_id:
-              taken: "είναι αντίγραφο ενός προϋπάρχοντος αιτήματος."
         reshare:
           attributes:
             root_guid:
@@ -182,7 +178,6 @@ el:
       commenting: "Σχολιάζει..."
   contacts:
     index:
-      add_a_new_aspect: "Πρόσθεσε μια νέα πτυχή"
       all_contacts: "Όλες οι επαφές"
       community_spotlight: "Δημοσιεύσεις κοινότητας"
       my_contacts: "Οι επαφές μου"
@@ -197,7 +192,6 @@ el:
   conversations:
     create:
       fail: "Μη έγκυρο μήνυμα"
-      no_contact: "Πρέπει πρώτα να προσθέσεις μια επαφή!"
       sent: "Μήνυμα εστάλη"
     index:
       inbox: "Εισερχόμενα"
@@ -264,21 +258,15 @@ el:
     pods:
       use_search_box_q: "Πώς μπορώ να χρησιμοποιήσω το πλαίσιο αναζήτησης για να βρω συγκεκριμένα άτομα;"
     posts_and_posting:
-      image_text: "κείμενο εικόνας"
       insert_images_q: "Πώς μπορώ να εισάγω εικόνες στις αναρτήσεις;"
     private_posts:
       title: "Ιδιωτικές αναρτήσεις"
-    private_profiles:
-      title: "Ιδιωτικά προφίλ"
     third_party_tools: "Εργαλεία τρίτων"
     title_header: "Βοήθεια"
     tutorial: "οδηγός"
     tutorials: "οδηγοί"
     wiki: "wiki"
   invitations:
-    a_facebook_user: "Ένας χρήστης του Facebook"
-    check_token:
-      not_found: "Το σύμβολο της πρόσκλησης δεν βρέθηκε"
     create:
       empty: "Παρακαλώ εισήγαγε τουλάχιστον μία διεύθυνση email."
       no_more: "Δεν έχεις άλλες προσκλήσεις."
@@ -356,7 +344,6 @@ el:
       one: "Ο/Η %{actors} σου ανέφερε σε μια διαγραμμένη δημοσίευση."
       other: "Οι %{actors} σου ανέφεραν σε μια διαγραμμένη δημοσίευση."
       zero: "Ο/Η %{actors} σου ανέφερε σε μια διαγραμμένη δημοσίευση."
-    post: "ανάρτηση"
     private_message:
       one: "Ο/Η %{actors} σου έστειλε ένα μήνυμα."
       other: "Οι %{actors} σου έστειλαν ένα μήνυμα."
@@ -451,14 +438,8 @@ el:
       type_error: "Η μεταφόρτωση της φωτογραφίας απέτυχε.  Σίγουρα προστέθηκε μια εικόνα;"
     destroy:
       notice: "Η φωτογραφία διαγράφηκε."
-    new_photo:
-      empty: "{file} είναι κενό, επιλέξτε και πάλι τα αρχεία χωρίς αυτό."
-      invalid_ext: "{file} δεν έχει έγκυρη τύπο αρχείου. Μόνο τύποι αρχείου {extensions} επιτρέπονται."
-      size_error: "{file} είναι πολύ μεγάλο, το μέγιστο μέγεθος αρχείου είναι {sizeLimit}."
     new_profile_photo:
       upload: "Ανέβασε μια νέα φωτογραφία προφίλ!"
-    show:
-      show_original_post: "Προβολή αρχικής ανάρτησης"
   posts:
     presenter:
       title: "Ένα άρθρο από τον/την %{name}"
@@ -488,13 +469,6 @@ el:
       failed: "Αποτυχία ενημέρωσης προφίλ"
       updated: "Το προφίλ ενημερώθηκε"
   public: "Δημόσιο"
-  reactions:
-    few: "%{count} αντιδράσεις"
-    many: "%{count} αντιδράσεις"
-    one: "1 αντίδραση"
-    other: "%{count} αντιδράσεις"
-    two: "%{count} αντιδράσεις"
-    zero: "0 αντιδράσεις"
   registrations:
     closed: "Οι εγγραφές είναι κλειστές σε αυτό το pod του diaspora*."
     create:
@@ -569,14 +543,11 @@ el:
         newhere: "ΝέοςΕδώ"
       posting: "Ανάρτηση..."
       share: "Κοινοποίηση"
-      upload_photos: "Μεταφόρτωση εικόνων"
       whats_on_your_mind: "Τι σκέφτεσαι;"
     stream_element:
       via: "Μέσω %{link}"
       via_mobile: "από κινητό"
   status_messages:
-    create:
-      success: "Αναφέρθηκαν επιτυχώς: %{names}"
     new:
       mentioning: "Αναφορά σε: %{person}"
     too_long: "Παρακαλώ μετέτρεψε το μήνυμα κατάστασης σου σε λιγότερους από %{count} χαρακτήρες. Τώρα είναι %{current_length} χαρακτήρες."
@@ -662,8 +633,6 @@ el:
     getting_started:
       awesome_take_me_to_diaspora: "Εξαιρετικά! Πήγαινέ με στο diaspora*"
       community_welcome: "Η κοινότητα του diaspora* είναι χαρούμενη που σε έχει κοντά της!"
-      connect_to_facebook: "Μπορούμε να επιταχύνουμε λίγο τα πράγματα με %{link} στο diaspora*. Αυτό θα τραβήξει το όνομα και τη φωτογραφία σας, και θα ενεργοποιήσει την πολλαπλή ανάρτηση."
-      connect_to_facebook_link: "Γίνεται ενσωμάτωση του λογαριασμού σας στο Facebook"
       hashtag_explanation: "Τα hashtags ή ετικέτες σας επιτρέπουν να συζητάτε και να ακολουθείτε συγκεκριμένα ενδιαφέροντα.  Επίσης είναι ένας εξαιρετικό τρόπος για να εντοπίσετε νέα πρόσωπα στο diaspora*."
       hashtag_suggestions: "Δοκιμάστε να ακολουθήσεις ετικέτες όπως #art, #movies, #gif, κτλ."
       well_hello_there: "Λοιπόν, γεια σου!"

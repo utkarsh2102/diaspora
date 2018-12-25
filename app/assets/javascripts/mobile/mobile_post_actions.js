@@ -35,6 +35,9 @@
           Diaspora.Mobile.PostActions.showLoader(link);
         },
         success: onSuccess,
+        error: function(response) {
+          Diaspora.Mobile.Alert.handleAjaxError(response);
+        },
         complete: function() {
           Diaspora.Mobile.PostActions.hideLoader(link);
         }
@@ -61,6 +64,9 @@
           Diaspora.Mobile.PostActions.showLoader(link);
         },
         success: onSuccess,
+        error: function(response) {
+          Diaspora.Mobile.Alert.handleAjaxError(response);
+        },
         complete: function() {
           Diaspora.Mobile.PostActions.hideLoader(link);
         }
@@ -69,8 +75,8 @@
 
     onLike: function(evt){
       evt.preventDefault();
-      var link = $(evt.target),
-          likeCounter = $(evt.target).closest(".stream_element").find(".like-count");
+      var link = $(evt.target).closest(".like-action"),
+          likeCounter = $(evt.target).closest(".stream-element").find(".like-count");
 
       if(!link.hasClass("loading") && link.hasClass("inactive")) {
         Diaspora.Mobile.PostActions.like(likeCounter, link);
@@ -83,7 +89,7 @@
     onReshare: function(evt) {
       evt.preventDefault();
 
-      var link = $(this),
+      var link = $(this).closest(".reshare-action"),
           href = link.attr("href"),
           confirmText = link.attr("title");
 
@@ -97,9 +103,13 @@
           },
           success: function() {
             Diaspora.Mobile.PostActions.toggleActive(link);
+            var reshareCounter = $(evt.target).closest(".stream-element").find(".reshare-count");
+            if (reshareCounter) {
+              reshareCounter.text(parseInt(reshareCounter.text(), 10) + 1);
+            }
           },
-          error: function() {
-            alert(Diaspora.I18n.t("failed_to_reshare"));
+          error: function(response) {
+            Diaspora.Mobile.Alert.handleAjaxError(response);
           },
           complete: function() {
             Diaspora.Mobile.PostActions.hideLoader(link);

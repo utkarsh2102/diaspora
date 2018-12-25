@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Workers::SendPrivate do
   let(:sender_id) { "any_user@example.org" }
@@ -25,7 +25,7 @@ describe Workers::SendPrivate do
       sender_id, obj_str, targets
     ).and_return(failing_targets)
     expect(Workers::SendPrivate).to receive(:perform_in).with(
-      kind_of(Fixnum), sender_id, obj_str, failing_targets, 1
+      kind_of(Integer), sender_id, obj_str, failing_targets, 1
     )
 
     Workers::SendPrivate.new.perform(sender_id, obj_str, targets)
@@ -39,6 +39,23 @@ describe Workers::SendPrivate do
 
     expect {
       Workers::SendPrivate.new.perform(sender_id, obj_str, targets, 9)
+    }.to raise_error Workers::SendBase::MaxRetriesReached
+  end
+
+  it "retries contact entities 20 times" do
+    contact = Fabricate(:contact_entity, author: sender_id, recipient: alice.diaspora_handle)
+    obj_str = contact.to_s
+    targets = {"https://example.org/receive/user/guid" => "<xml>post</xml>"}
+    expect(DiasporaFederation::Federation::Sender).to receive(:private).with(
+      sender_id, obj_str, targets
+    ).and_return(targets).twice
+
+    expect(Workers::SendPrivate).to receive(:perform_in).with(a_kind_of(Numeric), sender_id, obj_str, targets, 19)
+    Workers::SendPrivate.new.perform(sender_id, obj_str, targets, 18)
+
+    expect(Workers::SendPrivate).not_to receive(:perform_in)
+    expect {
+      Workers::SendPrivate.new.perform(sender_id, obj_str, targets, 19)
     }.to raise_error Workers::SendBase::MaxRetriesReached
   end
 end

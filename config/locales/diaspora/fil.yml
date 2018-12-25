@@ -20,10 +20,6 @@ fil:
           attributes:
             diaspora_handle:
               taken: "ay mayroon ng nagmamay-ari."
-        request:
-          attributes:
-            from_id:
-              taken: "ay kaparis na ng huling kahilingan."
         reshare:
           attributes:
             root_guid:
@@ -190,13 +186,6 @@ fil:
   profiles:
     edit:
       your_birthday: "Ye day o' birth"
-  reactions:
-    few: "%{count} reactions"
-    many: "%{count} reactions"
-    one: "1 reaction"
-    other: "%{count} reactions"
-    two: "%{count} reactions"
-    zero: "0 reactions"
   shared:
     aspect_dropdown:
       toggle:

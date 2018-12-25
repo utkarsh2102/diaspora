@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe Api::OpenidConnect::IdTokensController, type: :controller do
   describe "#jwks" do

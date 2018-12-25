@@ -1,4 +1,4 @@
-require "spec_helper"
+# frozen_string_literal: true
 
 describe "Dispatching", type: :request do
   context "a comment retraction on a public post" do

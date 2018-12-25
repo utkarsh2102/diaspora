@@ -1,8 +1,8 @@
-.settings_container.container-fluid
+.settings-container.container-fluid
   .row
     .col-md-12
       = render "shared/settings_nav"
 
   .row
     .col-md-12
-      = render "edit"
+      = render "edit", email_prefs: @email_prefs

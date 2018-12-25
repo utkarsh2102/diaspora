@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
 
   include Diaspora::Federated::Base
   include Diaspora::Fields::Guid
@@ -11,6 +13,8 @@ class Comment < ActiveRecord::Base
 
   include Diaspora::Taggable
   include Diaspora::Likeable
+  include Diaspora::MentionsContainer
+  include Reference::Source
 
   acts_as_taggable_on :tags
   extract_tags_from :text
@@ -25,7 +29,6 @@ class Comment < ActiveRecord::Base
   delegate :author_name, to: :parent, prefix: true
 
   validates :text, :presence => true, :length => {:maximum => 65535}
-  validates :parent, :presence => true #should be in relayable (pending on fixing Message)
 
   has_many :reports, as: :item
 
@@ -38,22 +41,23 @@ class Comment < ActiveRecord::Base
     self.text.strip! unless self.text.nil?
   end
 
-  after_commit :on => :create do
-    self.parent.update_comments_counter
+  after_commit on: :create do
+    parent.update_comments_counter
+    parent.touch(:interacted_at) if parent.respond_to?(:interacted_at)
   end
 
   after_destroy do
     self.parent.update_comments_counter
-    participation = author.participations.where(target_id: post.id).first
+    participation = author.participations.find_by(target_id: post.id)
     participation.unparticipate! if participation.present?
-  end
-
-  def message
-    @message ||= Diaspora::MessageRenderer.new text
   end
 
   def text= text
      self[:text] = text.to_s.strip #to_s if for nil, for whatever reason
+  end
+
+  def add_mention_subscribers?
+    super && parent.author.local?
   end
 
   class Generator < Diaspora::Federated::Generator
@@ -67,7 +71,7 @@ class Comment < ActiveRecord::Base
     end
 
     def relayable_options
-      {:post => @target, :text => @text}
+      {post: @target, text: @text}
     end
   end
 end

@@ -1,6 +1,6 @@
-class ReportMailer < ActionMailer::Base
-  default from: AppConfig.mail.sender_address
+# frozen_string_literal: true
 
+class ReportMailer < ApplicationMailer
   def self.new_report(report_id)
     report = Report.find_by_id(report_id)
     Role.moderators.map {|role| super(report.item_type, report.item_id, report.text, role) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rubygems"
 
 ENV["RAILS_ENV"] ||= "test"
@@ -16,15 +18,16 @@ require "capybara/session"
 require "capybara/poltergeist"
 
 require "cucumber/api_steps"
-require "json_spec/cucumber"
 
 # Ensure we know the appservers port
 Capybara.server_port = AppConfig.pod_uri.port
 Rails.application.routes.default_url_options[:host] = AppConfig.pod_uri.host
 Rails.application.routes.default_url_options[:port] = AppConfig.pod_uri.port
 
+Capybara.server = :webrick
+
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 60)
+  Capybara::Poltergeist::Driver.new(app, timeout: 30)
 end
 
 Capybara.javascript_driver = :poltergeist
@@ -53,7 +56,7 @@ Capybara.default_max_wait_time = 30
 ActionController::Base.allow_rescue = false
 
 Cucumber::Rails::Database.autorun_database_cleaner = true
-Cucumber::Rails::World.use_transactional_fixtures = false
+Cucumber::Rails::World.use_transactional_tests = false
 
 require File.join(File.dirname(__FILE__), "integration_sessions_controller")
 require File.join(File.dirname(__FILE__), "poor_mans_webmock")
@@ -75,4 +78,9 @@ Before do |scenario|
 
   # Reset overridden settings
   AppConfig.reset_dynamic!
+end
+
+After do |scenario|
+  Capybara.save_path = ENV["SCREENSHOT_PATH"]
+  page.save_screenshot("#{Time.now.utc} #{scenario.name}.png", full: true) if scenario.failed? && ENV["SCREENSHOT_PATH"]
 end

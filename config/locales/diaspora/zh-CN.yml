@@ -7,6 +7,7 @@
 zh-CN:
   _applications: "应用"
   _contacts: "好友"
+  _help: "求助"
   _services: "服务"
   account: "帐号"
   activerecord:
@@ -20,10 +21,6 @@ zh-CN:
           attributes:
             diaspora_handle:
               taken: "已被注册。"
-        request:
-          attributes:
-            from_id:
-              taken: "与已存在的请求重复。"
         reshare:
           attributes:
             root_guid:
@@ -39,8 +36,11 @@ zh-CN:
               taken: "已被注册。"
   admins:
     admin_bar:
+      dashboard: "控制面板"
       pages: "分页"
       pod_stats: "Pod 统计资料"
+      report: "举报"
+      sidekiq_monitor: "监控Sidekiq"
       user_search: "搜索用户"
       weekly_user_stats: "用户统计周报"
     stats:
@@ -63,12 +63,13 @@ zh-CN:
       tag_name: "标签名： <b>%{name_tag}</b> 数目：<b>%{count_tag}</b>"
       usage_statistic: "使用状况统计"
       users:
-        other: "%{count} 个用户"
-        zero: "%{count} 个用户"
+        other: "%{count} 位用户"
+        zero: "%{count} 位用户"
       week: "一周"
     user_search:
       add_invites: "增加邀请次数"
       email_to: "寄电子邮件邀请"
+      under_13: "显示13岁以下的用户 (受COPPA，小孩网路私隐保护法，保护)"
       users:
         other: "找到 %{count} 个用户"
         zero: "找到 %{count} 个用户"
@@ -81,7 +82,7 @@ zh-CN:
       current_server: "服务器当前日期：%{date}"
   all_aspects: "所有分组"
   are_you_sure: "您确定吗？"
-  are_you_sure_delete_account: "您真的确定要关闭您的帐号吗? 此操作不可撤销。"
+  are_you_sure_delete_account: "您确定要关闭您的帐号吗? 此操作无法撤销!"
   aspect_memberships:
     destroy:
       failure: "从分组中移除好友失败"
@@ -110,15 +111,20 @@ zh-CN:
     index:
       donate: "捐助"
       help:
+        any_problem: "需要帮忙吗？"
+        contact_podmin: "请联络您所在的服务器的管理员！"
         do_you: "您是否："
         feature_suggestion: "...想建议 %{link}?"
         find_a_bug: "...找到一只 %{link}？"
         have_a_question: "...有 %{link} ？"
         here_to_help: "Diaspora 社区很高兴帮助您！"
+        mail_podmin: "管理员电邮"
         need_help: "需要帮助吗？"
         tag_bug: "#bug"
         tag_feature: "#特色"
         tag_question: "#问题"
+        tutorial_link_text: "教程"
+        tutorials_and_wiki: "您可在%{faq}、%{tutorial}和%{wiki}学习如何开始。"
       introduce_yourself: "这是您的动态。介绍一下自己吧！"
       keep_pod_running: "让 %{pod} 高速运转，需要您的每月捐助，供应服务器的耗材！"
       new_here:
@@ -160,7 +166,6 @@ zh-CN:
       commenting: "回复中……"
   contacts:
     index:
-      add_a_new_aspect: "加入新分组"
       all_contacts: "所有好友"
       community_spotlight: "社区热点"
       my_contacts: "我的好友"
@@ -171,6 +176,7 @@ zh-CN:
       title: "好友"
     spotlight:
       community_spotlight: "社区热点"
+      suggest_member: "推荐一名成员"
   conversations:
     create:
       fail: "无效的信息"
@@ -199,13 +205,50 @@ zh-CN:
       correct_the_following_errors_and_try_again: "修正以下错误后重试。"
   fill_me_out: "补全信息"
   find_people: "找人或#标签"
+  help:
+    account_and_data_management:
+      close_account_a: "您可以去到设定的低端点击“关闭帐号”的按钮。您会需要在这个过程中输入您的密码。记得，您关闭帐号后，您就<strong>永远</strong>不能再在这个伺服器使用同个用户名了。"
+      close_account_q: "我如何删除我的帐号？"
+      data_other_podmins_a: "当您与另一个伺服器的用户共享您的帖子/资料时，所有您分享的帖子和您的用户资料都将被存储(作为缓存)在那个伺服器上，并且能被管理员开启。当你删除掉一则帖子或您的部分/全部资料时，所有曾留着您的资料的伺服器将被给予删除要求。您的照片永远都不会储存在别的伺服器上，别的伺服器只会拥有一个通往您的图片的链接。"
+      data_other_podmins_q: "其他的伺服器管理员看得到我的资料吗？"
+      data_visible_to_podmin_a: "简单来说：全部。伺服器与伺服器之间的通讯永远都被加密(使用SSL和diaspora*自己的加密方法)，但是存储在伺服器上的资料并没有加密。伺服器管理员拥有权力开启您所有的资料(包括帖子)(大部分存储用户资料的网站也一样)。这就是我们给予你选择注册的伺服器的原因：你可以选择一个值得信赖的管理员。您在可以开启您自己的伺服器以后，您也可以因拥有伺服器的管理权而拥有更多的隐私权。"
+      data_visible_to_podmin_q: "伺服器管理员到底能看到我多少资料？"
+      download_data_a: "是的，您可以。在设定中的“帐号”低端找到两个按钮：下载资料和下载图片。"
+      download_data_q: "我可以下载我的帐号所有的资料吗？"
+      move_pods_a: "Diaspora* 0.7.0.0 现在提供迁移帐号的第一步：您现在可以从设定中的“帐号”导出您所有的资料。记得安全的储存您的资料！我们接下来将允许您完全迁移您的账号（包括帖子和联络人）去别的伺服器。"
+      move_pods_q: "我如何把我的帐号移至另一个伺服器？"
+      title: "管理帐号和资料"
+    aspects:
+      restrict_posts_i_see_q: "我可以只阅读一些分组内的人发布的帖子吗？"
+      title: "分组"
+      what_is_an_aspect_a: "分组是个整合您在diaspora*的联络人的方法。一个分组是个您对外的一面。它可以是您的同事、您的家人或者您在一个俱乐部的朋友。"
+      what_is_an_aspect_q: "分组是什么？"
+      who_sees_post_a: "当您指定特定的收帖组时，它只会显示给您所指定的分组内的用户。不在分组内的联络人没有任何阅读您的帖的方法。这些帖子不会对不再您的分组内的用户显示。"
+      who_sees_post_q: "我对一个分组发帖时，有谁可以看到我的帖子？"
+    foundation_website: "diaspora*基金官方网站"
+    getting_help:
+      get_support_a_hashtag: "在公共的帖子使用%{question}问我们问题。"
+      get_support_a_irc: "请在%{irc}(现时交谈服务)加入我们"
+      get_support_a_tutorials: "查看我们的教程：%{tutorials}"
+      get_support_a_website: "请浏览%{link}"
+      get_support_a_wiki: "找看%{link}吧"
+      get_support_q: "朕的问题没被解答。朕需要更多帮助。"
+      getting_started_a: "您很幸运。您可以尝试浏览我们网站的%{tutorial_series}。它会教你注册方法和所有您使用diaspora*所需知道的东西。"
+      getting_started_q: "帮忙下，我需要一些基本的帮助才能开始！"
+      title: "求助"
+    getting_started_tutorial: "开始教程系列"
+    here: "这"
+    irc: "IRC （网路聊天）"
+    markdown: "修饰字体"
+    third_party_tools: "第三方用具"
+    tutorial: "教程"
+    tutorials: "教程"
+    wiki: "百科"
   invitations:
-    a_facebook_user: "Facebook 用户"
-    check_token:
-      not_found: "找不到该邀请码"
     create:
       empty: "请至少填写一个邮箱"
       no_more: "您暂无邀请函。"
+      note_already_sent: "邀请已被发送至：%{emails}"
       rejected: "下列电子信箱有问题: "
       sent: "邀请函已经寄给: "
     new:
@@ -217,6 +260,7 @@ zh-CN:
       language: "语言"
       paste_link: "将这个链接分享给您的朋友，邀请他们加入 Diaspora*，或者直接用电子邮件发送给他们。"
       send_an_invitation: "发送邀请函"
+      sending_invitation: "正在发出邀请..."
   layouts:
     application:
       back_to_top: "回到上面"
@@ -263,7 +307,6 @@ zh-CN:
     mentioned_deleted:
       other: "%{actors} 在已删除的内容中提到了您。"
       zero: "%{actors} 在已删除的内容中提到了您。"
-    post: "日志。"
     private_message:
       other: "%{actors} 向您发了一条信息。"
       zero: "%{actors} 向您发了一条信息。"
@@ -350,14 +393,8 @@ zh-CN:
       type_error: "照片上传失败。您确定有选择任何图片吗？"
     destroy:
       notice: "照片删除成功。"
-    new_photo:
-      empty: "文件 {file} 是空的，请重新选择文件，并且不要选中它。"
-      invalid_ext: "不支持文件 {file} 的格式。只接受 {extensions}。"
-      size_error: "文件 {file} 太大了，上限是 {sizeLimit}。"
     new_profile_photo:
       upload: "上传新的头像！"
-    show:
-      show_original_post: "显示原文"
   posts:
     presenter:
       title: "来自 %{name} 的内容"
@@ -386,14 +423,11 @@ zh-CN:
       failed: "个人档案更新失败"
       updated: "个人档案更新成功"
   public: "公开"
-  reactions:
-    other: "%{count} 个回应"
-    zero: "0 个回应"
   registrations:
     closed: "此 Diaspora pod 不开放注册。"
     create:
       success: "您已成功加入 Diaspora 了！"
-    invalid_invite: "您提供的邀请链接已失效"
+    invalid_invite: "此邀请链接已失效！"
     new:
       email: "电子邮箱"
       enter_email: "输入电子邮箱"
@@ -415,6 +449,7 @@ zh-CN:
     create:
       already_authorized: "已经有 Diaspora 通行证为 %{diaspora_id} 的用户被授权使用 %{service_name} 帐号了"
       failure: "认证失败"
+      read_only_access: "您只拥有阅读的权限，请尝试修复权限并稍后重新尝试。"
       success: "验证成功。"
     destroy:
       success: "验证删除成功。"
@@ -425,6 +460,7 @@ zh-CN:
       edit_services: "编辑服务"
       logged_in_as: "登录为"
       really_disconnect: "切断与 %{service} 的连接？"
+      services_explanation: "您连接第三方共享服务后，diaspora*就能自动把您所发出的帖子自动转发出去。"
   settings: "设置"
   shared:
     aspect_dropdown:
@@ -448,6 +484,7 @@ zh-CN:
       visibility_dropdown: "用这个下拉菜单来改变内容的可见范围。  （建议您的第一篇内容为公开）"
     publisher:
       discard_post: "丢弃内容"
+      get_location: "附上您的位置"
       new_user_prefill:
         hello: "大家好，我是 #%{new_user_tag}。 "
         i_like: "我对 %{tags} 感兴趣。 "
@@ -455,14 +492,11 @@ zh-CN:
         newhere: "新用户"
       posting: "发布中……"
       share: "分享"
-      upload_photos: "上载照片"
       whats_on_your_mind: "您想到了什么？"
     stream_element:
       via: "通过 %{link}"
       via_mobile: "通过移动设备"
   status_messages:
-    create:
-      success: "成功推荐了: %{names}"
     new:
       mentioning: "提及发布中: %{person}"
     too_long: "{\"other\"=>\"请确保您的状态信息不超过 %{count} 个字符\", \"zero\"=>\"请确保您的状态信息不超过 %{count} 个字符\"}"

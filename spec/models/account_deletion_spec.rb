@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
-
-require "spec_helper"
 
 describe AccountDeletion, type: :model do
   let(:account_deletion) { AccountDeletion.new(person: alice.person) }
@@ -18,7 +18,7 @@ describe AccountDeletion, type: :model do
 
   describe "#perform!" do
     it "creates a deleter" do
-      expect(AccountDeleter).to receive(:new).with(alice.person.diaspora_handle).and_return(double(perform!: true))
+      expect(AccountDeleter).to receive(:new).with(alice.person).and_return(double(perform!: true))
       account_deletion.perform!
     end
 

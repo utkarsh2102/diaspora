@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010-2011, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -22,7 +24,7 @@ class AspectsController < ApplicationController
 
       render json: result
     else
-      render nothing: true, status: 422
+      head :unprocessable_entity
     end
   end
 
@@ -71,7 +73,7 @@ class AspectsController < ApplicationController
     params[:ordered_aspect_ids].each_with_index do |id, i|
       current_user.aspects.find(id).update_attributes(order_id: i)
     end
-    render nothing: true
+    head :no_content
   end
 
   def toggle_chat_privilege
@@ -79,19 +81,7 @@ class AspectsController < ApplicationController
 
     @aspect.chat_enabled = !@aspect.chat_enabled
     @aspect.save
-    render :nothing => true
-  end
-
-  def toggle_contact_visibility
-    @aspect = current_user.aspects.where(:id => params[:aspect_id]).first
-
-    if @aspect.contacts_visible?
-      @aspect.contacts_visible = false
-    else
-      @aspect.contacts_visible = true
-    end
-    @aspect.save
-    render :nothing => true
+    head :no_content
   end
 
   private
@@ -107,6 +97,6 @@ class AspectsController < ApplicationController
   end
 
   def aspect_params
-    params.require(:aspect).permit(:name, :contacts_visible, :chat_enabled, :order_id)
+    params.require(:aspect).permit(:name, :chat_enabled, :order_id)
   end
 end

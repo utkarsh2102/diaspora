@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2011 nov matake
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -23,13 +25,12 @@
 
 module Api
   module OpenidConnect
-    class OAuthAccessToken < ActiveRecord::Base
+    class OAuthAccessToken < ApplicationRecord
       belongs_to :authorization
 
       before_validation :setup, on: :create
 
       validates :token, presence: true, uniqueness: true
-      validates :authorization, presence: true
 
       scope :valid, ->(time) { where("expires_at >= ?", time) }
 

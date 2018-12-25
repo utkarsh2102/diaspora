@@ -7,6 +7,7 @@
 ar:
   _applications: "التّطبيقات"
   _contacts: "المتراسلون"
+  _help: "المساعدة"
   _services: "الخدمات"
   _statistics: "إحصائيّات"
   account: "الحساب"
@@ -21,10 +22,6 @@ ar:
           attributes:
             diaspora_handle:
               taken: "مأخوذ بالفعل."
-        request:
-          attributes:
-            from_id:
-              taken: "مكرّر لطلب موجود مسبقًا."
         reshare:
           attributes:
             root_guid:
@@ -45,10 +42,24 @@ ar:
       weekly_user_stats: "إحصائيات المستخدم الإسبوعية"
     stats:
       2weeks: "أسبوعين"
+      comments:
+        few: "%{count} تعليقات"
+        many: "%{count} تعليقات"
+        one: "%{count} تعليق"
+        other: "%{count} تعليقات"
+        two: "%{count} تعليقين"
+        zero: "%{count} تعليق"
       daily: "يومياً"
       display_results: "يعرض النّتائج من الجزء <b>%{segment}</b>"
       month: "شهر"
       usage_statistic: "إحصائيّات الاستخدام"
+      users:
+        few: "%{count} مستخدمون"
+        many: "%{count} مستخدمون"
+        one: "%{count} مستخدم"
+        other: "%{count} مستخدمون"
+        two: "%{count} مستخدم"
+        zero: "%{count} مستخدم"
       week: "أسبوع"
     user_search:
       are_you_sure_lock_account: "أمتأكّد من قفل هذا الحساب؟"
@@ -97,7 +108,7 @@ ar:
         find_a_bug: "... وجدت %{link}?"
         have_a_question: "... تملك %{link}?"
         here_to_help: "مجتمع دياسبرا متأهب للمساعدة"
-        need_help: "تحتاج للمساعدة؟"
+        need_help: "هل تحتاج إلى مساعدة ؟"
         tag_bug: "#bug"
         tag_feature: "ميزة"
         tag_question: "سؤال"
@@ -140,7 +151,6 @@ ar:
       commenting: "جارى التعليق..."
   contacts:
     index:
-      add_a_new_aspect: "أضف فئة جديدة"
       all_contacts: "كل جهات الاتصال"
       community_spotlight: "ضوء المجتمع"
       my_contacts: "جهات الاتصال الخاصة بي"
@@ -164,7 +174,7 @@ ar:
       subject: "موضوع"
       to: "إلى"
     show:
-      delete: "احْذِف واحْظُر المحادثة"
+      delete: "احْذِف  المحادثة"
       reply: "رُدَّ"
       replying: "يُجيب..."
   date:
@@ -180,16 +190,19 @@ ar:
   fill_me_out: "املأني"
   find_people: "ابحث عن أشخاص أو #وسوم"
   help:
+    getting_help:
+      title: "الحصول على المساعدة"
     keyboard_shortcuts:
       keyboard_shortcuts_li5: "r - أعد مشاركة التدوينة الحاليّة"
       keyboard_shortcuts_li6: "m - وسّع التدوينة الحاليّة"
       keyboard_shortcuts_li7: "o - افتح أوّل وصلة في التدوينة الحاليّة"
     posts_and_posting:
       character_limit_a: "65535 محرفًا. هذا أكبر بِـ 65395 محرفًا الذي تحصل عليها في تويتر! ؛)"
+    title_header: "المساعدة"
+  home:
+    podmin:
+      getting_help: "الحصول على المساعدة"
   invitations:
-    a_facebook_user: "مستخدم فايسبوك"
-    check_token:
-      not_found: "الدعوة الرمزية غير موجودة"
     create:
       no_more: "لم يتبقى لك أية دعوات"
       rejected: "واجه هذا البريد الإلكتروني مشاكلا:  "
@@ -245,7 +258,8 @@ ar:
         other: "و %{count} آخرون"
         two: "و %{count} آخران"
         zero: "و لا أحد"
-      mark_all_as_read: "وضع الجميع كمقروء"
+      contacts_birthday: "تاريخ الميلاد"
+      mark_all_as_read: "تحديد الكل  كمقروء"
       mark_unread: "غير مقروء"
       no_notifications: "ليس هناك أيّ إخطار بعد."
       notifications: "تنبيهات"
@@ -277,7 +291,6 @@ ar:
       other: "%{actors} أشاروا إليك في مشاركة محذوفة."
       two: "%{actors} أشارا إليك في مشاركة محذوفة."
       zero: "%{actors} أشار إليك في مشاركة محذوفة."
-    post: "مشاركة"
     private_message:
       few: "%{actors} راسلوك."
       many: "%{actors} راسلوك."
@@ -395,25 +408,19 @@ ar:
       type_error: "فشل رفع الصورة، أواثقٌ أن صورة ما قد أُضيفَت؟"
     destroy:
       notice: "حُذِفَت الصورة."
-    new_photo:
-      empty: "{file} فارغ، رجاءًا أَعِد تحديد الملفات دونه."
-      invalid_ext: "{file} له صيغة غير صالحة. {extensions} هي الصيغ الوحيدة المسموح بها."
-      size_error: "{file} ذو حجم كبير جدا, {sizeLimit} هو الحجم الأقصى المسموح به."
     new_profile_photo:
       upload: "ارْفَع صورةً شخصيةً جديدة"
-    show:
-      show_original_post: "إِعرِضْ المشاركة الأصلية"
   posts:
     presenter:
       title: "مشاركة من %{name}"
     show:
       photos_by:
-        few: "%{count} photos by %{author}"
-        many: "%{count} photos by %{author}"
-        one: "One photo by %{author}"
-        other: "%{count} photos by %{author}"
-        two: "Two photos by %{author}"
-        zero: "No photos by %{author}"
+        few: "%{count} صور بواسطة %{author}"
+        many: "%{count} صور بواسطة %{author}"
+        one: "صورة بواسطة %{author}"
+        other: "%{count} صور بواسطة %{author}"
+        two: "صورتين بواسطة %{author}"
+        zero: "صورة واحدة بواسطة %{author}"
       reshare_by: "أعيد مشاركتها بواسطة %{author}"
   privacy: "الخصوصيّة"
   profile: "الملفّ الشخصيّ"
@@ -435,21 +442,14 @@ ar:
       failed: "فشل فى تحديث ملفك الشخصى"
       updated: "تم تحديث ملفك الشخصى"
   public: "عامّ"
-  reactions:
-    few: "%{count} reactions"
-    many: "%{count} reactions"
-    one: "1 reaction"
-    other: "%{count} reactions"
-    two: "%{count} reactions"
-    zero: "0 reactions"
   registrations:
     closed: "التسجيلات مغلقة على هذه المنصة"
     create:
-      success: "سجل في دياسبرا"
+      success: "لقد انضممت الى دياسبرا "
     new:
       email: "الإيميـــل"
       enter_email: "أدخل عنوان بريد إلكتروني"
-      enter_password: "أدخل كلمة مرور"
+      enter_password: "أدخل كلمة مرور (على الاقل ستة حروف)"
       enter_password_again: "أعد إدخال كلمة المرور"
       enter_username: "اختر معرف (فقط حروف, أرقام, و الإشارات الخطية)"
       password: "كلمة السر"
@@ -475,7 +475,7 @@ ar:
       edit_services: "تعديل الخدمات"
       logged_in_as: "متصل بحساب"
       really_disconnect: "قطع إتصال %{service}?"
-  settings: "إعدادات"
+  settings: "الإعدادات"
   shared:
     aspect_dropdown:
       toggle:
@@ -504,32 +504,34 @@ ar:
       discard_post: "تجاهل المشاركة"
       new_user_prefill:
         hello: "مرحبًا جميعًا، أنا #%{new_user_tag}. "
-        i_like: "I'm interested in %{tags}."
+        i_like: "انا مهتم بـ %{tags}."
         invited_by: "شكراً على الدعوة، "
         newhere: "جديد هنا"
       posting: "يَنشُر ..."
       share: "شَارِك"
-      upload_photos: "حمل الصور"
       whats_on_your_mind: "ماذا يجول في خاطرك؟"
     stream_element:
       via: "بواسطة %{link}"
       via_mobile: "عبر المحمول"
   statistics:
+    local_comments: "التعليقات المحلية"
     name: "الاسم"
     network: "الشبكة"
     services: "الخدمات"
     total_users: "مجموع المستخدمين"
   status_messages:
-    create:
-      success: "ذَكَرْتَ بنجاح: %{names}"
     new:
       mentioning: "ذكر %{person}"
-    too_long: "{\"few\"=>\"المرجو ان تكون رسالتك أقل من %{count} حرف\", \"many\"=>\"المرجو ان تكون رسالتك أقل من %{count} حرف\", \"one\"=>\"المرجو ان تكون رسالتك أقل من %{count} حروف\", \"other\"=>\"المرجو ان تكون رسالتك أقل من %{count} حروف\", \"two\"=>\"المرجو ان تكون رسالتك أقل من %{count} حرف\", \"zero\"=>\"المرجو ان تكون رسالتك أقل من %{count} حروف\"}"
+    too_long: |-
+        يجب ان تكون رسالتك أقل من %{count} حرف
+        تم استخدام %{current_length}حتى الآن
+  stream_helper:
+    no_more_posts: "لقد وصلت إلى نهاية التيار."
   streams:
     activity:
       title: "نشاطى"
     aspects:
-      title: "Your Aspects"
+      title: "فئاتي"
     aspects_stream: "الفئات"
     comment_stream:
       title: "المشاركات التى تم التعليق عليها"
@@ -561,7 +563,9 @@ ar:
       wrong_password: "كلمة المرور المدخلة لم تطابق كلمة مرورك الحالية."
     edit:
       also_commented: "...علق أحدهم على منشور مراسلك"
+      birthday: "عيد ميلاد شخص ما"
       change: "تغيير"
+      change_color_theme: "تغيير لون السمة"
       change_email: "عدِّل البريد الإلكتروني"
       change_language: "تغيير اللغة"
       change_password: "تغيير كلمة المرور"
@@ -569,32 +573,35 @@ ar:
       close_account:
         dont_go: "عزيزى , من فضلك لا تذهب"
         mr_wiggles: "الاستاذ . ويجليس سيكون حزين لانه يراك تذهب"
+        what_we_delete: "سنحذف جميع مشاركاتك وبيانات ملفك الشخصي في أقرب وقت ممكن. ستظل تعليقاتك على مشاركات الأشخاص الآخرين تظهر، ولكن سيتم ربطها مع حسابك  بدلا من اسمك "
       close_account_text: "أغلق الحساب"
       comment_on_post: "...علق أحدهم على مشاركتك"
       current_password: "كلمة المرور الحالية"
+      current_password_expl: "هي تلك التي أدخلتها أثناء تسجيل حسابك …"
       download_export: "نزّل ملفي الشخصيّ"
       edit_account: "تعديل الحساب"
       email_awaiting_confirmation: "لقد أرسلنا إليك رابط تفعيل إلى %{unconfirmed_email}. وحتى تتبع هذا الرابط وتفعل العنوان الجديد، سنستمر في استخدام بريدك الأساسي %{email}."
       export_data: "تصدير البيانات"
       export_in_progress: "نعالج بياناتك حاليًّا. فضلًا راجعنا بعد بضع لحظات."
       following: "إعدادات المتابعة"
-      last_exported_at: "(آخر تحديث كان في ‎%{timestamp}‎)"
       liked: "...أعجب أحدهم بمشاركتك"
       mentioned: "...تم ذكرك فى رسالة؟"
       new_password: "كلمة مرور جديدة"
       private_message: "...وصلتك رسالة خاصة؟"
       receive_email_notifications: "استقبال تنبيهات عبر البريد الإلكتروني؟"
       request_export: "اطلب بيانات ملفي الشخصيّ"
+      request_export_photos: "طلب صوري"
       request_export_update: "أنعش بيانات ملفي الشخصيّ"
       reshared: "...أعاد أحدهم نشر مشاركتك؟"
       started_sharing: "...بدأ أحدهم المشاركة معك؟"
       stream_preferences: "تفضيلات ساحة المشاركة"
       your_email: "بريدك الإلكتروني"
-      your_handle: "وسيط ديسبورا الخاص بك"
+      your_handle: "حساب ديسبورا الخاص بك"
     getting_started:
-      awesome_take_me_to_diaspora: "مدهش! خذنى إلى دياسبرا*"
+      awesome_take_me_to_diaspora: "مدهش! انقلني إلى دياسبرا*"
       hashtag_explanation: "الوسوم تسمح لك بالحديث عن اهتماماتك ومتابعتها.  وهي أيضا طريقة عبقرية للعثور على أناس جدد بدياسبرا."
       hashtag_suggestions: "جرب الوسوم التالية احب #فن، #أفلام، #صور، إلخ."
+      well_hello_there: "حسنا مرحبا جميعا"
       who_are_you: "من أنت؟"
     privacy_settings:
       ignored_users: "المستخدمين الذين تم تجاهلهم"
@@ -603,8 +610,10 @@ ar:
     public:
       does_not_exist: "هذا المستخدم %{username} غير موجود"
     update:
+      color_theme_changed: "تم تغيير لون السمة بنجاح."
       email_notifications_changed: "فشل تغيير اللغة"
       follow_settings_changed: "تم تغيير إعدادات المتابعة"
+      follow_settings_not_changed: "لم يتم تعديل إعدادات المتابعة"
       language_changed: "غُيِّرت اللغة بنجاح"
       language_not_changed: "فشل تغيير اللغة"
       password_changed: "غُيِّرت كلمة المرور بنجاح. يمكنك الولوج بكلمة سرك الجديدة."

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #   Copyright (c) 2010, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
@@ -48,6 +50,14 @@ module Diaspora
       else
         user.people_in_aspects(user.aspects_with_shareable(self.class, id))
       end
+    end
+
+    # Remote pods which are known to be subscribed to the post. Must include all pods which received the post in the
+    # past.
+    #
+    # @return [Array<String>] The list of pods' URIs
+    def subscribed_pods_uris
+      Pod.find(subscribers.select(&:remote?).map(&:pod_id).uniq).map {|pod| pod.url_to("") }
     end
 
     module QueryMethods
