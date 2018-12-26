@@ -6,12 +6,10 @@ Changelog.md usr/share/diaspora
 config/* etc/diaspora
 config.ru usr/share/diaspora
 COPYRIGHT usr/share/diaspora
-db/schema.rb var/lib/diaspora
 db usr/share/diaspora
 features usr/share/diaspora
 FederationProcfile usr/share/diaspora
 Gemfile usr/share/diaspora
-GNU-AGPL-3.0 usr/share/diaspora
 graphics usr/share/diaspora
 Guardfile usr/share/diaspora
 Procfile usr/share/diaspora
