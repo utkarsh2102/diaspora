@@ -2,11 +2,11 @@ Use version available in debian
 
 --- a/Gemfile
 +++ b/Gemfile
-@@ -218,7 +218,7 @@
+@@ -225,7 +225,7 @@
  
    # Process management
  
--  gem "eye", "~> 0.8.1"
+-  gem "eye", "~> 0.10.0"
 +  gem "eye", "~> 0.7"
  
    # Redirects

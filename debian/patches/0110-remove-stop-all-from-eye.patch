@@ -1,10 +1,8 @@
  --stop_all option does not work
 
-Index: diaspora/script/server
-===================================================================
---- diaspora.orig/script/server
-+++ diaspora/script/server
-@@ -205,4 +205,4 @@ else
+--- a/script/server
++++ b/script/server
+@@ -217,4 +217,4 @@
  fi
  echo ""
  

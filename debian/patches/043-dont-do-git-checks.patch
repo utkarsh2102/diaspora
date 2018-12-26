@@ -1,39 +1,30 @@
 don't fail when not a git repo
 
-Index: diaspora/script/server
-===================================================================
---- diaspora.orig/script/server
-+++ diaspora/script/server
-@@ -61,18 +61,21 @@ then
+--- a/script/server
++++ b/script/server
+@@ -61,25 +61,6 @@
    fatal "config/diaspora.yml is missing! Copy over config/diaspora.yml.example to config/diaspora.yml and edit it properly!"
  fi
  
 -command -v git > /dev/null 2>&1
 -if [ $? -eq 0 ]; then
--  # Check if git merge is in progress
--  if [ -f .git/MERGE_MODE ]; then
--    fatal "A git merge is in progress!"
--  fi
-+# Check if we are using git
-+if [ -f .git/config ]; then
-+  command -v git > /dev/null 2>&1
-+  if [ $? -eq 0 ]; then
-+    # Check if git merge is in progress
-+    if [ -f .git/MERGE_MODE ]; then
-+      fatal "A git merge is in progress!"
-+    fi
- 
--  # Check if detached head state
--  git_branch_name="$(git symbolic-ref HEAD 2>/dev/null)"
--  if [ -z "$git_branch_name" ];
+-  # Check if we're in a repository, before doing any verification.
+-  if git status > /dev/null 2>&1;
 -  then
--    warning "You are in detached HEAD state!"
-+    # Check if detached head state
-+    git_branch_name="$(git symbolic-ref HEAD 2>/dev/null)"
-+    if [ -z "$git_branch_name" ];
-+    then
-+      warning "You are in detached HEAD state!"
-+    fi
-   fi
- fi
- 
+-    # Check if git merge is in progress
+-    if [ -f .git/MERGE_MODE ]; then
+-      fatal "A git merge is in progress!"
+-    fi
+-
+-    # Check if detached head state
+-    git_branch_name="$(git symbolic-ref HEAD 2>/dev/null)"
+-    if [ -z "$git_branch_name" ];
+-    then
+-      warning "You are in detached HEAD state!"
+-    fi
+-  fi
+-fi
+-
+ # Do RVM checks if RVM is being used
+ command -v rvm > /dev/null 2>&1
+ if [ $? -eq 0 ]; then

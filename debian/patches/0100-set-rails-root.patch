@@ -2,7 +2,7 @@ set rails engine root for finding assets
 
 --- a/config/load_config.rb
 +++ b/config/load_config.rb
-@@ -6,7 +6,7 @@
+@@ -8,7 +8,7 @@
  
  module Rails
    def self.root
