@@ -1,3 +1,17 @@
+diaspora (0.7.8.0-1) experimental; urgency=medium
+
+  * New upstream version 0.7.8.0
+  * Bump Standards-Version to 4.3.0 (no changes needed)
+  * Bump debhelper compatibility level to 11
+  * Move back to main (ruby-handlebars-assets is now in main)
+  * Refresh patches
+  * Drop files no longer present upstream from debian/install
+  * Remove special handling of db/schema.rb (not present upstream now)
+  * Tighten dependencies
+  * Use salsa.debian.org in Vcs-* fields
+
+ -- Pirate Praveen <praveen@debian.org>  Wed, 26 Dec 2018 15:53:28 +0530
+
 diaspora (0.6.0.1+debian-2) unstable; urgency=medium
 
   [ Pirate Praveen ]
