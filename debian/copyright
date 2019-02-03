@@ -1,6 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: diaspora
 Source: http://github.com/diaspora/diaspora
+Files-Excluded: graphics/dandelion.jpg
+                app/assets/images/dandelion.jpg
+Comment: This file has been removed becuase they are not compatible with DFSG.
 
 Files: *
 Copyright: 2010 Daniel Grippi
