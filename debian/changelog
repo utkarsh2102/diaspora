@@ -1,3 +1,12 @@
+diaspora (0.7.9.0+dfsg-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream version 0.7.9.0+dfsg
+  * Update d/watch for repacking
+  * Update d/copyright to exclude files
+
+ -- Utkarsh Gupta <guptautkarsh2102@gmail.com>  Mon, 04 Feb 2019 04:42:01 +0530
+
 diaspora (0.7.8.0-1) experimental; urgency=medium
 
   * New upstream version 0.7.8.0
