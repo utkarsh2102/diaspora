@@ -1,0 +1,17 @@
+Description: workaround for the deprecated compass-rails, compass and sass
+package
+Bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=875612
+===================================================================
+--- a/Gemfile
++++ b/Gemfile
+@@ -54,7 +54,9 @@ gem "rack-cors", "~> 1.0",">= 1.0.2", require: "rack/cors"
+ gem "autoprefixer-rails",     "~> 8.6",">= 8.6.5"
+ gem "bootstrap-sass",         "~> 3.3",">= 3.3.7"
+ gem "bootstrap-switch-rails", "~> 3.3",">= 3.3.3" # 3.3.4 is broken, see https://github.com/Bttstrp/bootstrap-switch/issues/691
+-gem "compass-rails",          "~> 3.1"
++gem "compass-rails",          "3.1.0", path: 'vendor/gems/compass-rails-3.1.0'
++gem "compass",                "1.0.3", path: 'vendor/gems/compass-1.0.3'
++gem "ruby-sass",              "3.7.3", path: 'vendor/gems/ruby-sass-3.7.3'
+ gem "sass-rails",             "~> 5.0",">= 5.0.7"
+ gem "sprockets-rails",        "~> 3.2",">= 3.2.1"
+ # Database

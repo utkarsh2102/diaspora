@@ -1,6 +1,7 @@
+relax-dependencies.patch
 002-remove-development-test-from-gemfile.patch
 043-dont-do-git-checks.patch
-050-relax-libs.patch
+embed-gems.patch
 051-relax-eye.patch
 060-use-db-env.patch
 0100-set-rails-root.patch
