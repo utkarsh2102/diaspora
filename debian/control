@@ -56,7 +56,6 @@ Depends: ${shlibs:Depends},
          ruby-autoprefixer-rails (>= 8.6.5~),
          ruby-bootstrap-sass (>= 3.3.7~),
          ruby-bootstrap-switch-rails (>= 3.3.4~),
-         ruby-compass-rails (>= 3.1~),
          ruby-sass-rails (>= 5.0.7~),
          ruby-sprockets-rails (>= 3.2.1~),
          # Database
