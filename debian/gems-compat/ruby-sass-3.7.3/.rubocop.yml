@@ -1,0 +1,234 @@
+Lint/BlockAlignment:
+  Enabled: false
+Lint/EndAlignment:
+  # Our alignment style differs significantly
+  # and this doesn't seem to be a big deal.
+  Enabled: false
+Lint/HandleExceptions:
+  # We legitimately ignore exceptions in some cases and this is easy to catch in code review.
+  Enabled: false
+Lint/Loop:
+  # This isn't a big deal.
+  Enabled: false
+
+Metrics/BlockNesting:
+  # We'll catch this in code review. There are some legitimate uses.
+  Enabled: false
+Metrics/ClassLength:
+  # It's not worth bending over backwards to avoid long classes.
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  # It's difficult to reason about what will reduce cyclomatic complexity.
+  Enabled: false
+Metrics/LineLength:
+  Enabled: true
+  Max: 110
+Metrics/MethodLength:
+  # TODO: This max should actually be 25 but that will require significant refactoring.
+  Max: 50
+  CountComments: false
+
+Style/AccessorMethodName:
+  # We have good reasons for choosing our method names.
+  Enabled: false
+Style/AlignParameters:
+  # Natalie doesn't like to align parameters to the method call.
+  Enabled: false
+Style/AsciiComments:
+  # Why even have this restriction?
+  Enabled: false
+Style/CharacterLiteral:
+  # Character literals are pretty useful when working with text like we do.
+  Enabled: false
+Style/ClassVars:
+  # Class variables are useful for managing deprecation, and class instance
+  # variables would be much more cumbersome.
+  Enabled: false
+Style/CollectionMethods:
+  PreferredMethods:
+    collect: 'map'
+    reduce: 'inject'
+    detect: 'find'
+    find_all: 'select'
+Style/DeprecatedHashMethods:
+  # has_xxx? reads better.
+  Enabled: false
+Style/Documentation:
+  # TODO: We need to add a bunch of docs before we can enable this.
+  Enabled: false
+Style/DotPosition:
+  # This check doesn't want chained method invocation to end with a dot.
+  # But we like to do that.
+  Enabled: false
+Style/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
+Style/Encoding:
+  # We use utf-8 comments when utf-8 characters are in use.
+  Enabled: false
+Style/FormatString:
+  # We like the string % operator.
+  Enabled: false
+Style/HashSyntax:
+  # We are a 1.8 compatable project still.
+  Enabled: false
+Style/IfUnlessModifier:
+  # We don't feel strongly about this.
+  Enabled: false
+Style/IndentationConsistency:
+  # We use indentation to convey meaning more often than we screw it up.
+  Enabled: false
+Style/IndentationWidth:
+  Enabled: false
+Style/Lambda:
+  # We are a 1.8 compatible project still.
+  Enabled: false
+Style/ModuleFunction:
+  # The module_function declaration makes methods private so it means you can't use the module as a module.
+  Enabled: false
+Style/ParenthesesAroundCondition:
+  AllowSafeAssignment: true
+Style/PerlBackrefs:
+  # We like perl backrefs.
+  Enabled: false
+Style/PredicateName:
+  # We have good reasons for choosing our method names.
+  Enabled: false
+Style/RaiseArgs:
+  # We prefer "raise Exception.new(msg)".
+  EnforcedStyle: compact
+Style/RedundantReturn:
+  # We allow explicit returns for multiple return values.
+  AllowMultipleReturnValues: true
+Style/Semicolon:
+  # Makes a good line separator
+  Enabled: false
+Style/SignalException:
+  # We like saying raise.
+  Enabled: false
+Style/SingleLineBlockParams:
+  # We have good reasons for choosing our argument names.
+  Enabled: false
+Style/SingleLineMethods:
+  # We like single line methods for simple methods.
+  Enabled: false
+Style/SpaceBeforeBlockBraces:
+  # We prefer "foo {|arg| body}".
+  EnforcedStyle: space
+Style/SpaceInsideBlockBraces:
+  EnforcedStyle: no_space
+  SpaceBeforeBlockParameters: false
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+Style/StringLiterals:
+  # They say to not use double quoted strings unless there is interpolation.
+  # While this gives a marginal parse time speedup, it makes working with
+  # strings annoying.
+  Enabled: false
+Style/TrailingComma:
+  Enabled: false
+Style/TrivialAccessors:
+  AllowPredicates: true
+  ExactNameMatch: true
+Style/WhenThen:
+  # We like semi-colons.
+  Enabled: false
+Style/WhileUntilModifier:
+  # We don't feel strongly about this.
+  Enabled: false
+Lint/AssignmentInCondition:
+  Enabled: true
+Lint/FormatParameterMismatch:
+  Enabled: true
+Lint/NestedMethodDefinition:
+  Enabled: true
+Lint/NonLocalExitFromIterator:
+  # We do this a number of times and it cleans up the code.
+  Enabled: false
+Lint/StringConversionInInterpolation:
+  Enabled: true
+Lint/UselessAccessModifier:
+  Enabled: true
+Lint/UnneededDisable:
+  Enabled: true
+Lint/UnusedBlockArgument:
+  Enabled: true
+Lint/UnusedMethodArgument:
+  # Lots of polymorphic methods take arguments
+  # they don't use.
+  Enabled: false
+Metrics/AbcSize:
+  # TODO: It's probably good to address this complexity measurement
+  # but it's a lot of work so this remains disabled.
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: true
+Metrics/PerceivedComplexity:
+  # TODO: It's probably good to address this complexity measurement
+  # but it's a lot of work so this remains disabled.
+  Enabled: false
+Performance/FlatMap:
+  # This requires a newer version of ruby than we require.
+  Enabled: false
+Performance/ReverseEach:
+  Enabled: true
+Performance/StringReplacement:
+  Enabled: true
+Style/BarePercentLiterals:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  # We hates it.
+  Enabled: false
+Style/ClassCheck:
+  Enabled: true
+Style/ClosingParenthesisIndentation:
+  Enabled: true
+Style/DoubleNegation:
+  # We don't dislike double negation.
+  Enabled: false
+Style/EachWithObject:
+  # This requires a newer version of ruby than we require.
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: true
+Style/ExtraSpacing:
+  Enabled: true
+Style/FirstParameterIndentation:
+  Enabled: true
+Style/GuardClause:
+  Enabled: true
+Style/IndentHash:
+  Enabled: true
+Style/LineEndConcatenation:
+  Enabled: false
+Style/Next:
+  Enabled: true
+Style/MultilineOperationIndentation:
+  Enabled: false
+Style/MultilineTernaryOperator:
+  Enabled: true
+Style/ParallelAssignment:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: true
+Style/RegexpLiteral:
+  Enabled: true
+Style/SelfAssignment:
+  Enabled: true
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: true
+Style/SpaceAroundOperators:
+  Enabled: true
+Style/SpaceInsideRangeLiteral:
+  Enabled: true
+Style/SpaceInsideStringInterpolation:
+  Enabled: true
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+Style/StructInheritance:
+  Enabled: false
+Style/SymbolProc:
+  # We need to enable this for Sass 3.5+
+  # Since we will have dropped support for older rubies.
+  Enabled: false
+Style/TrailingUnderscoreVariable:
+  Enabled: false
