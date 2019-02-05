@@ -16,10 +16,14 @@ Files: app/assets/images/*.png
 Copyright: Paul Robert Lloyd
 License: CC-BY-SA-3.0
 
-Files: Rails, JQuery, Devise
-Copyright: 2005-2019, David Heinemeier Hansson
-           JS Foundation and other contributors
-           2009-2019, Plataformatec
+Files: lib/*
+Comment: The upstream distribution does not contain an explicit statement of
+ copyright ownership. Pursuant to the Berne Convention for the Protection of
+ Literary and Artistic Works, it is assumed that all content is copyright by
+ its respective authors unless otherwise stated.
+Copyright: 2005-2019, David Heinemeier Hansson (Rails)
+           JS Foundation and other contributors (JQuery)
+           2009-2019, Plataformatec (Devise)
 License: Expat/X11
 
 Files: debian/*
@@ -721,12 +725,12 @@ License: CC-BY-SA-3.0
  PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR
  OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS
  LICENSE OR COPYRIGHT LAW IS PROHIBITED.
-
+ .
  BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE
  BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED
  TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN
  CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
-
+ .
      1. Definitions
          a. "Adaptation" means a work based upon the Work, or upon the Work and
  other pre-existing works, such as a translation, adaptation, derivative work,
@@ -840,7 +844,7 @@ License: CC-BY-SA-3.0
  collect royalties, whether individually or, in the event that the Licensor is a
  member of a collecting society that administers voluntary licensing schemes, via
  that society, from any exercise by You of the rights granted under this License.
-
+ .
      The above rights may be exercised in all media and formats whether now known
  or hereafter devised. The above rights include the right to make such
  modifications as are technically necessary to exercise the rights in other media
@@ -932,7 +936,7 @@ License: CC-BY-SA-3.0
  enable You to reasonably exercise Your right under Section 3(b) of this License
  (right to make Adaptations) but not otherwise.
      5. Representations, Warranties and Disclaimer
-
+ .
      UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, LICENSOR
  OFFERS THE WORK AS-IS AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND
  CONCERNING THE WORK, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING,

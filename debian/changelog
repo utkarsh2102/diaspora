@@ -12,7 +12,7 @@ diaspora (0.7.9.0+dfsg-1) experimental; urgency=medium
   [ Raju Devidas ]
   * Adding new patches, changing the existing ones as per the new release
   * Embedding compass, compass-rails and ruby-sass
-  * Formating the control file
+  * Formatting the control file
   * Added the paths to the embedded gems in the install file
   * Including binaries in source/include-binaries for the embedded gems
   * Removing ruby-compass-rails from d/control
