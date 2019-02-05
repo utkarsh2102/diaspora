@@ -22,3 +22,61 @@ override_dh_install:
 clean:
 	dh clean
 	rm -rf .bundle
+
+override_dh_fixperms:
+	dh_fixperms -a
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/Rules
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/units/configuration_test.rb
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/units/frameworks_test.rb
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/units/urls_test.rb
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/import-once/test/import_once_test.rb
+	chmod a+x debian/diaspora/usr/share/diaspora/vendor/gems/compass-rails-3.1.0/Rakefile
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/content/reference/compass/css3/flexbox.haml
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/scss/scss_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/script_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/integrations/projects/busted_font_urls/fonts/grid.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/compiler_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/scss/css_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/util/subset_map_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/museosans-web.woff
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/museosans-web.svg
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/examples/bgrove.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/integrations/projects/busted_font_urls/fonts/sub/dk.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/fonts/bgrove.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/stylesheets/busted_font_urls/fonts/feed.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/units/caniuse_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/superselector_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/value_helpers_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/content/examples/compass/css3/flexbox/markup.haml
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/integrations/projects/compass/sass/flexbox.scss
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/sprites/public/images/ko/starbg26x27.png
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/stylesheets/compass/_css3.scss
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/stylesheets/busted_font_urls/fonts/sub/dk.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/functions_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/css2sass_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/cache_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/museosans-web.eot
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/exec_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/logger_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/script_conversion_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/content/examples/compass/css3/flexbox/stylesheet.scss
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/javascripts/jquery-1.3.2.min.js
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/encoding_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/engine_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/importer_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/content/examples/compass/css3/flexbox.haml
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/source_map_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/callbacks_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/stylesheets/busted_font_urls/fonts/grid.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/util_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/scss/rx_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/examples/bgrove.otf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/cli/test/fixtures/stylesheets/compass/sass/flexbox.scss
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/core/test/integrations/projects/busted_font_urls/fonts/feed.ttf
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/util/multibyte_string_scanner_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/util/normalized_map_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/conversion_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/plugin_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/css_variable_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/ruby-sass-3.7.3/test/sass/extend_test.rb
+	chmod a-x debian/diaspora/usr/share/diaspora/vendor/gems/compass-1.0.3/compass-style.org/assets/fonts/museosans-web.ttf
