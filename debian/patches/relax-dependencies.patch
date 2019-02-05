@@ -1,3 +1,7 @@
+This patch relaxes dependencies and fixes other things.
+Author: Pirate Praveen, Raju Devidas, Utkarsh Gupta
+---
+
 diff --git a/Gemfile b/Gemfile
 index b7ae543c9..8d1ace4b0 100644
 --- a/Gemfile

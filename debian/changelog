@@ -24,7 +24,7 @@ diaspora (0.7.8.0-1) experimental; urgency=medium
 diaspora (0.6.0.1+debian-2) unstable; urgency=medium
 
   [ Pirate Praveen ]
-  * Change section to contrib/net from contib/web 
+  * Change section to contrib/net from contib/web
 
   [ Joseph Nuthalapati ]
   * Fix syntax error in postinst script (Closes: #866877)
@@ -47,22 +47,22 @@ diaspora (0.6.0.1+debian-1) unstable; urgency=medium
 diaspora (0.6.0.0+debian-8) unstable; urgency=medium
 
   * Remove unused overrides
-  * Add tag for all patches 
+  * Add tag for all patches
 
   [ Julian Gilbey ]
-  * Fix maintscript syntax (Closes: #850575) 
+  * Fix maintscript syntax (Closes: #850575)
 
  -- Pirate Praveen <praveen@debian.org>  Fri, 13 Jan 2017 13:10:14 +0530
 
 diaspora (0.6.0.0+debian-7) unstable; urgency=medium
 
-  * Use jquery-ui 6 (See #846961) 
+  * Use jquery-ui 6 (See #846961)
 
  -- Pirate Praveen <praveen@debian.org>  Mon, 12 Dec 2016 11:18:48 +0530
 
 diaspora (0.6.0.0+debian-6) unstable; urgency=medium
 
-  * Switch back to jquery 2 (ruby-jquery-rails now provides jquery 2) 
+  * Switch back to jquery 2 (ruby-jquery-rails now provides jquery 2)
 
  -- Pirate Praveen <praveen@debian.org>  Wed, 07 Dec 2016 23:18:41 +0530
 
@@ -91,7 +91,7 @@ diaspora (0.6.0.0+debian-3) unstable; urgency=medium
 diaspora (0.6.0.0+debian-2) experimental; urgency=medium
 
   * Remove leftover files on uninstall
-  * Move log directory to /var 
+  * Move log directory to /var
 
  -- Pirate Praveen <praveen@debian.org>  Tue, 27 Sep 2016 19:11:45 +0530
 
@@ -125,13 +125,13 @@ diaspora (0.5.9.1+debian-1) unstable; urgency=medium
     (SemVer defines stable libs as x.y >= 1.0)
 
   [ Rahulkrishnan R A ]
-  * Refresh patch 
+  * Refresh patch
 
  -- Pirate Praveen <praveen@debian.org>  Sat, 09 Jul 2016 23:08:59 +0530
 
 diaspora (0.5.7.1+debian-3) unstable; urgency=medium
 
-  * Reupload to unstable 
+  * Reupload to unstable
 
  -- Pirate Praveen <praveen@debian.org>  Sat, 09 Jul 2016 01:11:39 +0530
 
@@ -201,7 +201,7 @@ diaspora (0.5.5.1+debian-3) unstable; urgency=medium
 
 diaspora (0.5.5.1+debian-2) unstable; urgency=medium
 
-  * Reupload to unstable 
+  * Reupload to unstable
 
  -- Pirate Praveen <praveen@debian.org>  Sat, 09 Jan 2016 01:26:43 +0530
 
@@ -233,7 +233,7 @@ diaspora (0.5.3.0+debian-1) experimental; urgency=medium
 
   * New upstream release
   * Change ruby-devise-lastseenable dependency to 0.0.6 (#796979)
-  * Change ruby-messagebus-api dependency to 
+  * Change ruby-messagebus-api dependency to
     3.0.7+git.20130130.97b34ece.REALLY.1.0.3 (match exact version with Gemfile)
   * Tighten dependencies
   * Add json-schema as new dependency
@@ -242,7 +242,7 @@ diaspora (0.5.3.0+debian-1) experimental; urgency=medium
 
 diaspora (0.5.2.0+debian-7) experimental; urgency=medium
 
-  * Bump minimum version of diaspora-common to 0.5.2.0+debian4 
+  * Bump minimum version of diaspora-common to 0.5.2.0+debian4
   * Remove bin directory before install (to support switching from
      diaspora-installer)
   * Stop diaspora before upgrade
