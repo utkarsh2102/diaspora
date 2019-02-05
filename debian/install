@@ -22,5 +22,4 @@ public var/lib/diaspora
 redis-integration1.conf usr/share/diaspora
 redis-integration2.conf usr/share/diaspora
 script usr/share/diaspora
-spec usr/share/diaspora
 vendor usr/share/diaspora

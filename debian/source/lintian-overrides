@@ -1,0 +1,9 @@
+# Source is missing and it's line legnth fixes.
+diaspora source: source-is-missing debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/jquery-1.3.2.min.js
+diaspora source: source-is-missing debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/jquery.url.packed.js
+diaspora source: source-is-missing debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/modernizr-1.6.min.js
+diaspora source: source-is-missing debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/shAutoloader.js line length is 1072 characters (>512)
+diaspora source: source-is-missing debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/shCore.js line length is 15796 characters (>512)
+diaspora source: insane-line-length-in-source-file debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/shCore.js line length is 15796 characters (>512)
+diaspora source: insane-line-length-in-source-file debian/gems-compat/compass-1.0.3/compass-style.org/assets/javascripts/shAutoloader.js line length is 1072 characters (>512)
+
