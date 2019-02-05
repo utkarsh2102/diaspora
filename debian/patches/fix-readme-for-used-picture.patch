@@ -1,0 +1,14 @@
+This patch updates the description of the picture which has been removed.
+Link to the upstream changes being implemented:
+https://github.com/diaspora/diaspora/pull/7976
+Author: Utkarsh Gupta <guptautkarsh2102@gmail.com>
+---
+
+--- a/graphics/README.md
++++ b/graphics/README.md
+@@ -6,4 +6,4 @@ frontend (PNGs, etc.).  They can be scaled, tinted, shaded, etc.
+ 
+ ## License
+ 
+-[dandelion.jpg](https://www.flickr.com/photos/pixagraphic/7218285148/) by pixagraphic has been released under [CC-BY-ND](https://creativecommons.org/licenses/by-nd/2.0/)
++dandelion.jpg is a public domain photo by creativecommonsstockphotos.

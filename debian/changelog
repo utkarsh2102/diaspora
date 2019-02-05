@@ -8,6 +8,8 @@ diaspora (0.7.9.0+dfsg-1) experimental; urgency=medium
   * Add override and avoid installation of spec
   * Fix minor changes in d/changelog and d/copyright
   * Update d/copyright to add missing licenses
+  * Add patch to relax sass dependencies
+  * Add patch to fix graphics/README
 
   [ Raju Devidas ]
   * Adding new patches, changing the existing ones as per the new release
