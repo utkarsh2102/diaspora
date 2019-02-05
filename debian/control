@@ -2,7 +2,9 @@ Source: diaspora
 Section: net
 Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
-Uploaders: Pirate Praveen <praveen@debian.org>
+Uploaders: Pirate Praveen <praveen@debian.org>,
+           Raju Devidas <rajudev@disroot.org>,
+           Utkarsh Gupta <guptautkarsh2102@gmail.com>
 Build-Depends: debhelper (>= 11~), gem2deb
 Standards-Version: 4.3.0
 Vcs-Git: https://salsa.debian.org/ruby-team/diaspora.git

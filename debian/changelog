@@ -1,9 +1,22 @@
 diaspora (0.7.9.0+dfsg-1) experimental; urgency=medium
 
-  * Team upload
+  [ Utkarsh Gupta ]
   * New upstream version 0.7.9.0+dfsg
   * Update d/watch for repacking
   * Update d/copyright to exclude files
+  * Fix executable permissions in d/rules
+  * Add override and avoid installation of spec
+  * Fix minor changes in d/changelog and d/copyright
+  * Update d/copyright to add missing licenses
+
+  [ Raju Devidas ]
+  * Adding new patches, changing the existing ones as per the new release
+  * Embedding compass, compass-rails and ruby-sass
+  * Formating the control file
+  * Added the paths to the embedded gems in the install file
+  * Including binaries in source/include-binaries for the embedded gems
+  * Removing ruby-compass-rails from d/control
+  * Removing the comments from d/control
 
  -- Utkarsh Gupta <guptautkarsh2102@gmail.com>  Mon, 04 Feb 2019 04:42:01 +0530
 
