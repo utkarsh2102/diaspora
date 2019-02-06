@@ -16,15 +16,14 @@ Files: app/assets/images/*.png
 Copyright: Paul Robert Lloyd
 License: CC-BY-SA-3.0
 
-Files: lib/*
-Comment: The upstream distribution does not contain an explicit statement of
- copyright ownership. Pursuant to the Berne Convention for the Protection of
- Literary and Artistic Works, it is assumed that all content is copyright by
- its respective authors unless otherwise stated.
-Copyright: 2005-2019, David Heinemeier Hansson (Rails)
-           JS Foundation and other contributors (JQuery)
-           2009-2019, Plataformatec (Devise)
-License: Expat/X11
+Files: debian/gems-compat/ruby-sass-3.7.3/*
+       debian/gems-compat/compass-1.0.3/*
+       debian/gems-compat/compass-rails-3.1.0/*
+Copyright: 2006-2016, Hampton Catlin, Natalie Weizenbaum, and Chris Eppstein
+           2009-2014, Christopher M. Eppstein
+           2011, Scott Davis
+License: Expat
+
 
 Files: debian/*
 Copyright: 2014 Pirate Praveen <praveen@debian.org>
@@ -1000,7 +999,7 @@ License: CC-BY-SA-3.0
  the License; this License is not intended to restrict the license of any rights
  under applicable law.
 
-License: Expat/X11
+License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
