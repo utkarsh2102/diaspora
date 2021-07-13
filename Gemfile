@@ -179,7 +179,7 @@ gem "acts-as-taggable-on", "6.0.0"
 
 # URIs and HTTP
 
-gem "addressable",        "2.5.2", require: "addressable/uri"
+gem "addressable",        "2.8.0", require: "addressable/uri"
 gem "faraday",            "0.15.3"
 gem "faraday_middleware", "0.12.2"
 gem "faraday-cookie_jar", "0.0.6"
